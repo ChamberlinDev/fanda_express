@@ -215,7 +215,15 @@
 						</div>
 
 						<h5 class="card-text mb-1">Suite Junior</h5>
-						<p class="card-text mb-3 small">Suite privée<br>1 lit double, lustre , Surface: 34 m2 <br><br><a
+						<p class="card-text mb-3 small">Suite privée<br>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
+							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum?
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
+							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum?
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
+							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum?  <br><br><a
 								href="" class="btn btn-info">voir plus</a> <a href="#" class="btn btn-primary">Reserver</a> </p>
 
 						<div class="price-block text-end mb-3">
@@ -226,9 +234,10 @@
 
 
 					</div>
-					<button class="btn btn-secondary w-100 d-flex justify-content-center align-items-center py-2">
+					<button class="btn btn-secondary w-80 d-flex justify-content-center align-items-center py-3">
 						Voir les disponibilités
 					</button>
+					
 				</div>
 			</div>
 		</div>
@@ -240,7 +249,7 @@
 			<div class="row g-0">
 				<div class="col-md-5 card-image-container">
 					<img src="../images/room-3.jpg"
-						class="img-fluid rounded-start w-100 h-100 object-fit-cover" alt="image_hotel">
+					class="img-fluid rounded-start w-100 h-100 object-fit-cover" alt="image_hotel">
 				</div>
 				<div class="col-md-7">
 					<div class="card-body py-3 px-3">
@@ -258,7 +267,15 @@
 						</div>
 
 						<h5 class="card-text mb-1">Suite Junior</h5>
-						<p class="card-text mb-3 small">Suite privée<br>1 lit double, lustre , Surface: 34 m2 <br><br><a
+						<p class="card-text mb-3 small">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
+							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum?
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
+							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum?
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
+							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum? <br><br><a
 								href="" class="btn btn-info">voir plus</a> <a href="#" class="btn btn-primary">Reserver</a> </p>
 
 						<div class="price-block text-end mb-3">
