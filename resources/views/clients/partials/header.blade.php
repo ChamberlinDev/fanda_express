@@ -15,7 +15,6 @@
 			</div>
 		</div>
 		<!-- Hamburger Menu -->
-		<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
 	</div>
 	</div>
 </header>

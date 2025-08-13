@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>The River</title>
+	<title>Fanda Express </title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="description" content="The River template project">
@@ -58,7 +58,7 @@
 
 					<!-- Slide -->
 					<div class="slide">
-						<div class="background_image" style="background-image:url(images/index_1.jpg)"></div>
+						<div class="background_image" style="background-image:url(images/h4.jpeg)"></div>
 						<div class="home_container">
 							<div class="container">
 								<div class="row">
@@ -77,7 +77,7 @@
 
 					<!-- Slide -->
 					<div class="slide">
-						<div class="background_image" style="background-image:url(images/index_1.jpg)"></div>
+						<div class="background_image" style="background-image:url(images/image_6.jpg)"></div>
 						<div class="home_container">
 							<div class="container">
 								<div class="row">
@@ -96,7 +96,7 @@
 
 					<!-- Slide -->
 					<div class="slide">
-						<div class="background_image" style="background-image:url(images/index_1.jpg)"></div>
+						<div class="background_image" style="background-image:url(images/room-3.jpg)"></div>
 						<div class="home_container">
 							<div class="container">
 								<div class="row">
@@ -129,105 +129,48 @@
 			</div>
 		</div>
 
-
 		<form action="#" class="booking_form">
 			<hr>
-			<h2>Recherche un appartement ou une chambre d'hotel</h2>
-			<div class="d-flex flex-xl-row flex-column align-items-start justify mt-5">
-				<div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-					<div class="col-3"><input type="date" class="form-control" placeholder="Check in"  required="required"></div>
-					<div class="col-3"><input type="date" class="form-control" placeholder="Check out" required="required"></div>
-					<div class="col-3"><input type="number" class="form-control" placeholder="Children" required="required"></div>
-					<div class="col-3"><input type="number" class="form-control" placeholder="Room" required="required"></div>
+			<h2>Recherche un appartement ou une chambre d'hôtel</h2>
+			<div class="row mt-5 align-items-end">
+				<div class="col-3">
+					<div class="form-group">
+						<label for="checkin">Date d'arrivée</label>
+						<input type="date" id="checkin" name="checkin" class="form-control" required>
+					</div>
 				</div>
-				<div><button class="btn btn-primary">rechercher</button></div>
+				<div class="col-3">
+					<div class="form-group">
+						<label for="checkout">Date de retour</label>
+						<input type="date" id="checkout" name="checkout" class="form-control" required>
+					</div>
+				</div>
+				<div class="col-2">
+					<div class="form-group">
+						<label for="personnes">Personnes</label>
+						<input type="number" id="personnes" name="personnes" class="form-control" required>
+					</div>
+				</div>
+				<div class="col-2">
+					<div class="form-group">
+						<label for="chambres">Chambres</label>
+						<input type="number" id="chambres" name="chambres" class="form-control" required>
+					</div>
+				</div>
+				<div class="col-2">
+					<button type="submit" class="btn btn-primary w-100">Rechercher</button>
+				</div>
 			</div>
 		</form>
+
 	</div>
 	<!-- Features -->
 
-	<div class="features">
-		<div class="container">
-			<div class="row">
 
-				<!-- Icon Box -->
-				<div class="col-lg-4 icon_box_col">
-					<div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
-						<div class="icon_box_icon"><img src="images/icon_1.svg" class="svg" alt="#"></div>
-						<div class="icon_box_title">
-							<h2>Etablissement fabuleux</h2>
-						</div>
-						<div class="icon_box_text">
-							<p>Que ce soit pour un séjour de courte durée ou de longue durée, il combine élégance, modernité et convivialité pour garantir une expérience inoubliable.</p>
-						</div>
-					</div>
-				</div>
 
-				<!-- Icon Box -->
-				<div class="col-lg-4 icon_box_col">
-					<div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
-						<div class="icon_box_icon"><img src="images/icon_2.svg" class="svg" alt="#"></div>
-						<div class="icon_box_title">
-							<h2>Infinity Pool</h2>
-						</div>
-						<div class="icon_box_text">
-							<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum.</p>
-						</div>
-					</div>
-				</div>
 
-				<!-- Icon Box -->
-				<div class="col-lg-4 icon_box_col">
-					<div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
-						<div class="icon_box_icon"><img src="images/icon_3.svg" class="svg" alt="#"></div>
-						<div class="icon_box_title">
-							<h2>Chambres de haut-niveau</h2>
-						</div>
-						<div class="icon_box_text">
-							<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum.</p>
-						</div>
-					</div>
-				</div>
 
-			</div>
-		</div>
-	</div>
-
-	<!-- Gallery -->
-
-	<div class="gallery">
-		<div class="gallery_slider_container">
-			<div class="owl-carousel owl-theme gallery_slider">
-
-				<!-- Slide -->
-				<div class="gallery_item">
-					<div class="background_image" style="background-image:url(images/gallery_1.jpg)"></div>
-					<a class="colorbox" href="images/gallery_1.jpg"></a>
-				</div>
-
-				<!-- Slide -->
-				<div class="gallery_item">
-					<div class="background_image" style="background-image:url(images/gallery_2.jpg)"></div>
-					<a class="colorbox" href="images/gallery_2.jpg"></a>
-				</div>
-
-				<!-- Slide -->
-				<div class="gallery_item">
-					<div class="background_image" style="background-image:url(images/gallery_3.jpg)"></div>
-					<a class="colorbox" href="images/gallery_3.jpg"></a>
-				</div>
-
-				<!-- Slide -->
-				<div class="gallery_item">
-					<div class="background_image" style="background-image:url(images/gallery_4.jpg)"></div>
-					<a class="colorbox" href="images/gallery_4.jpg"></a>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<!-- Booking -->
+	<!-- Resrvation chambre -->
 
 	<div class="booking">
 		<div class="container">
@@ -244,40 +187,96 @@
 							Ne perdez plus de temps — votre confort vous attend</p>
 					</div>
 
-					<!-- Booking Slider -->
-					<div class="booking_slider_container">
-						<div class="owl-carousel owl-theme booking_slider">
-
-							<!-- Slide -->
-							<div class="booking_item">
-								<div class="background_image" style="background-image:url(images/booking_1.jpg)"></div>
-								<div class="booking_overlay trans_200"></div>
-								<div class="booking_price">$120/Nuit</div>
-								<div class="booking_link"><a href="booking.html">Chambre Familiale</a></div>
-							</div>
-
-							<!-- Slide -->
-							<div class="booking_item">
-								<div class="background_image" style="background-image:url(images/booking_2.jpg)"></div>
-								<div class="booking_overlay trans_200"></div>
-								<div class="booking_price">$120/Nuit</div>
-								<div class="booking_link"><a href="booking.html">Chambre de luxe</a></div>
-							</div>
-
-							<!-- Slide -->
-							<div class="booking_item">
-								<div class="background_image" style="background-image:url(images/booking_3.jpg)"></div>
-								<div class="booking_overlay trans_200"></div>
-								<div class="booking_price">$120/Nuit</div>
-								<div class="booking_link"><a href="booking.html">Chambre simple</a></div>
-							</div>
-
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<section>
+
+		<div class="card mb-4 shadow-sm">
+			<div class="row g-0">
+				<div class="col-md-5 card-image-container">
+					<img src="../images/room-3.jpg"
+						class="img-fluid rounded-start w-100 h-100 object-fit-cover" alt="image_hotel">
+				</div>
+				<div class="col-md-7">
+					<div class="card-body py-3 px-3">
+						<div class="d-flex justify-content-between align-items-start mb-2">
+							<div>
+								<h5 class="card-title mb-0 text-primary">Hotel Kif </h5>
+								<p class="card-text text-muted small">Pointe-Noire, Congo </p>
+							</div>
+							<div class="text-end ms-3">
+								<div class="rating-badge">
+									<span class="label">3 ans </span>
+									<span class="score">d'existences</span>
+								</div>
+							</div>
+						</div>
+
+						<h5 class="card-text mb-1">Suite Junior</h5>
+						<p class="card-text mb-3 small">Suite privée<br>1 lit double, lustre , Surface: 34 m2 <br><br><a
+								href="" class="btn btn-info">voir plus</a> <a href="#" class="btn btn-primary">Reserver</a> </p>
+
+						<div class="price-block text-end mb-3">
+							<p class="small text-muted mb-0">8 nuits, 2 adultes</p>
+							<h4 class="price mb-0">XOF 252 000</h4>
+							<p class="details mb-0">Taxes et frais compris</p>
+						</div>
+
+
+					</div>
+					<button class="btn btn-secondary w-100 d-flex justify-content-center align-items-center py-2">
+						Voir les disponibilités
+					</button>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<section>
+
+		<div class="card mb-4 shadow-sm">
+			<div class="row g-0">
+				<div class="col-md-5 card-image-container">
+					<img src="../images/room-3.jpg"
+						class="img-fluid rounded-start w-100 h-100 object-fit-cover" alt="image_hotel">
+				</div>
+				<div class="col-md-7">
+					<div class="card-body py-3 px-3">
+						<div class="d-flex justify-content-between align-items-start mb-2">
+							<div>
+								<h5 class="card-title mb-0 text-primary">Hotel Kif </h5>
+								<p class="card-text text-muted small">Pointe-Noire, Congo </p>
+							</div>
+							<div class="text-end ms-3">
+								<div class="rating-badge">
+									<span class="label">3 ans </span>
+									<span class="score">d'existences</span>
+								</div>
+							</div>
+						</div>
+
+						<h5 class="card-text mb-1">Suite Junior</h5>
+						<p class="card-text mb-3 small">Suite privée<br>1 lit double, lustre , Surface: 34 m2 <br><br><a
+								href="" class="btn btn-info">voir plus</a> <a href="#" class="btn btn-primary">Reserver</a> </p>
+
+						<div class="price-block text-end mb-3">
+							<p class="small text-muted mb-0">8 nuits, 2 adultes</p>
+							<h4 class="price mb-0">XOF 252 000</h4>
+							<p class="details mb-0">Taxes et frais compris</p>
+						</div>
+
+
+					</div>
+					<button class="btn btn-secondary w-100 d-flex justify-content-center align-items-center py-2">
+						Voir les disponibilités
+					</button>
+				</div>
+			</div>
+		</div>
+
+	</section>
 
 	<!-- Blog -->
 
@@ -285,45 +284,39 @@
 
 		<!-- Blog Slider -->
 		<div class="blog_slider_container">
+			<h2 class="text-center">Blog</h2>
+			<hr>
 			<div class="owl-carousel owl-theme blog_slider">
 
 				<!-- Slide -->
 				<div class="blog_slide">
-					<div class="background_image" style="background-image:url(images/index_blog_1.jpg)"></div>
+					<div class="background_image"></div>
 					<div class="blog_content">
-						<div class="blog_date"><a href="#">Oct 20, 2018</a></div>
-						<div class="blog_title"><a href="#">How to book your stay</a></div>
+						<div class="blog_date"><a href="#">Date du blog</a></div>
+						<div class="blog_title"><a href="#">Titre du blog</a></div>
 					</div>
 				</div>
 
 				<!-- Slide -->
 				<div class="blog_slide">
-					<div class="background_image" style="background-image:url(images/index_blog_2.jpg)"></div>
+					<div class="background_image"></div>
 					<div class="blog_content">
-						<div class="blog_date"><a href="#">Oct 20, 2018</a></div>
-						<div class="blog_title"><a href="#">10 restaurants in town</a></div>
+						<div class="blog_date"><a href="#">Date du blog</a></div>
+						<div class="blog_title"><a href="#">Titre du blog</a></div>
 					</div>
 				</div>
 
-				<!-- Slide -->
-				<div class="blog_slide">
-					<div class="background_image" style="background-image:url(images/index_blog_3.jpg)"></div>
-					<div class="blog_content">
-						<div class="blog_date"><a href="#">Oct 20, 2018</a></div>
-						<div class="blog_title"><a href="#">A perfect wedding</a></div>
-					</div>
-				</div>
 
 			</div>
 		</div>
 	</div>
-     <div class="container">
-               @yield('content')
-            </div>
+	<div class="container">
+		@yield('content')
+	</div>
 
 	<!-- Footer -->
-
-	@include('clients.partials.footer')
+	<div>
+		@include('clients.partials.footer')
 	</div>
 
 	<script src="js/jquery-3.3.1.min.js"></script>
