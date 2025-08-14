@@ -41,21 +41,21 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#">
+                            <a data-bs-toggle="no-collapse" href="#">
                                 <i class="fas fa-layer-group"></i>
                                 <h5>Mon etablissement</h5>
                             </a>
                            
                         </li>
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#">
+                            <a data-bs-toggle="no-collapse"  href="#">
                                 <i class="fas fa-th-list"></i>
                                 <h5>Mes reservations<h5/>
                             </a>
                            
                         </li>
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#">
+                            <a data-bs-toggle="no-collapse" href="/profil">
                                 <i class="fas fa-user"></i>
                                 <h5>Profil</h5>
                             </a>

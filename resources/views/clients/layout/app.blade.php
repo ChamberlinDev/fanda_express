@@ -25,33 +25,6 @@
 		<!-- Header -->
 
 		@include('clients.partials.header')
-
-		<!-- Menu -->
-
-		<!-- <div class="menu trans_400 d-flex flex-column align-items-end justify-content-start">
-		<div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-		<div class="menu_content">
-			<nav class="menu_nav text-right">
-				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="about.html">About us</a></li>
-					<li><a href="#">Rooms</a></li>
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-			</nav>
-		</div>
-		<div class="menu_extra">
-			<div class="menu_book text-right"><a href="#">Book online</a></div>
-			<div class="menu_phone d-flex flex-row align-items-center justify-content-center">
-				<img src="images/phone-2.png" alt="">
-				<span>0183-12345678</span>
-			</div>
-		</div>
-	</div> -->
-
-		<!-- Home -->
-
 		<div class="home">
 			<div class="home_slider_container">
 				<div class="owl-carousel owl-theme home_slider">
@@ -115,221 +88,85 @@
 
 				</div>
 
-				<!-- Home Slider Dots -->
-				<!-- <div class="home_slider_dots_container">
-				<div class="home_slider_dots">
-					<ul id="home_slider_custom_dots" class="home_slider_custom_dots d-flex flex-row align-items-start justify-content-start">
-						<li class="home_slider_custom_dot active">01.</li>
-						<li class="home_slider_custom_dot">02.</li>
-						<li class="home_slider_custom_dot">03.</li>
-					</ul>
-				</div>
-			</div> -->
 
 			</div>
 		</div>
 
-		<form action="#" class="booking_form">
-			<hr>
-			<h2>Recherche un appartement ou une chambre d'hôtel</h2>
-			<div class="row mt-5 align-items-end">
-				<div class="col-3">
-					<div class="form-group">
-						<label for="checkin">Date d'arrivée</label>
-						<input type="date" id="checkin" name="checkin" class="form-control" required>
-					</div>
-				</div>
-				<div class="col-3">
-					<div class="form-group">
-						<label for="checkout">Date de retour</label>
-						<input type="date" id="checkout" name="checkout" class="form-control" required>
-					</div>
-				</div>
-				<div class="col-2">
-					<div class="form-group">
-						<label for="personnes">Personnes</label>
-						<input type="number" id="personnes" name="personnes" class="form-control" required>
-					</div>
-				</div>
-				<div class="col-2">
-					<div class="form-group">
-						<label for="chambres">Chambres</label>
-						<input type="number" id="chambres" name="chambres" class="form-control" required>
-					</div>
-				</div>
-				<div class="col-2">
-					<button type="submit" class="btn btn-primary w-100">Rechercher</button>
-				</div>
-			</div>
-		</form>
+		<!-- formulaire de recherche -->
 
 	</div>
 	<!-- Features -->
 
+	<!-- hotels -->
 
-
-
-
-	<!-- Resrvation chambre -->
-
-	<div class="booking">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="booking_title text-center">
-						<h2>Reserver une chambre</h2>
+	<!-- <section class="container my-5">
+		<div class="row g-4">
+			<div class="col-12 col-sm-6 col-lg-4 mb-4">
+				<div class="card h-100 shadow-sm border-5">
+					<img src="../images/room-3.jpg" class="card-img-top"
+						alt="image_hotel"
+						style="height: 260px; object-fit: cover;">
+					<div class="card-body">
+						<h6 class="text-primary mb-1">Hotel Kif</h6>
+						<p class="text-muted small mb-2">Pointe-Noire, Congo</p>
+						<p class="mb-2 small">Suite Junior</p>
+						<p class="fw-bold text-dark mb-1">XOF 252 000</p>
 					</div>
-					<div class="booking_text text-center">
-						<p>Réservez votre chambre dès maintenant et profitez d’un séjour alliant confort, tranquillité et qualité de service.
-							Que vous voyagiez pour les affaires ou pour le plaisir, notre établissement vous propose des chambres modernes,
-							entièrement équipées, et adaptées à tous vos besoins. En quelques clics, choisissez votre type de chambre,
-							vos dates de séjour et bénéficiez des meilleurs tarifs disponibles. Notre équipe reste à votre écoute pour rendre votre expérience inoubliable.
-							Ne perdez plus de temps — votre confort vous attend</p>
+					<div class="card-footer bg-white border-0">
+						<a href="#" class="btn btn-info btn-sm">Voir plus</a>
+						<a href="#" class="btn btn-primary btn-sm">Réserver</a>
 					</div>
+				</div>
+			</div>
+			<div class="col-12 col-sm-6 col-lg-4 mb-4">
+				<div class="card h-100 shadow-sm border-5">
+					<img src="../images/room-3.jpg" class="card-img-top"
+						alt="image_hotel"
+						style="height: 260px; object-fit: cover;">
+					<div class="card-body">
+						<h6 class="text-primary mb-1">Hotel Kif</h6>
+						<p class="text-muted small mb-2">Pointe-Noire, Congo</p>
+						<p class="mb-2 small">Suite Junior</p>
+						<p class="fw-bold text-dark mb-1">XOF 252 000</p>
+					</div>
+					<div class="card-footer bg-white border-0">
+						<a href="#" class="btn btn-info btn-sm">Voir plus</a>
+						<a href="#" class="btn btn-primary btn-sm">Réserver</a>
+					</div>
+				</div>
+			</div>
 
+
+			<div class="col-12 col-sm-3 col-lg-4 mb-4">
+				<div class="card h-100 shadow-sm border-5">
+					<img src="../images/room-3.jpg" class="card-img-top"
+						alt="image_hotel"
+						style="height: 260px; object-fit: cover;">
+					<div class="card-body">
+						<h6 class="text-primary mb-1">Hotel Kif</h6>
+						<p class="text-muted small mb-2">Pointe-Noire, Congo</p>
+						<p class="mb-2 small">Suite Junior</p>
+						<p class="text-dark mb-1">XOF 252 000</p>
+					</div>
+					<div class="card-footer bg-white border-0">
+						<a href="#" class="btn btn-info btn-sm">Voir plus</a>
+						<a href="#" class="btn btn-primary btn-sm">Réserver</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<section>
+	</section> -->
 
-		<div class="card mb-4 shadow-sm">
-			<div class="row g-0">
-				<div class="col-md-5 card-image-container">
-					<img src="../images/room-3.jpg"
-						class="img-fluid rounded-start w-100 h-100 object-fit-cover" alt="image_hotel">
-				</div>
-				<div class="col-md-7">
-					<div class="card-body py-3 px-3">
-						<div class="d-flex justify-content-between align-items-start mb-2">
-							<div>
-								<h5 class="card-title mb-0 text-primary">Hotel Kif </h5>
-								<p class="card-text text-muted small">Pointe-Noire, Congo </p>
-							</div>
-							<div class="text-end ms-3">
-								<div class="rating-badge">
-									<span class="label">3 ans </span>
-									<span class="score">d'existences</span>
-								</div>
-							</div>
-						</div>
-
-						<h5 class="card-text mb-1">Suite Junior</h5>
-						<p class="card-text mb-3 small">Suite privée<br>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
-							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum?
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
-							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum?
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
-							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum?  <br><br><a
-								href="" class="btn btn-info">voir plus</a> <a href="#" class="btn btn-primary">Reserver</a> </p>
-
-						<div class="price-block text-end mb-3">
-							<p class="small text-muted mb-0">8 nuits, 2 adultes</p>
-							<h4 class="price mb-0">XOF 252 000</h4>
-							<p class="details mb-0">Taxes et frais compris</p>
-						</div>
-
-
-					</div>
-					<button class="btn btn-secondary w-80 d-flex justify-content-center align-items-center py-3">
-						Voir les disponibilités
-					</button>
-					
-				</div>
-			</div>
-		</div>
-
-	</section>
-	<section>
-
-		<div class="card mb-4 shadow-sm">
-			<div class="row g-0">
-				<div class="col-md-5 card-image-container">
-					<img src="../images/room-3.jpg"
-					class="img-fluid rounded-start w-100 h-100 object-fit-cover" alt="image_hotel">
-				</div>
-				<div class="col-md-7">
-					<div class="card-body py-3 px-3">
-						<div class="d-flex justify-content-between align-items-start mb-2">
-							<div>
-								<h5 class="card-title mb-0 text-primary">Hotel Kif </h5>
-								<p class="card-text text-muted small">Pointe-Noire, Congo </p>
-							</div>
-							<div class="text-end ms-3">
-								<div class="rating-badge">
-									<span class="label">3 ans </span>
-									<span class="score">d'existences</span>
-								</div>
-							</div>
-						</div>
-
-						<h5 class="card-text mb-1">Suite Junior</h5>
-						<p class="card-text mb-3 small">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
-							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum?
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
-							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum?
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-							At quidem quo numquam autem eaque. Voluptatem ullam, exercitationem suscipit at, 
-							quos neque asperiores facere laboriosam dolorem, similique error officiis nam earum? <br><br><a
-								href="" class="btn btn-info">voir plus</a> <a href="#" class="btn btn-primary">Reserver</a> </p>
-
-						<div class="price-block text-end mb-3">
-							<p class="small text-muted mb-0">8 nuits, 2 adultes</p>
-							<h4 class="price mb-0">XOF 252 000</h4>
-							<p class="details mb-0">Taxes et frais compris</p>
-						</div>
-
-
-					</div>
-					<button class="btn btn-secondary w-100 d-flex justify-content-center align-items-center py-2">
-						Voir les disponibilités
-					</button>
-				</div>
-			</div>
-		</div>
-
-	</section>
 
 	<!-- Blog -->
 
-	<div class="blog">
 
-		<!-- Blog Slider -->
-		<div class="blog_slider_container">
-			<h2 class="text-center">Blog</h2>
-			<hr>
-			<div class="owl-carousel owl-theme blog_slider">
-
-				<!-- Slide -->
-				<div class="blog_slide">
-					<div class="background_image"></div>
-					<div class="blog_content">
-						<div class="blog_date"><a href="#">Date du blog</a></div>
-						<div class="blog_title"><a href="#">Titre du blog</a></div>
-					</div>
-				</div>
-
-				<!-- Slide -->
-				<div class="blog_slide">
-					<div class="background_image"></div>
-					<div class="blog_content">
-						<div class="blog_date"><a href="#">Date du blog</a></div>
-						<div class="blog_title"><a href="#">Titre du blog</a></div>
-					</div>
-				</div>
-
-
-			</div>
-		</div>
-	</div>
 	<div class="container">
 		@yield('content')
 	</div>
+<hr>
+	<!-- a propos de nous -->
+	
 
 	<!-- Footer -->
 	<div>

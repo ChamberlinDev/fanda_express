@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function(){
     return view('accueil');
 });
+Route::get('/hotels', function(){
+    return view('hotels.liste');
+});
 
 
 // routes de connexion
@@ -21,6 +24,9 @@ Route::post('/login', [Authcontroller::class, 'login']);
 
 // Routes admins
 Route::get('/home', [Authcontroller::class, 'home']);
+Route::get('/profil', [Authcontroller::class, 'profil']);
+Route::get('/profil_edit', [Authcontroller::class, 'edit_profil']);
+Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_save');
 
 
 

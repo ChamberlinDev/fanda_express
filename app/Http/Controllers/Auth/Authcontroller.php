@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class Authcontroller extends Controller
 {
     //
-     public function home(){
+    public function home()
+    {
         return view('welcome');
     }
-    
+
     public function loginform()
     {
         return view('auth.login');
@@ -55,7 +56,46 @@ class Authcontroller extends Controller
 
             return redirect()->intended('/home')->with('success', 'Connexion réussie !');
         }
-            return back()->with('error', 'Email ou mot de passe incorrect.');
+        return back()->with('error', 'Email ou mot de passe incorrect.');
+    }
 
-}
+    public function profil()
+    {
+        $hotels = Auth::user();
+        // Envoyer à la vue
+        return view('admin.profil', compact('hotels'));
+    }
+
+    public function edit_profil()
+    {
+        $hotels = Auth::user();
+        // Envoyer à la vue
+        return view('admin.edit', compact('hotels'));
+    }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'nom_hotel' => 'required|string|max:255',
+            'code' => 'required|string|max:50',
+            'adresse' => 'nullable|string|max:255',
+            'telephone' => 'nullable|string|max:20',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|min:6'
+        ]);
+
+        // On prend toutes les données sauf password
+        $data = $request->except('password');
+
+        // Si password est rempli, on le hache et on l’ajoute
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        $user->update($data);
+
+        return redirect('/profil')->with('success', 'Profil mis à jour avec succès');
+    }
 }
