@@ -20,7 +20,7 @@
 
 <body>
 
-	<div class="super_container">
+	<div class="container-fluid my-5">
 
 		<!-- Header -->
 
@@ -161,7 +161,7 @@
 	<!-- Blog -->
 
 
-	<div class="container">
+	<div class="container-fluid my-5">
 		@yield('content')
 	</div>
 <hr>

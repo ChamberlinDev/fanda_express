@@ -1,4 +1,4 @@
-<section class="container my-5">
+<section class="container-fluid my-5">
 		<div class="card h-100 p-4">
 			<div class="row g-4 align-items-center">
 

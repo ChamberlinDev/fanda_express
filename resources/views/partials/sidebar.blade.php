@@ -3,7 +3,7 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
-                    <a href="index.html" class="logo">
+                    <a href="/home" class="logo">
                         <!-- <img
                             src="assets/img/kaiadmin/logo_light.svg"
                             alt="navbar brand"
@@ -30,8 +30,8 @@
                     <ul class="nav nav-secondary">
                         <li class="nav-item active">
                             <a
-                                data-bs-toggle="collapse"
-                                href="#dashboard"
+                                data-bs-toggle="no-collapse"
+                                href="/home"
                                 class="collapsed"
                                 aria-expanded="false">
                                 <i class="fas fa-home"></i>
@@ -41,14 +41,14 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a data-bs-toggle="no-collapse" href="#">
+                            <a data-bs-toggle="no-collapse" href="/etablissement">
                                 <i class="fas fa-layer-group"></i>
                                 <h5>Mon etablissement</h5>
                             </a>
                            
                         </li>
                         <li class="nav-item">
-                            <a data-bs-toggle="no-collapse"  href="#">
+                            <a data-bs-toggle="no-collapse"  href="/reservation">
                                 <i class="fas fa-th-list"></i>
                                 <h5>Mes reservations<h5/>
                             </a>
