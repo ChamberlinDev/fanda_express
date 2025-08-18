@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_hotel');
-            $table->string('code');
-            $table->longText('description');
+            $table->string('nom_complet');
             $table->string('adresse');
             $table->integer('telephone');
             $table->string('email')->unique();

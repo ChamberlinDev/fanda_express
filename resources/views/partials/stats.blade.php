@@ -161,7 +161,7 @@
                      <thead class="thead-light">
                          <tr>
                              <th class="text-dark">{{auth()->user()->nom_hotel}}</th>
-                             <th><a href="" class="btn btn-primary">Modifier</a></th>
+                             <th><a href="/etablissement" class="btn btn-primary">Modifier</a></th>
                          </tr>
                      </thead>
                      <!-- <tbody>

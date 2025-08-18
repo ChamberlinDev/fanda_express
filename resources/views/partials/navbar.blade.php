@@ -54,7 +54,7 @@
                     </div> -->
                     <span class="profile-username">
                         <!-- <span class="op-7"></span> -->
-                        <h4 class="fw-bold"><i class="fas fa-home"></i>  {{auth()->user()->nom_hotel}}</h4>
+                        <h4 class="fw-bold"><i class="fas fa-user"></i>  {{auth()->user()->nom_complet}}</h4>
                     </span>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">

@@ -2,11 +2,16 @@
 @section('content')
 
 <h1 class="text-center">Listes des reservations</h1>
-<p>Cette partie permet de visualiser les demandes de reservations,
+<p class="text-center">Cette partie permet de visualiser les demandes de reservations,
     vous aurez le choix d'accepter ou de refuser une demande de reservation.
-    Une fois que vous enverrez votre reponse le client recevra un email comportant votre repons!</p>
+    Une fois que vous enverrez votre reponse le client recevra un email comportant votre reponse! Si le client n'a pas pu faire une reservation vous pouvez le faire a sa place </p>
 <hr>
 <div class="container">
+    <a href="#" class="btn btn-primary">+ Faire une reservation</a>
+    <a href="/fichier.pdf" class="btn btn-secondary">
+        <i class="bi bi-download"></i> Télécharger
+    </a>
+
     <table class="table">
 
         <thead>
@@ -23,7 +28,7 @@
         </thead>
         <tbody>
             <tr>
-               
+
             </tr>
 
     </table>

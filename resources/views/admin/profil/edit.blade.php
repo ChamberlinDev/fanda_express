@@ -11,20 +11,22 @@
             <div class="row">
                 <div class="col-6">
                     <label for="">Nom de l'hotel</label>
-                    <input type="text" name="nom_hotel" class="form-control" value="{{$hotels->nom_hotel}}">
+                    <input type="text" name="nom_hotel" class="form-control" value="{{$hotels->nom_complet}}">
                 </div>
-                <div class="col-6">
-                    <label for="">Code</label>
-                    <input type="text" name="code" class="form-control" value="{{$hotels->code}}">
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
                 <div class="col-6">
                     <label for="">Adresse</label>
                     <input type="text" name="adresse" class="form-control" value="{{$hotels->adresse}}">
                 </div>
+               
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                 <div class="col-6">
+                    <label for="">Email</label>
+                    <input type="text" name="email" class="form-control" value="{{$hotels->email}}">
+                </div>
+                
                 <div class="col-6">
                     <label for="">Telephone</label>
                     <input type="text" name="telephone" class="form-control" value="{{$hotels->telephone}}">
@@ -33,10 +35,6 @@
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-6">
-                    <label for="">Email</label>
-                    <input type="text" name="email" class="form-control" value="{{$hotels->email}}">
-                </div>
                 <div class="col-6">
                     <label for="password">Mot de passe</label>
                     <input type="password" name="password" class="form-control" placeholder="Laisser vide si inchangé">

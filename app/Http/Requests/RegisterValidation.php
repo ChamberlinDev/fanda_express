@@ -23,10 +23,8 @@ class RegisterValidation extends FormRequest
     {
         return [
 
-            'nom_hotel'            => 'required|string|max:255',
-            'code'                 => 'required|string|max:100|unique:users,code',
+            'nom_complet'            => 'required|string|max:255',
             'adresse'              => 'required|string|max:255',
-            'description'          => 'required|string|max:500',
             'email'                => 'required|email|unique:users,email',
             'telephone'            => 'required|string|max:20',
             'password'             => 'required|string|min:8|confirmed',

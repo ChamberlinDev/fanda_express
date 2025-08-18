@@ -30,16 +30,14 @@ class Authcontroller extends Controller
     public function register(RegisterValidation $request)
     {
         User::create([
-            'nom_hotel' => $request->nom_hotel,
-            'code' => $request->code,
-            'description' => $request->description,
+            'nom_complet' => $request->nom_complet,
             'adresse' => $request->adresse,
             'email' => $request->email,
             'telephone' => $request->telephone,
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect('/')->with('success', 'Inscription réussie !');
+        return redirect('/connexion')->with('success', 'Inscription réussie !');
     }
 
     public function login(Request $request)
@@ -63,14 +61,14 @@ class Authcontroller extends Controller
     {
         $hotels = Auth::user();
         // Envoyer à la vue
-        return view('admin.profil', compact('hotels'));
+        return view('admin.profil.profil', compact('hotels'));
     }
 
     public function edit_profil()
     {
         $hotels = Auth::user();
         // Envoyer à la vue
-        return view('admin.edit', compact('hotels'));
+        return view('admin.profil.edit', compact('hotels'));
     }
 
     public function update(Request $request)
@@ -78,8 +76,7 @@ class Authcontroller extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'nom_hotel' => 'required|string|max:255',
-            'code' => 'required|string|max:50',
+            'nom_complet' => 'required|string|max:255',
             'adresse' => 'nullable|string|max:255',
             'telephone' => 'nullable|string|max:20',
             'email' => 'required|email|unique:users,email,' . $user->id,

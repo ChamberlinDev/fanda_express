@@ -32,22 +32,13 @@
                 {{-- Champs --}}
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label class="form-label">Nom de l'hôtel</label>
-                        <input type="text" class="form-control @error('nom_hotel') is-invalid @enderror" name="nom_hotel" value="{{ old('nom_hotel') }}" placeholder="Veuillez saisir le nom de l'hôtel">
-                        @error('nom_hotel')
+                        <label class="form-label">Nom complet</label>
+                        <input type="text" class="form-control @error('nom_complet') is-invalid @enderror" name="nom_complet" value="{{ old('nom_complet') }}" placeholder="Veuillez saisir le nom complet">
+                        @error('nom_complet')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Code d'enregistrement</label>
-                        <input type="text" class="form-control @error('code') is-invalid @enderror" name="code" value="{{ old('code') }}" placeholder="Veuillez saisir le code de l'établissement">
-                        @error('code')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="row mb-3">
+                    
                     <div class="col-md-6">
                         <label class="form-label">Adresse</label>
                         <input type="text" class="form-control @error('adresse') is-invalid @enderror" name="adresse" value="{{ old('adresse') }}" placeholder="Veuillez saisir l'adresse">
@@ -55,15 +46,7 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Entrez les détails de l'établissement">{{ old('description') }}</textarea>
-                        @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
                 </div>
-
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Email</label>

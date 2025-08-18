@@ -15,6 +15,11 @@ Route::get('/', function(){
 Route::get('/hotels', function(){
     return view('hotels.liste');
 });
+Route::get('/details', function(){
+    return view('hotels.details');
+});
+
+
 
 
 // routes de connexion

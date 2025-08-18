@@ -11,29 +11,33 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-6">
-                    <input type="text" class="form-control" value="{{$hotels->nom_hotel}}"readonly>
+                    <label for="">Nom complet</label>
+                    <input type="text" class="form-control" value="{{$hotels->nom_complet}}"readonly>
                 </div>
                 <div class="col-6">
-                    <input type="text" class="form-control" value="{{$hotels->code}}"readonly>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-6">
+                    <label for="">Adresse</label>
                     <input type="text" class="form-control" value="{{$hotels->adresse}}" readonly>
                 </div>
+                
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                
                 <div class="col-6">
+                    <label for="">Telephone</label>
                     <input type="text" class="form-control" value="{{$hotels->telephone}}"readonly>
+                </div>
+                 <div class="col-6">
+                    <label for="">Adresse email</label>
+                    <input type="text" class="form-control" value="{{$hotels->email}}"readonly>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-6">
-                    <input type="text" class="form-control" value="{{$hotels->email}}"readonly>
-                </div>
-                <div class="col-6">
+                    <label for="">Mot de passe</label>
                     <input type="password" class="form-control" value="{{$hotels->password}}"readonly>
                 </div>
             </div>
