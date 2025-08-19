@@ -12,7 +12,7 @@
     d’attirer de nouveaux voyageurs.
 </p>
 <hr>
-<form action="#" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-white shadow-sm">
+<form action="/create" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-white shadow-sm">
     @csrf
 
     <div class="row">
@@ -36,8 +36,12 @@
     <!-- Ville -->
     <div class="row">
         <div class="col-6">
-            <label for="ville" class="form-label">Ville</label>
-            <input type="text" name="ville" id="ville" class="form-control" required>
+            <label for="classement" class="form-label">ville</label>
+            <select name="ville" id="classement" class="form-select">
+                <option value="">-- Sélectionner --</option>
+                <option value="pointe-noire">pointe-noire</option>
+                
+            </select>
         </div>
 
         <!-- Adresse -->
@@ -48,18 +52,18 @@
     </div>
 
     <!-- Prix par nuit -->
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-6">
             <label for="prix" class="form-label">Prix par nuit (XOF)</label>
             <input type="number" name="prix" id="prix" class="form-control" required>
-        </div>
+        </div> -->
 
         <!-- Capacité -->
-        <div class="col-6">
+        <!-- <div class="col-6">
             <label for="capacite" class="form-label">Capacité (nombre de personnes)</label>
             <input type="number" name="capacite" id="capacite" class="form-control" required>
         </div>
-    </div>
+    </div> -->
 
     <!-- CHAMPS POUR HÔTEL UNIQUEMENT -->
     <div id="hotel-fields" style="display:none;">
@@ -79,8 +83,8 @@
     <!-- CHAMPS POUR APPARTEMENT UNIQUEMENT -->
     <div id="appartement-fields" style="display:none;">
         <div class="col-6">
-            <label for="nb_sdb" class="form-label">Nombre de salles de bain</label>
-            <input type="number" name="nb_sdb" id="nb_sdb" class="form-control">
+            <label for="nb_sdb" class="form-label">Nombre de chambres</label>
+            <input type="number" name="nbre_chambre" id="nb_sdb" class="form-control">
         </div>
         <div class="row">
             <div class="col-6">
@@ -88,25 +92,27 @@
                 <input type="number" name="surface" id="surface" class="form-control">
             </div>
         </div>
-
-        <!-- Équipements -->
-        <div class="col-6">
-            <label for="equipements" class="form-label">Équipements</label>
-            <textarea name="equipements" id="equipements" class="form-control" rows="2" placeholder="Wi-Fi, Piscine, Climatisation..."></textarea>
+        <!-- Description -->
+        <div class="col-6 mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" class="form-control" rows="4"></textarea>
         </div>
+
+        
     </div>
 
     <!-- Images -->
     <div class="row">
         <div class="col-6">
             <label for="images" class="form-label">Images</label>
-            <input type="file" name="images[]" id="images" class="form-control" multiple>
+            <input type="file" name="images" id="images" class="form-control" multiple>
         </div>
 
-        <!-- Description -->
-        <div class="col-6">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="description" class="form-control" rows="4"></textarea>
+        
+        <!-- Équipements -->
+        <div class="col-6 mb-3">
+            <label for="equipements" class="form-label">Équipements</label>
+            <textarea name="equipements" id="equipements" class="form-control" rows="2" placeholder="Wi-Fi, Piscine, Climatisation..."></textarea>
         </div>
     </div>
 

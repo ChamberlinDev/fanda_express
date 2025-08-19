@@ -23,7 +23,7 @@
 
 				<!-- Colonne image -->
 				<div class="col-md-6 text-center">
-					<img src="../../static/apps/assets/img/working-4.jpg" alt="Image illustrative"
+					<img src="../images/working-4.jpg" alt="Image illustrative"
 						class="img-fluid rounded">
 				</div>
 

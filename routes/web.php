@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\Authcontroller;
+use App\Http\Controllers\blogcontroller;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Etablissement;
 use App\Http\Controllers\reservation;
@@ -17,6 +18,10 @@ Route::get('/hotels', function(){
 });
 Route::get('/details', function(){
     return view('hotels.details');
+});
+
+Route::get('/reservation_etablissements', function(){
+    return view('clients.reservations.create');
 });
 
 
@@ -41,9 +46,14 @@ Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_sav
 // Route pour gerer les etablissements
 Route::get('/etablissement', [Etablissement::class, 'index']);
 Route::get('/ajouter_eta', [Etablissement::class, 'Ajout_form']);
+Route::post('/create', [Etablissement::class, 'create']);
 
 
 // Route pour gerer les reservations
 Route::get('/reservation', [reservation::class, 'index']);
 
 
+
+// Route pour gerer les blogs
+Route::get('/blog', [blogcontroller::class, 'index']);
+Route::get('/ajouter_blog', [blogcontroller::class, 'ajout_form']);

@@ -62,7 +62,7 @@
                             
                         </li>
                          <li class="nav-item">
-                            <a data-bs-toggle="no-collapse" href="">
+                            <a data-bs-toggle="no-collapse" href="/blog">
                                 <i class="bi bi-journal"></i>
                                 <h5>Blog</h5>
                             </a>
