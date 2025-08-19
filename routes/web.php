@@ -45,8 +45,8 @@ Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_sav
 
 // Route pour gerer les etablissements
 Route::get('/etablissement', [Etablissement::class, 'index']);
-Route::get('/ajouter_eta', [Etablissement::class, 'Ajout_form']);
-Route::post('/create', [Etablissement::class, 'create']);
+Route::get('/ajouter_eta', [Etablissement::class, 'createForm']);
+Route::post('/create', [Etablissement::class, 'create'])->name('create');
 
 
 // Route pour gerer les reservations

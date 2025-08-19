@@ -7,47 +7,49 @@
         <h2>Nos établissements</h2>
         <a href="/ajouter_eta" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Ajouter un établissement
-
         </a>
     </div>
 
     {{-- Grille des cartes --}}
     <div class="row g-4">
+        @forelse($etablissements as $etab)
         <div class="col-md-4">
             <div class="card shadow-sm h-100">
-                {{-- Image de couverture --}}
+                {{-- Image --}}
+                <img src="{{ $etab->images ? asset('storage/' . $etab->images) : asset('default.jpg') }}" 
+                     class="card-img-top img-fluid" 
+                     alt="image" 
+                     style="height:200px; object-fit:cover;">
 
-
+                {{-- Corps de la carte --}}
                 <div class="card-body">
-                    <!-- {{-- Nom --}} -->
-
-                    <i class="fa fa-home"></i>
-                    <h5 class="card-title">nom_etablissement</h5>
-
-                    <!-- {{-- Type et ville --}} -->
+                    <h5 class="card-title">{{ $etab->nom }}</h5>
                     <p class="card-text">
-                        <strong>Type :</strong> Hotel/Appartement <br>
-                        <strong>Ville :</strong> Dakar
+                        <strong>Type :</strong> {{ $etab->type }} <br>
+                        <strong>Ville :</strong> {{ $etab->ville }}
                     </p>
-
-                    <!-- {{-- Description courte --}} -->
-                    <p class="text-muted" style="font-size: 0.9em;">
-                        Description
-                    </p>
+                    <p class="text-muted">{{ $etab->description }}</p>
                 </div>
 
-                <div class="card-footer bg-white border-top-0">
-                    <!-- {{-- Boutons --}} -->
+                {{-- Footer avec boutons --}}
+                <div class="card-footer bg-white border-top-0 d-flex justify-content-between">
+                    <a href="#" class="btn btn-info btn-sm">Voir</a>
                     <a href="#" class="btn btn-warning btn-sm">Modifier</a>
                     <form action="#" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger btn-sm" onclick="return confirm('Supprimer cet établissement ?')">Supprimer</button>
+                        <button class="btn btn-danger btn-sm" onclick="return confirm('Supprimer cet établissement ?')">
+                            Supprimer
+                        </button>
                     </form>
                 </div>
+
             </div>
         </div>
-
+        @empty
+        <p>Aucun établissement trouvé.</p>
+        @endforelse
     </div>
+
 </div>
 @endsection

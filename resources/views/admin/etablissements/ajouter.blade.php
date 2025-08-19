@@ -12,7 +12,7 @@
     d’attirer de nouveaux voyageurs.
 </p>
 <hr>
-<form action="/create" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-white shadow-sm">
+<form action="{{route('create')}}" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-white shadow-sm">
     @csrf
 
     <div class="row">

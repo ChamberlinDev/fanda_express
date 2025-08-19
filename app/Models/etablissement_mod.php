@@ -21,5 +21,6 @@ class etablissement_mod extends Model
         'description',
         'equipements',
         'images',
+        'user_id',
     ];
 }

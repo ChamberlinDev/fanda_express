@@ -2,22 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\etablissement_mod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Etablissement extends Controller
 {
-    //
-    public function Ajout_form (){
+    // Afficher le formulaire
+    public function createForm()
+    {
         return view('admin.etablissements.ajouter');
     }
 
-    public function index(){
-        return view('admin.etablissements.index');
+    // Lister les établissements de l'utilisateur connecté
+    public function index()
+    {
+        $etablissements = Auth::user()->etablissements;
+
+        return view('admin.etablissements.index', compact('etablissements'));
     }
 
-    public function create(Request $request){
-         $request->validate([
-            'type' => 'required',
+    // Enregistrer un établissement
+    public function create(Request $request)
+    {
+        $request->validate([
+            'type' => 'required|string',
             'nom' => 'required|string|max:255',
             'ville' => 'nullable|string',
             'adresse' => 'required|string',
@@ -29,12 +38,14 @@ class Etablissement extends Controller
             'images' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
+        // Gestion de l'image
         $imagePath = null;
         if ($request->hasFile('images')) {
             $imagePath = $request->file('images')->store('etablissements', 'public');
         }
 
-        Etablissement::create([
+        // Création de l'établissement avec user_id
+        etablissement_mod::create([
             'type' => $request->type,
             'nom' => $request->nom,
             'ville' => $request->ville,
@@ -45,11 +56,9 @@ class Etablissement extends Controller
             'description' => $request->description,
             'equipements' => $request->equipements,
             'images' => $imagePath,
+            'user_id' => Auth::id(), 
         ]);
 
-        return redirect()->route('etablissements.index')->with('success', 'Établissement ajouté avec succès ✅');
+        return redirect('/etablissement')->with('success', 'Établissement ajouté avec succès ✅');
     }
-
-
-    
 }

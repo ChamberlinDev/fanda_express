@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Http\Controllers\Etablissement;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -24,6 +26,12 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+
+    public function etablissements()
+    {
+        return $this->hasMany(Etablissement_mod::class, 'user_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
