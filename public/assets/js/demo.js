@@ -190,18 +190,31 @@ Circles.create({
 })
 
 //Notify
-$.notify({
-	icon: 'icon-bell',
-	title: 'Connexion reussie',
-	message: 'Vous etes connecté',
-},{
-	type: 'secondary',
-	placement: {
-		from: "bottom",
-		align: "right"
-	},
-	time: 1,
-});
+
+if(localStorage.getItem("notifyShown") !== "1") {
+    $.notify({
+        icon: 'icon-bell',
+        title: 'Connexion réussie',
+        message: 'Vous êtes connecté',
+    },{
+        type: 'success',
+        delay: 3000
+    });
+    localStorage.setItem("notifyShown", "1");
+}
+
+// $.notify({
+// 	icon: 'icon-bell',
+// 	title: 'Connexion reussie',
+// 	message: 'Vous etes connecté',
+// },{
+// 	type: 'secondary',
+// 	placement: {
+// 		from: "bottom",
+// 		align: "right"
+// 	},
+// 	time: 1,
+// });
 
 // Jsvectormap
 var world_map = new jsVectorMap({

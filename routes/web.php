@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\blogcontroller;
 use App\Http\Controllers\Controller;
@@ -10,9 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 
  // route client
-Route::get('/', function(){
-    return view('accueil');
-});
+Route::get('/', [AccueilController::class, 'accueil'] );
+
 Route::get('/hotels', function(){
     return view('hotels.liste');
 });

@@ -9,17 +9,25 @@
             <i class="bi bi-plus-circle"></i> Ajouter un établissement
         </a>
     </div>
+    <hr>
 
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus repellendus,
+        vero explicabo neque amet est, nostrum soluta temporibus error aspernatur cumque
+        animi distinctio vitae deleniti itaque iusto sequi? Officiis, consequuntur.
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus repellendus,
+        vero explicabo neque amet est, nostrum soluta temporibus error aspernatur cumque
+        animi distinctio vitae deleniti itaque iusto sequi? Officiis, consequuntur.</p>
+    <hr>
     {{-- Grille des cartes --}}
     <div class="row g-4">
         @forelse($etablissements as $etab)
         <div class="col-md-4">
             <div class="card shadow-sm h-100">
                 {{-- Image --}}
-                <img src="{{ $etab->images ? asset('storage/' . $etab->images) : asset('default.jpg') }}" 
-                     class="card-img-top img-fluid" 
-                     alt="image" 
-                     style="height:200px; object-fit:cover;">
+                <img src="{{ $etab->images ? asset('storage/' . $etab->images) : asset('default.jpg') }}"
+                    class="card-img-top img-fluid"
+                    alt="image"
+                    style="height:200px; object-fit:cover;">
 
                 {{-- Corps de la carte --}}
                 <div class="card-body">
@@ -28,6 +36,18 @@
                         <strong>Type :</strong> {{ $etab->type }} <br>
                         <strong>Ville :</strong> {{ $etab->ville }}
                     </p>
+                    @if($etab->classement)
+                    <p class="mb-2">
+                        Classement :
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <=$etab->classement)
+                            <i class="bi bi-star-fill text-warning"></i>
+                            @else
+                            <i class="bi bi-star text-warning"></i>
+                            @endif
+                            @endfor
+                    </p>
+                    @endif
                     <p class="text-muted">{{ $etab->description }}</p>
                 </div>
 

@@ -23,4 +23,9 @@ class etablissement_mod extends Model
         'images',
         'user_id',
     ];
+
+    public function chambre()
+    {
+        return $this->hasMany(Chambre::class);
+    }
 }
