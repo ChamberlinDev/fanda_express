@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\blogcontroller;
+use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Etablissement;
 use App\Http\Controllers\reservation;
@@ -12,13 +13,12 @@ use Illuminate\Support\Facades\Route;
 
  // route client
 Route::get('/', [AccueilController::class, 'accueil'] );
+Route::get('/details/{id}', [AccueilController::class, 'show'])->name('etablissements.show');
 
 Route::get('/hotels', function(){
     return view('hotels.liste');
 });
-Route::get('/details', function(){
-    return view('hotels.details');
-});
+
 
 Route::get('/reservation_etablissements', function(){
     return view('clients.reservations.create');
@@ -47,6 +47,10 @@ Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_sav
 Route::get('/etablissement', [Etablissement::class, 'index']);
 Route::get('/ajouter_eta', [Etablissement::class, 'createForm']);
 Route::post('/create', [Etablissement::class, 'create'])->name('create');
+// Route pour chambre
+Route::get('/etablissements/{id}/chambres/create', [ChambreController::class, 'create'])->name('chambres.create');
+Route::post('/etablissements/{id}/chambres', [ChambreController::class, 'store'])->name('chambres.store');
+
 
 
 // Route pour gerer les reservations

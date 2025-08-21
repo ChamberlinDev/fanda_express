@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
 
 <header class="container-fluid my-5">
     <div class="header_content d-flex flex-row align-items-center justify-content-start">
@@ -34,7 +35,6 @@
 </header>
 @include('clients.partials.recherche')
 </div>
-<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
 <section class="container-fluid my-5">
     <div class="row g-4">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">

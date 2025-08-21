@@ -33,7 +33,7 @@
 
                 </div>
                 <div class="card-footer bg-white border-0">
-                    <a href="/details" class="btn btn-info btn-sm">Voir plus</a>
+                    <a href="{{route('etablissements.show', $e->id)}}" class="btn btn-info btn-sm">Voir plus</a>
                     <a href="/reservation_etablissements" class="btn btn-primary btn-sm">Réserver</a>
                 </div>
             </div>

@@ -9,7 +9,6 @@ class etablissement_mod extends Model
 {
     // 
     use HasFactory;
-
     protected $fillable = [
         'type',
         'nom',
@@ -26,6 +25,7 @@ class etablissement_mod extends Model
 
     public function chambre()
     {
-        return $this->hasMany(Chambre::class);
+        return $this->hasMany(Chambre::class, 'etablissement_id'); 
     }
+    
 }

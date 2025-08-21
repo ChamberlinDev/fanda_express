@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('chambres', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('etablissement_id')->constrained()->onDelete('cascade');
             $table->string('nom');
             $table->integer('capacite');
             $table->decimal('prix', 10, 2);
             $table->string('image')->nullable();
+            $table->unsignedBigInteger('etablissement_id');
+            $table->foreign('etablissement_id')->references('id')->on('etablissement_mods')->onDelete('cascade');
             $table->timestamps();
         });
     }

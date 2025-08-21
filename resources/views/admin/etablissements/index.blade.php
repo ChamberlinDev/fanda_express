@@ -48,21 +48,32 @@
                             @endfor
                     </p>
                     @endif
-                    <p class="text-muted">{{ $etab->description }}</p>
+                    <!-- <p class="text-muted">{{ $etab->description }}</p> -->
                 </div>
 
                 {{-- Footer avec boutons --}}
-                <div class="card-footer bg-white border-top-0 d-flex justify-content-between">
-                    <a href="#" class="btn btn-info btn-sm">Voir</a>
-                    <a href="#" class="btn btn-warning btn-sm">Modifier</a>
+                <div class="card-footer bg-white border-top-0 d-flex justify-content-center gap-2">
+                    <!-- Voir -->
+                    <a href=""# class="btn btn-secondary" title="Voir">
+                        <i class="bi bi-eye"></i>
+                    </a>
+
+                    <!-- Modifier -->
+                    <a href="#" class="btn btn-warning" title="Modifier">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+
+                    <!-- Supprimer -->
                     <form action="#" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger btn-sm" onclick="return confirm('Supprimer cet établissement ?')">
-                            Supprimer
+                        <button type="submit" class="btn btn-danger" title="Supprimer"
+                            onclick="return confirm('Supprimer cet établissement ?')">
+                            <i class="bi bi-trash"></i>
                         </button>
                     </form>
                 </div>
+
 
             </div>
         </div>
