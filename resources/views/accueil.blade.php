@@ -9,11 +9,12 @@
         @foreach($etab as $e)
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <div class="card h-100 shadow-sm border-5">
+                <a href="{{ $e->images ? asset('storage/'.$e->images) : asset('default.jpg') }}" target="_blank">
                 <img src="{{ asset('storage/'.$e->images) }}"
                     class="card-img-top"
                     alt="image_hotel"
                     style="height:200px; width:100%; object-fit:cover;">
-
+                </a>
 
                 <div class="card-body">
                     <h6 class="text-primary mb-1">{{ $e->nom }}</h6>

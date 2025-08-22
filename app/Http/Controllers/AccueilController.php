@@ -15,10 +15,12 @@ class AccueilController extends Controller
         return view('accueil', compact('etab'));
     }
 
-    // Page détails d'un établissement
+    // Page détails d'un établissement ()
     public function show($id)
     {
         $etab = etablissement_mod::findOrFail($id);
         return view('hotels.details', compact('etab'));
     }
+
+   
 }

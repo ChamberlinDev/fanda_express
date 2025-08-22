@@ -24,11 +24,12 @@
         <div class="col-md-4">
             <div class="card shadow-sm h-100">
                 {{-- Image --}}
-                <img src="{{ $etab->images ? asset('storage/' . $etab->images) : asset('default.jpg') }}"
-                    class="card-img-top img-fluid"
-                    alt="image"
-                    style="height:200px; object-fit:cover;">
-
+                <a href="{{ $etab->images ? asset('storage/'.$etab->images) : asset('default.jpg') }}" target="_blank">
+                    <img src="{{ $etab->images ? asset('storage/' . $etab->images) : asset('default.jpg') }}"
+                        class="card-img-top img-fluid"
+                        alt="image"
+                        style="height:200px; object-fit:cover;">
+                </a>
                 {{-- Corps de la carte --}}
                 <div class="card-body">
                     <h5 class="card-title">{{ $etab->nom }}</h5>
@@ -54,17 +55,18 @@
                 {{-- Footer avec boutons --}}
                 <div class="card-footer bg-white border-top-0 d-flex justify-content-center gap-2">
                     <!-- Voir -->
-                    <a href=""# class="btn btn-secondary" title="Voir">
+                    <a href="/show_etab/{{$etab->id}}" class="btn btn-secondary" title="Voir">
                         <i class="bi bi-eye"></i>
                     </a>
 
                     <!-- Modifier -->
-                    <a href="#" class="btn btn-warning" title="Modifier">
+                    <a href="/modif/{{$etab->id}}" class="btn btn-warning" title="Modifier">
                         <i class="bi bi-pencil-square"></i>
                     </a>
 
                     <!-- Supprimer -->
-                    <form action="#" method="POST" class="d-inline">
+                    <!-- Supprimer -->
+                    <form action="{{ route('etablissements.destroy', $etab->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" title="Supprimer"
@@ -72,6 +74,7 @@
                             <i class="bi bi-trash"></i>
                         </button>
                     </form>
+
                 </div>
 
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\etablissement_mod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class Etablissement extends Controller
 {
@@ -18,7 +20,6 @@ class Etablissement extends Controller
     public function index()
     {
         $etablissements = Auth::user()->etablissements;
-
         return view('admin.etablissements.index', compact('etablissements'));
     }
 
@@ -56,9 +57,27 @@ class Etablissement extends Controller
             'description' => $request->description,
             'equipements' => $request->equipements,
             'images' => $imagePath,
-            'user_id' => Auth::id(), 
+            'user_id' => Auth::id(),
         ]);
 
-        return redirect('/etablissement')->with('success', 'Établissement ajouté avec succès ✅');
+        return redirect('/etablissement')->with('success', 'Établissement ajouté avec succès');
+    }
+
+
+
+
+
+    public function destroy($id)
+    {
+        $etab = etablissement_mod::findOrFail($id);
+
+        // Suppression de l'image du storage si elle existe
+        if ($etab->images && Storage::disk('public')->exists($etab->images)) {
+            Storage::disk('public')->delete($etab->images);
+        }
+
+        $etab->delete();
+
+        return redirect('etablissements.index')->with('success', 'Établissement supprimé avec succès !');
     }
 }

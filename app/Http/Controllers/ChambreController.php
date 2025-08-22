@@ -37,4 +37,7 @@ class ChambreController extends Controller
         return redirect()->route('etablissements.show', $etablissementId)
             ->with('success', 'Chambre ajoutée avec succès !');
     }
+
+
+    
 }

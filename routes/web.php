@@ -6,6 +6,7 @@ use App\Http\Controllers\blogcontroller;
 use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Etablissement;
+use App\Http\Controllers\homeController;
 use App\Http\Controllers\reservation;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,14 @@ Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_sav
 Route::get('/etablissement', [Etablissement::class, 'index']);
 Route::get('/ajouter_eta', [Etablissement::class, 'createForm']);
 Route::post('/create', [Etablissement::class, 'create'])->name('create');
+Route::delete('/etablissements/{id}', [Etablissement::class, 'destroy'])->name('etablissements.destroy');
+
+Route::get('/modif/{id}', [homeController::class, 'edit']);
+Route::get('/show_etab/{id}', [homeController::class, 'show']);
+
+
+
+
 // Route pour chambre
 Route::get('/etablissements/{id}/chambres/create', [ChambreController::class, 'create'])->name('chambres.create');
 Route::post('/etablissements/{id}/chambres', [ChambreController::class, 'store'])->name('chambres.store');

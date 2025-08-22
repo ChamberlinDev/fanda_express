@@ -11,14 +11,14 @@
 
 <header class="container-fluid my-5">
     <div class="header_content d-flex flex-row align-items-center justify-content-start">
-         <a href="/" class="text-decoration-none text-primary">
-                <i class="bi bi-arrow-left-circle fs-4"></i> Retour
-            </a>
+        <a href="/" class="text-decoration-none text-primary">
+            <i class="bi bi-arrow-left-circle fs-4"></i> Retour
+        </a>
         <div class="logo"><a href="/" class="text-dark">Fanda</a></div>
         <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
             <nav class="main_nav">
                 <ul class="d-flex flex-row align-items-start justify-content-start">
-                    <li ><a href="/" class="text-dark">Accueil</a></li>
+                    <li><a href="/" class="text-dark">Accueil</a></li>
                     <li class="active"><a href="/hotels">Hotels & Apparatements</a></li>
 
                 </ul>
@@ -73,7 +73,13 @@
             </ul>
         </div>
     </div>
-
+    <div class="form-group mt-5">
+        <label for="" class="text-dark">Commentaire</label>
+        <textarea name="" id="" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+    <a href="#" class="btn btn-primary">Envoyer</a>
+    </div>
 
 </section>
 
