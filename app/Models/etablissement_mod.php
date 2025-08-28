@@ -27,5 +27,9 @@ class etablissement_mod extends Model
     {
         return $this->hasMany(Chambre::class, 'etablissement_id'); 
     }
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
     
 }

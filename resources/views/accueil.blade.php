@@ -43,7 +43,7 @@
 </section>
 
 <hr>
-@include('clients.partials.blog')
+@include('clients.partials.blog', ['blogs' => $blogs]) 
 <hr>
 @include('clients.partials.apropos')
 @endsection

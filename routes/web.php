@@ -72,3 +72,4 @@ Route::get('/reservation', [reservation::class, 'index']);
 // Route pour gerer les blogs
 Route::get('/blog', [blogcontroller::class, 'index']);
 Route::get('/ajouter_blog', [blogcontroller::class, 'ajout_form']);
+Route::post('/ajout_save', [blogcontroller::class, 'store']);

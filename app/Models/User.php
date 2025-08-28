@@ -33,6 +33,13 @@ class User extends Authenticatable
         return $this->hasMany(Etablissement_mod::class, 'user_id');
     }
 
+     public function blogs()
+    {
+        return $this->hasMany(Blog::class, 'user_id');
+    }
+
+    
+
     /**
      * The attributes that should be hidden for serialization.
      *
