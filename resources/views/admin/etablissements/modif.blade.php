@@ -7,9 +7,8 @@
     </h2>
 
     {{-- Formulaire --}}
-    <form action="" method="POST" enctype="multipart/form-data" class="shadow p-4 rounded bg-white">
+    <form action="/modif_save/{{$etab->id}}" method="POST" enctype="multipart/form-data" class="shadow p-4 rounded bg-white">
         @csrf
-        @method('PUT')
 
         {{-- Nom --}}
         <div class="mb-3">
@@ -25,8 +24,7 @@
             <label for="type" class="form-label">Type</label>
             <select name="type" id="type" class="form-select">
                 <option value="Hotel" {{ $etab->type == 'Hotel' ? 'selected' : '' }}>Hôtel</option>
-                <option value="Auberge" {{ $etab->type == 'Auberge' ? 'selected' : '' }}>Auberge</option>
-                <option value="Villa" {{ $etab->type == 'Villa' ? 'selected' : '' }}>Villa</option>
+                <option value="Villa" {{ $etab->type == 'Appartement' ? 'selected' : '' }}>Appartement</option>
             </select>
         </div>
 

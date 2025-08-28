@@ -65,6 +65,8 @@ class Etablissement extends Controller
 
 
 
+    
+
 
 
     public function destroy($id)

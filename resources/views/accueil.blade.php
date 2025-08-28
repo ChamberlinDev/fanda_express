@@ -21,7 +21,6 @@
                     <p class="text-muted small mb-2">{{ $e->adresse }}, {{ $e->ville }}</p>
                     @if($e->classement)
                     <p class="mb-2">
-                        Classement :
                         @for ($i = 1; $i <= 5; $i++)
                             @if ($i <=$e->classement)
                             <i class="bi bi-star-fill text-warning"></i>

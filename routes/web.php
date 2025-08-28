@@ -50,7 +50,9 @@ Route::get('/ajouter_eta', [Etablissement::class, 'createForm']);
 Route::post('/create', [Etablissement::class, 'create'])->name('create');
 Route::delete('/etablissements/{id}', [Etablissement::class, 'destroy'])->name('etablissements.destroy');
 
-Route::get('/modif/{id}', [homeController::class, 'edit']);
+Route::get('/modif_form/{id}', [homeController::class, 'edit']);
+Route::post('/modif_save/{id}', [homeController::class, 'update']);
+
 Route::get('/show_etab/{id}', [homeController::class, 'show']);
 
 

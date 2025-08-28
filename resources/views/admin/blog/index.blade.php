@@ -8,7 +8,7 @@
         
         <a href="/ajouter_blog" class="btn btn-primary">
 
-            <i class="bi bi-plus-circle"></i> + Ajouter un blog
+            <i class="bi bi-plus-circle"></i> Ajouter un blog
         </a>
         
     </div>

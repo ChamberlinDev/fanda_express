@@ -60,7 +60,7 @@
                     </a>
 
                     <!-- Modifier -->
-                    <a href="/modif/{{$etab->id}}" class="btn btn-warning" title="Modifier">
+                    <a href="/modif_form/{{$etab->id}}" class="btn btn-warning" title="Modifier">
                         <i class="bi bi-pencil-square"></i>
                     </a>
 
