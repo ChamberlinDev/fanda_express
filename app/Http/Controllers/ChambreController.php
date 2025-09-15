@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Chambre;
 use App\Models\etablissement_mod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChambreController extends Controller
 {
     //
     public function create($etablissementId)
     {
+        $etablissements = Auth::user()->etablissements;
+
         $etablissement = etablissement_mod::findOrFail($etablissementId);
-        return view('clients.chambres.create', compact('etablissement'));
+        return view('admin.chambres.ajouter', compact('etablissement'));
     }
+
 
     public function store(Request $request, $etablissementId)
     {
@@ -34,10 +38,7 @@ class ChambreController extends Controller
 
         $chambre->save();
 
-        return redirect()->route('etablissements.show', $etablissementId)
+        return redirect('etablissements', $etablissementId)
             ->with('success', 'Chambre ajoutée avec succès !');
     }
-
-
-    
 }

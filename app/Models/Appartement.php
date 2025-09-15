@@ -2,19 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class etablissement_mod extends Model
+class Appartement extends Model
 {
-    // 
-    use HasFactory;
+    //
+
     protected $fillable = [
-        'type',
         'nom',
         'ville',
         'adresse',
-        'classement',
         'nbre_chambre',
         'surface',
         'description',
@@ -23,13 +20,13 @@ class etablissement_mod extends Model
         'user_id',
     ];
 
-    public function chambre()
+
+    public function chambres()
     {
-        return $this->hasMany(Chambre::class, 'etablissement_id'); 
+        return $this->hasMany(Chambre::class, 'etablissement_id');
     }
     public function blogs()
     {
         return $this->hasMany(Blog::class);
     }
-    
 }

@@ -40,7 +40,7 @@
             <select name="ville" id="classement" class="form-select">
                 <option value="">-- Sélectionner --</option>
                 <option value="pointe-noire">pointe-noire</option>
-                
+
             </select>
         </div>
 
@@ -50,6 +50,7 @@
             <textarea name="adresse" id="adresse" class="form-control" rows="2" required></textarea>
         </div>
     </div>
+    
 
     <!-- Prix par nuit -->
     <!-- <div class="row">
@@ -58,8 +59,8 @@
             <input type="number" name="prix" id="prix" class="form-control" required>
         </div> -->
 
-        <!-- Capacité -->
-        <!-- <div class="col-6">
+    <!-- Capacité -->
+    <!-- <div class="col-6">
             <label for="capacite" class="form-label">Capacité (nombre de personnes)</label>
             <input type="number" name="capacite" id="capacite" class="form-control" required>
         </div>
@@ -78,6 +79,10 @@
                 <option value="5">5 étoiles</option>
             </select>
         </div>
+        <div class="col-6" id="chbre">
+        <label for="nb_sdb" class="form-label">Nombre de chambres</label>
+        <input type="number" name="nbre_chambre" id="nb_sdb" class="form-control">
+    </div>
     </div>
 
     <!-- CHAMPS POUR APPARTEMENT UNIQUEMENT -->
@@ -98,7 +103,7 @@
             <textarea name="description" id="description" class="form-control" rows="4"></textarea>
         </div>
 
-        
+
     </div>
 
     <!-- Images -->
@@ -107,8 +112,8 @@
             <label for="images" class="form-label">Images</label>
             <input type="file" name="images" id="images" class="form-control" multiple>
         </div>
-
         
+
         <!-- Équipements -->
         <div class="col-6 mb-3">
             <label for="equipements" class="form-label">Équipements</label>
@@ -123,7 +128,7 @@
 <!-- SCRIPT POUR RENDRE LE FORMULAIRE DYNAMIQUE -->
 <script>
     document.getElementById('type').addEventListener('change', function() {
-        let hotelFields = document.getElementById('hotel-fields');
+        let hotelFields = document.getElementById('hotel-fields', 'chbre');
         let appartementFields = document.getElementById('appartement-fields');
 
         if (this.value === 'hotel') {

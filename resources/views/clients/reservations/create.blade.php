@@ -1,23 +1,69 @@
-@extends('clients.layout.app')
-@section('content')
+<link rel="stylesheet" href="{{ asset('styles/bootstrap-4.1.2/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/OwlCarousel2-2.3.4/owl.carousel.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/OwlCarousel2-2.3.4/owl.theme.default.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/OwlCarousel2-2.3.4/animate.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/jquery-datepicker/jquery-ui.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/colorbox/colorbox.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/main_styles.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/responsive.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<header class="container-fluid my-5">
+    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+        <a href="/" class="text-decoration-none text-primary">
+            <i class="bi bi-arrow-left-circle fs-4"></i> Retour
+        </a>
+        <div class="logo">
+            <a href="/" class="text-dark">Fanda</a>
+        </div>
+        <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+            <nav class="main_nav">
+                <ul class="d-flex flex-row align-items-start justify-content-start">
+                    <li><a href="/" class="text-dark">Accueil</a></li>
+                    <li><a class="text-dark" href="/hotels">Hotels & Appartements</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
 
 <section class="container my-5">
-    <h3 class="mb-4 text-primary text-center">
-        <i class="bi bi-calendar-check"></i> Réservation
-    </h3>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est molestias voluptatum odit ipsum recusandae aspernatur labore excepturi,
-         sint voluptas. Atque unde at laudantium aliquid est nemo eaque dolorum accusamus illum.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quae libero distinctio in! Nesciunt, corrupti dignissimos! Asperiores veritatis quidem illo ut culpa,
-         deleniti, dolorem quibusdam nobis exercitationem facere adipisci saepe!</p>
+    <h2 class="mb-4 text-primary text-center">
+        <i class="bi bi-calendar-check"></i> Faire une réservation
+    </h2>
 
-    <form action="#" method="POST" class="p-4 bg-light rounded shadow-sm">
+    <!-- Affichage infos hôtel -->
+    <div class="card mb-4 shadow-sm">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ asset('storage/' . $hotel->image) }}" class="img-fluid rounded-start" alt="Image de l'hôtel">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ $hotel->nom }}</h5>
+                    <p class="card-text">
+                        <strong>Adresse :</strong> {{ $hotel->adresse }} <br>
+                        <strong>Ville :</strong> {{ $hotel->ville }} <br>
+                        <strong>Prix :</strong> {{ number_format($hotel->prix, 0, ',', ' ') }} FCFA / nuit <br>
+                        <strong>Type de chambre :</strong> {{ $hotel->type_chambre }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <form action="{{ route('reservation.store') }}" method="POST" class="p-4 bg-light rounded shadow-sm">
         @csrf
+        <!-- On garde l’ID de l’hôtel caché -->
+        <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
 
         <!-- Informations client -->
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="nom" class="form-label text-dark">Nom complet</label>
-                <input type="text" class="form-control" id="nom" name="nom" placeholder="Ex: Jean KOUANGA" required>
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Ex: Patrick Kifoula" required>
             </div>
             <div class="col-md-6">
                 <label for="email" class="form-label text-dark">Adresse email</label>
@@ -32,7 +78,7 @@
             </div>
             <div class="col-md-6">
                 <label for="ville" class="form-label text-dark">Ville</label>
-                <input type="text" class="form-control" id="ville" name="ville" placeholder="Brazzaville" required>
+                <input type="text" class="form-control" id="ville" name="ville" placeholder="Pointe-Noire" required>
             </div>
         </div>
 
@@ -64,21 +110,21 @@
             </div>
         </div>
 
-        <!-- Commentaire -->
+        <!-- Prix (readonly pour éviter la modification par l’utilisateur) -->
         <div class="mb-3">
-            <label for="message" class="form-label text-dark">Prix</label>
-            <input class="form-control col-6" name="prix">
+            <label for="prix" class="form-label text-dark">Prix</label>
+            <input type="text" class="form-control col-6" id="prix" name="prix" 
+                   value="{{ number_format($hotel->prix, 0, ',', ' ') }} FCFA" readonly>
         </div>
 
-        <!-- Bouton -->
+        <!-- Boutons -->
         <div class="text-end">
-            <button type="submit" class="btn btn-secondary">
+            <a href="/hotels" class="btn btn-secondary">
                 <i class="bi bi-cancel"></i> Annuler
-            </button>
+            </a>
             <button type="submit" class="btn btn-primary">
-                <i class="bi bi-check-circle"></i> Confirmer la reservation
+                <i class="bi bi-check-circle"></i> Confirmer la réservation
             </button>
         </div>
     </form>
 </section>
-@endsection

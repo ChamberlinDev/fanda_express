@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
-class blogcontroller extends Controller
+class BlogController extends Controller
 {
+   
     //
     public function index()
     {
@@ -40,3 +41,5 @@ class blogcontroller extends Controller
         return redirect('/blog')->with('success', 'Blog ajouté avec succès.');
     }
 }
+
+

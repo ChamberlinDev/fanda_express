@@ -37,30 +37,23 @@
     <div class="row">
         <!-- Image principale -->
         <div class="col-lg-6 mb-4">
-            <img src="{{ $etab->images ? asset('storage/'.$etab->images) : asset('default.jpg') }}"
+            <img src=""
                 class="img-fluid rounded shadow-sm" style="height:400px; object-fit:cover; width:100%;" alt="image_hotel">
         </div>
 
         <!-- Infos principales -->
         <div class="col-lg-6">
-            <h2 class="text-primary">{{ $etab->nom }}</h2>
-            <p class="text-muted"><i class="bi bi-geo-alt-fill"></i> {{ $etab->adresse }}, {{ $etab->ville }}</p>
-            <p>Type : {{ $etab->type }}</p>
+            <h2 class="text-primary"></h2>
+            <p class="text-muted"><i class="bi bi-geo-alt-fill"></i></p>
+            <p>Type :</p>
 
-            @if($etab->classement)
             <p>
-                Classement :
-                @for($i=1; $i<=5; $i++)
-                    @if($i <=$etab->classement)
                     <i class="bi bi-star-fill text-warning"></i>
-                    @else
                     <i class="bi bi-star text-warning"></i>
-                    @endif
-                    @endfor
+               
             </p>
-            @endif
 
-            <p>{{ $etab->description }}</p>
+            <p></p>
         </div>
     </div>
 
@@ -69,16 +62,44 @@
         <div class="col-12">
             <h3>Équipements</h3>
             <ul class="list-inline">
-                <li class="list-inline-item badge bg-light text-dark p-2 m-1">{{$etab->equipements}}</li>
+                <li class="list-inline-item badge bg-light text-dark p-2 m-1"></li>
             </ul>
         </div>
     </div>
+    <hr>
+
+    <h3>Chambres disponibles</h3>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src=""
+                    class="card-img-top" alt="sv">
+               
+
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">
+                        <strong>Capacité :</strong> <br>
+                        <strong>Prix :</strong>  XOF / nuit
+                    </p>
+                    <a href="/reservation_etablissements" class="btn btn-primary">Reserver</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+
+
+    <hr>
     <div class="form-group mt-5">
         <label for="" class="text-dark">Commentaire</label>
         <textarea name="" id="" class="form-control"></textarea>
     </div>
     <div class="mb-3">
-    <a href="#" class="btn btn-primary">Envoyer</a>
+        <a href="#" class="btn btn-primary">Envoyer</a>
     </div>
 
 </section>

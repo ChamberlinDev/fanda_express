@@ -9,20 +9,22 @@ use Illuminate\Http\Request;
 class AccueilController extends Controller
 {
     //
-
     public function accueil()
     {
-        $etab   = etablissement_mod::all();
-        $blogs  = Blog::latest()->take(10)->get(); // <- on récupère les blogs
+        // $etab   = etablissement_mod::all();
+        // $blogs  = Blog::latest()
+        //     ->take(10)
+        //     ->get()
+        //     ->unique('titre'); // <- supprime doublons par titre
 
-        return view('accueil', compact('etab', 'blogs')); // <- on les passe à la vue
+       return view('accueil');
     }
+
 
     // Page détails d'un établissement ()
     public function show($id)
     {
-        $etab = etablissement_mod::findOrFail($id);
-        return view('hotels.details', compact('etab'));
+        // $etab = etablissement_mod::with('chambres')->findOrFail($id);
+        // return view('hotels.details', compact('etab'));
     }
-
 }

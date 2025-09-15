@@ -19,7 +19,7 @@ return new class extends Migration
 
             // clé étrangère vers users
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-
+            
             $table->timestamps();
         });
     }

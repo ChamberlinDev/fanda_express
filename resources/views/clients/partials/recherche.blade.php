@@ -1,13 +1,71 @@
 <form action="#" class="booking_form">
-			<hr>
-			<h2>Recherche un appartement ou une chambre d'hotel</h2>
-			<div class="d-flex flex-xl-row flex-column align-items-start justify mt-5">
-				<div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-					<div class="col-3">Date arrivee<input type="date" class="form-control" placeholder="Check in"  required="required"></div>
-					<div class="col-3">Date de retour<input type="date" class="form-control" placeholder="Check out" required="required"></div>
-					<div class="col-3">Nbre personne<input type="number" class="form-control"  required="required"></div>
-					<div class="col-3">Nbre chambres<input type="number" class="form-control"  required="required"></div>
-				</div>
-				<div>.<a class="btn btn-primary text-white">rechercher</a></div>
+	<hr>
+	<h2>Recherche d'un Hôtel ou Appartement</h2>
+	<div class="d-flex flex-xl-row flex-column align-items-start justify mt-5">
+		<div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
+
+			<!-- Type d'hôtel -->
+			<div class="col-3 mb-3">
+				<label for="type_hotel">Type d'hôtel</label>
+				<select id="type_hotel" class="form-control" name="type_hotel" required>
+					<option value="">-- Sélectionner --</option>
+					<option value="appart">Appartement hôtel</option>
+					<option value="chambre">Chambre d'hôtel</option>
+				</select>
 			</div>
-		</form>
+
+			<!-- Gamme de prix -->
+			<div class="col-3 mb-3">
+				<label for="prix">Budget (par nuit)</label>
+				<input type="number" id="prix" name="prix" class="form-control" placeholder="Ex: 50000 FCFA" required>
+			</div>
+
+			<!-- Localisation -->
+			<div class="col-3 mb-3">
+				<label for="localisation">Localisation</label>
+				<input type="text" id="localisation" name="localisation" class="form-control" placeholder="Ville ou quartier" required>
+			</div>
+
+			<!-- Type de chambre -->
+			<div class="col-3 mb-3" id="chambre_group">
+				<label for="chambre">Type de chambre</label>
+				<select id="chambre" class="form-control" name="chambre">
+					<option value="">-- Sélectionner --</option>
+					<option value="single">Simple</option>
+					<option value="double">Double</option>
+					<option value="suite">Suite</option>
+					<option value="familiale">Familiale</option>
+				</select>
+			</div>
+		</div>
+
+		<!-- Bouton recherche (caché au départ) -->
+		<div class="col-3 mb-3" id="btn_rechercher" style="display: none;">
+			<label class="d-block">&nbsp;</label> 
+			<button type="submit" class="btn btn-primary text-white">
+				Rechercher
+			</button>
+		</div>
+	</div>
+</form>
+
+<!-- Script -->
+<script>
+	const typeHotelSelect = document.getElementById("type_hotel");
+	const chambreGroup = document.getElementById("chambre_group");
+	const btnRechercher = document.getElementById("btn_rechercher");
+
+	typeHotelSelect.addEventListener("change", function() {
+		const typeHotel = this.value;
+
+		// Afficher/Masquer classement et type chambre
+		if (typeHotel === "appart") {
+			chambreGroup.style.display = "none";
+		} else if (typeHotel === "chambre") {
+			chambreGroup.style.display = "block";
+		}
+
+		// Afficher le bouton seulement si un type est choisi
+		btnRechercher.style.display = typeHotel ? "block" : "none";
+	});
+</script>

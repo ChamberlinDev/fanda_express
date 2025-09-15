@@ -18,7 +18,7 @@ class Blog extends Model
 
     public function etablissement()
     {
-        return $this->belongsTo(etablissement_mod::class);
+        return $this->belongsTo(Hotel::class);
     }
 
      public function user()
