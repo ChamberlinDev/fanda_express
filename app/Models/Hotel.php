@@ -11,8 +11,7 @@ class Hotel extends Model
         'nom',
         'ville',
         'adresse',
-        'nbre_chambre',
-        'surface',
+        'image',
         'description',
         'equipements',
         'user_id',
@@ -27,5 +26,9 @@ class Hotel extends Model
         return $this->hasMany(Blog::class);
     }
     
-    
+    public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
+
 }

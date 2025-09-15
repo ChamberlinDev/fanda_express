@@ -16,15 +16,14 @@ return new class extends Migration
             $table->string('nom');
             $table->string('ville');
             $table->string('adresse');
-            $table->string('description');
-            $table->string('surface');
-            $table->string('equipements');
-            $table->string('user_id');
-            $table->string('image_id');
-
-
-
+            $table->string('description')->nullable();
+            $table->string('equipements')->nullable();
+            $table->string('image');
+            $table->unsignedBigInteger('user_id'); // référence à users
             $table->timestamps();
+
+            // Clés étrangères
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -1,10 +1,10 @@
-@extends('layout.app')
+@extends('admin.layout.app')
 @section('content')
 
-<h1 class="text-center">Ajouter un etablissement</h1>
+<h1 class="text-center mb-4">Ajouter un hôtel</h1>
 <hr>
 <p class="text-center">
-    Ajoutez facilement votre établissement (hôtel ou appartement) à notre plateforme de réservation.
+    Ajoutez facilement votre établissement (hôtel) à notre plateforme de réservation.
     Renseignez les informations essentielles telles que le nom, l’adresse, la description,
     les services disponibles et vos coordonnées. Cela permettra aux clients de découvrir
     votre établissement, de consulter vos offres et de réserver directement en ligne.
@@ -12,137 +12,92 @@
     d’attirer de nouveaux voyageurs.
 </p>
 <hr>
-<form action="{{route('create')}}" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-white shadow-sm">
+
+<form action="{{ route('etablissement.store') }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-white shadow-sm">
     @csrf
 
-    <div class="row">
-        <!-- Type d'établissement -->
-        <div class="col-6">
-            <label for="type" class="form-label">Type d'établissement</label>
-            <select name="type" id="type" class="form-select" required>
-                <option value="">-- Sélectionner --</option>
-                <option value="hotel">Hôtel</option>
-                <option value="appartement">Appartement</option>
-            </select>
+    <!-- Nom & Ville -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="nom" class="form-label">Nom de l'hôtel</label>
+            <input type="text" name="nom" id="nom" class="form-control" placeholder="Veuillez saisir le nom de l'hôtel" required>
         </div>
-
-        <!-- Nom -->
-        <div class="col-6">
-            <label for="nom" class="form-label">Nom de l'établissement</label>
-            <input type="text" name="nom" id="nom" class="form-control" required>
+        <div class="col-md-6">
+            <label for="ville" class="form-label">Ville</label>
+            <select name="ville" id="ville" class="form-select">
+                <option value="pointe-noire">Pointe-Noire</option>
+            </select>
         </div>
     </div>
 
-    <!-- Ville -->
-    <div class="row">
-        <div class="col-6">
-            <label for="classement" class="form-label">ville</label>
-            <select name="ville" id="classement" class="form-select">
-                <option value="">-- Sélectionner --</option>
-                <option value="pointe-noire">pointe-noire</option>
-
-            </select>
-        </div>
-
-        <!-- Adresse -->
-        <div class="col-6">
+    <!-- Adresse & Description -->
+    <div class="row mb-3">
+        <div class="col-md-6">
             <label for="adresse" class="form-label">Adresse</label>
-            <textarea name="adresse" id="adresse" class="form-control" rows="2" required></textarea>
+            <textarea name="adresse" id="adresse" class="form-control" rows="2" placeholder="Veuillez saisir l'adresse" required></textarea>
         </div>
-    </div>
-    
-
-    <!-- Prix par nuit -->
-    <!-- <div class="row">
-        <div class="col-6">
-            <label for="prix" class="form-label">Prix par nuit (XOF)</label>
-            <input type="number" name="prix" id="prix" class="form-control" required>
-        </div> -->
-
-    <!-- Capacité -->
-    <!-- <div class="col-6">
-            <label for="capacite" class="form-label">Capacité (nombre de personnes)</label>
-            <input type="number" name="capacite" id="capacite" class="form-control" required>
-        </div>
-    </div> -->
-
-    <!-- CHAMPS POUR HÔTEL UNIQUEMENT -->
-    <div id="hotel-fields" style="display:none;">
-        <div class="col-6">
-            <label for="classement" class="form-label">Classement (étoiles)</label>
-            <select name="classement" id="classement" class="form-select">
-                <option value="">-- Sélectionner --</option>
-                <option value="1">1 étoile</option>
-                <option value="2">2 étoiles</option>
-                <option value="3">3 étoiles</option>
-                <option value="4">4 étoiles</option>
-                <option value="5">5 étoiles</option>
-            </select>
-        </div>
-        <div class="col-6" id="chbre">
-        <label for="nb_sdb" class="form-label">Nombre de chambres</label>
-        <input type="number" name="nbre_chambre" id="nb_sdb" class="form-control">
-    </div>
-    </div>
-
-    <!-- CHAMPS POUR APPARTEMENT UNIQUEMENT -->
-    <div id="appartement-fields" style="display:none;">
-        <div class="col-6">
-            <label for="nb_sdb" class="form-label">Nombre de chambres</label>
-            <input type="number" name="nbre_chambre" id="nb_sdb" class="form-control">
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <label for="surface" class="form-label">Surface (m²)</label>
-                <input type="number" name="surface" id="surface" class="form-control">
-            </div>
-        </div>
-        <!-- Description -->
-        <div class="col-6 mb-3">
+        <div class="col-md-6">
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="description" class="form-control" rows="4"></textarea>
+            <textarea name="description" id="description" class="form-control" placeholder="Vous pouvez parler de l'hôtel en quelques lignes" rows="4"></textarea>
         </div>
-
-
     </div>
 
     <!-- Images -->
-    <div class="row">
-        <div class="col-6">
-            <label for="images" class="form-label">Images</label>
-            <input type="file" name="images" id="images" class="form-control" multiple>
-        </div>
-        
-
-        <!-- Équipements -->
-        <div class="col-6 mb-3">
-            <label for="equipements" class="form-label">Équipements</label>
-            <textarea name="equipements" id="equipements" class="form-control" rows="2" placeholder="Wi-Fi, Piscine, Climatisation..."></textarea>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="image" class="form-label">Images</label>
+            <input type="file" name="image" id="image" class="form-control" multiple>
         </div>
     </div>
 
+    <!-- Équipements -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="equipements" class="form-label">Équipements</label>
+            <select name="equipements[]" id="equipements" class="form-select" multiple>
+                <option value="Wi-Fi">Wi-Fi</option>
+                <option value="Piscine">Piscine</option>
+                <option value="Climatisation">Climatisation</option>
+                <option value="Autres">Autres</option>
+            </select>
+            <small class="form-text text-muted">Maintenez la touche Ctrl (ou Cmd) pour sélectionner plusieurs options.</small>
+
+            <!-- Champ texte pour "Autres" -->
+            <div id="autres_input" class="mt-2 d-none">
+                <input type="text" name="equipements_autres" class="form-control" placeholder="Saisir un autre équipement">
+            </div>
+        </div>
+    </div>
+
+
+
+
+
     <!-- Bouton -->
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <div class="text-end">
+        <a href="/etablissement" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Retour
+        </a>
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Enregistrer
+        </button>
+    </div>
 </form>
 
-<!-- SCRIPT POUR RENDRE LE FORMULAIRE DYNAMIQUE -->
+<!-- Script pour afficher le champ si "Autres" est coché -->
 <script>
-    document.getElementById('type').addEventListener('change', function() {
-        let hotelFields = document.getElementById('hotel-fields', 'chbre');
-        let appartementFields = document.getElementById('appartement-fields');
+    document.addEventListener("DOMContentLoaded", function() {
+        const select = document.getElementById('equipements');
+        const autresInput = document.getElementById('autres_input');
 
-        if (this.value === 'hotel') {
-            hotelFields.style.display = 'block';
-            appartementFields.style.display = 'none';
-        } else if (this.value === 'appartement') {
-            hotelFields.style.display = 'none';
-            appartementFields.style.display = 'block';
-        } else {
-            hotelFields.style.display = 'none';
-            appartementFields.style.display = 'none';
-        }
+        select.addEventListener('change', function() {
+            if (Array.from(select.selectedOptions).some(opt => opt.value === 'Autres')) {
+                autresInput.classList.remove('d-none');
+            } else {
+                autresInput.classList.add('d-none');
+            }
+        });
     });
 </script>
-
 
 @endsection

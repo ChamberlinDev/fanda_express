@@ -45,19 +45,19 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
-        @include('partials.sidebar')
+        @include('admin.partials.sidebar')
         <!-- End Sidebar -->
 
         <div class="main-panel">
             <div class="main-header">
                 <div class="main-header-logo">
                     <!-- Logo Header -->
-                    @include('partials.header')
+                    @include('admin.partials.header')
                     <!-- End Logo Header -->
                 </div>
 
                 <!-- Navbar Header -->
-                @include('partials.navbar')
+                @include('admin.partials.navbar')
                 <!-- End Navbar -->
             </div>
 
@@ -65,11 +65,11 @@
                @yield('content')
             </div>
 
-            @include('partials.footer')
+            @include('admin.partials.footer')
         </div>
 
         <!-- Custom template | don't include it in your project! -->
-        @include('partials.color')
+        @include('admin.partials.color')
         <!-- End Custom template -->
     </div>
     <!--   Core JS Files   -->

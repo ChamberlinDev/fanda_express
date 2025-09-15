@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('admin.layout.app')
 @section('content')
 <div class="container my-5">
 
@@ -11,62 +11,42 @@
     </div>
     <hr>
 
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus repellendus,
-        vero explicabo neque amet est, nostrum soluta temporibus error aspernatur cumque
-        animi distinctio vitae deleniti itaque iusto sequi? Officiis, consequuntur.
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus repellendus,
-        vero explicabo neque amet est, nostrum soluta temporibus error aspernatur cumque
-        animi distinctio vitae deleniti itaque iusto sequi? Officiis, consequuntur.</p>
-    <hr>
     {{-- Grille des cartes --}}
     <div class="row g-4">
-        @forelse($etablissements as $etab)
+        @forelse($hotels as $hotel)
         <div class="col-md-4">
             <div class="card shadow-sm h-100">
                 {{-- Image --}}
-                <a href="{{ $etab->images ? asset('storage/'.$etab->images) : asset('default.jpg') }}" target="_blank">
-                    <img src="{{ $etab->images ? asset('storage/' . $etab->images) : asset('default.jpg') }}"
+                <a href="#" target="_blank">
+                    <img src="{{ $hotel->image ? asset('storage/'.$hotel->image) : asset('images/default-hotel.jpg') }}"
                         class="card-img-top img-fluid"
-                        alt="image"
+                        alt="{{ $hotel->nom }}"
                         style="height:200px; object-fit:cover;">
                 </a>
-                {{-- Corps de la carte --}}
+
                 <div class="card-body">
-                    <h5 class="card-title">{{ $etab->nom }}</h5>
+                    <h5 class="card-title">{{ $hotel->nom }}</h5>
                     <p class="card-text">
-                        <strong>Type :</strong> {{ $etab->type }} <br>
-                        <strong>Ville :</strong> {{ $etab->ville }}
+                        <strong>Ville :</strong> {{ $hotel->ville }} <br>
+                        <strong>Adresse :</strong> {{ $hotel->adresse }} <br>
+                        <strong>Équipements :</strong> {{ $hotel->equipements ?? 'Aucun' }}
                     </p>
-                    @if($etab->classement)
-                    <p class="mb-2">
-                        Classement :
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <=$etab->classement)
-                            <i class="bi bi-star-fill text-warning"></i>
-                            @else
-                            <i class="bi bi-star text-warning"></i>
-                            @endif
-                            @endfor
-                    </p>
-                    @endif
-                    <!-- <p class="text-muted">{{ $etab->description }}</p> -->
                 </div>
 
                 {{-- Footer avec boutons --}}
                 <div class="card-footer bg-white border-top-0 d-flex justify-content-center gap-2">
                     <!-- Voir -->
-                    <a href="/show_etab/{{$etab->id}}" class="btn btn-secondary" title="Voir">
+                    <a href="#" class="btn btn-secondary" title="Voir">
                         <i class="bi bi-eye"></i>
                     </a>
 
                     <!-- Modifier -->
-                    <a href="/modif_form/{{$etab->id}}" class="btn btn-warning" title="Modifier">
+                    <a href="#" class="btn btn-warning" title="Modifier">
                         <i class="bi bi-pencil-square"></i>
                     </a>
 
                     <!-- Supprimer -->
-                    <!-- Supprimer -->
-                    <form action="{{ route('etablissements.destroy', $etab->id) }}" method="POST" class="d-inline">
+                    <form action="#" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" title="Supprimer"
@@ -74,15 +54,19 @@
                             <i class="bi bi-trash"></i>
                         </button>
                     </form>
-
                 </div>
-
-
             </div>
         </div>
         @empty
-        <p>Aucun établissement trouvé.</p>
+        <div class="col-12">
+            <p class="text-center">Aucun hôtel trouvé.</p>
+        </div>
         @endforelse
+    </div>
+
+    {{-- Pagination --}}
+    <div class="mt-4">
+        {{ $hotels->links() }}
     </div>
 
 </div>

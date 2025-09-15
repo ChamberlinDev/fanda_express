@@ -7,6 +7,7 @@ use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Etablissement;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HotelController;
 use App\Http\Controllers\reservation;
 use App\Http\Controllers\ReservationController;
 use App\Models\Hotel;
@@ -44,15 +45,14 @@ Route::get('/profil_edit', [Authcontroller::class, 'edit_profil']);
 Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_save');
 
 
-// Route pour gerer les etablissements
-Route::get('/etablissement', [Hotel::class, 'index']);
-Route::get('/ajouter_eta', [Hotel::class, 'createForm']);
-Route::post('/create', [Hotel::class, 'create'])->name('create');
+// Route pour gerer les hotels
+Route::get('/etablissement', [HotelController::class, 'index']);
+Route::get('/ajouter_eta', [HotelController::class, 'Ajouter_hotel']);
+Route::post('/create', [HotelController::class, 'create'])->name('etablissement.store');
 Route::delete('/etablissements/{id}', [Hotel::class, 'destroy'])->name('etablissements.destroy');
 
 Route::get('/modif_form/{id}', [HomeController::class, 'edit']);
 Route::post('/modif_save/{id}', [HomeController::class, 'update']);
-
 Route::get('/show_etab/{id}', [HomeController::class, 'show']);
 
 

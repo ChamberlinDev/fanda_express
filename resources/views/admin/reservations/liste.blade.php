@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('admin.layout.app')
 @section('content')
 
 <h1 class="text-center">Listes des reservations</h1>
