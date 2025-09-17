@@ -1,6 +1,7 @@
 <form action="#" class="booking_form">
 	<hr>
-	<h2>Recherche d'un Hôtel ou Appartement</h2>
+	<h2 class="text-center">Recherche d'un Hôtel ou Appartement</h2>
+	<hr>
 	<div class="d-flex flex-xl-row flex-column align-items-start justify mt-5">
 		<div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
 
