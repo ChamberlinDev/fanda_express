@@ -17,12 +17,14 @@ return new class extends Migration
             $table->string('ville');
             $table->string('adresse');
             $table->string('description');
-            $table->string('surface');
-            $table->string('nbre_chambre');
+            $table->integer('nbre_chambre');
             $table->string('equipements');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('image_id');
+            $table->string('image');
+            $table->unsignedBigInteger('user_id'); // référence à users
             $table->timestamps();
+
+            // Clés étrangères
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appartement;
 use App\Models\Chambre;
 use App\Models\etablissement_mod;
+use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ChambreController extends Controller
 {
     //
-    public function create($etablissementId)
+    public function create($id)
     {
         $etablissements = Auth::user()->etablissements;
 
-        $etablissement = etablissement_mod::findOrFail($etablissementId);
-        return view('admin.chambres.ajouter', compact('etablissement'));
+        $hotel = Hotel::findOrFail($id);
+        $appart = Appartement::findOrFail($id);
+
+        return view('admin.chambres.ajouter', compact('etablissement', 'appart'));
     }
 
 

@@ -13,7 +13,7 @@
 </p>
 <hr>
 
-<form action="{{ route('etablissement.store') }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-white shadow-sm">
+<form action="/create_hotel" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-white shadow-sm">
     @csrf
 
     <!-- Nom & Ville -->

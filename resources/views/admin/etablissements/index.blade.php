@@ -2,72 +2,161 @@
 @section('content')
 <div class="container my-5">
 
-    {{-- Bouton Ajouter --}}
+    {{-- Titre --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Nos établissements</h2>
-        <a href="/ajouter_eta" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Ajouter un établissement
-        </a>
+        <h2 class="mb-0">Nos établissements</h2>
+        <div>
+            <a href="/ajouter_eta" class="btn btn-primary me-2">
+                <i class="bi bi-plus-circle"></i> Ajouter un hôtel
+            </a>
+            <a href="/ajouter_appart" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Ajouter un appartement
+            </a>
+        </div>
     </div>
     <hr>
 
     {{-- Grille des cartes --}}
+
+    <h4 class="text-center"> Hotel</h4>
     <div class="row g-4">
         @forelse($hotels as $hotel)
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm h-100 border-0">
+
                 {{-- Image --}}
                 <a href="#" target="_blank">
                     <img src="{{ $hotel->image ? asset('storage/'.$hotel->image) : asset('images/default-hotel.jpg') }}"
-                        class="card-img-top img-fluid"
+                        class="card-img-top"
                         alt="{{ $hotel->nom }}"
-                        style="height:200px; object-fit:cover;">
+                        style="height:200px; object-fit:cover; border-top-left-radius: .5rem; border-top-right-radius: .5rem;">
                 </a>
 
                 <div class="card-body">
-                    <h5 class="card-title">{{ $hotel->nom }}</h5>
-                    <p class="card-text">
-                        <strong>Ville :</strong> {{ $hotel->ville }} <br>
-                        <strong>Adresse :</strong> {{ $hotel->adresse }} <br>
+                    <h5 class="card-title text-primary text-truncate" title="{{ $hotel->nom }}">
+                        {{ $hotel->nom }}
+                    </h5>
+                    <p class="card-text small mb-1">
+                        <strong>Ville :</strong> {{ $hotel->ville }}
+                    </p>
+                    <p class="card-text small mb-1">
+                        <strong>Adresse :</strong> {{ $hotel->adresse }}
+                    </p>
+                    <p class="card-text small text-muted">
                         <strong>Équipements :</strong> {{ $hotel->equipements ?? 'Aucun' }}
                     </p>
                 </div>
 
                 {{-- Footer avec boutons --}}
-                <div class="card-footer bg-white border-top-0 d-flex justify-content-center gap-2">
-                    <!-- Voir -->
-                    <a href="#" class="btn btn-secondary" title="Voir">
-                        <i class="bi bi-eye"></i>
-                    </a>
+                <div class="card-footer bg-white border-0 text-center">
+                    <div class="btn-group" role="group">
+                        <!-- Voir -->
+                        <a href="#" class="btn btn-sm btn-outline-secondary" title="Voir">
+                            <i class="bi bi-eye"></i>
+                        </a>
 
-                    <!-- Modifier -->
-                    <a href="#" class="btn btn-warning" title="Modifier">
-                        <i class="bi bi-pencil-square"></i>
-                    </a>
+                        <!-- Modifier -->
+                        <a href="#" class="btn btn-sm btn-outline-warning" title="Modifier">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
 
-                    <!-- Supprimer -->
-                    <form action="#" method="POST" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" title="Supprimer"
-                            onclick="return confirm('Supprimer cet établissement ?')">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </form>
+                        <!-- Supprimer -->
+                        <form action="#" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="btn btn-sm btn-outline-danger"
+                                title="Supprimer"
+                                onclick="return confirm('Supprimer cet établissement ?')">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
         @empty
         <div class="col-12">
-            <p class="text-center">Aucun hôtel trouvé.</p>
+            <div class="alert alert-info text-center">
+                Aucun hôtel ou appartement trouvé.
+            </div>
         </div>
         @endforelse
     </div>
 
-    {{-- Pagination --}}
-    <div class="mt-4">
-        {{ $hotels->links() }}
+    <hr>
+
+    <h4 class="text-center">Appartement</h4>
+
+    <div class="row g-4">
+        @forelse($apparts as $appart)
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm h-100 border-0">
+
+                {{-- Image --}}
+                <a href="#" target="_blank">
+                    <img src="{{ $appart->image ? asset('storage/'.$appart->image) : asset('images/default-appart.jpg') }}"
+                        class="card-img-top"
+                        alt="{{ $appart->nom }}"
+                        style="height:200px; object-fit:cover; border-top-left-radius: .5rem; border-top-right-radius: .5rem;">
+                </a>
+
+                <div class="card-body">
+                    <h5 class="card-title text-primary text-truncate" title="{{ $appart->nom }}">
+                        {{ $appart->nom }}
+                    </h5>
+                    <p class="card-text small mb-1">
+                        <strong>Ville :</strong> {{ $appart->ville }}
+                    </p>
+                    <p class="card-text small mb-1">
+                        <strong>Adresse :</strong> {{ $appart->adresse }}
+                    </p>
+                    <p class="card-text small text-muted">
+                        <strong>Équipements :</strong> {{ $appart->equipements ?? 'Aucun' }}
+                    </p>
+                </div>
+
+                {{-- Footer avec boutons --}}
+                <div class="card-footer bg-white border-0 text-center">
+                    <div class="btn-group" role="group">
+                        <!-- Voir -->
+                        <a href="#" class="btn btn-sm btn-outline-secondary" title="Voir">
+                            <i class="bi bi-eye"></i>
+                        </a>
+
+                        <!-- Modifier -->
+                        <a href="#" class="btn btn-sm btn-outline-warning" title="Modifier">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+
+                        <!-- Supprimer -->
+                        <form action="#" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="btn btn-sm btn-outline-danger"
+                                title="Supprimer"
+                                onclick="return confirm('Supprimer cet établissement ?')">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @empty
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                Aucun hôtel ou appartement trouvé.
+            </div>
+        </div>
+        @endforelse
     </div>
+    {{-- Pagination centrée --}}
+    <div class="mt-4 d-flex justify-content-center">
+        {{ $apparts->links() }}
+    </div>
+
 
 </div>
 @endsection

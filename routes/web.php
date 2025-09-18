@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\AppartementController;
 use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\blogcontroller;
 use App\Http\Controllers\ChambreController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\reservation;
 use App\Http\Controllers\ReservationController;
-use App\Models\Hotel;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,12 +48,19 @@ Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_sav
 // Route pour gerer les hotels
 Route::get('/etablissement', [HotelController::class, 'index']);
 Route::get('/ajouter_eta', [HotelController::class, 'Ajouter_hotel']);
-Route::post('/create', [HotelController::class, 'create'])->name('etablissement.store');
-Route::delete('/etablissements/{id}', [Hotel::class, 'destroy'])->name('etablissements.destroy');
+Route::post('/create_hotel', [HotelController::class, 'create']);
+Route::delete('/etablissements/{id}', [HotelController::class, 'destroy'])->name('etablissements.destroy');
 
 Route::get('/modif_form/{id}', [HomeController::class, 'edit']);
 Route::post('/modif_save/{id}', [HomeController::class, 'update']);
 Route::get('/show_etab/{id}', [HomeController::class, 'show']);
+
+
+// Route pour les appartements
+Route::get('/ajouter_appart', [AppartementController::class, 'Ajouter_appart']);
+Route::post('/create', [AppartementController::class, 'create']);
+
+
 
 
 

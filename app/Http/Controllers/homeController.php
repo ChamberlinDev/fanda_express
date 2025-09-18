@@ -19,7 +19,7 @@ class HomeController extends Controller
     public function edit($id)
     {
         $etab = Hotel::findOrFail($id);
-        return view('admin.etablissements.modif', compact('etab'));
+        return view('admin.hotels.modif', compact('etab'));
     }
 
     public function update(Request $request, $id)

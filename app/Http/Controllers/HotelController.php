@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appartement;
 use App\Models\Hotel;
 use App\Models\Image;
 use Illuminate\Http\Request;
@@ -12,14 +13,14 @@ class HotelController extends Controller
     //
     public function index()
     {
-        // Récupère tous les hôtels avec pagination
-        $hotels = Hotel::with('user')->latest()->paginate(9); 
-        return view('admin.etablissements.index', compact('hotels'));
-    }
+        $hotels = Hotel::paginate(6);
+        $apparts = Appartement::paginate(6);
 
+        return view('admin.etablissements.index', compact('hotels', 'apparts'));
+    }
     public function Ajouter_hotel()
     {
-        return view('admin.etablissements.ajouter');
+        return view('admin.etablissements.ajouter_hotel');
     }
     public function create(Request $request)
     {

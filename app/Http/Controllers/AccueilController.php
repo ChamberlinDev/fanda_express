@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appartement;
 use App\Models\Blog;
 use App\Models\etablissement_mod;
 use App\Models\Hotel;
@@ -19,7 +20,9 @@ class AccueilController extends Controller
         //     ->get()
         //     ->unique('titre'); // <- supprime doublons par titre
 
-        return view('accueil', compact('hotels'));
+        $apparts = Appartement::paginate(12);
+
+        return view('accueil', compact('hotels', 'apparts'));
     }
 
 

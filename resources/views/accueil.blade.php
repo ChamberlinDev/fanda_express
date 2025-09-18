@@ -43,6 +43,44 @@
     </div>
 </section>
 
+<section class="container-fluid my-5">
+    <div class="row g-4">
+        @forelse($apparts as $appart)
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <div class="card h-100 shadow-sm border-2 p-3">
+                <a href="{{ asset('storage/' . $appart->image) }}" target="_blank">
+                    @if($appart->image)
+                    <img src="{{ asset('storage/' . $appart->image) }}" class="card-img-top" alt="{{ $appart->nom }}" style="height:200px; object-fit:cover;">
+                    @else
+                    <img src="https://via.placeholder.com/400x200?text=Pas+d'image" class="card-img-top" alt="{{ $appart->nom }}" style="height:200px; object-fit:cover;">
+                    @endif
+                </a>
+
+                <div class="card-body">
+                    <h4 class="card-title text-primary">{{ $appart->nom }}</h4>
+                    <p class="card-text mb-1"><strong>Ville :</strong> {{ $appart->ville }}</p>
+                    <p class="card-text mb-1"><strong>Adresse :</strong> {{ $appart->adresse }}</p>
+                </div>
+
+                <div class="card-footer bg-white border-0 text-center">
+                    <a href="#" class="btn btn-primary btn-sm">Voir l'hôtel</a>
+                </div>
+            </div>
+        </div>
+        @empty
+        <div class="col-12">
+            <p class="text-center">Aucun hôtel disponible pour le moment.</p>
+        </div>
+        @endforelse
+    </div>
+
+
+    {{-- Pagination --}}
+    <div class="mt-4 d-flex justify-content-center">
+        {{ $apparts->links() }}
+    </div>
+</section>
+
 
 <hr>
 @include('clients.partials.blog')

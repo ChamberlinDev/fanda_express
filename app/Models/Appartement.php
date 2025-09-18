@@ -13,10 +13,9 @@ class Appartement extends Model
         'ville',
         'adresse',
         'nbre_chambre',
-        'surface',
         'description',
         'equipements',
-        'images',
+        'image',
         'user_id',
     ];
 
