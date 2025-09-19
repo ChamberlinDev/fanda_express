@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\etablissement_mod;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class homeController extends Controller
 {
     //
     public function show($id)
@@ -19,7 +21,7 @@ class HomeController extends Controller
     public function edit($id)
     {
         $etab = Hotel::findOrFail($id);
-        return view('admin.hotels.modif', compact('etab'));
+        return view('admin.etablissements.modif', compact('etab'));
     }
 
     public function update(Request $request, $id)

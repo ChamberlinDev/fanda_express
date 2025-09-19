@@ -6,6 +6,10 @@
 <hr>
 <!-- hotels -->
 <section class="container-fluid my-5">
+    <div>
+        <h2 class="text-center"><span>Hotels</span></h2>
+    </div>
+<hr>
     <div class="row g-4">
         @forelse($hotels as $hotel)
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
@@ -43,7 +47,11 @@
     </div>
 </section>
 
+<hr>
 <section class="container-fluid my-5">
+    <div>
+        <h2 class="text-center"><span>Appartements </span></h2>
+    </div>
     <div class="row g-4">
         @forelse($apparts as $appart)
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
@@ -88,47 +96,48 @@
 @include('clients.partials.apropos')
 
 
-    <div class="mb-5" data-aos="fade-up" data-aos-delay="200">
-        <iframe style="border:0; width: 100%; height: 300px;" src="https://maps.google.com/maps?width=720&height=600&hl=fr&q=pointe-noire%20congo+(fanda-express)&t=&z=14&ie=UTF8&iwloc=B&output=embed" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
+<div class="mb-5" data-aos="fade-up" data-aos-delay="200">
+    <iframe style="border:0; width: 100%; height: 300px;" src="https://maps.google.com/maps?width=720&height=600&hl=fr&q=pointe-noire%20congo+(fanda-express)&t=&z=14&ie=UTF8&iwloc=B&output=embed" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+<hr>
+<div>
+    <h2 class="text-center"><span>Contactez-nous </span></h2>
     <hr>
-    <div>
-        <h2 class="text-center"><span>contactez-nous </span></h2>
-        <hr>
+</div>
+
+<div class="container" data-aos="fade-up" data-aos-delay="100">
+
+    <div class="row gy-4">
+
+
+        <form action="" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <div class="row gy-4">
+
+                <div class="col-md-6">
+                    <input type="text" name="name" class="form-control" placeholder="Votre nom" required="">
+                </div>
+
+                <div class="col-md-6">
+                    <input type="email" class="form-control" name="email" placeholder="Votre email" required="">
+                </div>
+
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="subject" placeholder="Sujet" required="">
+                </div>
+
+                <div class="col-md-12">
+                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+
+                    <a href="#" class="btn btn-primary col-8" type="submit">Envoyer</a>
+                </div>
+
+            </div>
+        </form>
     </div>
+</div>
 
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          
-                <form action="" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-                    <div class="row gy-4">
-
-                        <div class="col-md-6">
-                            <input type="text" name="name" class="form-control" placeholder="Votre nom" required="">
-                        </div>
-
-                        <div class="col-md-6">
-                            <input type="email" class="form-control" name="email" placeholder="Votre email" required="">
-                        </div>
-                        
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="subject" placeholder="Sujet" required="">
-                        </div>
-
-                        <div class="col-md-12">
-                            <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                        </div>
-
-                        <div class="col-md-12 text-center">
-
-                            <a href="#" class="btn btn-primary col-8" type="submit">Envoyer</a>
-                        </div>
-
-                    </div>
-                </form>
-            </div></div>
-
-    </div>
+</div>
 @endsection

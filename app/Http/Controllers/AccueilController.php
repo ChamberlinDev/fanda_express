@@ -20,9 +20,16 @@ class AccueilController extends Controller
         //     ->get()
         //     ->unique('titre'); // <- supprime doublons par titre
 
+
+
+    // Charger seulement quelques blogs pour la page d’accueil
+    $blogs = Blog::latest()->take(6)->get();
+
+
+
         $apparts = Appartement::paginate(12);
 
-        return view('accueil', compact('hotels', 'apparts'));
+        return view('accueil', compact('hotels', 'apparts', 'blogs'));
     }
 
 
