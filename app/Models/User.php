@@ -28,9 +28,9 @@ class User extends Authenticatable
     ];
 
 
-    public function etablissements()
+    public function hotels()
     {
-        return $this->hasMany(Etablissement_mod::class, 'user_id');
+        return $this->hasMany(Hotel::class, 'user_id');
     }
 
      public function blogs()

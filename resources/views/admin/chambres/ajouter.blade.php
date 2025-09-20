@@ -1,8 +1,8 @@
-@extends('layout.app')
+@extends('admin.layout.app')
 @section('content')
 <div class="container my-5">
-    <h3>Ajouter une chambre à <mark>{{ $etablissement->nom }}</mark></h3>
-    <form action="{{ route('chambres.store', $etablissement->id) }}" method="POST" enctype="multipart/form-data">
+    <h3>Ajouter une chambre à <mark>{{ $hotel->nom }}</mark></h3>
+    <form action="{{ route('chambres.store', $hotel->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <!-- Choix du type de chambre -->

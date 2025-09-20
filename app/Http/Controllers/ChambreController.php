@@ -14,16 +14,13 @@ class ChambreController extends Controller
     //
     public function create($id)
     {
-        $etablissements = Auth::user()->etablissements;
-
+        $hotel = Auth::user()->hotel;
         $hotel = Hotel::findOrFail($id);
-        $appart = Appartement::findOrFail($id);
-
-        return view('admin.chambres.ajouter', compact('etablissement', 'appart'));
+        return view('admin.chambres.ajouter', compact('hotel'));
     }
 
 
-    public function store(Request $request, $etablissementId)
+    public function store(Request $request, $hotelId)
     {
         $request->validate([
             'nom' => 'required|string|max:255',
@@ -33,7 +30,7 @@ class ChambreController extends Controller
         ]);
 
         $chambre = new Chambre($request->only(['nom', 'capacite', 'prix']));
-        $chambre->etablissement_id = $etablissementId;
+        $chambre->hotel_id = $hotelId;
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('chambres', 'public');
@@ -42,7 +39,8 @@ class ChambreController extends Controller
 
         $chambre->save();
 
-        return redirect('etablissements', $etablissementId)
+        return redirect()->route('etablissements.show', $hotelId)
             ->with('success', 'Chambre ajoutée avec succès !');
     }
+    
 }

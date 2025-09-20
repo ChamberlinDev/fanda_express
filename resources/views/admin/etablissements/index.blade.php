@@ -51,7 +51,7 @@
                 <div class="card-footer bg-white border-0 text-center">
                     <div class="btn-group" role="group">
                         <!-- Voir -->
-                        <a href="#" class="btn btn-sm btn-outline-secondary" title="Voir">
+                        <a href="{{route('etablissements.show', $hotel->id)}}" class="btn btn-sm btn-outline-secondary" title="Voir">
                             <i class="bi bi-eye"></i>
                         </a>
 
@@ -120,7 +120,7 @@
                 <div class="card-footer bg-white border-0 text-center">
                     <div class="btn-group" role="group">
                         <!-- Voir -->
-                        <a href="#" class="btn btn-sm btn-outline-secondary" title="Voir">
+                        <a href="/show_appart/{{$appart->id}}" class="btn btn-sm btn-outline-secondary" title="Voir">
                             <i class="bi bi-eye"></i>
                         </a>
 

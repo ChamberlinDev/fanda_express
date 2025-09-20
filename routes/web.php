@@ -11,17 +11,15 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\reservation;
 use App\Http\Controllers\ReservationController;
+use App\Models\Hotel;
 use Illuminate\Support\Facades\Route;
 
 
 
  // route client
 Route::get('/', [AccueilController::class, 'accueil'] );
-Route::get('/details/{id}', [AccueilController::class, 'show'])->name('etablissements.show');
 
-Route::get('/hotels', function(){
-    return view('hotels.liste');
-});
+Route::get('/hotels',[HotelController::class, 'search_hotel']);
 
 
 Route::get('/reservation_etablissements', [ReservationController::class, 'create']);
@@ -49,16 +47,23 @@ Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_sav
 Route::get('/etablissement', [HotelController::class, 'index']);
 Route::get('/ajouter_eta', [HotelController::class, 'Ajouter_hotel']);
 Route::post('/create_hotel', [HotelController::class, 'create']);
-Route::delete('/etablissements/{id}', [HotelController::class, 'destroy'])->name('etablissements.destroy');
+Route::delete('/hotels_delete/{id}', [HotelController::class, 'destroy'])->name('etablissements.destroy');
+Route::get('/show_hotel/{id}', [HotelController::class, 'show'])->name('etablissements.show');
+
+Route::get('/details/{id}', [HotelController::class, 'show'])->name('hotel.show');
+
+
+
 
 Route::get('/modif_form/{id}', [HomeController::class, 'edit']);
 Route::post('/modif_save/{id}', [HomeController::class, 'update']);
-Route::get('/show_etab/{id}', [HomeController::class, 'show']);
 
 
 // Route pour les appartements
 Route::get('/ajouter_appart', [AppartementController::class, 'Ajouter_appart']);
 Route::post('/create', [AppartementController::class, 'create']);
+Route::get('/show_appart/{id}', [AppartementController::class, 'show']);
+
 
 
 

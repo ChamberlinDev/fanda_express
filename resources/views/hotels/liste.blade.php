@@ -12,14 +12,14 @@
 
 <header class="container-fluid my-5">
     <div class="header_content d-flex flex-row align-items-center justify-content-start">
-         <a href="/" class="text-decoration-none text-primary">
-                <i class="bi bi-arrow-left-circle fs-4"></i> Retour
-            </a>
+        <a href="/" class="text-decoration-none text-primary">
+            <i class="bi bi-arrow-left-circle fs-4"></i> Retour
+        </a>
         <div class="logo"><a href="/" class="text-dark">Fanda</a></div>
         <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
             <nav class="main_nav">
                 <ul class="d-flex flex-row align-items-start justify-content-start">
-                    <li ><a href="/" class="text-dark">Accueil</a></li>
+                    <li><a href="/" class="text-dark">Accueil</a></li>
                     <li class="active"><a href="/hotels">Hotels & Apparatements</a></li>
 
                 </ul>
@@ -37,25 +37,66 @@
 </div>
 <section class="container-fluid my-5">
     <div class="row g-4">
+        @forelse($hotels as $hotel)
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-            <div class="card h-100 shadow-sm border-5">
-                <img src="../images/room-3.jpg" class="card-img-top"
-                    alt="image_hotel"
-                    style="height: 260px; object-fit: cover;">
+            <div class="card h-100 shadow-sm border-2 p-3">
+                <a href="{{ asset('storage/' . $hotel->image) }}" target="_blank">
+                    @if($hotel->image)
+                    <img src="{{ asset('storage/' . $hotel->image) }}" class="card-img-top" alt="{{ $hotel->nom }}" style="height:200px; object-fit:cover;">
+                    @else
+                    <img src="https://via.placeholder.com/400x200?text=Pas+d'image" class="card-img-top" alt="{{ $hotel->nom }}" style="height:200px; object-fit:cover;">
+                    @endif
+                </a>
+
                 <div class="card-body">
-                    <h6 class="text-primary mb-1">nom_etablissement</h6>
-                    <p class="text-muted small mb-2">adresse, ville</p>
-                    <p class="mb-2 small">Suite Junior</p>
-                    <p class="fw-bold text-dark mb-1">prix</p>
+                    <h4 class="card-title text-primary">{{ $hotel->nom }}</h4>
+                    <p class="card-text mb-1"><strong>Ville :</strong> {{ $hotel->ville }}</p>
+                    <p class="card-text mb-1"><strong>Adresse :</strong> {{ $hotel->adresse }}</p>
                 </div>
-                <div class="card-footer bg-white border-0">
-                    <a href="/details" class="btn btn-info btn-sm">Voir plus</a>
-                    <a href="/reservation_etablissements" class="btn btn-primary btn-sm">Réserver</a>
+
+                <div class="card-footer bg-white border-0 text-center">
+                    <a href="/details/{{$hotel->id}}" class="btn btn-primary btn-sm">Voir l'hôtel</a>
                 </div>
             </div>
         </div>
-
-      
+        @empty
+        <div class="col-12">
+            <p class="text-center">Aucun hôtel disponible pour le moment.</p>
+        </div>
+        @endforelse
     </div>
 </section>
-@include('partials.footer')
+<section class="container-fluid my-5">
+
+    <div class="row g-4">
+        @forelse($apparts as $appart)
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <div class="card h-100 shadow-sm border-2 p-3">
+                <a href="{{ asset('storage/' . $appart->image) }}" target="_blank">
+                    @if($appart->image)
+                    <img src="{{ asset('storage/' . $appart->image) }}" class="card-img-top" alt="{{ $appart->nom }}" style="height:200px; object-fit:cover;">
+                    @else
+                    <img src="https://via.placeholder.com/400x200?text=Pas+d'image" class="card-img-top" alt="{{ $appart->nom }}" style="height:200px; object-fit:cover;">
+                    @endif
+                </a>
+
+                <div class="card-body">
+                    <h4 class="card-title text-primary">{{ $appart->nom }}</h4>
+                    <p class="card-text mb-1"><strong>Ville :</strong> {{ $appart->ville }}</p>
+                    <p class="card-text mb-1"><strong>Adresse :</strong> {{ $appart->adresse }}</p>
+                </div>
+
+                <div class="card-footer bg-white border-0 text-center">
+                    <a href="/details/{{$appart->id}}" class="btn btn-primary btn-sm">Voir l'hôtel</a>
+                </div>
+            </div>
+        </div>
+        @empty
+        <div class="col-12">
+            <p class="text-center">Aucun appartement disponible pour le moment.</p>
+        </div>
+        @endforelse
+    </div>
+
+</section>
+@include('clients.partials.footer')

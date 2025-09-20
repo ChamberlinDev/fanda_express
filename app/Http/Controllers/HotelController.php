@@ -60,6 +60,21 @@ class HotelController extends Controller
         return redirect('/etablissement')->with('success', 'Hôtel ajouté avec succès !');
     }
 
+    public function search_hotel()
+    {
+
+        $hotels = Hotel::all();
+        $apparts = Appartement::all();
+        return view('hotels.liste', compact('hotels', 'apparts'));
+    }
+
+
+    public function show($id)
+{
+    $hotel = Hotel::with('chambres')->findOrFail($id);
+    return view('hotels.details', compact('hotel'));
+}
+
 
     public function destroy() {}
 }

@@ -5,55 +5,39 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>
             Informations de l'établissement :
-            <span class="text-primary">{{ $etab->nom }}</span>
+            <span class="text-primary">{{ $hotel->nom }}</span>
 
         </h2>
-        <a href="/chambres/{{ $etab->id}}" class="btn btn-primary">+ Ajouter une chambre</a>
+        <a href="/chambres/{{ $hotel->id}}" class="btn btn-primary">+ Ajouter une chambre</a>
     </div>
     <h2>
     </h2>
 
-    {{-- Image --}}
-    <div class="mt-4">
-        <a href="{{ $etab->images ? asset('storage/'.$etab->images) : asset('default.jpg') }}" target="_blank">
-            <img src="{{ $etab->images ? asset('storage/'.$etab->images) : asset('default.jpg') }}"
+  
+    <hr>
+    <p><strong>Adresse :</strong> {{ $hotel->adresse ?? 'Non renseignée' }}</p>
+    <p><strong>Ville :</strong> {{ $hotel->ville ?? 'Non renseignée' }}</p>
+
+    <p><strong>Description :</strong> {{ $hotel->description ?? 'Aucune description disponible.' }}</p>
+
+      {{-- Image --}}
+    <div class="container-fluid my-5">
+        <a href="{{ $hotel->images ? asset('storage/'.$hotel->image) : asset('default.jpg') }}" target="_blank">
+            <img src="{{ $hotel->image ? asset('storage/'.$hotel->image) : asset('default.jpg') }}"
                 class="img-fluid rounded shadow-sm d-block mx-auto"
-                style="max-height:250px; object-fit:fixed; width:50%; max-width:50%; cursor:pointer;"
+                style="max-height:500px; object-fit:fixed; width:50%; max-width:50%; cursor:pointer;"
                 alt="image etablissement">
         </a>
-
-
     </div>
-    <p><strong>Description :</strong> {{ $etab->description ?? 'Aucune description disponible.' }}</p>
-
-    <hr>
-
-    <p><strong>Adresse :</strong> {{ $etab->adresse ?? 'Non renseignée' }}</p>
-    <p><strong>Ville :</strong> {{ $etab->ville ?? 'Non renseignée' }}</p>
-    <p><strong>Type :</strong> {{ $etab->type ?? 'Non renseigné' }}</p>
-
-    @if($etab->classement)
-    <p>
-        <strong>Classement :</strong>
-        @for($i=1; $i<=5; $i++)
-            @if($i <=$etab->classement)
-            <i class="bi bi-star-fill text-warning"></i>
-            @else
-            <i class="bi bi-star text-warning"></i>
-            @endif
-            @endfor
-    </p>
-    @endif
-
 
 
     <hr>
 
     <h3>Chambres disponibles</h3>
 
-    @if($etab->chambres->count() > 0)
+    @if($hotel->chambres->count() > 0)
     <div class="row">
-        @foreach($etab->chambres as $chambre)
+        @foreach($hotel->chambres as $chambre)
         <div class="col-md-4 mb-4">
             <div class="card">
                 @if($chambre->image)
@@ -80,6 +64,4 @@
     @endif
 </div>
 <hr>
-
-</div>
 @endsection

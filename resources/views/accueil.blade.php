@@ -28,8 +28,8 @@
                     <p class="card-text mb-1"><strong>Adresse :</strong> {{ $hotel->adresse }}</p>
                 </div>
 
-                <div class="card-footer bg-white border-0 text-center">
-                    <a href="#" class="btn btn-primary btn-sm">Voir l'hôtel</a>
+                <div class="card-footer bg-white border-1 text-center">
+                    <a href="/details/{{$hotel->id}}" class="btn btn-primary btn-sm">Voir l'hôtel</a>
                 </div>
             </div>
         </div>
@@ -70,14 +70,14 @@
                     <p class="card-text mb-1"><strong>Adresse :</strong> {{ $appart->adresse }}</p>
                 </div>
 
-                <div class="card-footer bg-white border-0 text-center">
-                    <a href="#" class="btn btn-primary btn-sm">Voir l'hôtel</a>
+                <div class="card-footer bg-white border-1 text-center">
+                    <a href="#" class="btn btn-primary btn-sm">Voir l'appart</a>
                 </div>
             </div>
         </div>
         @empty
         <div class="col-12">
-            <p class="text-center">Aucun hôtel disponible pour le moment.</p>
+            <p class="text-center">Aucun appartement disponible pour le moment.</p>
         </div>
         @endforelse
     </div>

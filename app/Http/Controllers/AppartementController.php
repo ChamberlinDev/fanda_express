@@ -60,4 +60,11 @@ class AppartementController extends Controller
 
         return redirect('/etablissement')->with('success', 'Appartement ajouté avec succès !');
     }
+
+     public function show($id)
+    {
+        $appart = Appartement::findOrFail($id);
+        return view('admin.etablissements.show_appart', compact('appart'));
+    }
+
 }

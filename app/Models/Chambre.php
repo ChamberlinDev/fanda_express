@@ -14,7 +14,7 @@ class Chambre extends Model
         'capacite',
         'prix',
         'image',
-        'etablissement_id'
+        'hotel_id'
     ];
 
 
