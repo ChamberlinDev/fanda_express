@@ -67,4 +67,9 @@ class AppartementController extends Controller
         return view('admin.etablissements.show_appart', compact('appart'));
     }
 
+    public function details($id){
+        $appart =Appartement::find($id);
+        return view('hotels.appart_details', compact('appart'));
+    }
+
 }

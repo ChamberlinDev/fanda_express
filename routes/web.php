@@ -16,20 +16,19 @@ use Illuminate\Support\Facades\Route;
 
 
 
- // route client
-Route::get('/', [AccueilController::class, 'accueil'] );
+// route client
+Route::get('/', [AccueilController::class, 'accueil']);
 
-Route::get('/hotels',[HotelController::class, 'search_hotel']);
+Route::get('/hotels', [HotelController::class, 'search_hotel']);
 
-
-Route::get('/reservation_etablissements', [ReservationController::class, 'create']);
+Route::get('/reservation_etablissements/{id}', [ReservationController::class, 'create'])->name('reservation_etablissements');
 
 
 
 
 // routes de connexion
-Route::get('/connexion',[Authcontroller::class, 'loginform']);
-Route::get('/inscription',[Authcontroller::class, 'registerform']);
+Route::get('/connexion', [Authcontroller::class, 'loginform']);
+Route::get('/inscription', [Authcontroller::class, 'registerform']);
 Route::post('/register', [Authcontroller::class, 'register']);
 Route::post('/login', [Authcontroller::class, 'login']);
 
@@ -63,6 +62,8 @@ Route::post('/modif_save/{id}', [HomeController::class, 'update']);
 Route::get('/ajouter_appart', [AppartementController::class, 'Ajouter_appart']);
 Route::post('/create', [AppartementController::class, 'create']);
 Route::get('/show_appart/{id}', [AppartementController::class, 'show']);
+Route::get('/details_appart/{id}', [AppartementController::class, 'details'])->name('hotel.show');
+
 
 
 

@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="card-footer bg-white border-1 text-center">
-                    <a href="#" class="btn btn-primary btn-sm">Voir l'appart</a>
+                    <a href="/details_appart/{{$appart->id}}" class="btn btn-primary btn-sm">Voir l'appart</a>
                 </div>
             </div>
         </div>

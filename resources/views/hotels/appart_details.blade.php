@@ -1,5 +1,3 @@
-
-
 <link rel="stylesheet" href="{{ asset('styles/bootstrap-4.1.2/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/OwlCarousel2-2.3.4/owl.carousel.css') }}">
@@ -36,11 +34,11 @@
     <div class="row">
         <!-- Image principale -->
         <div class="col-lg-6 mb-4">
-            @if($hotel->image)
-            <img src="{{ asset('storage/' . $hotel->image) }}"
+            @if($appart->image)
+            <img src="{{ asset('storage/' . $appart->image) }}"
                 class="img-fluid rounded shadow-sm"
                 style="height:400px; object-fit:cover; width:100%;"
-                alt="{{ $hotel->nom }}">
+                alt="{{ $appart->nom }}">
             @else
             <img src="https://via.placeholder.com/800x400?text=Pas+d'image"
                 class="img-fluid rounded shadow-sm"
@@ -51,22 +49,28 @@
 
         <!-- Infos principales -->
         <div class="col-lg-6">
-            <h2 class="text-primary">{{ $hotel->nom }}</h2>
+            <h2 class="text-primary">{{ $appart->nom }}</h2>
             <p class="text-muted">
-                <i class="bi bi-geo-alt-fill"></i> {{ $hotel->ville }}
+                <i class="bi bi-geo-alt-fill"></i> {{ $appart->ville }}
             </p>
-            <p><strong>Adresse :</strong> {{ $hotel->adresse }}</p>
-            <p><strong>Description :</strong> {{ $hotel->description ?? 'Aucune description disponible' }}</p>
+            <p><strong>Adresse :</strong> {{ $appart->adresse }}</p>
+            <p><strong>Description :</strong> {{ $appart->description ?? 'Aucune description disponible' }}</p>
+            <div class="col-6 mt-5">
+                <a href="#" class="btn btn-primary">Reserver</a>
+
+            </div>
         </div>
+
     </div>
+
 
     <!-- Section équipements -->
     <div class="row mt-5">
         <div class="col-12">
             <h3>Équipements</h3>
-            @if($hotel->equipements)
+            @if($appart->equipements)
             <ul class="list-inline">
-                @foreach(explode(',', $hotel->equipements) as $equipement)
+                @foreach(explode(',', $appart->equipements) as $equipement)
                 <li class="list-inline-item badge bg-light text-dark p-2 m-1">
                     {{ $equipement }}
                 </li>
@@ -77,44 +81,6 @@
             @endif
         </div>
     </div>
-    <hr>
-
-    <!-- Chambres disponibles -->
-    <div class="container my-5">
-        <h3>Chambres disponibles</h3>
-        <div class="row">
-            @forelse($hotel->chambres as $chambre)
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    @if($chambre->image)
-                    <img src="{{ asset('storage/' . $chambre->image) }}"
-                        class="card-img-top"
-                        alt="{{ $chambre->nom }}"
-                        style="height:200px; object-fit:cover;">
-                    @else
-                    <img src="https://via.placeholder.com/400x200?text=Pas+d'image"
-                        class="card-img-top"
-                        alt="Pas d'image">
-                    @endif
-
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $chambre->nom }}</h5>
-                        <p class="card-text">
-                            <strong>Capacité :</strong> {{ $chambre->capacite }} personnes <br>
-                            <strong>Prix :</strong> {{ number_format($chambre->prix, 0, ',', ' ') }} XOF / nuit
-                        </p>
-                        <a href="{{ url('/reservation_etablissements/' . $chambre->id) }}"
-                            class="btn btn-primary">
-                            Réserver
-                        </a>
-                    </div>
-                </div>
-            </div>
-            @empty
-            <p class="text-center">Aucune chambre disponible pour le moment.</p>
-            @endforelse
-        </div>
-    </div>
 
     <hr>
     <!-- Commentaire -->
@@ -123,9 +89,7 @@
         <textarea name="commentaire" id="commentaire" class="form-control" placeholder="Envoyer un commentaire"></textarea>
     </div>
     <div class="mb-3">
-        <a href="#" class="btn btn-primary">Envoyer</a>
+        <a href="#" class="btn btn-success">Envoyer</a>
     </div>
 </section>
-
-
 @include('clients.partials.footer')
