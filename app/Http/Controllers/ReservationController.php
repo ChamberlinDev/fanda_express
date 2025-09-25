@@ -19,9 +19,8 @@ class ReservationController extends Controller
     {
         // Récupérer la chambre choisie
         $chambre = Chambre::findOrFail($id);
-        $hotel = Hotel::findOrFail($id);
 
         // Envoyer à la vue reservation.blade.php
-        return view('admin.reservations.ajouter', compact('chambre', 'hotel'));
+        return view('admin.reservations.ajouter', compact('chambre'));
     }
 }
