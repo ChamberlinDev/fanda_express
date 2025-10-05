@@ -18,8 +18,13 @@ class Chambre extends Model
     ];
 
 
-   public function etablissement()
+    public function etablissement()
     {
         return $this->belongsTo(Hotel::class, 'hotel_id');
+    }
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
     }
 }

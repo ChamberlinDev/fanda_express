@@ -8,7 +8,7 @@
 			<!-- Type d'hôtel -->
 			<div class="col-3 mb-3">
 				<label for="type_hotel">Type d'hôtel</label>
-				<select id="type_hotel" class="form-control" name="type_hotel" required>
+				<select id="type_hotel" class="form-control text-dark" name="type_hotel" required>
 					<option value="">-- Sélectionner --</option>
 					<option value="appart">Appartement hôtel</option>
 					<option value="chambre">Chambre d'hôtel</option>
@@ -30,7 +30,7 @@
 			<!-- Type de chambre -->
 			<div class="col-3 mb-3" id="chambre_group">
 				<label for="chambre">Type de chambre</label>
-				<select id="chambre" class="form-control" name="chambre">
+				<select id="chambre" class="form-control text-dark" name="chambre">
 					<option value="">-- Sélectionner --</option>
 					<option value="single">Simple</option>
 					<option value="double">Double</option>
