@@ -12,19 +12,19 @@ use Illuminate\Http\Request;
 class ReservationController extends Controller
 {
     public function index()
-    {
-    
-       $hotel = auth()->user()->hotel;
+{
+    $hotel = auth()->user()->hotel;
 
-        $reservations = Reservation::whereHas('chambre', function ($q) use ($hotel) {
-            $q->where('hotel_id', $hotel->id);
-        })
-            ->with(['chambre.hotel'])
-            ->latest()
-            ->get();
+    $reservations = Reservation::whereHas('chambre', function ($q) use ($hotel) {
+        $q->where('hotel_id', $hotel->id);
+    })
+        ->with(['chambre.hotel'])
+        ->latest()
+        ->get();
 
-        return view('admin.reservations.liste');
-    }
+    return view('admin.reservations.liste', compact('reservations'));
+}
+
 
 
 
