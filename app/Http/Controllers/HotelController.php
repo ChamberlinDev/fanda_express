@@ -72,7 +72,7 @@ class HotelController extends Controller
     public function show($id)
     {
         $hotel = Hotel::with('chambres')->findOrFail($id);
-        return view('etablissements.show', compact('hotel'));
+        return view('admin.etablissements.show', compact('hotel'));
     }
 
 
