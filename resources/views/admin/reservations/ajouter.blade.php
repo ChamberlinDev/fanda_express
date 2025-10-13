@@ -11,6 +11,27 @@
         <i class="bi bi-arrow-left-circle fs-4"></i> Retour
     </a>
 
+
+
+    @if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
+    @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+
     <div class="card shadow p-4 border-0 rounded-4">
         {{-- 🏨 INFOS HÔTEL --}}
         <h2 class="mb-4 text-center text-primary">
@@ -22,13 +43,13 @@
                 <div class="col-md-8">
                     <h4 class="fw-bold">Nom de l'hotel : <em>{{ $chambre->hotel->nom ?? 'Nom de l’hôtel non disponible' }}</em></h4>
                     <p class="mb-2"><i class="bi bi-geo-alt-fill text-danger"></i>
-                       Adresse: {{ $chambre->hotel->adresse ?? 'Adresse non renseignée' }}
+                        Adresse: {{ $chambre->hotel->adresse ?? 'Adresse non renseignée' }}
                     </p>
                     <!-- <p class="mb-2"><i class="bi bi-telephone-fill text-success"></i>
                        Telephone: {{ $chambre->hotel->telephone ?? 'Téléphone non renseigné' }} -->
                     </p>
                     <p class="mb-0 text-muted">
-                      Description: <br> {{ $chambre->hotel->description ?? 'Aucune description disponible pour cet hôtel.' }}
+                        Description: <br> {{ $chambre->hotel->description ?? 'Aucune description disponible pour cet hôtel.' }}
                     </p>
                 </div>
             </div>
@@ -47,13 +68,13 @@
 
         {{-- Miniatures --}}
         @if(isset($chambre->images) && count($chambre->images) > 0)
-            <div class="d-flex justify-content-center mb-4 flex-wrap gap-2">
-                @foreach($chambre->images as $img)
-                    <img src="{{ asset('storage/' . $img->path) }}"
-                        class="img-thumbnail thumbnail-image"
-                        style="width: 100px; height: 70px; object-fit: cover; cursor: pointer;">
-                @endforeach
-            </div>
+        <div class="d-flex justify-content-center mb-4 flex-wrap gap-2">
+            @foreach($chambre->images as $img)
+            <img src="{{ asset('storage/' . $img->path) }}"
+                class="img-thumbnail thumbnail-image"
+                style="width: 100px; height: 70px; object-fit: cover; cursor: pointer;">
+            @endforeach
+        </div>
         @endif
 
         <div class="mb-4">
@@ -90,7 +111,7 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="date_debut" class="form-label">Date de début</label>
-                    <input type="date" name="date_bt" id="date_debut" class="form-control text-dark" required>
+                    <input type="date" name="date_debut" id="date_debut" class="form-control text-dark" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="date_fin" class="form-label">Date de fin</label>
@@ -111,6 +132,7 @@
         transform: scale(1.05);
         transition: 0.2s;
     }
+
     .card {
         background-color: #fff;
     }

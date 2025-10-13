@@ -13,19 +13,30 @@ class ReservationController extends Controller
 {
     public function index()
     {
+    
+       $hotel = auth()->user()->hotel;
+
+        $reservations = Reservation::whereHas('chambre', function ($q) use ($hotel) {
+            $q->where('hotel_id', $hotel->id);
+        })
+            ->with(['chambre.hotel'])
+            ->latest()
+            ->get();
+
         return view('admin.reservations.liste');
     }
+
+
 
     public function create($id)
     {
         // Récupérer la chambre choisie 
         $chambre = Chambre::with('hotel')->findOrFail($id);
-
         // Envoyer à la vue reservation.blade.php
         return view('admin.reservations.ajouter', compact('chambre'));
     }
 
-  
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -41,7 +52,7 @@ class ReservationController extends Controller
         $dejaReservee = Reservation::where('chambre_id', $validated['chambre_id'])
             ->where(function ($q) use ($validated) {
                 $q->whereBetween('date_debut', [$validated['date_debut'], $validated['date_fin']])
-                  ->orWhereBetween('date_fin', [$validated['date_debut'], $validated['date_fin']]);
+                    ->orWhereBetween('date_fin', [$validated['date_debut'], $validated['date_fin']]);
             })
             ->exists();
 
@@ -54,5 +65,3 @@ class ReservationController extends Controller
         return back()->with('success', 'Votre réservation a bien été enregistrée !');
     }
 }
-
-

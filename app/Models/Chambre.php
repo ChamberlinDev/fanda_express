@@ -27,4 +27,8 @@ class Chambre extends Model
     {
         return $this->belongsTo(Hotel::class);
     }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'chambre_id');
+    }
 }

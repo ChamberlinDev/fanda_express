@@ -28,17 +28,17 @@ class User extends Authenticatable
     ];
 
 
-    public function hotels()
+    public function hotel()
     {
-        return $this->hasMany(Hotel::class, 'user_id');
+        return $this->hasOne(Hotel::class, 'user_id');
     }
 
-     public function blogs()
+    public function blogs()
     {
         return $this->hasMany(Blog::class, 'user_id');
     }
 
-    
+
 
     /**
      * The attributes that should be hidden for serialization.

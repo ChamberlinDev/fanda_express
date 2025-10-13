@@ -55,7 +55,7 @@
                            
                         </li>
                         <li class="nav-item">
-                            <a data-bs-toggle="no-collapse" href="3">
+                            <a data-bs-toggle="no-collapse" href="#">
                                 <i class="fas fa-users"></i>
                                 <h5>Clients</h5>
                             </a>

@@ -70,11 +70,21 @@ class HotelController extends Controller
 
 
     public function show($id)
-{
-    $hotel = Hotel::with('chambres')->findOrFail($id);
-    return view('hotels.details', compact('hotel'));
-}
+    {
+        $hotel = Hotel::with('chambres')->findOrFail($id);
+        return view('etablissements.show', compact('hotel'));
+    }
 
 
     public function destroy() {}
+
+
+
+
+    public function reservations($id)
+    {
+        $hotel = Hotel::with(['reservations.chambre'])->findOrFail($id);
+        return view('admin.hotels.reservations', compact('hotel'));
+    }
+    
 }

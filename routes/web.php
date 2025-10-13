@@ -23,9 +23,9 @@ Route::get('/hotels', [HotelController::class, 'search_hotel']);
 
 Route::get('/reservation_etablissements/{id}', [ReservationController::class, 'create'])->name('reservation_etablissements');
 
-Route::get('/reservation/{id}', [ReservationController::class, 'create'])->name('reservations.create');
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservations.store');
 
+Route::get('/hotels/{id}/reservations', [HotelController::class, 'reservations'])->name('hotels.reservations');
 
 
 // routes de connexion

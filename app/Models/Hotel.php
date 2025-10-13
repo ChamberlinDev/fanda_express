@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Hotel extends Model
 {
     //
-     protected $fillable = [
+    protected $fillable = [
         'nom',
         'ville',
         'adresse',
@@ -17,7 +18,7 @@ class Hotel extends Model
         'user_id',
     ];
 
-     public function chambres()
+    public function chambres()
     {
         return $this->hasMany(Chambre::class, 'hotel_id');
     }
@@ -25,10 +26,21 @@ class Hotel extends Model
     {
         return $this->hasMany(Blog::class);
     }
-    
-    public function user()
-{
-    return $this->belongsTo(User::class, 'user_id');
-}
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function reservations(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Reservation::class,
+            Chambre::class,
+            'hotel_id',      // Clé étrangère dans la table chambres
+            'chambre_id',    // Clé étrangère dans la table réservations
+            'id',            // Clé primaire de la table hôtels
+            'id'             // Clé primaire de la table chambres
+        );
+    }
 }
