@@ -51,7 +51,7 @@ Route::post('/create_hotel', [HotelController::class, 'create']);
 Route::delete('/hotels_delete/{id}', [HotelController::class, 'destroy'])->name('etablissements.destroy');
 Route::get('/show_hotel/{id}', [HotelController::class, 'show'])->name('etablissements.show');
 
-Route::get('/details/{id}', [HotelController::class, 'show'])->name('hotel.show');
+Route::get('/details/{id}', [HotelController::class, 'details'])->name('hotel.show');
 
 
 
