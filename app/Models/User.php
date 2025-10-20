@@ -37,6 +37,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Blog::class, 'user_id');
     }
+    public function appartement()
+    {
+        return $this->hasOne(Appartement::class);
+    }
 
 
 

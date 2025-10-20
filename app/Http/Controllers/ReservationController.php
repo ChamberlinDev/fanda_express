@@ -8,22 +8,35 @@ use App\Models\etablissement_mod;
 use App\Models\Hotel;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
+
     public function index()
-{
-    $hotel = auth()->user()->hotel;
+    {
+        $user = Auth::user();
+        $hotel = $user->hotel;
 
-    $reservations = Reservation::whereHas('chambre', function ($q) use ($hotel) {
-        $q->where('hotel_id', $hotel->id);
-    })
-        ->with(['chambre.hotel'])
-        ->latest()
-        ->get();
+        // Si l'utilisateur n'a pas encore d'hôtel
+        if (!$hotel) {
+            // On retourne une vue avec un message explicite
+            return view('admin.reservations.liste', [
+                'reservations' => collect(), // liste vide
+                'message' => 'Aucun hôtel associé à votre compte. Veuillez créer un établissement pour voir vos réservations.'
+            ]);
+        }
 
-    return view('admin.reservations.liste', compact('reservations'));
-}
+        // Sinon, on récupère les réservations liées à son hôtel
+        $reservations = Reservation::whereHas('chambre', function ($q) use ($hotel) {
+            $q->where('hotel_id', $hotel->id);
+        })
+            ->with(['chambre.hotel'])
+            ->latest()
+            ->get();
+
+        return view('admin.reservations.liste', compact('reservations'));
+    }
 
 
 

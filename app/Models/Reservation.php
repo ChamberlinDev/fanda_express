@@ -23,4 +23,8 @@ class Reservation extends Model
     {
         return $this->belongsTo(Chambre::class, 'chambre_id');
     }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

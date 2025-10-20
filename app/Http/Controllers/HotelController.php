@@ -13,9 +13,10 @@ class HotelController extends Controller
     //
     public function index()
     {
-        $hotels = Hotel::paginate(6);
-        $apparts = Appartement::paginate(6);
-
+        $userId = Auth::id();
+        // On récupère seulement les hôtels et appartements de l'utilisateur connecté
+        $hotels = Hotel::where('user_id', $userId)->paginate(6);
+        $apparts = Appartement::where('user_id', $userId)->paginate(6);
         return view('admin.etablissements.index', compact('hotels', 'apparts'));
     }
     public function Ajouter_hotel()
@@ -76,7 +77,7 @@ class HotelController extends Controller
     }
 
 
-    
+
     public function details($id)
     {
         $hotel = Hotel::with('chambres')->findOrFail($id);
@@ -93,5 +94,4 @@ class HotelController extends Controller
         $hotel = Hotel::with(['reservations.chambre'])->findOrFail($id);
         return view('admin.hotels.reservations', compact('hotel'));
     }
-    
 }

@@ -5,7 +5,7 @@
 			<nav class="main_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-start">
 					<li class="active"><a href="/">Accueil</a></li>
-					<li><a href="/hotels">Hotels & Apparatements</a></li>
+					<li><a href="/hotels">Hotels & Appartements</a></li>
 
 				</ul>
 			</nav>
