@@ -12,7 +12,7 @@
     <h2>
     </h2>
 
-  
+
     <hr>
 
     <p><strong>Adresse :</strong> {{ $appart->adresse ?? 'Non renseignée' }}</p>
@@ -20,19 +20,34 @@
 
     <p><strong>Description :</strong> {{ $appart->description ?? 'Aucune description disponible.' }}</p>
 
-      {{-- Image --}}
+    {{-- Image --}}
+    @php
+    // Si la colonne images n'est pas vide, on la décode
+    $images = $appart->images ? json_decode($appart->images, true) : [];
+    @endphp
+
     <div class="container-fluid my-5">
-        <a href="{{ $appart->images ? asset('storage/'.$appart->image) : asset('default.jpg') }}" target="_blank">
-            <img src="{{ $appart->image ? asset('storage/'.$appart->image) : asset('default.jpg') }}"
+        @if(!empty($images))
+        {{-- Affiche la première image --}}
+        <a href="{{ asset('storage/'.$images[0]) }}" target="_blank">
+            <img src="{{ asset('storage/'.$images[0]) }}"
                 class="img-fluid rounded shadow-sm d-block mx-auto"
-                style="max-height:500px; object-fit:fixed; width:50%; max-width:50%; cursor:pointer;"
-                alt="image etablissement">
+                style="max-height:500px; object-fit:cover; width:50%; max-width:50%; cursor:pointer;"
+                alt="image établissement">
         </a>
-
-
+        @else
+        {{-- Image par défaut si aucune image --}}
+        <a href="{{ asset('default.jpg') }}" target="_blank">
+            <img src="{{ asset('default.jpg') }}"
+                class="img-fluid rounded shadow-sm d-block mx-auto"
+                style="max-height:500px; object-fit:cover; width:50%; max-width:50%; cursor:pointer;"
+                alt="image établissement">
+        </a>
+        @endif
     </div>
+
     <a href="/etablissement" class="btn btn-primary">Retour</a>
-<a href="#" class="btn btn-warning">Modifier</a>
+    <a href="#" class="btn btn-warning">Modifier</a>
 
     <hr>
 

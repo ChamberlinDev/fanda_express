@@ -24,7 +24,7 @@
             </ul>
         </nav>
         <div class="d-flex align-items-center">
-            <a href="#" class="btn btn-warning text-white px-4 mr-3">Réserver</a>
+            <a href="#" class="btn btn-primary text-white px-4 mr-3">Réserver</a>
             <a href="/connexion" class="btn btn-outline-primary">Connexion</a>
         </div>
     </div>
@@ -82,14 +82,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Informations</h5>
                     <hr>
-                    <p class="mb-2"><i class="bi bi-building mr-2 text-primary"></i> {{ $hotel->type ?? 'Hôtel' }}</p>
-                    <p class="mb-2"><i class="bi bi-star-fill mr-2 text-warning"></i> 
-                        @if(isset($hotel->note))
-                            {{ $hotel->note }}/10
-                        @else
-                            Pas encore noté
-                        @endif
-                    </p>
+                    <p class="mb-2"><i class="bi bi-building mr-2 text-primary"></i> {{ $hotel->nom ?? 'Hôtel' }}</p>
                     <p class="mb-2"><i class="bi bi-telephone-fill mr-2 text-success"></i> {{ $hotel->telephone ?? 'Non renseigné' }}</p>
                     <p class="mb-2"><i class="bi bi-envelope-fill mr-2 text-info"></i> {{ $hotel->email ?? 'Non renseigné' }}</p>
                 </div>

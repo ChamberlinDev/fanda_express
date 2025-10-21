@@ -13,7 +13,7 @@ class Chambre extends Model
         'nom',
         'capacite',
         'prix',
-        'image',
+        'images',
         'hotel_id'
     ];
 

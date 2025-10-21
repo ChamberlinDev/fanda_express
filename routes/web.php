@@ -63,7 +63,7 @@ Route::post('/modif_save/{id}', [HomeController::class, 'update']);
 // Route pour les appartements
 Route::get('/ajouter_appart', [AppartementController::class, 'Ajouter_appart']);
 Route::post('/create', [AppartementController::class, 'create']);
-Route::get('/show_appart/{id}', [AppartementController::class, 'show']);
+Route::get('/show_appart/{id}', [AppartementController::class, 'show'])->name('show_appart');
 Route::get('/details_appart/{id}', [AppartementController::class, 'details'])->name('hotel.show');
 
 

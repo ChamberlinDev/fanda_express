@@ -110,14 +110,16 @@
         @forelse($apparts as $appart)
         <div class="col-sm-6 col-md-4 col-lg-3">
             <div class="card shadow-sm h-100 border-0">
-
                 {{-- Image --}}
-                <a href="#" target="_blank">
-                    <img src="{{ $appart->image ? asset('storage/'.$appart->image) : asset('images/default-appart.jpg') }}"
-                        class="card-img-top"
-                        alt="{{ $appart->nom }}"
-                        style="height:200px; object-fit:cover; border-top-left-radius: .5rem; border-top-right-radius: .5rem;">
-                </a>
+                @php
+                $images = $appart->images ? json_decode($appart->images, true) : [];
+                @endphp
+
+                @if(!empty($images))
+                <img src="{{ asset('storage/'.$images[0]) }}" alt="{{ $appart->nom }}" class="card-img-top" style="height:200px; object-fit:cover;">
+                @else
+                <img src="{{ asset('images/default-appart.jpg') }}" class="card-img-top" style="height:200px; object-fit:cover;">
+                @endif
 
                 <div class="card-body">
                     <h5 class="card-title text-primary text-truncate" title="{{ $appart->nom }}">
@@ -138,7 +140,7 @@
                 <div class="card-footer bg-white border-0 text-center">
                     <div class="btn-group" role="group">
                         <!-- Voir -->
-                        <a href="/show_appart/{{$appart->id}}" class="btn btn-sm btn-outline-secondary" title="Voir">
+                        <a href="{{route('show_appart', $appart->id)}}" class="btn btn-sm btn-outline-secondary" title="Voir">
                             <i class="bi bi-eye"></i>
                         </a>
 
@@ -160,6 +162,7 @@
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
         @empty
@@ -170,11 +173,13 @@
         </div>
         @endforelse
     </div>
+
     {{-- Pagination centrée --}}
+    @if($apparts->hasPages())
     <div class="mt-4 d-flex justify-content-center">
         {{ $apparts->links() }}
     </div>
-
+    @endif
 
 </div>
 @endsection

@@ -24,98 +24,75 @@
             </ul>
         </nav>
         <div class="d-flex align-items-center">
-            <a href="#" class="btn btn-warning text-white px-4 mr-3">Réserver</a>
+            <a href="#" class="btn btn-primary text-white px-4 mr-3">Réserver</a>
             <a href="/connexion" class="btn btn-outline-primary">Connexion</a>
         </div>
     </div>
 </header>
 
 <section class="container my-5">
-    <!-- Titre et localisation -->
+ <!-- Titre et localisation -->
     <div class="mb-4">
         <h1 class="mb-2">{{ $appart->nom }}</h1>
         <div class="d-flex align-items-center text-muted">
             <i class="bi bi-geo-alt-fill mr-2"></i>
-            <span>{{ $appart->ville }} - {{ $appart->adresse }}</span>
+            <span>{{ $appart->adresse ?? 'Pointe-noire, Republique du Congo' }}</span>
         </div>
     </div>
 
-    <!-- Image et informations -->
+    <!-- Galerie d'images -->
     <div class="row mb-5">
-        <!-- Image principale -->
-        <div class="col-lg-8 mb-4">
-            @if($appart->image)
-            <img src="{{ asset('storage/' . $appart->image) }}"
-                class="img-fluid rounded shadow w-100"
-                style="height:500px; object-fit:cover;"
-                alt="{{ $appart->nom }}">
+        <div class="col-lg-8">
+            @php
+            $images = json_decode($appart->images, true);
+            @endphp
+
+            @if(!empty($images) && is_array($images))
+            <!-- Image principale -->
+            <div class="mb-3">
+                <img id="mainImage" src="{{ asset('storage/' . $images[0]) }}"
+                    class="img-fluid rounded shadow w-100"
+                    style="height:450px; object-fit:cover;"
+                    alt="Image principale">
+            </div>
+
+            <!-- Miniatures -->
+            @if(count($images) > 1)
+            <div class="d-flex flex-wrap">
+                @foreach($images as $index => $img)
+                <img src="{{ asset('storage/' . $img) }}"
+                    class="rounded shadow-sm mr-2 mb-2 border"
+                    style="width:80px; height:60px; object-fit:cover; cursor:pointer;"
+                    onclick="document.getElementById('mainImage').src=this.src"
+                    alt="Miniature {{ $index + 1 }}">
+                @endforeach
+            </div>
+            @endif
             @else
-            <img src="https://via.placeholder.com/1200x500?text=Pas+d'image"
+            <img src="https://via.placeholder.com/1200x450?text=Pas+d'image"
                 class="img-fluid rounded shadow w-100"
-                style="height:500px; object-fit:cover;"
+                style="height:450px; object-fit:cover;"
                 alt="Pas d'image">
             @endif
         </div>
 
-        <!-- Carte d'informations -->
+        <!-- Informations de l'hôtel -->
         <div class="col-lg-4">
-            <div class="card shadow-sm sticky-top" style="top: 20px;">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold mb-4">Informations principales</h5>
-                    
-                    <div class="mb-3">
-                        <p class="mb-2">
-                            <i class="bi bi-building text-primary mr-2"></i>
-                            <strong>Type:</strong> Appartement
-                        </p>
-                        <p class="mb-2">
-                            <i class="bi bi-geo-alt-fill text-danger mr-2"></i>
-                            <strong>Ville:</strong> {{ $appart->ville }}
-                        </p>
-                        <p class="mb-2">
-                            <i class="bi bi-pin-map-fill text-info mr-2"></i>
-                            <strong>Adresse:</strong> {{ $appart->adresse }}
-                        </p>
-                        @if(isset($appart->capacite))
-                        <p class="mb-2">
-                            <i class="bi bi-people-fill text-success mr-2"></i>
-                            <strong>Capacité:</strong> {{ $appart->capacite }} personnes
-                        </p>
-                        @endif
-                        @if(isset($appart->superficie))
-                        <p class="mb-2">
-                            <i class="bi bi-arrows-angle-expand text-warning mr-2"></i>
-                            <strong>Superficie:</strong> {{ $appart->superficie }} m²
-                        </p>
-                        @endif
-                    </div>
-
-                    <hr>
-
-                    <div class="text-center mb-4">
-                        <h3 class="text-primary mb-0">{{ number_format($appart->prix, 0, ',', ' ') }} <small class="text-muted">XAF</small></h3>
-                        <small class="text-muted">par nuit</small>
-                    </div>
-
-                    <a href="#" class="btn btn-primary btn-block btn-lg">
-                        <i class="bi bi-calendar-check mr-2"></i>Réserver maintenant
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Description -->
-    <div class="row mb-5">
-        <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">
-                        <i class="bi bi-card-text text-primary mr-2"></i>Description
-                    </h4>
-                    <p class="text-muted mb-0">
-                        {{ $appart->description ?? 'Aucune description disponible pour cet appartement.' }}
-                    </p>
+                    <h5 class="card-title">Informations</h5>
+                    <hr>
+                    <p class="mb-2"><i class="bi bi-building mr-2 text-primary"></i> {{ $hotel->nom ?? 'Hôtel' }}</p>
+                    <p class="mb-2"><i class="bi bi-telephone-fill mr-2 text-success"></i> {{ $appart->telephone ?? 'Non renseigné' }}</p>
+                    <p class="mb-2"><i class="bi bi-envelope-fill mr-2 text-info"></i> {{ $appart->email ?? 'Non renseigné' }}</p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Description</h5>
+                    <hr>
+                    <p class="text-muted">{{ $appart->description ?? 'Aucune description disponible.' }}</p>
                 </div>
             </div>
         </div>
@@ -126,9 +103,7 @@
         <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">
-                        <i class="bi bi-grid-3x3-gap-fill text-primary mr-2"></i>Équipements
-                    </h4>
+                    <h4 class="card-title mb-4"><i class="bi bi-grid-3x3-gap-fill mr-2 text-primary"></i>Équipements</h4>
                     @if($appart->equipements)
                     <div class="d-flex flex-wrap">
                         @foreach(explode(',', $appart->equipements) as $equipement)
@@ -169,5 +144,4 @@
         </div>
     </div>
 </section>
-
 @include('clients.partials.footer')

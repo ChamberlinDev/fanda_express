@@ -9,7 +9,7 @@
 
 				</ul>
 			</nav>
-			<div class="book_button"><a href="/hotel">Reserver</a></div>
+			<div class="book_button btn btn-primary"><a href="/hotel">Reserver</a></div>
 			<div class="header_phone d-flex flex-row align-items-center justify-content-center">
 				<a href="/connexion" class="text-white">Connexion</a>
 			</div>
