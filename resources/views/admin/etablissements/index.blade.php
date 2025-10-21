@@ -25,12 +25,30 @@
             <div class="card shadow-sm h-100 border-0">
 
                 {{-- Image --}}
-                <a href="#" target="_blank">
-                    <img src="{{ $hotel->image ? asset('storage/'.$hotel->image) : asset('images/default-hotel.jpg') }}"
-                        class="card-img-top"
-                        alt="{{ $hotel->nom }}"
-                        style="height:200px; object-fit:cover; border-top-left-radius: .5rem; border-top-right-radius: .5rem;">
-                </a>
+                @php
+                $images = json_decode($hotel->images, true);
+                @endphp
+
+                @if(!empty($images))
+                <div id="carousel-{{ $hotel->id }}" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach($images as $key => $img)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                            <img src="{{ asset('storage/' . $img) }}"
+                                class="d-block w-100"
+                                alt="{{ $hotel->nom }}"
+                                style="height:200px; object-fit:cover; border-top-left-radius: .5rem; border-top-right-radius: .5rem;">
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                @else
+                <img src="{{ asset('images/default-hotel.jpg') }}"
+                    class="card-img-top"
+                    alt="{{ $hotel->nom }}"
+                    style="height:200px; object-fit:cover; border-top-left-radius: .5rem; border-top-right-radius: .5rem;">
+                @endif
+
 
                 <div class="card-body">
                     <h5 class="card-title text-primary text-truncate" title="{{ $hotel->nom }}">

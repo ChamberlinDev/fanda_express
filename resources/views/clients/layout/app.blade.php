@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-	<title>Fanda Express </title>
+	<title>Fanda Express - Votre confort, notre priorité</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="The River template project">
+	<meta name="description" content="Fanda Express - Réservez votre chambre d'hôtel en toute simplicité">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
 	<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -20,100 +20,119 @@
 
 <body>
 
-	<div class="container-fluid my-5">
+	<!-- Header -->
+	@include('clients.partials.header')
 
-		<!-- Header -->
+	<!-- Hero Slider -->
+	<div class="home" style="height: 500px;">
+		<div class="home_slider_container">
+			<div class="owl-carousel owl-theme home_slider">
 
-		@include('clients.partials.header')
-		<div class="home">
-			<div class="home_slider_container">
-				<div class="owl-carousel owl-theme home_slider">
-
-					<!-- Slide 1 -->
-					<div class="slide">
-						<div class="background_image" style="background-image:url(images/téléchargement.jpeg)"></div>
-						<div class="home_container">
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<div class="home_content text-center">
-											<div class="home_title">Bienvenu(e) sur Fanda-express</div>
-											<div class="booking_form_container">
-												<p class="text-white">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi eaque cupiditate quo aspernatur quos inventore. Architecto, nobis dolore tenetur accusamus officiis, maxime, dolorum temporibus alias quia quidem eveniet nam quam!</p>
-											</div>
+				<!-- Slide 1 -->
+				<div class="slide">
+					<div class="background_image" style="background-image:url(images/téléchargement.jpeg)"></div>
+					<div class="home_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_content text-center">
+										<div class="home_title">Bienvenue sur Fanda Express</div>
+										<div class="booking_form_container">
+											<p class="text-white lead">Découvrez nos hébergements de qualité et profitez d'un séjour inoubliable dans un cadre exceptionnel.</p>
+											<a href="#reservation" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill">
+												Réserver maintenant
+											</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<!-- Slide 2 -->
-					<div class="slide">
-						<div class="background_image" style="background-image:url(images/image_6.jpg)"></div>
-						<div class="home_container">
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<div class="home_content text-center">
-											<div class="home_title">Retrouvez votre luxe</div>
-											<div class="booking_form_container">
-												<p class="text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe odio adipisci est atque in obcaecati reiciendis aspernatur. Dolore exercitationem maiores reprehenderit. Nam sint provident molestiae minima delectus? Optio, perferendis laboriosam.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Slide 3 -->
-					<div class="slide">
-						<div class="background_image" style="background-image:url(images/room-3.jpg)"></div>
-						<div class="home_container">
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<div class="home_content text-center">
-											<div class="home_title">Un moment de reve</div>
-											<div class="booking_form_container">
-												<p class="text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe odio adipisci est atque in obcaecati reiciendis aspernatur. Dolore exercitationem maiores reprehenderit. Nam sint provident molestiae minima delectus? Optio, perferendis laboriosam.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
 				</div>
 
+				<!-- Slide 2 -->
+				<div class="slide">
+					<div class="background_image" style="background-image:url(images/image_6.jpg)"></div>
+					<div class="home_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_content text-center">
+										<div class="home_title">Retrouvez Votre Luxe</div>
+										<div class="booking_form_container">
+											<p class="text-white lead">Des chambres élégantes et confortables pour un séjour qui allie raffinement et détente.</p>
+											<a href="#chambres" class="btn btn-light btn-lg mt-3 px-5 rounded-pill">
+												Voir nos chambres
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slide 3 -->
+				<div class="slide">
+					<div class="background_image" style="background-image:url(images/room-3.jpg)"></div>
+					<div class="home_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_content text-center">
+										<div class="home_title">Un Moment de Rêve</div>
+										<div class="booking_form_container">
+											<p class="text-white lead">Vivez une expérience unique dans un environnement paisible et accueillant.</p>
+											<a href="#contact" class="btn btn-warning btn-lg mt-3 px-5 rounded-pill">
+												Nous contacter
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 			</div>
 		</div>
-
-		<!-- formulaire de recherche -->
-
 	</div>
-	<!-- Features -->
 
-	<!-- hotels -->
-
-	<!-- Blog -->
-
-
-	<div class="container-fluid my-5">
+	<!-- Main Content -->
+	<div class="container-fluid my-5" id="chambres">
 		@yield('content')
 	</div>
-<hr>
-	<!-- a propos de nous -->
-	
+
+	<hr class="my-5">
+
+	<!-- About Section -->
+	<section class="container my-5 py-5" id="about">
+		<div class="row align-items-center">
+			<div class="col-md-6 mb-4">
+				<h2 class="font-weight-bold mb-4">Nos etablissements</h2>
+				<p class="lead text-muted">
+					Fanda Express vous accueille dans un cadre chaleureux et moderne. 
+					Notre établissement allie confort, qualité de service et tarifs attractifs 
+					pour vous offrir une expérience mémorable.
+				</p>
+				<p class="text-muted">
+					Que vous soyez en voyage d'affaires ou en vacances, notre équipe dévouée 
+					est à votre disposition pour répondre à tous vos besoins.
+				</p>
+				<a href="#contact" class="btn btn-primary mt-3 px-4 rounded-pill">
+					En savoir plus
+				</a>
+			</div>
+			<div class="col-md-6">
+				<img src="images/téléchargement.jpeg" alt="Fanda Express" class="img-fluid rounded shadow">
+			</div>
+		</div>
+	</section>
 
 	<!-- Footer -->
-	<div>
-		@include('clients.partials.footer')
-	</div>
+	@include('clients.partials.footer')
 
+	<!-- Scripts -->
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="styles/bootstrap-4.1.2/popper.js"></script>
 	<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>

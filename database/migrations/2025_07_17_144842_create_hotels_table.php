@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('nom');
             $table->string('ville');
             $table->string('adresse');
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('equipements')->nullable();
-            $table->string('image');
+            $table->json('images')->nullable();
             $table->unsignedBigInteger('user_id'); // référence à users
             $table->timestamps();
 

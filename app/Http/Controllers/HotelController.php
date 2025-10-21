@@ -33,7 +33,8 @@ class HotelController extends Controller
             'equipements' => 'nullable|array',
             'equipements.*' => 'string|max:255',
             'equipements_autres' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $hotel = new Hotel();
@@ -42,7 +43,7 @@ class HotelController extends Controller
         $hotel->adresse = $request->adresse;
         $hotel->description = $request->description;
 
-        // Gestion des équipements
+        // Équipements
         $equipements = $request->equipements ?? [];
         if ($request->equipements_autres) {
             $equipements[] = $request->equipements_autres;
@@ -51,15 +52,25 @@ class HotelController extends Controller
 
         $hotel->user_id = Auth::id();
 
-        // Gestion de l'image
-        if ($request->hasFile('image')) {
-            $hotel->image = $request->file('image')->store('hotels', 'public');
+        // Images multiples
+        $imagesPaths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('hotels', 'public');
+                    $imagesPaths[] = $path;
+                }
+            }
         }
+
+        $hotel->images = !empty($imagesPaths) ? json_encode($imagesPaths) : null;
 
         $hotel->save();
 
         return redirect('/etablissement')->with('success', 'Hôtel ajouté avec succès !');
     }
+
+
 
     public function search_hotel()
     {

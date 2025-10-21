@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Appartement;
 use App\Models\Chambre;
 use App\Models\etablissement_mod;
@@ -34,7 +33,6 @@ class ReservationController extends Controller
             ->with(['chambre.hotel'])
             ->latest()
             ->get();
-
         return view('admin.reservations.liste', compact('reservations'));
     }
 

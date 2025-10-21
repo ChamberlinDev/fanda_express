@@ -46,7 +46,7 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="image" class="form-label">Images</label>
-            <input type="file" name="image" id="image" class="form-control" multiple>
+            <input type="file" name="images[]" id="images[]"  multiple class="form-control">
         </div>
     </div>
 

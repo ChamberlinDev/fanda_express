@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('nom');
             $table->string('ville');
             $table->string('adresse');
-            $table->string('description');
+            $table->longText('description');
             $table->integer('nbre_chambre');
             $table->string('equipements');
-            $table->string('image');
+            $table->json('images')->nullable();
+            $table->decimal('prix');
             $table->unsignedBigInteger('user_id'); // référence à users
             $table->timestamps();
 

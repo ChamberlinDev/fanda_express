@@ -16,6 +16,7 @@ class Appartement extends Model
         'description',
         'equipements',
         'image',
+        'prix',
         'user_id',
     ];
 

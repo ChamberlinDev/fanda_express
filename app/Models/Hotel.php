@@ -12,7 +12,7 @@ class Hotel extends Model
         'nom',
         'ville',
         'adresse',
-        'image',
+        'images',
         'description',
         'equipements',
         'user_id',

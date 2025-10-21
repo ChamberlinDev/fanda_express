@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->integer('capacite');
             $table->decimal('prix', 10, 2);
-            $table->string('image')->nullable();
+            $table->json('images')->nullable();
             $table->unsignedBigInteger('hotel_id');
             $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
             $table->timestamps();
