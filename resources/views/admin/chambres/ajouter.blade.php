@@ -25,15 +25,16 @@
         </div>
 
         <!-- Prix -->
-        <div class="mb-3">
+        <div class="form-group">
             <label for="prix" class="form-label">Prix par nuit (XOF)</label>
             <input type="number" class="form-control" id="prix" name="prix" required>
         </div>
 
         <!-- Image -->
-        <div class="mb-3">
-            <label for="image" class="form-label">Image (optionnel)</label>
-            <input type="file" class="form-control" id="image" name="image">
+        <div class="form-group">
+            <label for="images">Images de la chambre</label>
+            <input type="file" name="images[]" id="images" class="form-control" multiple accept="image/*">
+            <small class="form-text text-muted">Vous pouvez sélectionner plusieurs images</small>
         </div>
 
         <button type="submit" class="btn btn-primary">Ajouter la chambre</button>

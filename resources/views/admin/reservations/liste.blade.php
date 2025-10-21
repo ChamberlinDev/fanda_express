@@ -39,7 +39,7 @@
                         <tr>
                             <td>{{ $reservation->id }}</td>
                             <td>{{ $reservation->nom }} {{ $reservation->prenom }}</td>
-                            <td>{{ $reservation->telephone }}</td>
+                            <td>+242 XX XXX XX XX</td>
                             <td>{{ $reservation->chambre->nom ?? '—' }}</td>
                             <td>{{ $reservation->chambre->hotel->nom ?? '—' }}</td>
                             <td>{{ \Carbon\Carbon::parse($reservation->date_debut)->format('d/m/Y') }}</td>

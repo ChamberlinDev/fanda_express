@@ -17,6 +17,17 @@ class Chambre extends Model
         'hotel_id'
     ];
 
+     protected $casts = [
+        'images' => 'array',
+    ];
+     public function getImagesAttribute($value)
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+        return $value ? json_decode($value, true) : [];
+    }
+
 
     public function etablissement()
     {

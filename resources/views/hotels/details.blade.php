@@ -126,17 +126,31 @@
         <div class="col-12">
             <h3 class="mb-4"><i class="bi bi-door-open-fill mr-2 text-primary"></i>Chambres disponibles</h3>
             <div class="row">
+
                 @forelse($hotel->chambres as $chambre)
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100 shadow-sm">
                         @php
-                        $img = $chambre->image ? asset('storage/' . $chambre->image) : 'https://via.placeholder.com/400x250?text=Pas+d\'image';
+                        // Solution robuste pour les images
+                        $images = [];
+                        if ($chambre->images && is_string($chambre->images)) {
+                        $decoded = json_decode($chambre->images, true);
+                        $images = is_array($decoded) ? $decoded : [];
+                        }
+
+                        $firstImage = !empty($images) ? $images[0] : null;
+                        $imgUrl = $firstImage ? asset('storage/' . $firstImage) : asset('images/default-room.jpg');
+                        $imageCount = is_array($images) ? count($images) : 0;
                         @endphp
-                        <img src="{{ $img }}" class="card-img-top" alt="{{ $chambre->nom }}" style="height:220px; object-fit:cover;">
+
+                        <img src="{{ $imgUrl }}"
+                            class="card-img-top"
+                            alt="{{ $chambre->nom }}"
+                            style="height:220px; object-fit:cover;">
 
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title font-weight-bold">{{ $chambre->nom }}</h5>
-                            
+
                             <div class="mb-3">
                                 <p class="mb-2">
                                     <i class="bi bi-people-fill text-primary mr-2"></i>
@@ -185,7 +199,7 @@
                     <form>
                         <div class="form-group">
                             <label for="commentaire" class="font-weight-bold">Votre commentaire</label>
-                            <textarea name="commentaire" id="commentaire" class="form-control" rows="5" 
+                            <textarea name="commentaire" id="commentaire" class="form-control" rows="5"
                                 placeholder="Partagez votre expérience..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary px-4">

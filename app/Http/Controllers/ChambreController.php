@@ -26,16 +26,25 @@ class ChambreController extends Controller
             'nom' => 'required|string|max:255',
             'capacite' => 'required|integer|min:1',
             'prix' => 'required|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $chambre = new Chambre($request->only(['nom', 'capacite', 'prix']));
         $chambre->hotel_id = $hotelId;
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('chambres', 'public');
-            $chambre->image = $path;
+        $imagesPaths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('hotels', 'public');
+                    $imagesPaths[] = $path;
+                }
+            }
         }
+
+        $chambre->images = !empty($imagesPaths) ? json_encode($imagesPaths) : null;
+
 
         $chambre->save();
 
