@@ -24,7 +24,7 @@
             </ul>
         </nav>
         <div class="d-flex align-items-center">
-            <a href="/hotel" class="btn btn-warning text-white px-4 mr-3">Réserver</a>
+            <a href="/hotel" class="btn btn-primary text-white px-4 mr-3">Réserver</a>
             <a href="/connexion" class="btn btn-outline-primary">Connexion</a>
         </div>
     </div>
@@ -119,8 +119,13 @@
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 shadow border-0 rounded-lg">
                 <div class="position-relative">
-                    @if($appart->image)
-                    <img src="{{ asset('storage/' . $appart->image) }}" 
+                    @php
+                    $hotelImages = json_decode($appart->images, true);
+                    $firstImage = (!empty($hotelImages) && is_array($hotelImages)) ? $hotelImages[0] : null;
+                    @endphp
+                    
+                    @if($firstImage)
+                    <img src="{{ asset('storage/' . $firstImage) }}" 
                          class="card-img-top rounded-top" 
                          alt="{{ $appart->nom }}" 
                          style="height:280px; object-fit:cover;">
@@ -131,9 +136,10 @@
                          style="height:280px; object-fit:cover;">
                     @endif
                     <span class="badge badge-success position-absolute rounded-pill" style="top: 15px; right: 15px; font-size: 0.9rem; padding: 8px 16px;">
-                        <i class="bi bi-house-door mr-1"></i>Appartement
+                        <i class="bi bi-building mr-1"></i>Appartement
                     </span>
                 </div>
+
 
                 <div class="card-body p-4">
                     <h5 class="card-title text-dark font-weight-bold mb-3" style="font-size: 1.25rem;">{{ $appart->nom }}</h5>

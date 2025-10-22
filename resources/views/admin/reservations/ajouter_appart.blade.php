@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="{{ asset('styles/bootstrap-4.1.2/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 
@@ -35,29 +34,38 @@
     @endif
 
     <div class="row">
-        {{-- Colonne gauche : Info chambre --}}
+        {{-- Colonne gauche : Info logement --}}
         <div class="col-lg-8 mb-4">
             <div class="card shadow border-0 mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0"><i class="fa fa-hotel"></i> {{ $chambre->hotel->nom ?? 'Hôtel' }}</h4>
+                    @php
+                        $isAppartement = isset($appart) || (isset($chambre->type) && strtolower($chambre->type) === 'appartement');
+                        $logement = $isAppartement && isset($appart) ? $appart : $chambre;
+                        $iconType = $isAppartement ? 'fa-home' : 'fa-hotel';
+                        $labelType = $isAppartement ? 'Appartement' : 'Chambre';
+                    @endphp
+                    <h4 class="mb-0">
+                        <i class="fa {{ $iconType }}"></i> 
+                        {{ $logement->nom ?? ($isAppartement ? 'Appartement' : 'Hôtel') }}
+                    </h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-5">
                             @php
                                 $images = [];
-                                if (isset($chambre->images)) {
-                                    if (is_string($chambre->images)) {
-                                        $images = json_decode($chambre->images, true) ?? [];
-                                    } elseif (is_array($chambre->images)) {
-                                        $images = $chambre->images;
+                                if (isset($logement->images)) {
+                                    if (is_string($logement->images)) {
+                                        $images = json_decode($logement->images, true) ?? [];
+                                    } elseif (is_array($logement->images)) {
+                                        $images = $logement->images;
                                     }
                                 }
                                 $mainImage = !empty($images) ? $images[0] : null;
                             @endphp
-                            <img src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/300x200?text=Chambre' }}"
+                            <img src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/300x200?text=' . $labelType }}"
                                 class="img-fluid rounded shadow-sm mb-3" 
-                                alt="{{ $chambre->nom }}">
+                                alt="{{ $logement->nom }}">
                             
                             @if(count($images) > 1)
                             <div class="d-flex flex-wrap">
@@ -73,37 +81,57 @@
                         </div>
                         
                         <div class="col-md-7">
-                            <h5 class="text-primary font-weight-bold">{{ $chambre->nom }}</h5>
+                            <h5 class="text-primary font-weight-bold">{{ $logement->nom }}</h5>
                             <p class="text-muted mb-3">
                                 <i class="fa fa-map-marker text-danger"></i>
-                                {{ $chambre->hotel->adresse ?? 'Adresse non disponible' }}
+                                {{ $logement->adresse ?? 'Adresse non disponible' }}
                             </p>
                             
+                            @if($isAppartement && isset($logement->telephone))
+                            <p class="text-muted mb-2">
+                                <i class="fa fa-phone text-success"></i>
+                                {{ $logement->telephone }}
+                            </p>
+                            @endif
+
+                            @if($isAppartement && isset($logement->email))
+                            <p class="text-muted mb-3">
+                                <i class="fa fa-envelope text-info"></i>
+                                {{ $logement->email }}
+                            </p>
+                            @endif
+                            
                             <div class="row mb-3">
-                                <div class="col-6">
-                                    <div class="bg-light p-3 rounded text-center">
-                                        <i class="fa fa-users fa-2x text-info mb-2"></i>
-                                        <h6 class="mb-1 font-weight-bold">Capacité</h6>
-                                        <span>{{ $chambre->capacite }} personnes</span>
-                                    </div>
-                                </div>
-                                <div class="col-6">
+                                <div class="col-12">
                                     <div class="bg-light p-3 rounded text-center">
                                         <i class="fa fa-tag fa-2x text-success mb-2"></i>
                                         <h6 class="mb-1 font-weight-bold">Prix/nuit</h6>
                                         <span class="text-success font-weight-bold">
-                                            {{ number_format($chambre->prix, 0, ',', ' ') }} XOF
+                                            {{ number_format($logement->prix, 0, ',', ' ') }} XOF
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
-                            @if(isset($chambre->hotel->description))
+                            @if(isset($logement->description))
                             <div class="bg-light p-3 rounded">
                                 <h6 class="text-primary font-weight-bold">
                                     <i class="fa fa-info-circle"></i> Description
                                 </h6>
-                                <p class="mb-0 text-muted small">{{ $chambre->hotel->description }}</p>
+                                <p class="mb-0 text-muted small">{{ $logement->description }}</p>
+                            </div>
+                            @endif
+
+                            @if($isAppartement && isset($logement->equipements))
+                            <div class="mt-3 bg-light p-3 rounded">
+                                <h6 class="text-primary font-weight-bold">
+                                    <i class="fa fa-check-circle"></i> Équipements
+                                </h6>
+                                <div class="d-flex flex-wrap">
+                                    @foreach(explode(',', $logement->equipements) as $equipement)
+                                    <span class="badge badge-secondary mr-1 mb-1">{{ trim($equipement) }}</span>
+                                    @endforeach
+                                </div>
                             </div>
                             @endif
                         </div>
@@ -121,7 +149,8 @@
                 <div class="card-body">
                     <form id="reservationForm" action="{{ route('reservations.store') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="chambre_id" value="{{ $chambre->id }}">
+                        <input type="hidden" name="logement_id" value="{{ $logement->id }}">
+                        <input type="hidden" name="type" value="{{ $isAppartement ? 'appartement' : 'chambre' }}">
 
                         <div class="form-group">
                             <label class="font-weight-bold">
@@ -147,13 +176,13 @@
                                 placeholder="+221 XX XXX XX XX" value="{{ old('telephone') }}" required>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label class="font-weight-bold">
                                 <i class="fa fa-envelope text-primary"></i> Email
                             </label>
                             <input type="email" name="email" id="email" class="form-control" 
                                 placeholder="votre@email.com" value="{{ old('email') }}">
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label class="font-weight-bold">
@@ -176,7 +205,7 @@
                                 <i class="fa fa-users text-primary"></i> Nombre de personnes *
                             </label>
                             <select name="nombre_personnes" id="nombre_personnes" class="form-control" required>
-                                @for($i = 1; $i <= $chambre->capacite; $i++)
+                                @for($i = 1; $i <= 10; $i++)
                                     <option value="{{ $i }}" {{ old('nombre_personnes') == $i ? 'selected' : '' }}>
                                         {{ $i }} personne{{ $i > 1 ? 's' : '' }}
                                     </option>
@@ -186,7 +215,7 @@
 
                         <div class="alert alert-info">
                             <strong><i class="fa fa-calculator"></i> Total estimé:</strong>
-                            <h5 class="mb-0 text-success">{{ number_format($chambre->prix, 0, ',', ' ') }} XOF</h5>
+                            <h5 class="mb-0 text-success">{{ number_format($logement->prix, 0, ',', ' ') }} XOF</h5>
                             <small class="text-muted">Basé sur 1 nuit</small>
                         </div>
 
@@ -222,12 +251,15 @@
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <h6 class="text-primary font-weight-bold border-bottom pb-2">
-                            <i class="fa fa-hotel"></i> Détails de la chambre
+                            <i class="fa {{ $iconType }}"></i> Détails du {{ $labelType }}
                         </h6>
-                        <p class="mb-1"><strong>Hôtel :</strong> <span>{{ $chambre->hotel->nom }}</span></p>
-                        <p class="mb-1"><strong>Chambre :</strong> <span>{{ $chambre->nom }}</span></p>
-                        <p class="mb-1"><strong>Capacité :</strong> <span>{{ $chambre->capacite }}</span> personnes</p>
-                        <p class="mb-1"><strong>Prix/nuit :</strong> <span>{{ number_format($chambre->prix, 0, ',', ' ') }}</span> XOF</p>
+                        <p class="mb-1"><strong>{{ $labelType }} :</strong> 
+                            <span>{{ $logement->nom }}</span>
+                        </p>
+                        <p class="mb-1"><strong>Adresse :</strong> <span>{{ $logement->adresse ?? 'Non renseignée' }}</span></p>
+                        <p class="mb-1"><strong>Prix/nuit :</strong> 
+                            <span>{{ number_format($logement->prix, 0, ',', ' ') }}</span> XOF
+                        </p>
                     </div>
                     <div class="col-md-6">
                         <h6 class="text-primary font-weight-bold border-bottom pb-2">
@@ -235,7 +267,7 @@
                         </h6>
                         <p class="mb-1"><strong>Nom complet :</strong> <span id="recap_nom_complet"></span></p>
                         <p class="mb-1"><strong>Téléphone :</strong> <span id="recap_telephone"></span></p>
-                        <p class="mb-1"><strong>Email :</strong> <span id="recap_email"></span></p>
+                        <!-- <p class="mb-1"><strong>Email :</strong> <span id="recap_email"></span></p> -->
                         <p class="mb-1"><strong>Nombre de personnes :</strong> <span id="recap_personnes"></span></p>
                     </div>
                 </div>
@@ -298,14 +330,14 @@
                         <i class="fa fa-credit-card"></i> Mode de paiement de l'acompte
                     </h6>
                     <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="mode_paiement" id="mobile_money" value="mobile_money" checked>
-                        <label class="form-check-label" for="mobile_money">
-                            <i class="fa fa-mobile"></i> Mobile Money 
+                        <input class="form-check-input" type="radio" name="mode_paiement" id="orange_money" value="orange_money" checked>
+                        <label class="form-check-label" for="orange_money">
+                            <i class="fa fa-mobile"></i> Orange Money
                         </label>
                     </div>
                     <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="mode_paiement" id="mobile_money" value="mobile_money" checked>
-                        <label class="form-check-label" for="mobile_money">
+                        <input class="form-check-input" type="radio" name="mode_paiement" id="airtel_money" value="airtel_money">
+                        <label class="form-check-label" for="airtel_money">
                             <i class="fa fa-mobile"></i> Airtel Money
                         </label>
                     </div>
@@ -335,7 +367,7 @@
 
 <script>
 $(document).ready(function() {
-    var prixNuit = {{ $chambre->prix }};
+    var prixNuit = {{ $logement->prix }};
 
     $('#recapModal').on('show.bs.modal', function() {
         var prenom = $('#prenom').val();

@@ -1,11 +1,11 @@
 <section class="container my-5">
     <div class="blog_section">
-        <h2 class="text-center mb-4">Derniers Articles</h2>
+        <h2 class="text-center mb-4">Derniers Blogs</h2>
         
         @if($blogs->isNotEmpty())
             <div class="row g-4">
                 @foreach($blogs as $blog)
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-12 col-lg-6">
                         <div class="card h-100 shadow-sm border-0">
                             <!-- Image -->
                             <div class="position-relative overflow-hidden">
@@ -30,12 +30,12 @@
                                 @endif
                             </div>
 
-                            <div class="card-footer bg-transparent border-0 text-center pb-3">
+                            <!-- <div class="card-footer bg-transparent border-0 text-center pb-3">
                                 <a href="#" 
                                    class="btn btn-primary btn-sm px-4 rounded-pill">
                                     Lire la suite
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 @endforeach

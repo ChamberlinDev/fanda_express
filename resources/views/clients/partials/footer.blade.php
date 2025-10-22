@@ -55,19 +55,11 @@
 					</li>
 					<li class="mb-2">
 						<a href="/hotels" class="text-white text-decoration-none d-flex align-items-center">
-							<i class="bi bi-chevron-right mr-2"></i>Hôtels
+							<i class="bi bi-chevron-right mr-2"></i>Hôtels et Appartements
 						</a>
 					</li>
-					<li class="mb-2">
-						<a href="/appartements" class="text-white text-decoration-none d-flex align-items-center">
-							<i class="bi bi-chevron-right mr-2"></i>Appartements
-						</a>
-					</li>
-					<li class="mb-2">
-						<a href="#apropos" class="text-white text-decoration-none d-flex align-items-center">
-							<i class="bi bi-chevron-right mr-2"></i>À propos de nous
-						</a>
-					</li>
+					
+					
 					<li class="mb-2">
 						<a href="#contact" class="text-white text-decoration-none d-flex align-items-center">
 							<i class="bi bi-chevron-right mr-2"></i>Contact
@@ -83,25 +75,11 @@
 				</h5>
 				<ul class="list-unstyled">
 					<li class="mb-2">
-						<a href="#" class="text-white text-decoration-none d-flex align-items-center">
+						<a href="/hotels" class="text-white text-decoration-none d-flex align-items-center">
 							<i class="bi bi-chevron-right mr-2"></i>Réservation
 						</a>
 					</li>
-					<li class="mb-2">
-						<a href="#" class="text-white text-decoration-none d-flex align-items-center">
-							<i class="bi bi-chevron-right mr-2"></i>Support 24/7
-						</a>
-					</li>
-					<li class="mb-2">
-						<a href="#" class="text-white text-decoration-none d-flex align-items-center">
-							<i class="bi bi-chevron-right mr-2"></i>Conseils voyage
-						</a>
-					</li>
-					<li class="mb-2">
-						<a href="#" class="text-white text-decoration-none d-flex align-items-center">
-							<i class="bi bi-chevron-right mr-2"></i>Partenariats
-						</a>
-					</li>
+					
 				</ul>
 			</div>
 
@@ -117,12 +95,12 @@
 						© 2025 <strong>Fanda-Express</strong>. Tous droits réservés.
 					</p>
 				</div>
-				<div class="col-md-6 text-center text-md-right">
+				<!-- <div class="col-md-6 text-center text-md-right">
 					<p class="text-white mb-0">
 						<a href="#" class="text-white text-decoration-none mr-3">Politique de confidentialité</a>
 						<a href="#" class="text-white text-decoration-none">Conditions d'utilisation</a>
 					</p>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

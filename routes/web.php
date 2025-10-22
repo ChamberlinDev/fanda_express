@@ -21,7 +21,12 @@ Route::get('/', [AccueilController::class, 'accueil']);
 
 Route::get('/hotels', [HotelController::class, 'search_hotel']);
 
+// reservation hotel
 Route::get('/reservation_etablissements/{id}', [ReservationController::class, 'create'])->name('reservation_etablissements');
+
+// reservation appart
+Route::get('/reservation_etablissements/{id}', [ReservationController::class, 'create_appart'])->name('reservation_appart');
+
 
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservations.store');
 
@@ -43,6 +48,9 @@ Route::get('/profil', [Authcontroller::class, 'profil']);
 Route::get('/profil_edit', [Authcontroller::class, 'edit_profil']);
 Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_save');
 
+
+// clients partie/admin
+Route::get('/clients', [Authcontroller::class, 'clients']);
 
 // Route pour gerer les hotels
 Route::get('/etablissement', [HotelController::class, 'index']);

@@ -39,7 +39,7 @@
 										<div class="home_title">Bienvenue sur Fanda Express</div>
 										<div class="booking_form_container">
 											<p class="text-white lead">Découvrez nos hébergements de qualité et profitez d'un séjour inoubliable dans un cadre exceptionnel.</p>
-											<a href="#reservation" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill">
+											<a href="/hotels" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill">
 												Réserver maintenant
 											</a>
 										</div>
@@ -61,8 +61,8 @@
 										<div class="home_title">Retrouvez Votre Luxe</div>
 										<div class="booking_form_container">
 											<p class="text-white lead">Des chambres élégantes et confortables pour un séjour qui allie raffinement et détente.</p>
-											<a href="#chambres" class="btn btn-light btn-lg mt-3 px-5 rounded-pill">
-												Voir nos chambres
+											<a href="/hotels" class="btn btn-light btn-lg mt-3 px-5 rounded-pill">
+												Voir nos etablissements
 											</a>
 										</div>
 									</div>
@@ -83,9 +83,7 @@
 										<div class="home_title">Un Moment de Rêve</div>
 										<div class="booking_form_container">
 											<p class="text-white lead">Vivez une expérience unique dans un environnement paisible et accueillant.</p>
-											<a href="#contact" class="btn btn-warning btn-lg mt-3 px-5 rounded-pill">
-												Nous contacter
-											</a>
+											
 										</div>
 									</div>
 								</div>
@@ -106,28 +104,7 @@
 	<hr class="my-5">
 
 	<!-- About Section -->
-	<section class="container my-5 py-5" id="about">
-		<div class="row align-items-center">
-			<div class="col-md-6 mb-4">
-				<h2 class="font-weight-bold mb-4">Nos etablissements</h2>
-				<p class="lead text-muted">
-					Fanda Express vous accueille dans un cadre chaleureux et moderne. 
-					Notre établissement allie confort, qualité de service et tarifs attractifs 
-					pour vous offrir une expérience mémorable.
-				</p>
-				<p class="text-muted">
-					Que vous soyez en voyage d'affaires ou en vacances, notre équipe dévouée 
-					est à votre disposition pour répondre à tous vos besoins.
-				</p>
-				<a href="#contact" class="btn btn-primary mt-3 px-4 rounded-pill">
-					En savoir plus
-				</a>
-			</div>
-			<div class="col-md-6">
-				<img src="images/téléchargement.jpeg" alt="Fanda Express" class="img-fluid rounded shadow">
-			</div>
-		</div>
-	</section>
+	
 
 	<!-- Footer -->
 	@include('clients.partials.footer')

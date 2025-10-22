@@ -8,7 +8,7 @@
 @include('clients.partials.recherche')
 
 <!-- === SECTION HOTELS === -->
-<section class="container-fluid my-5">
+<section class="container my-5">
     <div class="mb-4">
         <h2 class="font-weight-bold text-center">
             <i class="bi bi-building text-primary mr-2"></i>Hôtels
@@ -23,7 +23,7 @@
                 $firstImage = (!empty($hotelImages) && is_array($hotelImages)) ? $hotelImages[0] : null;
             @endphp
 
-            <div class="col-8 col-sm-2 col-md-3 col-lg-3 mb-3">
+            <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4">
                 <div class="card h-100 shadow border-0 rounded-lg">
                     <div class="position-relative">
                         @if($firstImage)
@@ -86,7 +86,7 @@
 </section>
 
 <!-- === SECTION APPARTEMENTS === -->
-<section class="container-fluid my-5">
+<section class="container my-5">
     <div class="mb-4">
         <h2 class="font-weight-bold text-center">
             <i class="bi bi-house-door text-success mr-2"></i>Appartements
@@ -105,7 +105,7 @@
                 }
             @endphp
 
-            <div class="col-8 col-sm-2 col-md-3 col-lg-3 mb-3">
+            <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4">
                 <div class="card h-100 shadow border-0 rounded-lg">
                     <div class="position-relative">
                         @if($firstImage)
@@ -196,7 +196,7 @@
 </section>
 
 <!-- Section Contact -->
-<section class="container my-5">
+<section class="container my-5" id="#contact">
     <div class="mb-5">
         <h2 class="font-weight-bold text-center">
             <i class="bi bi-envelope text-primary mr-2"></i>Contactez-nous

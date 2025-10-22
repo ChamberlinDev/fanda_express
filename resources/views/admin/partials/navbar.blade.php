@@ -65,8 +65,8 @@
                                 <i class="fas fa-home"> </i>
                                 <div class="u-text">
                                     <h4>{{auth()->user()->nom_hotel}}</h4>
-                                    <p class="text-muted">Email: {{auth()->user()->email}}</p>
-                                    <p class="text-muted">Telephone: {{auth()->user()->telephone}}</p>
+                                    <p class="text-dark">Email: {{auth()->user()->email}}</p>
+                                    <p class="text-dark">Telephone: {{auth()->user()->telephone}}</p>
 
                                     <a
                                         href="/profil"

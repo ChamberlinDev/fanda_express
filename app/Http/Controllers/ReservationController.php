@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Appartement;
 use App\Models\Chambre;
 use App\Models\etablissement_mod;
@@ -46,6 +47,14 @@ class ReservationController extends Controller
         // Envoyer à la vue reservation.blade.php
         return view('admin.reservations.ajouter', compact('chambre'));
     }
+
+    public function create_appart($id)
+    {
+        $appart = Appartement::findOrFail($id);
+        return view('admin.reservations.ajouter_appart', compact('appart'));
+    }
+
+
 
 
     public function store(Request $request)

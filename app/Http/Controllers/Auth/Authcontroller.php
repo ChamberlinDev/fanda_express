@@ -95,4 +95,10 @@ class Authcontroller extends Controller
 
         return redirect('/profil')->with('success', 'Profil mis à jour avec succès');
     }
+
+
+    public function clients(){
+
+        return view('admin.clients.index');
+    }
 }

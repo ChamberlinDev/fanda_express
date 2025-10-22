@@ -31,7 +31,7 @@
 </header>
 
 <section class="container my-5">
- <!-- Titre et localisation -->
+    <!-- Titre et localisation -->
     <div class="mb-4">
         <h1 class="mb-2">{{ $appart->nom }}</h1>
         <div class="d-flex align-items-center text-muted">
@@ -82,7 +82,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Informations</h5>
                     <hr>
-                    <p class="mb-2"><i class="bi bi-building mr-2 text-primary"></i> {{ $hotel->nom ?? 'Hôtel' }}</p>
+                    <p class="mb-2"><i class="bi bi-building mr-2 text-primary"></i> {{ $appart->nom ?? 'Appartement' }}</p>
                     <p class="mb-2"><i class="bi bi-telephone-fill mr-2 text-success"></i> {{ $appart->telephone ?? 'Non renseigné' }}</p>
                     <p class="mb-2"><i class="bi bi-envelope-fill mr-2 text-info"></i> {{ $appart->email ?? 'Non renseigné' }}</p>
                 </div>
@@ -95,8 +95,17 @@
                     <p class="text-muted">{{ $appart->description ?? 'Aucune description disponible.' }}</p>
                 </div>
             </div>
+            <div class="col-12 mt-4">
+            <a href="{{ route('reservation_appart', $appart->id) }}"
+                class="btn btn-primary btn-block">
+                <i class="bi bi-calendar-check mr-2"></i>Réserver
+            </a>
         </div>
+
+        </div>
+        
     </div>
+
 
     <!-- Équipements -->
     <div class="row mb-5">
@@ -132,7 +141,7 @@
                     <form>
                         <div class="form-group">
                             <label for="commentaire" class="font-weight-bold">Votre avis</label>
-                            <textarea name="commentaire" id="commentaire" class="form-control" rows="5" 
+                            <textarea name="commentaire" id="commentaire" class="form-control" rows="5"
                                 placeholder="Partagez votre expérience sur cet appartement..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-success px-4">
