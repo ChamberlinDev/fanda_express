@@ -27,18 +27,18 @@
 					</div>
 				</div>
 				<div class="d-flex mt-4">
-					<a href="#" class="btn btn-light btn-sm rounded-circle mr-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+					<!-- <a href="#" class="btn btn-light btn-sm rounded-circle mr-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
 						<i class="bi bi-twitter-x text-primary"></i>
-					</a>
+					</a> -->
 					<a href="#" class="btn btn-light btn-sm rounded-circle mr-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
 						<i class="bi bi-facebook text-primary"></i>
 					</a>
-					<a href="#" class="btn btn-light btn-sm rounded-circle mr-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+					<!-- <a href="#" class="btn btn-light btn-sm rounded-circle mr-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
 						<i class="bi bi-instagram text-danger"></i>
-					</a>
-					<a href="#" class="btn btn-light btn-sm rounded-circle" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+					</a> -->
+					<!-- <a href="#" class="btn btn-light btn-sm rounded-circle" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
 						<i class="bi bi-linkedin text-primary"></i>
-					</a>
+					</a> -->
 				</div>
 			</div>
 
