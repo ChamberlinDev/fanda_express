@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appartement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AppartementController extends Controller
 {
@@ -65,7 +66,7 @@ class AppartementController extends Controller
         $appart->user_id = $user->id;
         $appart->save();
 
-         $imagesPaths = [];
+        $imagesPaths = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 if ($image->isValid()) {
@@ -91,5 +92,86 @@ class AppartementController extends Controller
     {
         $appart = Appartement::find($id);
         return view('hotels.appart_details', compact('appart'));
+    }
+
+    public function edit($id)
+    {
+        $appartement = Appartement::findOrFail($id);
+        return view('admin.etablissements.modif_appart', compact('appartement'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $appartement = Appartement::findOrFail($id);
+
+        // Validation des données
+        $validatedData = $request->validate([
+            'nom' => 'required|string|max:255',
+            'ville' => 'required|string|max:255',
+            'adresse' => 'required|string',
+            'description' => 'nullable|string',
+            'nbre_chambre' => 'nullable|integer|min:0',
+            'prix' => 'nullable|numeric|min:0',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'equipements' => 'nullable|array',
+            'equipements_autres' => 'nullable|string|max:255',
+        ]);
+
+        // === GESTION DES IMAGES ===
+        $oldImages = json_decode($appartement->images, true) ?? [];
+
+        if ($request->hasFile('images')) {
+            $newImages = [];
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('appartements', 'public'); // dossier 'appartements' dans storage/app/public
+                $newImages[] = $path;
+            }
+
+            // Fusionner anciennes + nouvelles images
+            $validatedData['images'] = json_encode(array_merge($oldImages, $newImages));
+        } else {
+            // Garder les anciennes si aucune nouvelle
+            $validatedData['images'] = json_encode($oldImages);
+        }
+
+        // === GESTION DES ÉQUIPEMENTS ===
+        $equipements = $request->input('equipements', []);
+        if (in_array('Autres', $equipements) && $request->filled('equipements_autres')) {
+            $equipements[] = $request->equipements_autres;
+        }
+        $validatedData['equipements'] = json_encode($equipements);
+
+        // === MISE À JOUR ===
+        $appartement->update([
+            'nom' => $validatedData['nom'],
+            'ville' => $validatedData['ville'],
+            'adresse' => $validatedData['adresse'],
+            'description' => $validatedData['description'] ?? null,
+            'nbre_chambre' => $validatedData['nbre_chambre'] ?? null,
+            'prix' => $validatedData['prix'] ?? null,
+            'images' => $validatedData['images'],
+            'equipements' => $validatedData['equipements'],
+        ]);
+
+        // === REDIRECTION ===
+        return redirect('/etablissement')->with('success', 'Appartement mis à jour avec succès.');
+    }
+
+    public function destroy($id)
+    {
+        $appartement = Appartement::findOrFail($id);
+
+        // Supprimer les images
+        $images = json_decode($appartement->images, true) ?? [];
+        foreach ($images as $img) {
+            if (Storage::disk('public')->exists($img)) {
+                Storage::disk('public')->delete($img);
+            }
+        }
+
+        // Supprimer l’appartement
+        $appartement->delete();
+
+        return redirect('/etablissement')->with('success', 'Appartement supprimé avec succès.');
     }
 }

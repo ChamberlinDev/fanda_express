@@ -4,7 +4,7 @@
 			{{-- Logo --}}
 			<div style="width: 150px;">
 				<a href="/">
-					<img src="{{ asset('clients/images/logo2.jpeg') }}" alt="Fanda Express" class="img-fluid">
+					<img src="{{ asset('/images/logo2.jpeg') }}" alt="Fanda Express" class="img-fluid">
 				</a>
 			</div>
 

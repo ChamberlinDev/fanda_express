@@ -7,6 +7,7 @@ use App\Models\Hotel;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class HotelController extends Controller
 {
@@ -23,6 +24,14 @@ class HotelController extends Controller
     {
         return view('admin.etablissements.ajouter_hotel');
     }
+
+    public function edit($id)
+    {
+        $hotel = Hotel::findOrFail($id);
+        return view('admin.etablissements.modif', compact('hotel'));
+    }
+
+
     public function create(Request $request)
     {
         $request->validate([
@@ -95,9 +104,70 @@ class HotelController extends Controller
         return view('hotels.details', compact('hotel'));
     }
 
-    public function destroy() {}
+    public function update(Request $request, $id)
+    {
+        $hotel = Hotel::findOrFail($id);
+
+        // Validation de base
+        $validatedData = $request->validate([
+            'nom' => 'required|string|max:255',
+            'ville' => 'required|string|max:255',
+            'adresse' => 'required|string',
+            'description' => 'nullable|string',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'equipements' => 'nullable|array',
+            'equipements_autres' => 'nullable|string|max:255',
+        ]);
+
+        // === GESTION DES IMAGES ===
+        $oldImages = json_decode($hotel->images, true) ?? [];
+
+        if ($request->hasFile('images')) {
+            $newImages = [];
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('hotels', 'public');
+                $newImages[] = $path;
+            }
+
+            // Fusion ancienne + nouvelle
+            $validatedData['images'] = json_encode(array_merge($oldImages, $newImages));
+        } else {
+            // On garde les anciennes images si aucune nouvelle n’est ajoutée
+            $validatedData['images'] = json_encode($oldImages);
+        }
+
+        // === GESTION DES ÉQUIPEMENTS ===
+        $equipements = $request->input('equipements', []);
+        if (in_array('Autres', $equipements) && $request->filled('equipements_autres')) {
+            $equipements[] = $request->equipements_autres;
+        }
+        $validatedData['equipements'] = json_encode($equipements);
+
+        // Mise à jour de l’hôtel
+        $hotel->update($validatedData);
+
+        return redirect('/etablissement')->with('success', 'Hôtel mis à jour avec succès.');
+    }
 
 
+
+    public function destroy($id)
+    {
+        $hotel = Hotel::findOrFail($id);
+
+        // Supprimer les images du stockage si elles existent
+        $images = json_decode($hotel->images, true) ?? [];
+        foreach ($images as $img) {
+            if (Storage::disk('public')->exists($img)) {
+                Storage::disk('public')->delete($img);
+            }
+        }
+
+        // Supprimer l’hôtel
+        $hotel->delete();
+
+        return redirect('/etablissement')->with('success', 'Hôtel supprimé avec succès.');
+    }
 
 
     public function reservations($id)

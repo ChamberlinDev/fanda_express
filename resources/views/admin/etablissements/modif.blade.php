@@ -1,88 +1,107 @@
 @extends('admin.layout.app')
 @section('content')
-<div class="container my-5">
 
-    <h2 class="mb-4 text-primary">
-        <i class="bi bi-pencil-square"></i> Modifier l'établissement
-    </h2>
+<h1 class="text-center mb-4">Modifier l'hôtel</h1>
+<hr>
+<p class="text-center">
+    Modifiez les informations de votre établissement afin de les maintenir à jour et d’offrir une meilleure expérience aux visiteurs.
+</p>
+<hr>
 
-    {{-- Formulaire --}}
-    <form action="/modif_save/{{$etab->id}}" method="POST" enctype="multipart/form-data" class="shadow p-4 rounded bg-white">
-        @csrf
+<form action="{{ route('modif_save', $hotel->id) }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded bg-white shadow-sm">
+    @csrf
 
-        {{-- Nom --}}
-        <div class="mb-3">
-            <label for="nom" class="form-label">Nom de l'établissement</label>
-            <input type="text" name="nom" id="nom"
-                value="{{ old('nom', $etab->nom) }}"
-                class="form-control @error('nom') is-invalid @enderror" required>
-            @error('nom') <div class="invalid-feedback">{{ $message }}</div> @enderror
+    <!-- Nom & Ville -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="nom" class="form-label">Nom de l'hôtel</label>
+            <input type="text" name="nom" id="nom" class="form-control" value="{{ old('nom', $hotel->nom) }}" required>
         </div>
-
-        {{-- Type --}}
-        <div class="mb-3">
-            <label for="type" class="form-label">Type</label>
-            <select name="type" id="type" class="form-select">
-                <option value="Hotel" {{ $etab->type == 'Hotel' ? 'selected' : '' }}>Hôtel</option>
-                <option value="Villa" {{ $etab->type == 'Appartement' ? 'selected' : '' }}>Appartement</option>
+        <div class="col-md-6">
+            <label for="ville" class="form-label">Ville</label>
+            <select name="ville" id="ville" class="form-select">
+                <option value="pointe-noire" {{ $hotel->ville == 'pointe-noire' ? 'selected' : '' }}>Pointe-Noire</option>
             </select>
         </div>
+    </div>
 
-        {{-- Ville --}}
-        <div class="mb-3">
-            <label for="ville" class="form-label">Ville</label>
-            <input type="text" name="ville" id="ville"
-                value="{{ old('ville', $etab->ville) }}"
-                class="form-control @error('ville') is-invalid @enderror" required>
-            @error('ville') <div class="invalid-feedback">{{ $message }}</div> @enderror
+    <!-- Adresse & Description -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="adresse" class="form-label">Adresse</label>
+            <textarea name="adresse" id="adresse" class="form-control" rows="2" required>{{ old('adresse', $hotel->adresse) }}</textarea>
         </div>
-
-        {{-- Classement --}}
-        <div class="mb-3">
-            <label for="classement" class="form-label">Classement (1 à 5 étoiles)</label>
-            <input type="number" name="classement" id="classement"
-                value="{{ old('classement', $etab->classement) }}"
-                min="1" max="5"
-                class="form-control @error('classement') is-invalid @enderror">
-            @error('classement') <div class="invalid-feedback">{{ $message }}</div> @enderror
-        </div>
-
-        {{-- Description --}}
-        <div class="mb-3">
+        <div class="col-md-6">
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="description" rows="4"
-                class="form-control @error('description') is-invalid @enderror">{{ old('description', $etab->description) }}</textarea>
-            @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            <textarea name="description" id="description" class="form-control" rows="4">{{ old('description', $hotel->description) }}</textarea>
         </div>
+    </div>
 
-        {{-- Image --}}
-        <div class="mb-3">
-            <label for="images" class="form-label">Image</label>
-            <input type="file" name="images" id="images"
-                class="form-control @error('images') is-invalid @enderror">
-            @error('images') <div class="invalid-feedback">{{ $message }}</div> @enderror
+    <!-- Images -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="images" class="form-label">Ajouter de nouvelles images</label>
+            <input type="file" name="images[]" id="images" multiple class="form-control">
 
-            {{-- Aperçu de l'image actuelle --}}
-            @if($etab->images)
-            <div class="mt-3">
-                <p>Image actuelle :</p>
-                <img src="{{ asset('storage/'.$etab->images) }}"
-                    class="img-thumbnail"
-                    style="max-height: 200px;">
+            <small class="text-muted d-block mt-2">Images actuelles :</small>
+            <div class="mt-2 d-flex flex-wrap gap-2">
+                @php
+                    $images = json_decode($hotel->images, true) ?? [];
+                @endphp
+                @foreach($images as $img)
+                    @if(!empty(trim($img)))
+                        <img src="{{ asset('storage/' . trim($img)) }}" alt="image" class="rounded border" width="100" height="100">
+                    @endif
+                @endforeach
             </div>
-            @endif
         </div>
+    </div>
 
-        {{-- Boutons --}}
-        <div class="d-flex justify-content-between mt-4">
-            <a href="/etablissement" class="btn btn-secondary">
-                <i class="bi bi-arrow-left"></i> Annuler
-            </a>
-            <button type="submit" class="btn btn-primary">
-                <i class="bi bi-save"></i> Enregistrer
-            </button>
+    <!-- Équipements -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="equipements" class="form-label">Équipements</label>
+            @php
+                $equipements = json_decode($hotel->equipements, true) ?? [];
+            @endphp
+            <select name="equipements[]" id="equipements" class="form-select" multiple>
+                <option value="Wi-Fi" {{ in_array('Wi-Fi', $equipements) ? 'selected' : '' }}>Wi-Fi</option>
+                <option value="Piscine" {{ in_array('Piscine', $equipements) ? 'selected' : '' }}>Piscine</option>
+                <option value="Climatisation" {{ in_array('Climatisation', $equipements) ? 'selected' : '' }}>Climatisation</option>
+                <option value="Autres" {{ in_array('Autres', $equipements) ? 'selected' : '' }}>Autres</option>
+            </select>
+
+            <div id="autres_input" class="mt-2 {{ in_array('Autres', $equipements) ? '' : 'd-none' }}">
+                <input type="text" name="equipements_autres" class="form-control"
+                       placeholder="Saisir un autre équipement"
+                       value="{{ old('equipements_autres') }}">
+            </div>
         </div>
-    </form>
+    </div>
 
-</div>
+    <!-- Boutons -->
+    <div class="text-end">
+        <a href="/etablissement" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Retour
+        </a>
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-save"></i> Mettre à jour
+        </button>
+    </div>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const select = document.getElementById('equipements');
+        const autresInput = document.getElementById('autres_input');
+        select.addEventListener('change', function() {
+            if (Array.from(select.selectedOptions).some(opt => opt.value === 'Autres')) {
+                autresInput.classList.remove('d-none');
+            } else {
+                autresInput.classList.add('d-none');
+            }
+        });
+    });
+</script>
+
 @endsection

@@ -1,14 +1,13 @@
-<link rel="stylesheet" type="text/css" href="{{asset('clients/styles/bootstrap-4.1.2/bootstrap.min.css')}}">
-<link href="{{asset('clients/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="{{asset('clients/plugins/OwlCarousel2-2.3.4/owl.carousel.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('clients/plugins/OwlCarousel2-2.3.4/owl.theme.default.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('clients/plugins/OwlCarousel2-2.3.4/animate.css')}}">
-<link href="{{asset('clients/plugins/jquery-datepicker/jquery-ui.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('clients/plugins/colorbox/colorbox.css')}}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="{{asset('clients/styles/main_styles.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('clients/styles/responsive.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('styles/bootstrap-4.1.2/bootstrap.min.css')}}">
+<link href="{{asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.3.4/owl.carousel.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.3.4/owl.theme.default.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.3.4/animate.css')}}">
+<link href="{{asset('plugins/jquery-datepicker/jquery-ui.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('plugins/colorbox/colorbox.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('styles/main_styles.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('styles/responsive.css')}}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
 <header class="container-fluid my-4 border-bottom pb-3">
     <div class="header_content d-flex flex-row align-items-center justify-content-between">
         <div class="d-flex align-items-center">

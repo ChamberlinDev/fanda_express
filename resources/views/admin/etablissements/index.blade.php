@@ -74,12 +74,12 @@
                         </a>
 
                         <!-- Modifier -->
-                        <a href="#" class="btn btn-sm btn-outline-warning" title="Modifier">
+                        <a href="/modif_form/{{$hotel->id}}" class="btn btn-sm btn-outline-warning" title="Modifier">
                             <i class="bi bi-pencil-square"></i>
                         </a>
 
                         <!-- Supprimer -->
-                        <form action="#" method="POST" class="d-inline">
+                        <form action="{{ route('supp_hotel', $hotel->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
@@ -145,12 +145,12 @@
                         </a>
 
                         <!-- Modifier -->
-                        <a href="#" class="btn btn-sm btn-outline-warning" title="Modifier">
+                        <a href="/modif_edit/{{$appart->id}}" class="btn btn-sm btn-outline-warning" title="Modifier">
                             <i class="bi bi-pencil-square"></i>
                         </a>
 
                         <!-- Supprimer -->
-                        <form action="#" method="POST" class="d-inline">
+                        <form action="{{ route('supp_appart', $appart->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit"

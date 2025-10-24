@@ -60,12 +60,13 @@ Route::delete('/hotels_delete/{id}', [HotelController::class, 'destroy'])->name(
 Route::get('/show_hotel/{id}', [HotelController::class, 'show'])->name('etablissements.show');
 
 Route::get('/details/{id}', [HotelController::class, 'details'])->name('hotel.show');
+Route::delete('/supp_hotel/{id}', [HotelController::class, 'destroy'])->name('supp_hotel');
 
 
 
 
-Route::get('/modif_form/{id}', [HomeController::class, 'edit']);
-Route::post('/modif_save/{id}', [HomeController::class, 'update']);
+Route::get('/modif_form/{id}', [HotelController::class, 'edit']);
+Route::post('/modif_save/{id}', [HotelController::class, 'update'])->name('modif_save');
 
 
 // Route pour les appartements
@@ -73,6 +74,10 @@ Route::get('/ajouter_appart', [AppartementController::class, 'Ajouter_appart']);
 Route::post('/create', [AppartementController::class, 'create']);
 Route::get('/show_appart/{id}', [AppartementController::class, 'show'])->name('show_appart');
 Route::get('/details_appart/{id}', [AppartementController::class, 'details'])->name('hotel.show');
+Route::get('/modif_edit/{id}', [AppartementController::class, 'edit']);
+Route::post('/modif_appart/{id}', [AppartementController::class, 'update'])->name('modif_appart');
+Route::delete('/supp_appart/{id}', [AppartementController::class, 'destroy'])->name('supp_appart');
+
 
 
 

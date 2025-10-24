@@ -11,7 +11,7 @@
 
 			<!-- Colonne image -->
 			<div class="col-lg-6">
-				<img src="../clients/images/working-4.jpg" 
+				<img src="../images/working-4.jpg" 
 					 alt="Image Fanda-Express"
 					 class="img-fluid w-100" 
 					 style="height: 100%; object-fit: cover; min-height: 400px;">
