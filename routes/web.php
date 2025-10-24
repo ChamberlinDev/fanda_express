@@ -50,7 +50,7 @@ Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_sav
 
 
 // clients partie/admin
-Route::get('/clients', [Authcontroller::class, 'clients']);
+Route::get('/clients', [Authcontroller::class, 'clients_liste']);
 
 // Route pour gerer les hotels
 Route::get('/etablissement', [HotelController::class, 'index']);

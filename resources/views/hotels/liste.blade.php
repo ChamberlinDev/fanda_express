@@ -1,12 +1,12 @@
-<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
-<link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-<link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
-<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+<link rel="stylesheet" type="text/css" href="{{asset('clients/styles/bootstrap-4.1.2/bootstrap.min.css')}}">
+<link href="{{asset('clients/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('clients/plugins/OwlCarousel2-2.3.4/owl.carousel.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('clients/plugins/OwlCarousel2-2.3.4/owl.theme.default.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('clients/plugins/OwlCarousel2-2.3.4/animate.css')}}">
+<link href="{{asset('clients/plugins/jquery-datepicker/jquery-ui.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('clients/plugins/colorbox/colorbox.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('clients/styles/main_styles.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('clients/styles/responsive.css')}}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 <header class="container-fluid my-4 border-bottom pb-3">
@@ -32,7 +32,6 @@
 
 @include('clients.partials.recherche')
 
-<!-- Section Hôtels -->
 <section class="container my-5">
     <div class="mb-4">
         <h2 class="font-weight-bold">
@@ -53,14 +52,14 @@
                     
                     @if($firstImage)
                     <img src="{{ asset('storage/' . $firstImage) }}" 
-                         class="card-img-top rounded-top" 
-                         alt="{{ $hotel->nom }}" 
-                         style="height:280px; object-fit:cover;">
+                            class="card-img-top rounded-top" 
+                            alt="{{ $hotel->nom }}" 
+                            style="height:280px; object-fit:cover;">
                     @else
                     <img src="https://via.placeholder.com/400x280?text=Pas+d'image" 
-                         class="card-img-top rounded-top" 
-                         alt="{{ $hotel->nom }}" 
-                         style="height:280px; object-fit:cover;">
+                            class="card-img-top rounded-top" 
+                            alt="{{ $hotel->nom }}" 
+                            style="height:280px; object-fit:cover;">
                     @endif
                     <span class="badge badge-primary position-absolute rounded-pill" style="top: 15px; right: 15px; font-size: 0.9rem; padding: 8px 16px;">
                         <i class="bi bi-building mr-1"></i>Hôtel
@@ -105,7 +104,6 @@
     </div>
 </section>
 
-<!-- Section Appartements -->
 <section class="container my-5">
     <div class="mb-4">
         <h2 class="font-weight-bold">
@@ -126,14 +124,14 @@
                     
                     @if($firstImage)
                     <img src="{{ asset('storage/' . $firstImage) }}" 
-                         class="card-img-top rounded-top" 
-                         alt="{{ $appart->nom }}" 
-                         style="height:280px; object-fit:cover;">
+                            class="card-img-top rounded-top" 
+                            alt="{{ $appart->nom }}" 
+                            style="height:280px; object-fit:cover;">
                     @else
                     <img src="https://via.placeholder.com/400x280?text=Pas+d'image" 
-                         class="card-img-top rounded-top" 
-                         alt="{{ $appart->nom }}" 
-                         style="height:280px; object-fit:cover;">
+                            class="card-img-top rounded-top" 
+                            alt="{{ $appart->nom }}" 
+                            style="height:280px; object-fit:cover;">
                     @endif
                     <span class="badge badge-success position-absolute rounded-pill" style="top: 15px; right: 15px; font-size: 0.9rem; padding: 8px 16px;">
                         <i class="bi bi-building mr-1"></i>Appartement

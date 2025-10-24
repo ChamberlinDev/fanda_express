@@ -5,7 +5,7 @@
         
         <!-- Colonne image -->
         <div class="col-md-5 d-none d-md-block">
-            <img src="../images/undraw_add-user_rbko.png" 
+            <img src="../clients/images/undraw_add-user_rbko.png" 
                  alt="Image Hôtel"
                  class="img-fluid rounded shadow">
         </div>

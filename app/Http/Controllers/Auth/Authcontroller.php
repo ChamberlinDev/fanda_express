@@ -97,8 +97,7 @@ class Authcontroller extends Controller
     }
 
 
-    public function clients(){
-
+    public function clients_liste(){
         return view('admin.clients.index');
     }
 }

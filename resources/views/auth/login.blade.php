@@ -5,7 +5,7 @@
 
         <!-- Colonne image -->
         <div class="col-md-5 d-none d-md-block">
-            <img src="../images/undraw_access-account_aydp.png"
+            <img src="../clients/images/undraw_access-account_aydp.png"
                 alt="Image connexion"
                 class="img-fluid rounded shadow">
         </div>
