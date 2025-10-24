@@ -182,7 +182,7 @@
 <section class="container-fluid my-5">
     <div class="mb-4">
         <h2 class="font-weight-bold text-center">
-            <i class="bi bi-geo-alt text-danger mr-2"></i>Notre localisation
+            <i class="bi bi-geo-alt text-danger mr-2"></i>Localisation
         </h2>
         <p class="text-muted text-center">Trouvez-nous facilement</p>
     </div>
