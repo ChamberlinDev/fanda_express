@@ -29,4 +29,6 @@ class AccueilController extends Controller
         $hotels = Hotel::findOrFail($id);
         return view('hotels.details', compact('hotels'));
     }
+
+    
 }

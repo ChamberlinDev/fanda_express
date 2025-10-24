@@ -53,9 +53,7 @@
                     <select name="ville" id="ville" class="form-select form-select-lg" required>
                         <option value="">-- Sélectionnez une ville --</option>
                         <option value="pointe-noire">Pointe-Noire</option>
-                        <option value="brazzaville">Brazzaville</option>
-                        <option value="dolisie">Dolisie</option>
-                        <option value="nkayi">Nkayi</option>
+                        
                     </select>
                 </div>
             </div>
