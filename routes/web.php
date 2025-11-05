@@ -22,14 +22,12 @@ Route::get('/', [AccueilController::class, 'accueil']);
 Route::get('/hotels', [HotelController::class, 'search_hotel']);
 
 // reservation hotel
-Route::get('/reservation_etablissements/{id}', [ReservationController::class, 'create'])->name('reservation_etablissements');
 
+Route::get('/reservation_hotel/{id}', [ReservationController::class, 'create'])
+    ->name('reservation_hotel');
 // reservation appart
 Route::get('/reservation_etablissements/{id}', [ReservationController::class, 'create_appart'])->name('reservation_appart');
-
-
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservations.store');
-
 Route::get('/hotels/{id}/reservations', [HotelController::class, 'reservations'])->name('hotels.reservations');
 
 

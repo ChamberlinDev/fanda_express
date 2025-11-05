@@ -171,10 +171,10 @@
                                         <small class="text-muted">par nuit</small>
                                     </div>
                                 </div>
-                                <a href="{{ url('/reservation_etablissements/' . $chambre->id) }}"
-                                    class="btn btn-primary btn-block">
+                                <a href="{{ route('reservation_hotel', $chambre->id) }}" class="btn btn-primary btn-block">
                                     <i class="bi bi-calendar-check mr-2"></i>Réserver
                                 </a>
+
                             </div>
                         </div>
                     </div>

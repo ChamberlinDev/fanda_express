@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReservationAdmin;
+use App\Mail\ReservationMail;
 use App\Models\Appartement;
 use App\Models\Chambre;
 use App\Models\etablissement_mod;
 use App\Models\Hotel;
 use App\Models\Reservation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -64,11 +68,12 @@ class ReservationController extends Controller
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'telephone' => 'required|string|max:50',
+            'email' => 'nullable|email', // client peut laisser vide
             'date_debut' => 'required|date|after_or_equal:today',
             'date_fin' => 'required|date|after:date_debut',
         ]);
 
-        // Vérifie si la chambre est déjà réservée sur la même période
+        // Vérification si la chambre est déjà réservée
         $dejaReservee = Reservation::where('chambre_id', $validated['chambre_id'])
             ->where(function ($q) use ($validated) {
                 $q->whereBetween('date_debut', [$validated['date_debut'], $validated['date_fin']])
@@ -80,8 +85,19 @@ class ReservationController extends Controller
             return back()->with('error', 'Cette chambre est déjà réservée pour cette période.');
         }
 
-        Reservation::create($validated);
+        // Création de la réservation
+        $reservation = Reservation::create($validated);
 
+        // 1️⃣ Mail au client (si email renseigné)
+        if (!empty($reservation->email)) {
+            Mail::to($reservation->email)->send(new ReservationMail($reservation));
+        }
+
+        // 2️⃣ Mail aux utilisateurs de l'hôtel
+        $hotel = $reservation->chambre->hotel; // récupère l'hôtel via la chambre
+        if ($hotel && $hotel->user && !empty($hotel->user->email)) {
+            Mail::to($hotel->user->email)->send(new ReservationAdmin($reservation));
+        }
         return back()->with('success', 'Votre réservation a bien été enregistrée !');
     }
 }

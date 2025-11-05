@@ -15,6 +15,7 @@ class Reservation extends Model
         'nom',
         'prenom',
         'telephone',
+        'email',
         'date_debut',
         'date_fin'
     ];
