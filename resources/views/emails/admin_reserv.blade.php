@@ -13,7 +13,7 @@ Une nouvelle réservation a été effectuée.
 - Date de départ : {{ \Carbon\Carbon::parse($reservation->date_fin)->format('d/m/Y') }}
 
 Vous pouvez consulter toutes les réservations dans votre tableau de bord :  
-[Accéder au tableau de bord]({{ url('/dashboard') }})
+[Accéder au tableau de bord]({{ url('/connexion') }})
 
 Merci,  
 **{{ config('app.name') }}**

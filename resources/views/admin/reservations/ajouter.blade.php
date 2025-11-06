@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="{{ asset('styles/bootstrap-4.1.2/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 
@@ -11,7 +10,7 @@
     {{-- Messages --}}
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="fa fa-check-circle"></i> 
+        <i class="fa fa-check-circle"></i>
         <strong>Succès !</strong> {{ session('success') }}
         <button type="button" class="close" data-dismiss="alert">
             <span aria-hidden="true">&times;</span>
@@ -45,20 +44,20 @@
                     <div class="row">
                         <div class="col-md-5">
                             @php
-                                $images = [];
-                                if (isset($chambre->images)) {
-                                    if (is_string($chambre->images)) {
-                                        $images = json_decode($chambre->images, true) ?? [];
-                                    } elseif (is_array($chambre->images)) {
-                                        $images = $chambre->images;
-                                    }
-                                }
-                                $mainImage = !empty($images) ? $images[0] : null;
+                            $images = [];
+                            if (isset($chambre->images)) {
+                            if (is_string($chambre->images)) {
+                            $images = json_decode($chambre->images, true) ?? [];
+                            } elseif (is_array($chambre->images)) {
+                            $images = $chambre->images;
+                            }
+                            }
+                            $mainImage = !empty($images) ? $images[0] : null;
                             @endphp
                             <img src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/300x200?text=Chambre' }}"
-                                class="img-fluid rounded shadow-sm mb-3" 
+                                class="img-fluid rounded shadow-sm mb-3"
                                 alt="{{ $chambre->nom }}">
-                            
+
                             @if(count($images) > 1)
                             <div class="d-flex flex-wrap">
                                 @foreach(array_slice($images, 1, 4) as $imagePath)
@@ -71,14 +70,14 @@
                             </div>
                             @endif
                         </div>
-                        
+
                         <div class="col-md-7">
                             <h5 class="text-primary font-weight-bold">{{ $chambre->nom }}</h5>
                             <p class="text-muted mb-3">
                                 <i class="fa fa-map-marker text-danger"></i>
                                 {{ $chambre->hotel->adresse ?? 'Adresse non disponible' }}
                             </p>
-                            
+
                             <div class="row mb-3">
                                 <div class="col-6">
                                     <div class="bg-light p-3 rounded text-center">
@@ -127,7 +126,7 @@
                             <label class="font-weight-bold">
                                 <i class="fa fa-user text-primary"></i> Prénom *
                             </label>
-                            <input type="text" name="prenom" id="prenom" class="form-control" 
+                            <input type="text" name="prenom" id="prenom" class="form-control"
                                 placeholder="Votre prénom" value="{{ old('prenom') }}" required>
                         </div>
 
@@ -135,7 +134,7 @@
                             <label class="font-weight-bold">
                                 <i class="fa fa-user text-primary"></i> Nom *
                             </label>
-                            <input type="text" name="nom" id="nom" class="form-control" 
+                            <input type="text" name="nom" id="nom" class="form-control"
                                 placeholder="Votre nom" value="{{ old('nom') }}" required>
                         </div>
 
@@ -143,7 +142,7 @@
                             <label class="font-weight-bold">
                                 <i class="fa fa-phone text-primary"></i> Téléphone *
                             </label>
-                            <input type="tel" name="telephone" id="telephone" class="form-control" 
+                            <input type="tel" name="telephone" id="telephone" class="form-control"
                                 placeholder="+221 XX XXX XX XX" value="{{ old('telephone') }}" required>
                         </div>
 
@@ -151,7 +150,7 @@
                             <label class="font-weight-bold">
                                 <i class="fa fa-envelope text-primary"></i> Email
                             </label>
-                            <input type="email" name="email" id="email" class="form-control" 
+                            <input type="email" name="email" id="email" class="form-control"
                                 placeholder="votre@email.com" value="{{ old('email') }}">
                         </div>
 
@@ -159,7 +158,7 @@
                             <label class="font-weight-bold">
                                 <i class="fa fa-calendar text-primary"></i> Date d'arrivée *
                             </label>
-                            <input type="date" name="date_debut" id="date_debut" class="form-control" 
+                            <input type="date" name="date_debut" id="date_debut" class="form-control"
                                 value="{{ old('date_debut') }}" required>
                         </div>
 
@@ -167,7 +166,7 @@
                             <label class="font-weight-bold">
                                 <i class="fa fa-calendar text-primary"></i> Date de départ *
                             </label>
-                            <input type="date" name="date_fin" id="date_fin" class="form-control" 
+                            <input type="date" name="date_fin" id="date_fin" class="form-control"
                                 value="{{ old('date_fin') }}" required>
                         </div>
 
@@ -180,7 +179,7 @@
                                     <option value="{{ $i }}" {{ old('nombre_personnes') == $i ? 'selected' : '' }}>
                                         {{ $i }} personne{{ $i > 1 ? 's' : '' }}
                                     </option>
-                                @endfor
+                                    @endfor
                             </select>
                         </div>
 
@@ -300,7 +299,7 @@
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="mode_paiement" id="mobile_money" value="mobile_money" checked>
                         <label class="form-check-label" for="mobile_money">
-                            <i class="fa fa-mobile"></i> Mobile Money 
+                            <i class="fa fa-mobile"></i> Mobile Money
                         </label>
                     </div>
                     <div class="form-check mb-2">
@@ -334,48 +333,50 @@
 <script src="{{ asset('styles/bootstrap-4.1.2/bootstrap.min.js') }}"></script>
 
 <script>
-$(document).ready(function() {
-    var prixNuit = {{ $chambre->prix }};
+    $(document).ready(function() {
+        // Injection sécurisée de la variable PHP dans JavaScript
+        var prixNuit = {{ $chambre->prix ?? 0 }};
 
-    $('#recapModal').on('show.bs.modal', function() {
-        var prenom = $('#prenom').val();
-        var nom = $('#nom').val();
-        var telephone = $('#telephone').val();
-        var email = $('#email').val() || 'Non renseigné';
-        var dateDebut = $('#date_debut').val();
-        var dateFin = $('#date_fin').val();
-        var personnes = $('#nombre_personnes').val();
+        $('#recapModal').on('show.bs.modal', function() {
+            var prenom = $('#prenom').val();
+            var nom = $('#nom').val();
+            var telephone = $('#telephone').val();
+            var email = $('#email').val() || 'Non renseigné';
+            var dateDebut = $('#date_debut').val();
+            var dateFin = $('#date_fin').val();
+            var personnes = $('#nombre_personnes').val();
 
-        $('#recap_nom_complet').text(prenom + ' ' + nom);
-        $('#recap_telephone').text(telephone);
-        $('#recap_email').text(email);
-        $('#recap_personnes').text(personnes + ' personne(s)');
-        $('#recap_date_debut').text(dateDebut);
-        $('#recap_date_fin').text(dateFin);
+            // Remplir le récapitulatif
+            $('#recap_nom_complet').text(prenom + ' ' + nom);
+            $('#recap_telephone').text(telephone);
+            $('#recap_email').text(email);
+            $('#recap_personnes').text(personnes + ' personne(s)');
+            $('#recap_date_debut').text(dateDebut);
+            $('#recap_date_fin').text(dateFin);
 
-        if (dateDebut && dateFin) {
-            var debut = new Date(dateDebut);
-            var fin = new Date(dateFin);
-            var nuits = Math.ceil((fin - debut) / (1000 * 60 * 60 * 24));
+            if (dateDebut && dateFin) {
+                var debut = new Date(dateDebut);
+                var fin = new Date(dateFin);
+                var nuits = Math.ceil((fin - debut) / (1000 * 60 * 60 * 24));
 
-            if (nuits > 0) {
-                var total = nuits * prixNuit;
-                var acompte = Math.round(total * 0.3);
-                var reste = total - acompte;
+                if (nuits > 0) {
+                    var total = nuits * prixNuit;
+                    var acompte = Math.round(total * 0.3);
+                    var reste = total - acompte;
 
-                $('#recap_duree').text(nuits + ' nuit(s)');
-                $('#recap_nuits').text(nuits);
-                $('#recap_total').text(total.toLocaleString('fr-FR') + ' XOF');
-                $('#recap_acompte').text(acompte.toLocaleString('fr-FR') + ' XOF');
-                $('#recap_reste').text(reste.toLocaleString('fr-FR') + ' XOF');
-            } else {
-                $('#recap_duree').text('Dates invalides');
-                $('#recap_nuits').text('0');
-                $('#recap_total').text('0 XOF');
-                $('#recap_acompte').text('0 XOF');
-                $('#recap_reste').text('0 XOF');
+                    $('#recap_duree').text(nuits + ' nuit(s)');
+                    $('#recap_nuits').text(nuits);
+                    $('#recap_total').text(total.toLocaleString('fr-FR') + ' XOF');
+                    $('#recap_acompte').text(acompte.toLocaleString('fr-FR') + ' XOF');
+                    $('#recap_reste').text(reste.toLocaleString('fr-FR') + ' XOF');
+                } else {
+                    $('#recap_duree').text('Dates invalides');
+                    $('#recap_nuits').text('0');
+                    $('#recap_total').text('0 XOF');
+                    $('#recap_acompte').text('0 XOF');
+                    $('#recap_reste').text('0 XOF');
+                }
             }
-        }
+        });
     });
-});
 </script>

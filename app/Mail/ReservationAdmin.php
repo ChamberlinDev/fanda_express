@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 
 class ReservationAdmin extends Mailable
 {
-   
+
     use Queueable, SerializesModels;
 
     public $reservation;
@@ -24,7 +24,8 @@ class ReservationAdmin extends Mailable
 
     public function build()
     {
-        return $this->subject('Nouvelle réservation reçue')
-                    ->markdown('emails.admin_reserv');
+        return $this->from('fandaexpresscg@gmail.com', 'Fanda-express-reservation')
+            ->subject('Nouvelle réservation reçue')
+            ->markdown('emails.admin_reserv');
     }
 }
