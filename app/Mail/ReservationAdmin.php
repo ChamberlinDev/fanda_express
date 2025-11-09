@@ -20,11 +20,12 @@ class ReservationAdmin extends Mailable
     public function __construct(Reservation $reservation)
     {
         $this->reservation = $reservation;
+        $this->reservation = $reservation->load('chambre.hotel');
     }
 
     public function build()
     {
-        return $this->from('fandaexpresscg@gmail.com', 'Fanda-express-reservation')
+        return $this->from('fandaexpresscg@gmail.com', 'Fanda-express')
             ->subject('Nouvelle réservation reçue')
             ->markdown('emails.admin_reserv');
     }

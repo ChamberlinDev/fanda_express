@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ReservationMail extends Mailable
+class ReservationAccept extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,14 +18,12 @@ class ReservationMail extends Mailable
 
     public function __construct(Reservation $reservation)
     {
-        $this->reservation = $reservation;
         $this->reservation = $reservation->load('chambre.hotel');
     }
 
     public function build()
     {
-        return $this->from('fandaexpresscg@gmail.com', 'Fanda-express')
-            ->subject('Confirmation de votre réservation')
-            ->view('emails.email_reserv');
+        return $this->subject('Votre réservation a été confirmée 🏨')
+                    ->view('emails.accept_reser');
     }
 }

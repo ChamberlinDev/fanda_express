@@ -25,6 +25,11 @@ Route::get('/hotels', [HotelController::class, 'search_hotel']);
 
 Route::get('/reservation_hotel/{id}', [ReservationController::class, 'create'])
     ->name('reservation_hotel');
+
+
+Route::get('/reservations/{id}/accepter', [ReservationController::class, 'accepter'])
+     ->name('reservations_accepter');
+
 // reservation appart
 Route::get('/reservation_etablissements/{id}', [ReservationController::class, 'create_appart'])->name('reservation_appart');
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservations.store');

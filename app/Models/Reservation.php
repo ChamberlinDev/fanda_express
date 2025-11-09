@@ -17,7 +17,8 @@ class Reservation extends Model
         'telephone',
         'email',
         'date_debut',
-        'date_fin'
+        'date_fin',
+        'statut'
     ];
 
     public function chambre()

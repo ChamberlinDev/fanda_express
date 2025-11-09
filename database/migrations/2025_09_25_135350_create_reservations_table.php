@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->date('date_debut');
             $table->date('date_fin');
+            $table->string('statut')->default('en attente');
             $table->timestamps();
         });
     }

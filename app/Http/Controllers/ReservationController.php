@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReservationAccept;
 use App\Mail\ReservationAdmin;
 use App\Mail\ReservationMail;
 use App\Models\Appartement;
@@ -100,4 +101,20 @@ class ReservationController extends Controller
         }
         return back()->with('success', 'Votre réservation a bien été enregistrée !');
     }
+
+   public function accepter($id)
+{
+    $reservation = Reservation::with('chambre.hotel')->findOrFail($id);
+
+    // Met à jour le statut
+    $reservation->update(['statut' => 'acceptée']);
+
+    // Envoi du mail de confirmation au client
+    if ($reservation->email) {
+        Mail::to($reservation->email)->send(new ReservationAccept ($reservation));
+    }
+
+    return redirect()->back()->with('success', 'Réservation acceptée et mail envoyé.');
+}
+
 }
