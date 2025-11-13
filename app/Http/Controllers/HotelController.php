@@ -76,7 +76,7 @@ class HotelController extends Controller
 
         $hotel->save();
 
-        return redirect('/home')->with('success', 'Hôtel ajouté avec succès !');
+        return redirect('/etablissement')->with('success', 'Hôtel ajouté avec succès !');
     }
 
 

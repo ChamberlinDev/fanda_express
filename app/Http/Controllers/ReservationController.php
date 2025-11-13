@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ReservationAccept;
 use App\Mail\ReservationAdmin;
 use App\Mail\ReservationMail;
+use App\Mail\ReservationRefus;
 use App\Models\Appartement;
 use App\Models\Chambre;
 use App\Models\etablissement_mod;
@@ -102,19 +103,51 @@ class ReservationController extends Controller
         return back()->with('success', 'Votre réservation a bien été enregistrée !');
     }
 
-   public function accepter($id)
-{
-    $reservation = Reservation::with('chambre.hotel')->findOrFail($id);
+    public function accepter($id)
+    {
+        $reservation = Reservation::with('chambre.hotel')->findOrFail($id);
 
-    // Met à jour le statut
-    $reservation->update(['statut' => 'acceptée']);
+        // Met à jour le statut
+        $reservation->update(['statut' => 'acceptée']);
 
-    // Envoi du mail de confirmation au client
-    if ($reservation->email) {
-        Mail::to($reservation->email)->send(new ReservationAccept ($reservation));
+        // Envoi du mail de confirmation au client
+        if ($reservation->email) {
+            Mail::to($reservation->email)->send(new ReservationAccept($reservation));
+        }
+
+        return redirect()->back()->with('success', 'Réservation acceptée et mail envoyé.');
     }
 
-    return redirect()->back()->with('success', 'Réservation acceptée et mail envoyé.');
-}
+    public function refuser($id)
+    {
+        $reservation = Reservation::with('chambre.hotel')->findOrFail($id);
 
+        // Mise à jour du statut
+        $reservation->update(['statut' => 'refusée']);
+
+        // Envoi du mail de refus
+        if ($reservation->email) {
+            Mail::to($reservation->email)->send(new ReservationRefus($reservation));
+        }
+        return redirect()->back()->with('success', 'Réservation refusée et mail envoyé.');
+    }
+
+
+    public function updateStatut(Request $request, $id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $ancienStatut = $reservation->statut;
+        $reservation->update(['statut' => $request->statut]);
+
+        // Envoi du mail selon le nouveau statut
+        if ($reservation->email) {
+            if ($request->statut === 'acceptée' && $ancienStatut !== 'acceptée') {
+                Mail::to($reservation->email)->send(new ReservationAccept($reservation));
+            } elseif ($request->statut === 'refusée' && $ancienStatut !== 'refusée') {
+                Mail::to($reservation->email)->send(new ReservationRefus($reservation));
+            }
+        }
+
+        return redirect()->back()->with('success', 'Statut de la réservation mis à jour.');
+    }
 }

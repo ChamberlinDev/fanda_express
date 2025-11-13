@@ -28,7 +28,14 @@ Route::get('/reservation_hotel/{id}', [ReservationController::class, 'create'])
 
 
 Route::get('/reservations/{id}/accepter', [ReservationController::class, 'accepter'])
-     ->name('reservations_accepter');
+    ->name('reservations_accepter');
+
+Route::get('/reservations/{id}/refuser', [ReservationController::class, 'refuser'])
+    ->name('reservations_refuser');
+
+Route::put('/reservations/{id}/update-statut', [ReservationController::class, 'updateStatut'])
+    ->name('reservations_update_statut');
+
 
 // reservation appart
 Route::get('/reservation_etablissements/{id}', [ReservationController::class, 'create_appart'])->name('reservation_appart');
