@@ -23,20 +23,13 @@ Route::get('/hotels', [HotelController::class, 'search_hotel']);
 
 // reservation hotel
 
-Route::get('/reservation_hotel/{id}', [ReservationController::class, 'create'])
-    ->name('reservation_hotel');
+Route::get('/reservation_hotel/{id}', [ReservationController::class, 'create'])->name('reservation_hotel');
+Route::get('/reservations/{id}/accepter', [ReservationController::class, 'accepter'])->name('reservations_accepter');
+Route::get('/reservations/{id}/refuser', [ReservationController::class, 'refuser'])->name('reservations_refuser');
+Route::put('/reservations/{id}/update-statut', [ReservationController::class, 'updateStatut'])->name('reservations_update_statut');
 
 
-Route::get('/reservations/{id}/accepter', [ReservationController::class, 'accepter'])
-    ->name('reservations_accepter');
-
-Route::get('/reservations/{id}/refuser', [ReservationController::class, 'refuser'])
-    ->name('reservations_refuser');
-
-Route::put('/reservations/{id}/update-statut', [ReservationController::class, 'updateStatut'])
-    ->name('reservations_update_statut');
-
-
+Route::get('/reservation_admin', [ReservationController::class, 'reservation_admin']);
 // reservation appart
 Route::get('/reservation_etablissements/{id}', [ReservationController::class, 'create_appart'])->name('reservation_appart');
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservations.store');
@@ -51,8 +44,9 @@ Route::post('/login', [Authcontroller::class, 'login']);
 
 
 // Routes admins
-Route::get('/home', [Authcontroller::class, 'home']);
 
+
+Route::get('/home', [Authcontroller::class, 'home']);
 // Route pour gerer le profil
 Route::get('/profil', [Authcontroller::class, 'profil']);
 Route::get('/profil_edit', [Authcontroller::class, 'edit_profil']);

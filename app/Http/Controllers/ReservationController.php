@@ -150,4 +150,13 @@ class ReservationController extends Controller
 
         return redirect()->back()->with('success', 'Statut de la réservation mis à jour.');
     }
+
+    public function reservation_admin()
+    {
+        $hotel = Hotel::where('user_id', auth()->id())->first();
+
+        $chambres = Chambre::where('hotel_id', $hotel->id)->get();
+
+        return view('reservation_admin', compact('chambres'));
+    }
 }

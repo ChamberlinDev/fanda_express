@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterValidation;
+use App\Models\Appartement;
+use App\Models\Chambre;
+use App\Models\Hotel;
+use App\Models\Reservation;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +18,58 @@ class Authcontroller extends Controller
     //
     public function home()
     {
-        return view('welcome');
+        $admin = auth()->user();
+
+        //Récupérer l’hôtel de l’admin
+        $hotel = Hotel::where('user_id', $admin->id)->first();
+
+        if (!$hotel) {
+            return view('admin.dashboard')->with('error', "Aucun hôtel n'est associé à cet administrateur.");
+        }
+
+        // Récupérer les chambres de cet hôtel
+        $chambres = Chambre::where('hotel_id', $hotel->id)->get();
+
+        $appartements = Appartement::where('user_id');
+        // Récupérer les réservations récentes
+        $reservations = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
+            ->latest()
+            ->take(5)
+            ->get();
+
+        // 4️⃣ Statistiques
+        $totalReservations = $reservations->count();
+        $totalChambres = $chambres->count();
+        $totalClients = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
+            ->distinct('email')
+            ->count('email');
+
+        // Récupérer toutes les réservations confirmées des chambres de l'hôtel
+        $reservationsConfirmees = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
+            ->where('statut', 'acceptée')
+            ->get();
+
+        $revenuTotal = $reservationsConfirmees->sum(function ($reservation) {
+            $jours = Carbon::parse($reservation->date_fin)
+                ->diffInDays(Carbon::parse($reservation->date_debut));
+            return $jours * $reservation->chambre->prix;
+        });
+        // Appartements
+        $totalAppartements = $appartements->count();
+        $totalhotels = $hotel->count();
+
+
+
+        return view('welcome', compact(
+            'hotel',
+            'chambres',
+            'reservations',
+            'totalReservations',
+            'totalhotels',
+            'totalClients',
+            'totalAppartements',
+            'revenuTotal',
+        ));
     }
 
     public function loginform()
@@ -97,7 +153,8 @@ class Authcontroller extends Controller
     }
 
 
-    public function clients_liste(){
+    public function clients_liste()
+    {
         return view('admin.clients.index');
     }
 }
