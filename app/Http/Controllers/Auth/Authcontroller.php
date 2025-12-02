@@ -82,8 +82,6 @@ class Authcontroller extends Controller
             'revenuTotal',
         ));
     }
-
-
     public function loginform()
     {
         return view('auth.login');
