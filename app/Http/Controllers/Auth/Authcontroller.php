@@ -20,31 +20,44 @@ class Authcontroller extends Controller
     {
         $admin = auth()->user();
 
-        //Récupérer l’hôtel de l’admin
+        // Récupérer l’hôtel de l’admin
         $hotel = Hotel::where('user_id', $admin->id)->first();
 
+        // Si aucun hôtel n'est associé, on affiche quand même le dashboard
         if (!$hotel) {
-            return view('admin.dashboard')->with('error', "Aucun hôtel n'est associé à cet administrateur.");
+            return view('welcome', [
+                'hotel' => null,
+                'chambres' => collect(),
+                'reservations' => collect(),
+                'totalReservations' => 0,
+                'totalhotels' => 0,
+                'totalClients' => 0,
+                'totalAppartements' => 0,
+                'revenuTotal' => 0,
+                'message' => "Aucun hôtel n'est encore associé à votre compte."
+            ]);
         }
 
         // Récupérer les chambres de cet hôtel
         $chambres = Chambre::where('hotel_id', $hotel->id)->get();
 
-        $appartements = Appartement::where('user_id');
+        // Récupérer les appartements de l’admin
+        $appartements = Appartement::where('user_id', $admin->id)->get();
+
         // Récupérer les réservations récentes
         $reservations = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
             ->latest()
             ->take(5)
             ->get();
 
-        // 4️⃣ Statistiques
+        // Statistiques
         $totalReservations = $reservations->count();
         $totalChambres = $chambres->count();
         $totalClients = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
             ->distinct('email')
             ->count('email');
 
-        // Récupérer toutes les réservations confirmées des chambres de l'hôtel
+        // Récupérer toutes les réservations confirmées
         $reservationsConfirmees = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
             ->where('statut', 'acceptée')
             ->get();
@@ -54,13 +67,11 @@ class Authcontroller extends Controller
                 ->diffInDays(Carbon::parse($reservation->date_debut));
             return $jours * $reservation->chambre->prix;
         });
-        // Appartements
+
         $totalAppartements = $appartements->count();
-        $totalhotels = $hotel->count();
+        $totalhotels = 1;
 
-
-
-        return view('welcome', compact(
+        return view('admin.dashboard', compact(
             'hotel',
             'chambres',
             'reservations',
@@ -71,6 +82,7 @@ class Authcontroller extends Controller
             'revenuTotal',
         ));
     }
+
 
     public function loginform()
     {

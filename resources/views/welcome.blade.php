@@ -177,7 +177,7 @@
                 </div>
                 <div class="card-body text-white">
                     <div class="mb-4">
-                        <h1 class="display-4 fw-bold mb-0">{{$revenuTotal}} FCFA</h1>
+                        <h1 class="display-4 fw-bold mb-0"> {{$revenuTotal}} FCFA</h1>
                         <!-- <p class="mb-0 opacity-75">FCFA ce mois</p> -->
                     </div>
 
