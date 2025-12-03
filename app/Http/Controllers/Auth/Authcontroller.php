@@ -71,7 +71,7 @@ class Authcontroller extends Controller
         $totalAppartements = $appartements->count();
         $totalhotels = 1;
 
-        return view('admin.dashboard', compact(
+        return view('welcome', compact(
             'hotel',
             'chambres',
             'reservations',
