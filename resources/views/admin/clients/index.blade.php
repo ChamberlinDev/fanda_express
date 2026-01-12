@@ -46,7 +46,7 @@
                         </tr>
                         <tr>
                             <td colspan="9" class="text-center text-muted py-3">
-                                Aucune réservation enregistrée pour le moment.
+                                Aucun client enregistré pour le moment.
                             </td>
                         </tr>
                     

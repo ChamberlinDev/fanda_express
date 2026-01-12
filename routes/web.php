@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppartementController;
 use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\blogcontroller;
@@ -43,10 +44,9 @@ Route::post('/register', [Authcontroller::class, 'register']);
 Route::post('/login', [Authcontroller::class, 'login']);
 
 
-// Routes admins
-
-
+// Routes gerants
 Route::get('/home', [Authcontroller::class, 'home']);
+
 // Route pour gerer le profil
 Route::get('/profil', [Authcontroller::class, 'profil']);
 Route::get('/profil_edit', [Authcontroller::class, 'edit_profil']);
@@ -66,12 +66,8 @@ Route::get('/show_hotel/{id}', [HotelController::class, 'show'])->name('etabliss
 Route::get('/details/{id}', [HotelController::class, 'details'])->name('hotel.show');
 Route::delete('/supp_hotel/{id}', [HotelController::class, 'destroy'])->name('supp_hotel');
 
-
-
-
 Route::get('/modif_form/{id}', [HotelController::class, 'edit']);
 Route::post('/modif_save/{id}', [HotelController::class, 'update'])->name('modif_save');
-
 
 // Route pour les appartements
 Route::get('/ajouter_appart', [AppartementController::class, 'Ajouter_appart']);
@@ -82,26 +78,19 @@ Route::get('/modif_edit/{id}', [AppartementController::class, 'edit']);
 Route::post('/modif_appart/{id}', [AppartementController::class, 'update'])->name('modif_appart');
 Route::delete('/supp_appart/{id}', [AppartementController::class, 'destroy'])->name('supp_appart');
 
-
-
-
-
-
-
-
-
 // Route pour chambre
 Route::get('/chambres/{id}', [ChambreController::class, 'create'])->name('chambres.create');
 Route::post('/etablissements/{id}/chambres', [ChambreController::class, 'store'])->name('chambres.store');
 
-
-
 // Route pour gerer les reservations
 Route::get('/reservation', [ReservationController::class, 'index']);
-
-
 
 // Route pour gerer les blogs
 Route::get('/blog', [blogcontroller::class, 'index']);
 Route::get('/ajouter_blog', [blogcontroller::class, 'ajout_form']);
 Route::post('/ajout_save', [blogcontroller::class, 'store']);
+
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard',[AdminController::class, 'admin_view'])->name('admin.dashboard');
+});

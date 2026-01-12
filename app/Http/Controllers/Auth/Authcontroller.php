@@ -108,21 +108,40 @@ class Authcontroller extends Controller
 
     public function login(Request $request)
     {
-        // Validation des champs
-        $data = $request->validate([
+        // 1️⃣ Validation
+        $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($data)) {
+        // 2️⃣ Tentative de connexion
+        if (Auth::attempt($credentials)) {
 
             $request->session()->regenerate();
 
-            return redirect()->intended('/home')->with('success', 'Connexion réussie !');
-        }
-        return back()->with('error', 'Email ou mot de passe incorrect.');
-    }
+            $user = Auth::user();
 
+            // 3️⃣ Si ADMIN → dashboard admin
+            if ($user->hasRole('admin')) {
+
+                return redirect()
+                    ->route('admin.dashboard')
+                    ->with('success', 'Bienvenue Administrateur');
+            }
+            // 4️⃣ SINON → interface utilisateur
+            else {
+
+                return redirect()
+                    ->intended('/home')
+                    ->with('success', 'Connexion réussie !');
+            }
+        }
+
+        // 5️⃣ Échec de connexion
+        return back()->withErrors([
+            'email' => 'Email ou mot de passe incorrect.',
+        ]);
+    }
     public function profil()
     {
         $hotels = Auth::user();

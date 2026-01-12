@@ -1,231 +1,109 @@
 @extends('admin.layout.app')
 
 @section('content')
-<div class="container-fluid my-4">
-    <!-- Welcome Header -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card border-0 shadow-sm bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                <div class="card-body py-4">
-                    <div class="d-flex align-items-center justify-content-between flex-wrap">
-                        <div class="text-dark">
-                            <h2 class="mb-2 fw-bold">
-                                <i class="bi bi-emoji-smile me-2"></i>Bonjour, {{auth()->user()->nom_complet}} !
-                            </h2>
-                            <p class="mb-0 opacity-75">
-                                <i class="bi bi-calendar-check me-2"></i>{{ \Carbon\Carbon::now()->isoFormat('dddd D MMMM YYYY') }}
-                            </p>
-                        </div>
-                        <div class="text-white text-end d-none d-md-block">
-                            <h4 class="mb-0">🏨</h4>
-                            <small class="opacity-75">Espace de gestion</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Stats Cards -->
-    <div class="row g-3 mb-6">
-        <div class="col-sm-6 col-lg-3">
-            <div class="card border-0 shadow-sm h-100 hover-shadow" style="transition: all 0.3s;">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <div class="bg-primary bg-opacity-10 rounded-circle p-3">
-                                <i class="bi bi-people-fill fs-2 text-white"></i>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h6 class="text-muted mb-1 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
-                                Clients
-                            </h6>
-                            <h2 class="mb-0 fw-bold">{{ $totalClients }}</h2>
-                            <small class="text-success">
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<h4 class="mb-4">Espace de travail</h4>
 
-        <div class="col-sm-6 col-lg-3">
-            <div class="card border-0 shadow-sm h-100 hover-shadow" style="transition: all 0.3s;">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <div class="bg-info bg-opacity-10 rounded-circle p-3">
-                                <i class="bi bi-calendar-check fs-2 text-white"></i>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h6 class="text-muted mb-1 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
-                                Réservations
-                            </h6>
-                            <h2 class="mb-0 fw-bold">{{ $totalReservations }}</h2>
-                            <small class="text-info">
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-3">
-            <div class="card border-0 shadow-sm h-100 hover-shadow" style="transition: all 0.3s;">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <div class="bg-success bg-opacity-10 rounded-circle p-3">
-                                <i class="bi bi-door-closed fs-2 text-white"></i>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h6 class="text-muted mb-1 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
-                                Hotels
-                            </h6>
-                            <h2 class="mb-0 fw-bold">{{ $totalhotels }}</h2>
-                            <small class="text-success">
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <div class="card border-0 shadow-sm h-100 hover-shadow" style="transition: all 0.3s;">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <div class="bg-success bg-opacity-10 rounded-circle p-3">
-                                <i class="bi bi-house fs-2 text-white"></i>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h6 class="text-muted mb-1 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
-                                Appartements
-                            </h6>
-                            <h2 class="mb-0 fw-bold">{{ $totalAppartements }}</h2>
-                            <small class="text-success">
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Réservations récentes -->
-    
-
-
-    <!-- Mon établissement et Gains -->
-   <div class="row g-3">
-    <div class="col-lg-8">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-bottom py-3">
-                <h5 class="mb-0 fw-bold">
-                    <i class="bi bi-building text-primary me-2"></i>Mon établissement
-                </h5>
+<div class="row">
+    {{-- ================== TABLE Reservations ================== --}}
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4><strong>Liste des reservations</strong></h4>
             </div>
 
             <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between p-4 bg-light rounded-3">
-                    <div>
+                <a href="#" class="btn btn-sm btn-success mb-3">
+                    Ajouter une reservation
+                </a>
 
-                        {{-- SI L'HOTEL EXISTE --}}
-                        @if($hotel)
-                            <h3 class="mb-2 fw-bold text-primary">
-                                <i class="bi bi-award-fill me-2"></i>{{ $hotel->nom }}
-                            </h3>
-                            <p class="text-muted mb-0">
-                                <i class="bi bi-geo-alt me-2"></i>Informations de l'établissement
-                            </p>
-                        @else
-                        {{-- SI AUCUN HOTEL N'EST ENREGISTRÉ --}}
-                            <h3 class="mb-2 fw-bold text-danger">
-                                <i class="bi bi-exclamation-triangle me-2"></i>Aucun hôtel enregistré
-                            </h3>
-                            <p class="text-muted mb-0">
-                                Vous devez ajouter un hôtel pour commencer.
-                            </p>
-                        @endif
+                <table class="table table-bordered table-striped align-middle">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nom client</th>
+                            <th>Email du client</th>
+                            <th>durée</th>
+                            <th>statut</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
 
-                    </div>
+                            <td>
+                                <span class="badge text-white">
 
-                    <div>
-                        @if($hotel)
-                            <a href="/etablissement" class="btn btn-primary btn-lg">
-                                <i class="bi bi-pencil-square me-2"></i>Modifier
-                            </a>
-                        @else
-                            <a href="/ajouter_eta" class="btn btn-success btn-lg">
-                                <i class="bi bi-plus-circle me-2"></i>Créer un hôtel
-                            </a>
-                        @endif
-                    </div>
-                </div>
+                                </span>
+                            </td>
 
-                {{-- Stats rapides (n’afficher que si un hôtel existe) --}}
-                @if($hotel)
-                    <div class="row g-3 mt-3">
-                        <div class="col-6">
-                            <div class="border rounded p-3 text-center">
-                                <i class="bi bi-star-fill text-warning fs-4"></i>
-                                <h4 class="mb-0 mt-2">4.8</h4>
-                                <small class="text-muted">Note moyenne</small>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="border rounded p-3 text-center">
-                                <i class="bi bi-chat-left-text-fill text-info fs-4"></i>
-                                <h4 class="mb-0 mt-2">156</h4>
-                                <small class="text-muted">Avis clients</small>
-                            </div>
-                        </div>
-                    </div>
-                @endif
+                            <td>
+                                <span class="badge bg-primary text-white"></span>
+                            </td>
 
+                            <td class="text-center">
+                                {{-- Modifier utilisateur --}}
+                                <a href="#" class="btn btn-sm btn-warning">
+                                    Modifier
+                                </a>
+
+                                {{-- Activer / Désactiver --}}
+                                <form action="#"
+                                    method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit"
+                                        class=""
+                                        onclick="return confirm('Confirmer cette action ?')">
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">
+                                Aucun utilisateur trouvé
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
+    {{-- ================== TABLE CLIENTS ================== --}}
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h4> <strong>Liste des clients</strong>
+                </h4>
+            </div>
 
-    <!-- Actions rapides -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="card border-0 shadow-sm bg-light">
-                <div class="card-body">
-                    <h6 class="text-muted mb-3 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
-                        <i class="bi bi-lightning-charge-fill me-2"></i>Actions rapides
-                    </h6>
-                    <div class="row g-2">
-                        <div class="col-6 col-md-3">
-                            <a href="#" class="btn btn-outline-primary w-100">
-                                <i class="bi bi-plus-circle me-2"></i>Nouvelle réservation
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <a href="/etablissement" class="btn btn-outline-success w-100">
-                                <i class="bi bi-door-closed me-2"></i>Gérer chambres
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <a href="#" class="btn btn-outline-info w-100">
-                                <i class="bi bi-people me-2"></i>Voir clients
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <a href="#" class="btn btn-outline-warning w-100">
-                                <i class="bi bi-file-earmark-text me-2"></i>Rapports
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped align-middle">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Telephone</th>
+                            <th>email</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">
+                                Aucun dossier disponible
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

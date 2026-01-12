@@ -52,13 +52,13 @@
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 p-3 bg-light rounded-3 border">
                 <div class="d-flex gap-2 flex-wrap">
                     <a href="/reservation_admin" class="btn btn-primary">
-                        <i class="bi bi-plus-circle me-1"></i> Nouvelle réservation - hotel
+                        <i class="bi bi-plus-circle me-1 mx-3"></i> Nouvelle réservation - hotel
                     </a>
                     <a href="#" class="btn btn-success">
-                        <i class="bi bi-plus-circle me-1"></i> Nouvelle reservation - appart
+                        <i class="bi bi-plus-circle me-1 mx-3"></i> Nouvelle reservation - appart
                     </a>
                     <a href="#" class="btn btn-danger">
-                        <i class="bi bi-file-earmark-pdf me-1"></i> Exporter PDF
+                        <i class="bi bi-file-earmark-pdf me-1 mx-3"></i> Exporter PDF
                     </a>
                 </div>
                 <div class="input-group" style="max-width: 300px;">

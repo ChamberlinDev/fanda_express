@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 @section('content')
-<div class="container my-5">
+<div class="container">
 
     {{-- En-tête avec dégradé --}}
     <div class="mb-5">
@@ -13,7 +13,7 @@
                 <a href="/ajouter_eta" class="btn btn-primary shadow-sm px-4">
                     <i class="bi bi-building-add me-2"></i>Ajouter un hôtel
                 </a>
-                <a href="/ajouter_appart" class="btn btn-success shadow-sm px-4">
+                <a href="/ajouter_appart" class="btn btn-success shadow-sm px-4 mx-2">
                     <i class="bi bi-house-add me-2"></i>Ajouter un appartement
                 </a>
             </div>
