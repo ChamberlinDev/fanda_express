@@ -51,7 +51,26 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <h3 class="card-category">Appartement</h3>
+                                    <h3 class="card-category">Appartements</h3>
+                                    <h4 class="card-title">3</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-stats card-info">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="icon-big text-center">
+                                    <i class="la la-shopping-cart"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <h3 class="card-category">Reservations</h3>
                                     <h4 class="card-title">3</h4>
                                 </div>
                             </div>

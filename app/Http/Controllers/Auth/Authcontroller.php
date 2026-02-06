@@ -103,7 +103,7 @@ class Authcontroller extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect('/connexion')->with('success', 'Inscription réussie !');
+        return redirect('/home')->with('success', 'Inscription réussie !');
     }
 
     public function login(Request $request)

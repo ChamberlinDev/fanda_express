@@ -9,21 +9,21 @@
     <div class="col-md-6">
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
-                <h4><strong>Liste des reservations</strong></h4>
+                <h4><strong>Liste des utilisateurs</strong></h4>
             </div>
 
             <div class="card-body">
                 <a href="#" class="btn btn-sm btn-success mb-3">
-                    Ajouter une reservation
+                    Ajouter un utilisateur  
                 </a>
 
                 <table class="table table-bordered table-striped align-middle">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nom client</th>
-                            <th>Email du client</th>
-                            <th>durée</th>
+                            <th>Nom utilisateur</th>
+                            <th>Email utilisateur</th>
+                            <th>Email</th>
                             <th>statut</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -78,7 +78,7 @@
     <div class="col-md-6">
         <div class="card shadow-sm">
             <div class="card-header bg-secondary text-white">
-                <h4> <strong>Liste des clients</strong>
+                <h4> <strong>Liste des hotels</strong>
                 </h4>
             </div>
 
@@ -87,10 +87,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nom</th>
+                            <th>Nom hotel</th>
                             <th>Telephone</th>
                             <th>email</th>
-                            <th>Date</th>
+                            <th>Nombre de chambres</th>
                         </tr>
                     </thead>
                     <tbody>
