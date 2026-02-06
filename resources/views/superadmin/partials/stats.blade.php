@@ -13,7 +13,7 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <h3 class="card-category">Etablissements</h3>
+                                    <h3 class="card-category">Utilisateurs</h3>
                                     <h4 class="card-title">1,294</h4>
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <h3 class="card-category">Reservations</h3>
+                                    <h3 class="card-category">Hotels</h3>
                                     <h4 class="card-title">45</h4>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <h3 class="card-category">Clients</h3>
+                                    <h3 class="card-category">Appartement</h3>
                                     <h4 class="card-title">3</h4>
                                 </div>
                             </div>

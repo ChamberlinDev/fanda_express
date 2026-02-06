@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header fixed-top">
 	<div class="container-fluid">
 		<div class="header_content d-flex flex-row align-items-center justify-content-between py-3">
 			{{-- Logo --}}

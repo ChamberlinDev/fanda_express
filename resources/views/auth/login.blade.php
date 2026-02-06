@@ -130,13 +130,13 @@
                                         </button>
                                     </div>
                                     <!-- Lien inscription -->
-                                    <div class="text-center">
+                                    <!-- <div class="text-center">
                                         <p class="text-muted mb-2">Vous n'avez pas encore de compte ?</p>
                                         <a href="/inscription" class="btn btn-outline-primary">
                                             <i class="bi bi-person-plus me-2"></i>
                                             Créer un compte
                                         </a>
-                                    </div>
+                                    </div> -->
 
                                 </form>
                             </div>

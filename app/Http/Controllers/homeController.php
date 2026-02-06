@@ -17,7 +17,6 @@ class homeController extends Controller
     }
 
 
-
     
 
     public function update(Request $request, $id)
@@ -48,7 +47,6 @@ class homeController extends Controller
         }
 
         $etab->save();
-
         return redirect('/etablissement')->with('success', 'Établissement mis à jour avec succès.');
     }
 }

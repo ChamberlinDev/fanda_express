@@ -20,15 +20,14 @@ class AccueilController extends Controller
         return view('accueil', compact('hotels', 'apparts', 'blogs'));
     }
 
-
-
-
     // Page détails d'un établissement ()
     public function show($id)
     {
         $hotels = Hotel::findOrFail($id);
         return view('hotels.details', compact('hotels'));
     }
+
+   
 
     
 }
