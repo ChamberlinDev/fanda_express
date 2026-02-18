@@ -45,8 +45,8 @@
                 </a>
             </li>
 
-            <li class="nav-item {{ request()->is('inscription*') ? 'active' : '' }}">
-                <a href="/inscription">
+            <li class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
+                <a href="{{ route('admin.users') }}">
                     <i class="bi bi-people"></i>
                     <p>Utilisateurs</p>
                 </a>

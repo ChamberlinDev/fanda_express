@@ -39,7 +39,6 @@ Route::get('/hotels/{id}/reservations', [HotelController::class, 'reservations']
 
 // routes de connexion
 Route::get('/connexion', [Authcontroller::class, 'loginform']);
-Route::get('/inscription', [Authcontroller::class, 'registerform']);
 Route::post('/register', [Authcontroller::class, 'register']);
 Route::post('/login', [Authcontroller::class, 'login']);
 
@@ -92,5 +91,7 @@ Route::post('/ajout_save', [blogcontroller::class, 'store']);
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard',[AdminController::class, 'admin_view'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'admin_view'])->name('admin.dashboard');
+    Route::get('/inscription', [Authcontroller::class, 'registerform']);
+    Route::get('/admin/users', [AdminController::class, 'liste_users'])->name('admin.users');   
 });
