@@ -14,7 +14,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <h3 class="card-category">Utilisateurs</h3>
-                                    <h4 class="card-title">1,294</h4>
+                                    <h4 class="card-title">{{ number_format($stats['utilisateurs']) }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <h3 class="card-category">Hotels</h3>
-                                    <h4 class="card-title">45</h4>
+                                    <h4 class="card-title">{{ number_format($stats['hotels']) }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -46,13 +46,13 @@
                         <div class="row">
                             <div class="col-3">
                                 <div class="icon-big text-center">
-                                    <i class="la la-newspaper-o"></i>
+                                    <i class="la la-home"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <h3 class="card-category">Appartements</h3>
-                                    <h4 class="card-title">3</h4>
+                                    <h4 class="card-title">{{ number_format($stats['appartements']) }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <h3 class="card-category">Reservations</h3>
-                                    <h4 class="card-title">3</h4>
+                                    <h4 class="card-title">{{ number_format($stats['reservations']) }}</h4>
                                 </div>
                             </div>
                         </div>

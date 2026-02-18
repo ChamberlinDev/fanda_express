@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appartement;
+use App\Models\Hotel;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,7 +15,13 @@ class AdminController extends Controller
    {
 
     $users = User::paginate(10);
-      return view('superadmin_view', compact('users'));
+    $stats= [
+        'utilisateurs'  => User::count(),
+        'hotels'        => Hotel::count(),
+        'appartements'  => Appartement::count(),
+        'reservations'  => Reservation::count(),
+    ];
+      return view('superadmin_view', compact('users', 'stats'));
    }
 
    public function liste_users()

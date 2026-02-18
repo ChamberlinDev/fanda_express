@@ -186,4 +186,9 @@ class Authcontroller extends Controller
     {
         return view('admin.clients.index');
     }
+
+    public function change_password()
+    {
+        return view('auth.change_password');
+    }
 }

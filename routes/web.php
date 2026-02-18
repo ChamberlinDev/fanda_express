@@ -41,7 +41,9 @@ Route::get('/hotels/{id}/reservations', [HotelController::class, 'reservations']
 Route::get('/connexion', [Authcontroller::class, 'loginform']);
 Route::post('/register', [Authcontroller::class, 'register']);
 Route::post('/login', [Authcontroller::class, 'login']);
-
+Route::get('/change_password', [Authcontroller::class, 'change_password']);
+// Route::post('/change_pass', [Authcontroller::class, 'update_password'])->name('update_password');
+// Route::get('/logout', [Authcontroller::class, 'logout'])->name('logout');
 
 // Routes gerants
 Route::get('/home', [Authcontroller::class, 'home']);
