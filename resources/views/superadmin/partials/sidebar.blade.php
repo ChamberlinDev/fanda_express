@@ -53,14 +53,14 @@
             </li>
 
             <li class="nav-item {{ request()->is('hotels*') ? 'active' : '' }}">
-                <a href="#">
+                <a href="{{ route('admin.hotels') }}">
                     <i class="bi bi-building"></i>
                     <p>Hotels</p>
                 </a>
             </li>
 
             <li class="nav-item {{ request()->is('appartements*') ? 'active' : '' }}">
-                <a href="#">
+                <a href="{{ route('admin.appartements') }}">
                     <i class="bi bi-house-door"></i>
                     <p>Appartements</p>
                 </a>

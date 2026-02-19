@@ -48,7 +48,7 @@
                         <!-- Colonne formulaire -->
                         <div class="col-md-7 bg-white">
                             <div class="p-5">
-                                <form action="/change-password" method="POST">
+                                <form action="{{route('password.change')}}" method="POST">
                                     @csrf
 
                                     <!-- En-tête -->
@@ -103,7 +103,7 @@
                                                 name="password"
                                                 id="password"
                                                 class="form-control border-start-0 border-end-0 ps-0"
-                                                placeholder="••••••••"
+                                                placeholder="Entrez votre nouveau mot de passe"
                                                 required>
                                             <button class="btn btn-outline-secondary border-start-0"
                                                 type="button"
@@ -127,7 +127,7 @@
                                                 name="password_confirmation"
                                                 id="password_confirmation"
                                                 class="form-control border-start-0 border-end-0 ps-0"
-                                                placeholder="••••••••"
+                                                placeholder="Confirmez votre mot de passe"
                                                 required>
                                             <button class="btn btn-outline-secondary border-start-0"
                                                 type="button"

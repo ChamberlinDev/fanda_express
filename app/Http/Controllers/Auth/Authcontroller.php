@@ -12,6 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class Authcontroller extends Controller
 {
@@ -95,53 +96,80 @@ class Authcontroller extends Controller
 
     public function register(RegisterValidation $request)
     {
-        User::create([
+        $user = User::create([
             'nom_complet' => $request->nom_complet,
             'adresse' => $request->adresse,
             'email' => $request->email,
             'telephone' => $request->telephone,
             'password' => bcrypt($request->password),
+            'must_change_password' => true,
+
         ]);
 
-        return redirect('/home')->with('success', 'Inscription réussie !');
+
+        return redirect()->route('admin.users')->with('success', 'Inscription réussie !');
     }
 
     public function login(Request $request)
     {
-        // 1️⃣ Validation
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        // 2️⃣ Tentative de connexion
         if (Auth::attempt($credentials)) {
 
             $request->session()->regenerate();
 
             $user = Auth::user();
 
-            // 3️⃣ Si ADMIN → dashboard admin
-            if ($user->hasRole('admin')) {
+            // 🔐 OBLIGATION changement mot de passe (peu importe le rôle)
+            if ($user->must_change_password) {
+                return redirect()
+                    ->route('change_password')
+                    ->with('warning', 'Vous devez changer votre mot de passe avant de continuer.');
+            }
 
+            // ADMIN
+            if ($user->hasRole('admin')) {
                 return redirect()
                     ->route('admin.dashboard')
                     ->with('success', 'Bienvenue Administrateur');
             }
-            // 4️⃣ SINON → interface utilisateur
-            else {
 
-                return redirect()
-                    ->intended('/home')
-                    ->with('success', 'Connexion réussie !');
-            }
+            // AUTRES RÔLES
+            return redirect()
+                ->intended('/home')
+                ->with('success', 'Connexion réussie !');
         }
 
-        // 5️⃣ Échec de connexion
         return back()->withErrors([
             'email' => 'Email ou mot de passe incorrect.',
         ]);
     }
+
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = Auth::user();
+        $user->password = Hash::make($request->password);
+        $user->must_change_password = false; 
+        $user->save();
+
+        // Redirection selon rôle après changement
+        if ($user->hasRole('admin')) {
+            return redirect()->route('admin.dashboard')
+                ->with('success', 'Mot de passe modifié avec succès');
+        }
+
+        return redirect('/home')
+            ->with('success', 'Mot de passe modifié avec succès');
+    }
+
     public function profil()
     {
         $hotels = Auth::user();

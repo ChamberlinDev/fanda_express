@@ -41,9 +41,8 @@ Route::get('/hotels/{id}/reservations', [HotelController::class, 'reservations']
 Route::get('/connexion', [Authcontroller::class, 'loginform']);
 Route::post('/register', [Authcontroller::class, 'register']);
 Route::post('/login', [Authcontroller::class, 'login']);
-Route::get('/change_password', [Authcontroller::class, 'change_password']);
-// Route::post('/change_pass', [Authcontroller::class, 'update_password'])->name('update_password');
-// Route::get('/logout', [Authcontroller::class, 'logout'])->name('logout');
+Route::get('/change_password', [Authcontroller::class, 'change_password'])->name('change_password');
+Route::post('/change-password', [AuthController::class, 'changePassword'])->name('password.change');
 
 // Routes gerants
 Route::get('/home', [Authcontroller::class, 'home']);
@@ -95,5 +94,7 @@ Route::post('/ajout_save', [blogcontroller::class, 'store']);
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'admin_view'])->name('admin.dashboard');
     Route::get('/inscription', [Authcontroller::class, 'registerform']);
-    Route::get('/admin/users', [AdminController::class, 'liste_users'])->name('admin.users');   
+    Route::get('/admin/users', [AdminController::class, 'liste_users'])->name('admin.users');
+    Route::get('/admin/hotels', [AdminController::class, 'liste_hotels'])->name('admin.hotels');
+    Route::get('/admin/appartements', [AdminController::class, 'liste_appartements'])->name('admin.appartements');
 });

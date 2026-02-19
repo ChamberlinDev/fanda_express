@@ -31,4 +31,14 @@ class AdminController extends Controller
       return view('superadmin.users.liste', compact('users'));
    }
 
+   public function liste_hotels(){
+      $hotels = Hotel::paginate(10);
+      return view('superadmin.hotels.liste', compact('hotels'));
+   }
+
+   public function liste_appartements(){
+      $apparts = Appartement::paginate(10);
+      return view('superadmin.appartements.liste', compact('apparts'));
+   }
+
 }
