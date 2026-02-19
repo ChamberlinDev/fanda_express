@@ -74,7 +74,7 @@
             </li>
 
             <li class="nav-item {{ request()->is('reservations*') ? 'active' : '' }}">
-                <a href="#">
+                <a href="{{ route('admin.reservations') }}">
                     <i class="bi bi-cart"></i>
                     <p>Reservations</p>
                 </a>

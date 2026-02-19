@@ -97,4 +97,5 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/users', [AdminController::class, 'liste_users'])->name('admin.users');
     Route::get('/admin/hotels', [AdminController::class, 'liste_hotels'])->name('admin.hotels');
     Route::get('/admin/appartements', [AdminController::class, 'liste_appartements'])->name('admin.appartements');
+    Route::get('/admin/reservations', [AdminController::class, 'liste_reservations'])->name('admin.reservations');
 });

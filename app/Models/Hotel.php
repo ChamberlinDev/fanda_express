@@ -43,4 +43,8 @@ class Hotel extends Model
             'id'             // Clé primaire de la table chambres
         );
     }
+//     public function reservations()
+// {
+//     return $this->hasMany(Reservation::class);
+// }
 }

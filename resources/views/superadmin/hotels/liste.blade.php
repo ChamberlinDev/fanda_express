@@ -3,10 +3,13 @@
 
 <section class="container my-5">
     <div class="mb-4">
-        <h2 class="font-weight-bold text-center">
+        <h3 class="font-weight-bold text-center">
             Affichage de tous les hôtels 
-        </h2>
+        </h3>
+        <hr>
+        <p>Sur cette interface, vous pouvez voir la liste complète des hôtels disponibles dans le système.</p>
     </div>
+    <hr>
 
     <div class="row">
         @forelse($hotels as $hotel)
@@ -47,9 +50,9 @@
                         <span class="text-muted">{{ $hotel->adresse }}</span>
                     </div>
 
-                    @if(isset($hotel->prix_min))
+                    @if(isset($hotel->prix))
                     <div class="mb-2">
-                        <span class="text-primary font-weight-bold" style="font-size: 1.15rem;">À partir de {{ number_format($hotel->prix_min, 0, ',', ' ') }} XAF</span>
+                        <span class="text-primary font-weight-bold" style="font-size: 1.15rem;">À partir de {{ number_format($hotel->prix, 0, ',', ' ') }} XAF</span>
                         <small class="text-muted">/nuit</small>
                     </div>
                     @endif

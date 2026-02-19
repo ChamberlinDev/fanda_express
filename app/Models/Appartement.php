@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Appartement extends Model
 {
@@ -34,5 +35,16 @@ class Appartement extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function reservations(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Reservation::class,
+            Chambre::class,
+            'id',      // Clé étrangère dans la table chambres
+            'chambre_id',    // Clé étrangère dans la table réservations
+            'id',            // Clé primaire de la table appartements
+            'id'             // Clé primaire de la table chambres
+        );
     }
 }
