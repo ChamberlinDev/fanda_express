@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-   //
+   //super admin
+
+
    public function admin_view()
    {
 

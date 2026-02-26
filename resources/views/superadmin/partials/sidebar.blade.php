@@ -1,102 +1,72 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-<div class="sidebar">
-    <div class="scrollbar-inner sidebar-wrapper">
-
-        <!-- USER -->
-        <div class="user">
-            <div class="photo">
-                <img src="{{ asset('assets/img/profile.jpg') }}">
-            </div>
-            <div class="info">
-                <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-                    <span class="text-dark">
-                        {{ auth()->user()->nom_complet }}
-                        <span class="user-level text-success">
-                            {{ auth()->user()->getRoleNames()->first() }}
-                        </span>
-                        <span class="caret"></span>
-                    </span>
-                </a>
-
-                <div class="clearfix"></div>
-
-                <div class="collapse in" id="collapseExample">
-                    <ul class="nav">
-                        <li>
-                            <a href="#">
-                                <span class="link-collapse">
-                                    {{ auth()->user()->email }}
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('superadmin.dashboard') }}">
+        <div class="sidebar-brand-icon">
+            <img src="{{ asset('img/logo/logo.jpeg') }}">
         </div>
-
-        <!-- MENU -->
-        <ul class="nav">
-
-            <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                <a href="{{ route('admin.dashboard') }}">
-                    <i class="la la-dashboard"></i>
-                    <p>Tableau de bord</p>
-                </a>
-            </li>
-
-            <li class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
-                <a href="{{ route('admin.users') }}">
-                    <i class="bi bi-people"></i>
-                    <p>Utilisateurs</p>
-                </a>
-            </li>
-
-            <li class="nav-item {{ request()->is('hotels*') ? 'active' : '' }}">
-                <a href="{{ route('admin.hotels') }}">
-                    <i class="bi bi-building"></i>
-                    <p>Hotels</p>
-                </a>
-            </li>
-
-            <li class="nav-item {{ request()->is('appartements*') ? 'active' : '' }}">
-                <a href="{{ route('admin.appartements') }}">
-                    <i class="bi bi-house-door"></i>
-                    <p>Appartements</p>
-                </a>
-            </li>
-
-            <li class="nav-item {{ request()->is('blogs*') ? 'active' : '' }}">
-                <a href="#">
-                    <i class="bi bi-newspaper"></i>
-                    <p>Blogs</p>
-                </a>
-            </li>
-
-            <li class="nav-item {{ request()->is('reservations*') ? 'active' : '' }}">
-                <a href="{{ route('admin.reservations') }}">
-                    <i class="bi bi-cart"></i>
-                    <p>Reservations</p>
-                </a>
-            </li>
-
-            <li class="nav-item {{ request()->is('settings*') ? 'active' : '' }}">
-                <a href="#">
-                    <i class="bi bi-gear"></i>
-                    <p>Parametres</p>
-                </a>
-            </li>
-
-            <!-- LOGOUT -->
-            <li class="nav-item update-pro">
-                <form action="#" method="POST">
-                    @csrf
-                    <button class="btn btn-danger w-100 text-white">
-                        Déconnexion
-                    </button>
-                </form>
-            </li>
-
-        </ul>
+        <div class="sidebar-brand-text mx-3">Fanda-express</div>
+    </a>
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('superadmin.dashboard') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Tableau de bord</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+        Fonctionnalités
     </div>
-</div>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('superadmin.reservations')}}">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>Reservations</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('superadmin.hotels') }}">
+            <i class="fas fa-fw fa-building"></i>
+            <span>Hotels</span>
+        </a>
+    </li>
+     <li class="nav-item">
+        <a class="nav-link" href="{{ route('superadmin.appartements') }}">
+            <i class="fas fa-fw fa-home"></i>
+            <span>Appartements</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('superadmin.users') }}">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Utilisateurs</span>
+        </a>
+    </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link" href="">
+            <i class="fas fa-fw fa-blog"></i>
+            <span>Blogs</span>
+        </a>
+    </li>
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+        Systeme
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Parametres</span>
+        </a>
+    </li>
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-file-invoice"></i>
+            <span>Rapports</span>
+        </a>
+    </li> -->
+    <hr class="sidebar-divider">
+    <div class="version" id="version-ruangadmin"></div>
+</ul>

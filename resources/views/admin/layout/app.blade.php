@@ -1,54 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Dashboard</title>
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-	<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-	<link rel="stylesheet" href="{{asset('assets/css/ready.css')}}">
-	<link rel="stylesheet" href="{{asset('assets/css/demo.css')}}">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="{{ asset('img/logo/logo.png') }}" rel="icon">
+	<title>Fanda-express - Tableau de bord</title>
+	<link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('css/ruang-admin.min.css') }}" rel="stylesheet">
 </head>
 
-<body>
-	<div class="wrapper">
-		<div class="main-header">
+<body id="page-top">
+	<div id="wrapper">
+		<!-- Sidebar -->
+		@include('admin.partials.sidebar')
+		<!-- Sidebar -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+				<!-- TopBar -->
+				@include('admin.partials.header')
+				<!-- Topbar -->
 
-			@include('admin.partials.header')
+				<!-- Container Fluid-->
+				@yield('content')
 
-
-			@include('admin.partials.sidebar')
-
-
-			<div class="main-panel">
-				@include('admin.partials.stats')
-				<div class="content">
-					<div class="container-fluid">
-						@yield('content')
-					</div>
-				</div>
-				@include('admin.partials.footer')
 
 			</div>
 
+			<!-- Modal Logout -->
+			<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabelLogout">Deconnexion</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>Etes-vous sur de vouloir vous deconnecter ?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Annuler</button>
+							<a href="{{ route('logout') }}" class="btn btn-primary">Se deconnecter</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
+		<!---Container Fluid-->
+	</div>
+	<!-- Footer -->
+
+	<!-- Footer -->
+	</div>
 	</div>
 
+	<!-- Scroll to top -->
+	<a class="scroll-to-top rounded" href="#page-top">
+		<i class="fas fa-angle-up"></i>
+	</a>
+
+	<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+	<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+	<script src="{{ asset('js/ruang-admin.min.js') }}"></script>
+	<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+	<script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
 </body>
-<script src="{{asset('assets/js/core/jquery.3.2.1.min.js')}}"></script>
-<script src="{{asset('assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
-<script src="{{asset('assets/js/core/popper.min.js')}}"></script>
-<script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/plugin/chartist/chartist.min.js')}}"></script>
-<script src="{{asset('assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js')}}"></script>
-<script src="{{asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
-<script src="{{asset('assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
-<script src="{{asset('assets/js/plugin/jquery-mapael/jquery.mapael.min.js')}}"></script>
-<script src="{{asset('assets/js/plugin/jquery-mapael/maps/world_countries.min.js')}}"></script>
-<script src="{{asset('assets/js/plugin/chart-circle/circles.min.js')}}"></script>
-<script src="{{asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
-<script src="{{asset('assets/js/ready.min.js')}}"></script>
-<script src="{{asset('assets/js/demo.js')}}"></script>
 
 </html>

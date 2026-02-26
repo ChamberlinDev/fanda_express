@@ -17,8 +17,6 @@ class homeController extends Controller
     }
 
 
-    
-
     public function update(Request $request, $id)
     {
         $etab = Hotel::findOrFail($id);

@@ -8,6 +8,7 @@ use App\Http\Controllers\blogcontroller;
 use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Etablissement;
+use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\reservation;
@@ -44,20 +45,29 @@ Route::post('/login', [Authcontroller::class, 'login']);
 Route::get('/change_password', [Authcontroller::class, 'change_password'])->name('change_password');
 Route::post('/change-password', [AuthController::class, 'changePassword'])->name('password.change');
 
+Route::get('/deconnexion', [Authcontroller::class, 'logout'])->name('logout');
+
 // Routes gerants
 Route::get('/home', [Authcontroller::class, 'home']);
 
 // Route pour gerer le profil
-Route::get('/profil', [Authcontroller::class, 'profil']);
+Route::get('/profil', [Authcontroller::class, 'profil'])->name('admin.profil');
 Route::get('/profil_edit', [Authcontroller::class, 'edit_profil']);
 Route::post('/profil_save', [Authcontroller::class, 'update'])->name('profil_save');
 
 
 // clients partie/admin
-Route::get('/clients', [Authcontroller::class, 'clients_liste']);
+Route::get('/clients', [Authcontroller::class, 'clients_liste'])->name('admin.clients');
+
+
+// Route pour gerer les finances
+Route::get('/caisse', [FinanceController::class, 'index'])->name('admin.caisse');
+Route::get('/rapport', [FinanceController::class, 'rapport_index'])->name('admin.rapport');
+Route::get('/rapport/create', [FinanceController::class, 'create_rapport'])->name('admin.rapport.create');
+Route::post('/rapport/store', [FinanceController::class, 'store_rapport'])->name('admin.rapport.store');
 
 // Route pour gerer les hotels
-Route::get('/etablissement', [HotelController::class, 'index']);
+Route::get('/etablissement', [HotelController::class, 'index'])->name('admin.etablissements');
 Route::get('/ajouter_eta', [HotelController::class, 'Ajouter_hotel']);
 Route::post('/create_hotel', [HotelController::class, 'create']);
 Route::delete('/hotels_delete/{id}', [HotelController::class, 'destroy'])->name('etablissements.destroy');
@@ -83,19 +93,24 @@ Route::get('/chambres/{id}', [ChambreController::class, 'create'])->name('chambr
 Route::post('/etablissements/{id}/chambres', [ChambreController::class, 'store'])->name('chambres.store');
 
 // Route pour gerer les reservations
-Route::get('/reservation', [ReservationController::class, 'index']);
+Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation.index');
 
 // Route pour gerer les blogs
-Route::get('/blog', [blogcontroller::class, 'index']);
+Route::get('/blog', [blogcontroller::class, 'index'])->name('admin.blog');
 Route::get('/ajouter_blog', [blogcontroller::class, 'ajout_form']);
 Route::post('/ajout_save', [blogcontroller::class, 'store']);
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'admin_view'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'admin_view'])->name('superadmin.dashboard');
     Route::get('/inscription', [Authcontroller::class, 'registerform']);
-    Route::get('/admin/users', [AdminController::class, 'liste_users'])->name('admin.users');
-    Route::get('/admin/hotels', [AdminController::class, 'liste_hotels'])->name('admin.hotels');
-    Route::get('/admin/appartements', [AdminController::class, 'liste_appartements'])->name('admin.appartements');
-    Route::get('/admin/reservations', [AdminController::class, 'liste_reservations'])->name('admin.reservations');
+    Route::get('/admin/users', [AdminController::class, 'liste_users'])->name('superadmin.users');
+    Route::get('/admin/hotels', [AdminController::class, 'liste_hotels'])->name('superadmin.hotels');
+    Route::get('/admin/appartements', [AdminController::class, 'liste_appartements'])->name('superadmin.appartements');
+    Route::get('/admin/reservations', [AdminController::class, 'liste_reservations'])->name('superadmin.reservations');
+
+
+    Route::get('/profil/admin', [Authcontroller::class, 'profil_admin'])->name('superadmin.profil');
+    Route::get('/profil_edit/admin', [Authcontroller::class, 'edit_profil_admin'])->name('superadmin.profil_edit');
+    Route::post('/profil_save/admin', [Authcontroller::class, 'update_admin'])->name('superadmin.profil_save');
 });

@@ -66,21 +66,21 @@
                             @php
                             $roleColors = [
                             'superadmin' => 'bg-danger',
-                            'admin' => 'bg-warning text-dark',
+                            'admin' => 'bg-primary text-white',
                             'user' => 'bg-primary',
                             ];
                             @endphp
                             @forelse($user->getRoleNames() as $role)
-                            <span class="badge rounded-pill {{ $roleColors[$role] ?? 'bg-secondary' }}">
+                            <span class="badge rounded-pill  {{ $roleColors[$role] ?? 'bg-secondary' }} text-white">
                                 {{ ucfirst($role) }}
                             </span>
                             @empty
-                            <span class="badge rounded-pill bg-info text-dark">Établissement</span>
+                            <span class="badge rounded-pill bg-info text-white">Établissement</span>
                             @endforelse
                         </td>
 
                         {{-- Statut --}}
-                        <td class="text-center">
+                        <td class="text-center text-white">
                             @if($user->is_blocked)
                             <span class="badge bg-danger rounded-pill">🔒 Bloqué</span>
                             @else

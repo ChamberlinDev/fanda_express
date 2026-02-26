@@ -45,6 +45,11 @@ class User extends Authenticatable
     }
 
 
+    public function rapports()
+    {
+        return $this->hasMany(Rapport::class, 'id_user');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

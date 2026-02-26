@@ -133,7 +133,7 @@ class Authcontroller extends Controller
             // ADMIN
             if ($user->hasRole('admin')) {
                 return redirect()
-                    ->route('admin.dashboard')
+                    ->route('superadmin.dashboard')
                     ->with('success', 'Bienvenue Administrateur');
             }
 
@@ -162,7 +162,7 @@ class Authcontroller extends Controller
 
         // Redirection selon rôle après changement
         if ($user->hasRole('admin')) {
-            return redirect()->route('admin.dashboard')
+            return redirect()->route('superadmin.dashboard')
                 ->with('success', 'Mot de passe modifié avec succès');
         }
 
@@ -209,6 +209,39 @@ class Authcontroller extends Controller
         return redirect('/profil')->with('success', 'Profil mis à jour avec succès');
     }
 
+
+    public function profil_admin()
+    {
+        $user = Auth::user();
+        // Envoyer à la vue
+        return view('superadmin.profil.profil', compact('user'));
+    }
+
+    public function edit_profil_admin()
+    {
+        $user = Auth::user();
+        // Envoyer à la vue
+        return view('superadmin.profil.edit', compact('user'));
+    }
+
+
+
+
+
+
+
+
+
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/connexion')->with('success', 'Déconnexion réussie !');
+    }   
 
     public function clients_liste()
     {

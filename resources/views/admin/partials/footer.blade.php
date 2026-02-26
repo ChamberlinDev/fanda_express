@@ -1,26 +1,9 @@
-	<footer class="footer">
-					<div class="container-fluid">
-						<nav class="pull-left">
-							<ul class="nav">
-								<li class="nav-item">
-									<a class="nav-link" href="http://www.themekita.com">
-										ThemeKita
-									</a>
-								</li>
-								<!-- <li class="nav-item">
-									<a class="nav-link" href="#">
-										Help
-									</a>
-								</li> -->
-								<li class="nav-item">
-									<a class="nav-link" href="#">
-										Licenses
-									</a>
-								</li>
-							</ul>
-						</nav>
-						<div class="copyright ml-auto">
-							2025, made with by <a href="#">Fanda-express dev</a>
-						</div>				
-					</div>
-				</footer>
+ <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed by
+              <b><a href="https://indrijunanda.gitlab.io/" target="_blank">indrijunanda</a></b>
+            </span>
+          </div>
+        </div>
+      </footer>
