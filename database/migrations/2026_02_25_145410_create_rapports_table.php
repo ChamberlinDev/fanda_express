@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('rapports', function (Blueprint $table) {
             $table->id();
-            $table->string('type_rapport');
-            $table->decimal('montant_entrees', 10, 2);
-            $table->decimal('montant_sorties', 10, 2);
+            $table->enum('type_rapport', ['journalier', 'hebdomadaire', 'mensuel', 'annuel']);
+            $table->date('date_debut');
+            $table->date('date_fin');
+            $table->decimal('montant_encaisse', 10, 2)->default(0);
+            $table->decimal('montant_perdu', 10, 2)->default(0);
             $table->text('description')->nullable();
-            $table->date('date_rapport');
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

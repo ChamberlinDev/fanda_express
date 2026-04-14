@@ -59,8 +59,8 @@
                 </div>
 
                 <div class="card-footer bg-white border-0 p-3">
-                    <a href="/details/{{$hotel->id}}" class="btn btn-primary btn-block btn-lg">
-                        <i class="bi bi-eye mr-2"></i>Voir les détails
+                    <a href="{{ route('superadmin.details', $hotel->id) }}" class="btn btn-primary btn-block btn-lg">
+                        <i class="bi bi-eye mr-2"></i>
                     </a>
                 </div>
             </div>

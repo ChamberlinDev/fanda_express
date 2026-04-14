@@ -90,7 +90,7 @@ class AppartementController extends Controller
 
     public function details($id)
     {
-        $appart = Appartement::find($id);
+        $appart = Appartement::findOrFail($id);
         return view('hotels.appart_details', compact('appart'));
     }
 

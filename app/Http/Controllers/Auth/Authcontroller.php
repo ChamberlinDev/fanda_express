@@ -107,7 +107,7 @@ class Authcontroller extends Controller
         ]);
 
 
-        return redirect()->route('admin.users')->with('success', 'Inscription réussie !');
+        return redirect()->route('superadmin.users')->with('success', 'Inscription réussie !');
     }
 
     public function login(Request $request)
@@ -157,7 +157,7 @@ class Authcontroller extends Controller
 
         $user = Auth::user();
         $user->password = Hash::make($request->password);
-        $user->must_change_password = false; 
+        $user->must_change_password = false;
         $user->save();
 
         // Redirection selon rôle après changement
@@ -241,11 +241,15 @@ class Authcontroller extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/connexion')->with('success', 'Déconnexion réussie !');
-    }   
+    }
 
     public function clients_liste()
     {
-        return view('admin.clients.index');
+        $clients = Reservation::select('nom', 'prenom', 'telephone', 'email')
+            ->distinct()
+            ->orderBy('nom')
+            ->get();
+        return view('admin.clients.index', compact('clients'));
     }
 
     public function change_password()

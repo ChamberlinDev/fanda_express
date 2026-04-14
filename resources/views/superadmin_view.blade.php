@@ -99,7 +99,7 @@
             </div>
 
             <div class="card-body">
-                <a href="#" class="btn btn-sm btn-success mb-3">
+                <a href="/inscription" class="btn btn-sm btn-success mb-3">
                     Ajouter un utilisateur
                 </a>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rapport;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,13 +13,34 @@ class FinanceController extends Controller
 
     public function index()
     {
-        return view('admin.caisse.index');
+        $reservations = Reservation::with(['chambre.hotel'])
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($r) {
+                $nuits = \Carbon\Carbon::parse($r->date_debut)
+                    ->diffInDays(\Carbon\Carbon::parse($r->date_fin));
+                $r->nuits   = $nuits;
+                $r->montant = $nuits * ($r->chambre->prix ?? 0);
+                return $r;
+            });
+
+        // Stats
+        $totalEncaisse  = $reservations->where('statut', 'acceptée')->sum('montant');
+        $totalRefuse    = $reservations->where('statut', 'refusée')->sum('montant');
+        $totalEnAttente = $reservations->where('statut', 'en attente')->sum('montant');
+
+        return view('admin.caisse.index', compact(
+            'reservations',
+            'totalEncaisse',
+            'totalRefuse',
+            'totalEnAttente'
+        ));
     }
 
     // rapport
     public function rapport_index()
     {
-        $rapports = Rapport::with('user')->orderBy('date_rapport', 'desc')->get();
+        $rapports = Rapport::with('user')->orderBy('created_at', 'desc')->get();
         return view('admin.rapport.index', compact('rapports'));
     }
 
@@ -30,19 +52,44 @@ class FinanceController extends Controller
     public function store_rapport(Request $request)
     {
         // Validation des données du rapport
-        $validatedData = $request->validate([
-            'type_rapport' => 'required|string|max:255',
-            'montant_entrees' => 'required|numeric|min:0',
-            'montant_sorties' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'date_rapport' => 'required|date',
+        $request->validate([
+            'type_rapport' => 'required|in:journalier,hebdomadaire,mensuel,annuel',
+            'date_debut'   => 'required|date',
+            'date_fin'     => 'required|date|after_or_equal:date_debut',
+            'description'  => 'nullable|string|max:1000',
         ]);
 
-            $validatedData['id_user'] = Auth::id();
+        // Récupérer les réservations sur la période
+        $reservations = Reservation::with('chambre')
+            ->whereBetween('date_debut', [$request->date_debut, $request->date_fin])
+            ->get()
+            ->map(function ($r) {
+                $nuits      = \Carbon\Carbon::parse($r->date_debut)->diffInDays($r->date_fin);
+                $r->montant = $nuits * ($r->chambre->prix ?? 0);
+                return $r;
+            });
 
-        // Création du rapport dans la base de données
-        $rapport = Rapport::create($validatedData);
-        // Redirection vers la page de liste des rapports avec un message de succès
-        return redirect()->route('admin.rapport')->with('success', 'Rapport créé avec succès.');
+        // Calcul automatique
+        $montantEncaisse = $reservations->where('statut', 'acceptée')->sum('montant');
+        $montantPerdu    = $reservations->where('statut', 'refusée')->sum('montant');
+
+        Rapport::create([
+            'type_rapport'     => $request->type_rapport,
+            'date_debut'       => $request->date_debut,
+            'date_fin'         => $request->date_fin,
+            'montant_encaisse' => $montantEncaisse,
+            'montant_perdu'    => $montantPerdu,
+            'description'      => $request->description,
+            'user_id'          => Auth::id(),
+        ]);
+
+        return redirect()->route('admin.rapport.index')
+            ->with('success', 'Rapport généré avec succès !');
+    }
+
+    public function destroy($id)
+    {
+        Rapport::findOrFail($id)->delete();
+        return back()->with('success', 'Rapport supprimé.');
     }
 }

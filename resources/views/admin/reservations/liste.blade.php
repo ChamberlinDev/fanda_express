@@ -9,7 +9,7 @@
                 <i class="bi bi-calendar-check me-2"></i>Gestion des réservations
             </h1>
             <p class="lead text-muted">
-                Visualisez et gérez les réservations. Acceptez ou refusez les demandes directement depuis le tableau. 
+                Visualisez et gérez les réservations. Acceptez ou refusez les demandes directement depuis le tableau.
                 Un email de confirmation sera envoyé automatiquement au client.
             </p>
         </div>
@@ -45,7 +45,6 @@
             </div>
         </div>
     </div>
-
     <!-- Actions Row -->
     <div class="row mb-4">
         <div class="col-12">
@@ -54,12 +53,12 @@
                     <a href="/reservation_admin" class="btn btn-primary">
                         <i class="bi bi-plus-circle me-1 mx-3"></i> Nouvelle réservation - hotel
                     </a>
-                    <a href="#" class="btn btn-success">
+                    <!-- <a href="#" class="btn btn-success">
                         <i class="bi bi-plus-circle me-1 mx-3"></i> Nouvelle reservation - appart
                     </a>
                     <a href="#" class="btn btn-danger">
                         <i class="bi bi-file-earmark-pdf me-1 mx-3"></i> Exporter PDF
-                    </a>
+                    </a> -->
                 </div>
                 <div class="input-group" style="max-width: 300px;">
                     <span class="input-group-text bg-white">
@@ -74,7 +73,7 @@
     <!-- Reservations Table Card -->
     <div class="card shadow border-0">
         <div class="card-header bg-primary text-white py-3">
-            <h5 class="mb-0"><i class="bi bi-list-ul me-2"></i>Liste complète des réservations</h5>
+            <h5 class="mb-0">Liste complète des réservations</h5>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -82,17 +81,17 @@
                     <thead class="table-dark">
                         <tr>
                             <th class="text-center" style="width: 60px;">#</th>
-                            <th><i class="bi bi-person me-1"></i>Client</th>
-                            <th><i class="bi bi-telephone me-1"></i>Téléphone</th>
-                            <th><i class="bi bi-door-closed me-1"></i>Chambre</th>
-                            <th><i class="bi bi-building me-1"></i>Hôtel</th>
-                            <th class="text-center"><i class="bi bi-calendar-event me-1"></i>Arrivée</th>
-                            <th class="text-center"><i class="bi bi-calendar-event me-1"></i>Départ</th>
-                            <th class="text-center"><i class="bi bi-moon-stars me-1"></i>Nuits</th>
-                            <th class="text-center" style="min-width: 160px;"><i class="bi bi-gear me-1"></i>Statut</th>
+                            <th>Client</th>
+                            <th>Téléphone</th>
+                            <th>Chambre</th>
+                            <th>Hôtel</th>
+                            <th class="text-center">Arrivée</th>
+                            <th class="text-center">Départ</th>
+                            <th class="text-center">Nuits</th>
+                            <th class="text-center" style="min-width: 160px;">Statut</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-dark">
                         @forelse($reservations as $reservation)
                         <tr class="
                             @if($reservation->statut == 'acceptée') table-success
@@ -105,8 +104,8 @@
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2" 
-                                         style="width: 40px; height: 40px; font-weight: bold;">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
+                                        style="width: 40px; height: 40px; font-weight: bold;">
                                         {{ strtoupper(substr($reservation->nom, 0, 1)) }}{{ strtoupper(substr($reservation->prenom, 0, 1)) }}
                                     </div>
                                     <div>
@@ -125,7 +124,7 @@
                                 </span>
                             </td>
                             <td>
-                                <span class="badge bg-secondary">
+                                <span class="badge bg-secondary text-white">
                                     {{ $reservation->chambre->hotel->nom ?? '—' }}
                                 </span>
                             </td>
@@ -142,7 +141,7 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <span class="badge bg-dark fs-6">
+                                <span class="badge bg-white fs-6">
                                     {{ \Carbon\Carbon::parse($reservation->date_debut)->diffInDays(\Carbon\Carbon::parse($reservation->date_fin)) }}
                                 </span>
                             </td>
@@ -150,13 +149,13 @@
                                 <form action="{{ route('reservations_update_statut', $reservation->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <select name="statut" 
-                                            class="form-select form-select-sm fw-bold
+                                    <select name="statut"
+                                        class="form-select form-select-sm fw-bold
                                             @if($reservation->statut == 'acceptée') text-success border-success
                                             @elseif($reservation->statut == 'refusée') text-danger border-danger
                                             @else text-warning border-warning
                                             @endif"
-                                            onchange="this.form.submit()">
+                                        onchange="this.form.submit()">
                                         <option value="en attente" {{ $reservation->statut == 'en attente' ? 'selected' : '' }}>
                                             ⏳ En attente
                                         </option>

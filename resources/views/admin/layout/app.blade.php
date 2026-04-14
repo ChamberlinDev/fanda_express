@@ -12,6 +12,8 @@
 	<link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/ruang-admin.min.css') }}" rel="stylesheet">
+	<!-- Bootstrap Icons CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
 <body id="page-top">

@@ -93,14 +93,14 @@
                         <thead class="table-dark">
                             <tr>
                                 <th class="text-center" style="width: 60px;">#</th>
-                                <th><i class="bi bi-person me-1"></i>Client</th>
-                                <th><i class="bi bi-telephone me-1"></i>Téléphone</th>
-                                <th><i class="bi bi-door-closed me-1"></i>Chambre</th>
-                                <th><i class="bi bi-building me-1"></i>Hôtel</th>
-                                <th class="text-center"><i class="bi bi-calendar-event me-1"></i>Arrivée</th>
-                                <th class="text-center"><i class="bi bi-calendar-event me-1"></i>Départ</th>
-                                <th class="text-center"><i class="bi bi-moon-stars me-1"></i>Nuits</th>
-                                <th class="text-center" style="min-width: 160px;"><i class="bi bi-gear me-1"></i>Statut</th>
+                                <th>Client</th>
+                                <th>Téléphone</th>
+                                <th>Chambre</th>
+                                <th>Hôtel</th>
+                                <th class="text-center">Arrivée</th>
+                                <th class="text-center">Départ</th>
+                                <th class="text-center">Nuits</th>
+                                <th class="text-center" style="min-width: 160px;">Statut</th>
                             </tr>
                         </thead>
                         <tbody>

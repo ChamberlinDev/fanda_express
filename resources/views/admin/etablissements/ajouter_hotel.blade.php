@@ -16,7 +16,7 @@
     </div>
 
     {{-- Formulaire --}}
-    <form action="#" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('create_hotel') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="row g-4">

@@ -7,7 +7,10 @@
         <h2 class="font-weight-bold text-center">
             Affichage de tous les appartements 
         </h2>
+        <hr>
+        <p>Sur cette interface, vous pouvez voir la liste complète des appartements disponibles dans le système.</p>
     </div>
+    <hr>
 
     <div class="row">
         @forelse($apparts as $appart)
@@ -65,8 +68,8 @@
                 </div>
 
                 <div class="card-footer bg-white border-0 p-3">
-                    <a href="/details/{{$appart->id}}" class="btn btn-success btn-block btn-lg">
-                        <i class="bi bi-eye mr-2"></i>Voir les détails
+                    <a href="{{ route('superadmin.details.appart', $appart->id) }}" class="btn btn-success btn-block btn-lg">
+                        <i class="bi bi-eye mr-2"></i>
                     </a>
                 </div>
             </div>

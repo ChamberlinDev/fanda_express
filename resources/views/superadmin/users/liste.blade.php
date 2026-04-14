@@ -5,25 +5,25 @@
     {{-- Header --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0 fw-bold">
-            🧑‍💼 Liste des utilisateurs
+            <i class="bi bi-people"></i> Liste des utilisateurs
             <span class="badge bg-primary text-white ms-2">{{ $users->count() }}</span>
         </h2>
         <a href="/inscription" class="btn btn-success">
-            ➕ Nouvel utilisateur
+            Nouvel utilisateur
         </a>
     </div>
 
     {{-- Alerts --}}
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        ✅ {{ session('success') }}
+        {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     @endif
 
     @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        ❌ {{ session('error') }}
+        {{ session('error') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     @endif
@@ -33,7 +33,7 @@
         <div class="card-body p-0">
             <table class="table table-hover align-middle mb-0">
                 <thead>
-                    <tr class="table-dark">
+                    <tr class="table-dark text-dark">
                         <th scope="col" class="ps-3" style="width: 60px;">#</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Email</th>
@@ -94,7 +94,7 @@
 
                                 {{-- Modifier --}}
                                 <a href="#" class="btn btn-sm btn-outline-primary" title="Modifier">
-                                    ✏️
+                                    <i class="bi bi-pencil-square me-1"></i>
                                 </a>
 
                                 {{-- Bloquer / Débloquer --}}
@@ -104,7 +104,7 @@
                                     @method('PATCH')
                                     <button type="submit" class="btn btn-sm btn-outline-success" title="Débloquer"
                                         onclick="return confirm('Débloquer {{ $user->nom_complet }} ?')">
-                                        🔓
+                                        Débloquer
                                     </button>
                                 </form>
                                 @else
@@ -113,7 +113,7 @@
                                     @method('PATCH')
                                     <button type="submit" class="btn btn-sm btn-outline-warning" title="Bloquer"
                                         onclick="return confirm('Bloquer {{ $user->nom_complet }} ?')">
-                                        🔒
+                                        <i class="bi bi-lock me-1"></i> 
                                     </button>
                                 </form>
                                 @endif
@@ -124,7 +124,8 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger" title="Supprimer"
                                         onclick="return confirm('Supprimer définitivement {{ $user->nom_complet }} ?')">
-                                        🗑️
+                                        <i class="bi bi-trash me-1"></i>
+
                                     </button>
                                 </form>
 
@@ -134,7 +135,7 @@
                     @empty
                     <tr>
                         <td colspan="6" class="text-center text-muted py-5">
-                            <div class="fs-4 mb-2">😕</div>
+                            <div class="fs-4 mb-2"></div>
                             Aucun utilisateur trouvé.
                         </td>
                     </tr>

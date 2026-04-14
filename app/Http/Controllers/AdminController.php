@@ -39,6 +39,12 @@ class AdminController extends Controller
       return view('superadmin.hotels.liste', compact('hotels'));
    }
 
+   public function detail_hotel($id)
+   {
+      $hotel = Hotel::with('chambres.reservations')->findOrFail($id);
+      return view('superadmin.hotels.detail', compact('hotel'));
+   }
+
    public function liste_appartements()
    {
       $apparts = Appartement::paginate(10);
@@ -47,8 +53,70 @@ class AdminController extends Controller
    public function liste_reservations()
    {
       $hotels = Hotel::withCount('reservations')->get();
-          $apparts = Appartement::withCount('reservations')->get();
+      $apparts = Appartement::withCount('reservations')->get();
 
       return view('superadmin.reservations.liste', compact('hotels', 'apparts'));
+   }
+   public function show($id)
+   {
+      $hotel = Hotel::with([
+         'chambres.reservations'
+      ])->findOrFail($id);
+
+      // Calcul par réservation
+      $reservations = collect();
+      foreach ($hotel->chambres as $chambre) {
+         foreach ($chambre->reservations as $reservation) {
+            $nuits   = \Carbon\Carbon::parse($reservation->date_debut)
+               ->diffInDays($reservation->date_fin);
+            $montant = $nuits * $chambre->prix;
+
+            $reservations->push([
+               'reservation' => $reservation,
+               'chambre'     => $chambre,
+               'nuits'       => $nuits,
+               'montant'     => $montant,
+            ]);
+         }
+      }
+
+      $totalEncaisse  = $reservations->where('reservation.statut', 'acceptée')->sum('montant');
+      $totalReservations = $reservations->count();
+
+      return view('superadmin.reservations.show', compact(
+         'hotel',
+         'reservations',
+         'totalEncaisse',
+         'totalReservations'
+      ));
+   }
+
+   public function show_appart($id)
+   {
+      $appart = Appartement::with('reservations')->findOrFail($id);
+
+      // Calcul par réservation
+      $reservations = collect();
+      foreach ($appart->reservations as $reservation) {
+         $nuits   = \Carbon\Carbon::parse($reservation->date_debut)
+            ->diffInDays($reservation->date_fin);
+         $montant = $nuits * $appart->prix;
+
+         $reservations->push([
+            'reservation' => $reservation,
+            'nuits'       => $nuits,
+            'montant'     => $montant,
+         ]);
+      }
+
+      $totalEncaisse  = $reservations->where('reservation.statut', 'acceptée')->sum('montant');
+      $totalReservations = $reservations->count();
+
+      return view('superadmin.appartements.detail', compact(
+         'appart',
+         'reservations',
+         'totalEncaisse',
+         'totalReservations'
+      ));
    }
 }

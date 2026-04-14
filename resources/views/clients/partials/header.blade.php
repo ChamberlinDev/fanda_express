@@ -1,4 +1,4 @@
-<header class="header fixed-top">
+<header class="header bg-secondary text-white py-3">
 	<div class="container-fluid">
 		<div class="header_content d-flex flex-row align-items-center justify-content-between py-3">
 			{{-- Logo --}}
@@ -60,7 +60,7 @@
 						</a>
 					</li>
 					<li class="py-2">
-						<a href="/connexion" class="text-white d-block px-3">
+						<a href="/connexion" class="text-white btn-primary d-block px-3">
 							<i class="fa fa-sign-in"></i> Connexion
 						</a>
 					</li>

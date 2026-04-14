@@ -1,87 +1,96 @@
 @extends('admin.layout.app')
 @section('content')
 
+<div class="container-fluid my-5 px-4">
 
-
-<div class="row mb-4">
-    <div class="col-12">
-        <h1 class="display-5 fw-bold text-primary mb-3">
-            <i class="bi bi-file-earmark-text me-2"></i>Créer un rapport
-        </h1>
-        <p class="lead text-muted">
-            Utilisez ce formulaire pour créer un nouveau rapport financier. Sélectionnez les critères souhaités et générez des rapports détaillés pour une meilleure analyse de vos données financières.
-        </p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-5 fw-bold text-primary mb-1">
+                <i class="bi bi-file-earmark-bar-graph me-2"></i>Rapports financiers
+            </h1>
+            <p class="text-muted mb-0">Historique de tous les rapports générés.</p>
+        </div>
+        <a href="{{ route('admin.rapport.create') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i>Nouveau rapport
+        </a>
     </div>
 
-     <div class="row mb-4">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 p-3 bg-light rounded-3 border">
-                <div class="d-flex gap-2 flex-wrap">
-                    <a href="{{ route('admin.rapport.create') }}" class="btn btn-info mx-2">
-                        <i class="bi bi-plus-circle me-1 mx-2"></i> Personnaliser le rapport    
-                    </a>
-                   
-                    <a href="#" class="btn btn-success">
-                        <i class="bi bi-file-earmark-pdf me-1 mx-2"></i> Generer un rapport PDF
-                    </a>
-                </div>
-               
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <div class="card shadow border-0">
+        <div class="card-header bg-primary text-white py-3">
+            <h5 class="mb-0">Liste des rapports</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Type</th>
+                            <th>Période</th>
+                            <th class="text-center">Encaissé</th>
+                            <th class="text-center">Perdu</th>
+                            <th class="text-center">Bénéfice net</th>
+                            <th>Généré par</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($rapports as $rapport)
+                        <tr>
+                            <td class="text-center">
+                                <span class="badge bg-secondary">{{ $rapport->id }}</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-primary">{{ ucfirst($rapport->type_rapport) }}</span>
+                            </td>
+                            <td>
+                                <i class="bi bi-calendar3 text-muted me-1"></i>
+                                {{ $rapport->periode }}
+                            </td>
+                            <td class="text-center fw-bold text-success">
+                                {{ number_format($rapport->montant_encaisse, 0, ',', ' ') }} FCFA
+                            </td>
+                            <td class="text-center fw-bold text-danger">
+                                {{ number_format($rapport->montant_perdu, 0, ',', ' ') }} FCFA
+                            </td>
+                            <td class="text-center fw-bold">
+                                <span class="{{ $rapport->benefice_net >= 0 ? 'text-success' : 'text-danger' }}">
+                                    {{ number_format($rapport->benefice_net, 0, ',', ' ') }} FCFA
+                                </span>
+                            </td>
+                            <td>
+                                <i class="bi bi-person text-muted me-1"></i>
+                                {{ $rapport->user->name ?? '—' }}
+                            </td>
+                            <td class="text-center">
+                                <form action="{{ route('admin.rapport.destroy', $rapport->id) }}"
+                                      method="POST"
+                                      onsubmit="return confirm('Supprimer ce rapport ?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="8" class="text-center py-5 text-muted">
+                                <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+                                <h5>Aucun rapport généré</h5>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
-    </div>
-
-
-
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-dark">
-                    <tr>
-                        <th class="text-center" style="width: 60px;">#</th>
-                        <th><i class="bi bi-person me-1"></i>Type de rapport</th>
-                        <th><i class="bi bi-telephone me-1"></i>Montant entrées</th>
-                        <th><i class="bi bi-door-closed me-1"></i>Montant sorties</th>
-                        <th><i class="bi bi-building me-1"></i>Description</th>
-                        <th class="text-center"><i class="bi bi-calendar-event me-1"></i>Date</th>
-                        <th class="text-center"><i class="bi bi-calendar-event me-1"></i>Créé le</th>
-                        <th><i class="bi bi-user"></i>Par </th>
-                        <th class="text-center" style="min-width: 160px;"><i class="bi bi-gear me-1"></i>Actions</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($rapports as $rapport)
-                    <tr>
-                        <td>{{ $rapport->id }}</td>
-                        <td>{{ $rapport->type_rapport }}</td>
-                        <td>{{ number_format($rapport->montant_entrees, 2) }} FCFA</td>
-                        <td>{{ number_format($rapport->montant_sorties, 2) }} FCFA</td>
-                        <td>{{ $rapport->description }}</td>
-                        <td class="text-center">{{ \Carbon\Carbon::parse($rapport->date_rapport)->format('d/m/Y') }}</td>
-                        <td class="text-center">{{ \Carbon\Carbon::parse($rapport->created_at)->format('d/m/Y H:i') }}</td>
-                        <td>{{ $rapport->user ? $rapport->user->nom_complet : 'Inconnu' }}</td>
-                        <td class="text-center">
-                            <a href="#" class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-eye me-1"></i> Voir
-                            </a>
-                            <a href="#" class="btn btn-sm btn-outline-warning">
-                                <i class="bi bi-pencil me-1"></i> Modifier
-                            </a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">
-                                <i class="bi bi-trash me-1"></i> Supprimer
-                            </a>
-                        </td>
-                    </tr>
-
-                    @endforeach
-                    
-
-                </tbody>
-            </table>
         </div>
     </div>
 
-
-   
-
-
-
+</div>
 @endsection

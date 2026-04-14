@@ -12,7 +12,7 @@
 				aria-labelledby="searchDropdown">
 				<form class="navbar-search">
 					<div class="input-group">
-						<input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
+						<input type="text" class="form-control bg-light small" placeholder="What do you want to look for?"
 							aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
 						<div class="input-group-append">
 							<button class="btn btn-primary" type="button">
@@ -26,6 +26,7 @@
 
 
 
+		
 		<li class="nav-item dropdown no-arrow">
 			<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false">
