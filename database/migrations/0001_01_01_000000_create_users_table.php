@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('adresse');
             $table->string('telephone', 20);
             $table->string('email')->unique();
+            $table->boolean('is_blocked')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('must_change_password')->default(true);
             $table->string('password');

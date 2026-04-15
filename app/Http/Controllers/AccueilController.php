@@ -13,9 +13,19 @@ class AccueilController extends Controller
     //
     public function accueil()
     {
-        $hotels = Hotel::paginate(12); // 12 hôtels par page
+        // Filtrer les hôtels dont le propriétaire n'est pas bloqué
+        $hotels = Hotel::whereHas('user', function ($q) {
+            $q->where('is_blocked', false);
+        })
+            ->paginate(12);
+
+        // Filtrer les appartements dont le propriétaire n'est pas bloqué
+        $apparts = Appartement::whereHas('user', function ($q) {
+            $q->where('is_blocked', false);
+        })
+            ->paginate(12);
+
         $blogs = Blog::latest()->take(6)->get();
-        $apparts = Appartement::paginate(12);
 
         return view('accueil', compact('hotels', 'apparts', 'blogs'));
     }
@@ -26,8 +36,4 @@ class AccueilController extends Controller
         $hotels = Hotel::findOrFail($id);
         return view('hotels.details', compact('hotels'));
     }
-
-   
-
-    
 }

@@ -84,7 +84,7 @@
         <div class="col-xl-8 col-lg-7 mb-4">
             <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Apercu des reservations</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Apercu des reservations d'hotel</h6>
                     <a class="m-0 float-right btn btn-danger btn-sm" href="#">Parcourir <i
                             class="fas fa-chevron-right"></i></a>
                 </div>
@@ -131,12 +131,12 @@
                                     {{ $reservation->telephone ?? '+242 XX XXX XX XX' }}
                                 </td>
                                 <td>
-                                    <span class="badge bg-info text-dark">
+                                    <span class="badge bg-info text-white ">
                                         {{ $reservation->chambre->nom ?? '—' }}
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-secondary">
+                                    <span class="badge bg-secondary text-white">
                                         {{ $reservation->chambre->hotel->nom ?? '—' }}
                                     </span>
                                 </td>
@@ -169,13 +169,13 @@
                                             @endif"
                                             onchange="this.form.submit()">
                                             <option value="en attente" {{ $reservation->statut == 'en attente' ? 'selected' : '' }}>
-                                                ⏳ En attente
+                                                En attente
                                             </option>
                                             <option value="acceptée" {{ $reservation->statut == 'acceptée' ? 'selected' : '' }}>
-                                                ✅ Acceptée
+                                                Acceptée
                                             </option>
                                             <option value="refusée" {{ $reservation->statut == 'refusée' ? 'selected' : '' }}>
-                                                ❌ Refusée
+                                                Refusée
                                             </option>
                                         </select>
                                     </form>
@@ -198,8 +198,6 @@
                 <div class="card-footer"></div>
             </div>
         </div>
-
-
 
 
         <!-- Pie Chart -->
@@ -227,6 +225,124 @@
 
             </div>
         </div>
+
+
+
+        <div class="col-xl-8 col-lg-7 mb-4">
+            <div class="card">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Apercu des reservations d'appartements</h6>
+                    <a class="m-0 float-right btn btn-danger btn-sm" href="#">Parcourir <i
+                            class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="text-center" style="width: 60px;">#</th>
+                                <th>Client</th>
+                                <th>Téléphone</th>
+                                <th>Appartement</th>
+                                <th class="text-center">Arrivée</th>
+                                <th class="text-center">Départ</th>
+                                <th class="text-center">Nuits</th>
+                                <th class="text-center" style="min-width: 160px;">Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($reservations_appart as $reservation)
+                            <tr class="
+                            @if($reservation->statut == 'acceptée') table-success
+                            @elseif($reservation->statut == 'refusée') table-danger
+                            @else table-warning
+                            @endif
+                        ">
+                                <td class="text-center fw-bold">
+                                    <span class="badge bg-secondary">{{ $reservation->id }}</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
+                                            style="width: 40px; height: 40px; font-weight: bold;">
+                                            {{ strtoupper(substr($reservation->nom, 0, 1)) }}{{ strtoupper(substr($reservation->prenom, 0, 1)) }}
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold">{{ $reservation->nom }} {{ $reservation->prenom }}</div>
+                                            <small class="text-muted">{{ $reservation->email ?? 'N/A' }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <i class="bi bi-phone text-muted me-1"></i>
+                                    {{ $reservation->telephone ?? '+242 XX XXX XX XX' }}
+                                </td>
+                                <td>
+                                    <span class="badge bg-info text-white ">
+                                        {{ $reservation->appartement->nom ?? '—' }}
+                                    </span>
+                                </td>
+
+                                <td class="text-center">
+                                    <div class="small">
+                                        <i class="bi bi-calendar3 text-primary me-1"></i>
+                                        {{ \Carbon\Carbon::parse($reservation->date_debut)->format('d/m/Y') }}
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="small">
+                                        <i class="bi bi-calendar3 text-danger me-1"></i>
+                                        {{ \Carbon\Carbon::parse($reservation->date_fin)->format('d/m/Y') }}
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-dark fs-6">
+                                        {{ \Carbon\Carbon::parse($reservation->date_debut)->diffInDays(\Carbon\Carbon::parse($reservation->date_fin)) }}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <form action="{{ route('reservations_update_statut', $reservation->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <select name="statut"
+                                            class="form-select form-select-sm fw-bold
+                                            @if($reservation->statut == 'acceptée') text-success border-success
+                                            @elseif($reservation->statut == 'refusée') text-danger border-danger
+                                            @else text-warning border-warning
+                                            @endif"
+                                            onchange="this.form.submit()">
+                                            <option value="en attente" {{ $reservation->statut == 'en attente' ? 'selected' : '' }}>
+                                                En attente
+                                            </option>
+                                            <option value="acceptée" {{ $reservation->statut == 'acceptée' ? 'selected' : '' }}>
+                                                Acceptée
+                                            </option>
+                                            <option value="refusée" {{ $reservation->statut == 'refusée' ? 'selected' : '' }}>
+                                                Refusée
+                                            </option>
+                                        </select>
+                                    </form>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="9" class="text-center py-5">
+                                    <div class="text-muted">
+                                        <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+                                        <h5>Aucune réservation disponible</h5>
+                                        <p class="mb-0">Les nouvelles réservations apparaîtront ici.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+
+
+
 
 
 

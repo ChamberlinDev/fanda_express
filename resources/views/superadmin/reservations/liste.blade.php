@@ -150,7 +150,7 @@
                 <p class="text-muted">Aucun hôtel enregistré.</p>
             </div>
             @endif
-        </div>
+        </div>  
 
         {{-- TAB APPARTEMENTS --}}
         <div class="tab-pane fade" id="apparts">

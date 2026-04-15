@@ -25,6 +25,7 @@ class User extends Authenticatable
         'adresse',
         'telephone',
         'email',
+        'is_blocked',
         'password',
         'must_change_password',
     ];

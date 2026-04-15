@@ -40,7 +40,7 @@
                     
                     {{-- Badge statut --}}
                     <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
-                        <span class="badge bg-primary">Hôtel</span>
+                        <span class="badge bg-primary text-white">Hôtel</span>
                     </div>
 
                     {{-- Carousel d'images --}}
@@ -70,7 +70,7 @@
                         @endif
                         <div class="carousel-indicators" style="bottom: 5px;">
                             @foreach($images as $key => $img)
-                            <button type="button" data-bs-target="#carousel-{{ $hotel->id }}" data-bs-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></button>
+                            <!-- <button type="button" data-bs-target="#carousel-{{ $hotel->id }}" data-bs-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></button> -->
                             @endforeach
                         </div>
                     </div>

@@ -8,9 +8,71 @@
             <i class="bi bi-people"></i> Liste des utilisateurs
             <span class="badge bg-primary text-white ms-2">{{ $users->count() }}</span>
         </h2>
-        <a href="/inscription" class="btn btn-success">
-            Nouvel utilisateur
+        <a href="/inscription" class="btn btn-primary">
+            Ajouter un utilisateur
         </a>
+    </div>
+    {{-- Stats Cards --}}
+    <div class="row mb-4">
+
+        {{-- Total utilisateurs --}}
+        <div class="col-md-3">
+            <div class="card text-white border-0 shadow-sm" style="background: linear-gradient(45deg,#4e73df,#224abe);">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="text-uppercase small">Utilisateurs</div>
+                        <div class="fs-4 fw-bold">{{ number_format($users->count()) }}</div>
+                    </div>
+                    <i class="bi bi-people fs-1 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+
+        {{-- Actifs --}}
+        <div class="col-md-3">
+            <div class="card text-white border-0 shadow-sm" style="background: linear-gradient(45deg,#1cc88a,#17a673);">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="text-uppercase small">Actifs</div>
+                        <div class="fs-4 fw-bold">
+                            {{ number_format($users->where('is_blocked', false)->count()) }}
+                        </div>
+                    </div>
+                    <i class="bi bi-check-circle fs-1 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+
+        {{-- Bloqués --}}
+        <div class="col-md-3">
+            <div class="card text-white border-0 shadow-sm" style="background: linear-gradient(45deg,#e74a3b,#c0392b);">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="text-uppercase small">Bloqués</div>
+                        <div class="fs-4 fw-bold">
+                            {{ number_format($users->where('is_blocked', true)->count()) }}
+                        </div>
+                    </div>
+                    <i class="bi bi-lock fs-1 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+
+        {{-- Admins --}}
+        <div class="col-md-3">
+            <div class="card text-white border-0 shadow-sm" style="background: linear-gradient(45deg,#f6c23e,#dda20a);">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="text-uppercase small">Admins</div>
+                        <div class="fs-4 fw-bold">
+                            {{ number_format($users->filter(fn($u) => $u->hasRole('admin'))->count()) }}
+                        </div>
+                    </div>
+                    <i class="bi bi-shield-lock fs-1 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     {{-- Alerts --}}
@@ -82,7 +144,7 @@
                         {{-- Statut --}}
                         <td class="text-center text-white">
                             @if($user->is_blocked)
-                            <span class="badge bg-danger rounded-pill">🔒 Bloqué</span>
+                            <span class="badge bg-danger rounded-pill"> Bloqué</span>
                             @else
                             <span class="badge bg-success rounded-pill"> Actif</span>
                             @endif
@@ -93,13 +155,13 @@
                             <div class="d-flex justify-content-center gap-1 flex-wrap">
 
                                 {{-- Modifier --}}
-                                <a href="#" class="btn btn-sm btn-outline-primary" title="Modifier">
+                                <a href="{{ route('superadmin.users.edit', $user->id) }}" class="btn btn-sm btn-outline-primary" title="Modifier">
                                     <i class="bi bi-pencil-square me-1"></i>
                                 </a>
 
                                 {{-- Bloquer / Débloquer --}}
                                 @if($user->is_blocked)
-                                <form action="#" method="POST">
+                                <form action="{{ route('superadmin.users.debloquer', $user->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit" class="btn btn-sm btn-outline-success" title="Débloquer"
@@ -108,18 +170,18 @@
                                     </button>
                                 </form>
                                 @else
-                                <form action="#" method="POST">
+                                <form action="{{ route('superadmin.users.bloquer', $user->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit" class="btn btn-sm btn-outline-warning" title="Bloquer"
                                         onclick="return confirm('Bloquer {{ $user->nom_complet }} ?')">
-                                        <i class="bi bi-lock me-1"></i> 
+                                        <i class="bi bi-lock me-1"></i>
                                     </button>
                                 </form>
                                 @endif
 
                                 {{-- Supprimer --}}
-                                <form action="#" method="POST">
+                                <form action="{{ route('superadmin.users.supprimer', $user->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger" title="Supprimer"

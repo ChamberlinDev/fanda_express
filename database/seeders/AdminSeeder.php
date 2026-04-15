@@ -41,16 +41,5 @@ class AdminSeeder extends Seeder
             ]
         );
         $admin2->assignRole('admin');
-    
-     $admin3 = User::firstOrCreate(
-            ['email' => 'daniel@fanda.com'],
-            [
-                'nom_complet' => 'Daniel',
-                'password' => Hash::make('password123'),
-                'telephone' => '24265000000',
-                'adresse' => 'Ngoyo',
-            ]
-        );
-        $admin3->assignRole('admin');
     }
 }

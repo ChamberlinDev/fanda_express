@@ -8,6 +8,7 @@ use App\Models\Appartement;
 use App\Models\Chambre;
 use App\Models\Hotel;
 use App\Models\Reservation;
+use App\Models\Reservation_appart;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,67 +22,59 @@ class Authcontroller extends Controller
     {
         $admin = auth()->user();
 
-        // Récupérer l’hôtel de l’admin
         $hotel = Hotel::where('user_id', $admin->id)->first();
-
-        // Si aucun hôtel n'est associé, on affiche quand même le dashboard
-        if (!$hotel) {
-            return view('welcome', [
-                'hotel' => null,
-                'chambres' => collect(),
-                'reservations' => collect(),
-                'totalReservations' => 0,
-                'totalhotels' => 0,
-                'totalClients' => 0,
-                'totalAppartements' => 0,
-                'revenuTotal' => 0,
-                'message' => "Aucun hôtel n'est encore associé à votre compte."
-            ]);
-        }
-
-        // Récupérer les chambres de cet hôtel
-        $chambres = Chambre::where('hotel_id', $hotel->id)->get();
-
-        // Récupérer les appartements de l’admin
         $appartements = Appartement::where('user_id', $admin->id)->get();
 
-        // Récupérer les réservations récentes
-        $reservations = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
-            ->latest()
-            ->take(5)
-            ->get();
+        // Initialisation
+        $chambres = collect();
+        $reservations = collect();
+        $reservations_appart = collect();
+        $totalClients = 0;
+        $revenuTotal = 0;
 
-        // Statistiques
-        $totalReservations = $reservations->count();
-        $totalChambres = $chambres->count();
-        $totalClients = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
-            ->distinct('email')
-            ->count('email');
+        // 👉 Si hôtel existe
+        if ($hotel) {
+            $chambres = Chambre::where('hotel_id', $hotel->id)->get();
 
-        // Récupérer toutes les réservations confirmées
-        $reservationsConfirmees = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
-            ->where('statut', 'acceptée')
-            ->get();
+            $reservations = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
+                ->latest()
+                ->take(5)
+                ->get();
 
-        $revenuTotal = $reservationsConfirmees->sum(function ($reservation) {
-            $jours = Carbon::parse($reservation->date_fin)
-                ->diffInDays(Carbon::parse($reservation->date_debut));
-            return $jours * $reservation->chambre->prix;
-        });
+            $totalClients = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
+                ->distinct('email')
+                ->count('email');
 
-        $totalAppartements = $appartements->count();
-        $totalhotels = 1;
+            $reservationsConfirmees = Reservation::whereIn('chambre_id', $chambres->pluck('id'))
+                ->where('statut', 'acceptée')
+                ->get();
 
-        return view('welcome', compact(
-            'hotel',
-            'chambres',
-            'reservations',
-            'totalReservations',
-            'totalhotels',
-            'totalClients',
-            'totalAppartements',
-            'revenuTotal',
-        ));
+            $revenuTotal = $reservationsConfirmees->sum(function ($reservation) {
+                $jours = Carbon::parse($reservation->date_fin)
+                    ->diffInDays(Carbon::parse($reservation->date_debut));
+                return $jours * $reservation->chambre->prix;
+            });
+        }
+
+        // 👉 Si appartements existent
+        if ($appartements->isNotEmpty()) {
+            $reservations_appart = Reservation_appart::whereIn('appartement_id', $appartements->pluck('id'))
+                ->latest()
+                ->take(5)
+                ->get();
+        }
+
+        return view('welcome', [
+            'hotel' => $hotel,
+            'chambres' => $chambres,
+            'reservations' => $reservations,
+            'reservations_appart' => $reservations_appart,
+            'totalReservations' => $reservations->count(),
+            'totalhotels' => $hotel ? 1 : 0,
+            'totalClients' => $totalClients,
+            'totalAppartements' => $appartements->count(),
+            'revenuTotal' => $revenuTotal,
+        ]);
     }
     public function loginform()
     {
@@ -123,7 +116,13 @@ class Authcontroller extends Controller
 
             $user = Auth::user();
 
-            // 🔐 OBLIGATION changement mot de passe (peu importe le rôle)
+            if (!Auth::user()->is_blocked == 0) {
+                Auth::logout();
+                return back()->withErrors([
+                    'email' => 'Votre compte est bloqué. Veuillez contacter l’administrateur.',
+                ]);
+            }
+            //  OBLIGATION changement mot de passe (peu importe le rôle)
             if ($user->must_change_password) {
                 return redirect()
                     ->route('change_password')
@@ -136,6 +135,8 @@ class Authcontroller extends Controller
                     ->route('superadmin.dashboard')
                     ->with('success', 'Bienvenue Administrateur');
             }
+
+
 
             // AUTRES RÔLES
             return redirect()

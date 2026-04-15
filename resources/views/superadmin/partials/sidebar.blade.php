@@ -46,7 +46,7 @@
 
 
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('superadmin.blogs') }}">
                 <i class="fas fa-fw fa-blog"></i>
                 <span>Blogs</span>
             </a>

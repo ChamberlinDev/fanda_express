@@ -11,6 +11,7 @@ class Reservation extends Model
     use HasFactory;
 
     protected $fillable = [
+        'code_reservation',
         'chambre_id',
         'nom',
         'prenom',

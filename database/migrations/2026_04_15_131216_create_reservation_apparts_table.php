@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('reservation_apparts', function (Blueprint $table) {
             $table->id();
             $table->string('code_reservation')->unique();
-            $table->foreignId('chambre_id')->constrained('chambres')->onDelete('cascade');
+            $table->unsignedBigInteger('appartement_id');
+            $table->foreign('appartement_id')->references('id')->on('appartements')->onDelete('cascade');
             $table->string('nom');
             $table->string('prenom');
             $table->string('telephone');
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('reservation_apparts');
     }
 };

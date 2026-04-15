@@ -65,13 +65,13 @@
                         Tous
                     </button>
                     <button class="btn btn-outline-success btn-sm filtre-btn" data-filtre="acceptée">
-                        ✅ Acceptées
+                        Acceptées
                     </button>
                     <button class="btn btn-outline-warning btn-sm filtre-btn" data-filtre="en attente">
-                        ⏳ En attente
+                         En attente
                     </button>
                     <button class="btn btn-outline-danger btn-sm filtre-btn" data-filtre="refusée">
-                        ❌ Refusées
+                         Refusées
                     </button>
                 </div>
                 <div class="input-group" style="max-width: 300px;">
@@ -196,11 +196,11 @@
                             {{-- Statut --}}
                             <td class="text-center">
                                 @if($reservation->statut == 'acceptée')
-                                    <span class="badge bg-success">✅ Acceptée</span>
+                                    <span class="badge bg-success">Acceptée</span>
                                 @elseif($reservation->statut == 'refusée')
-                                    <span class="badge bg-danger">❌ Refusée</span>
+                                    <span class="badge bg-danger">Refusée</span>
                                 @else
-                                    <span class="badge bg-warning text-dark">⏳ En attente</span>
+                                    <span class="badge bg-warning text-dark"> En attente</span>
                                 @endif
                             </td>
 

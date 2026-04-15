@@ -55,7 +55,7 @@
                                     <!-- Messages d'erreur améliorés -->
                                     @if(session('error'))
                                     <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
-                                        <i class="bi bi-exclamation-circle-fill me-2 flex-shrink-0 fs-5"></i>
+                                        <i class="bi bi-exclamation-circle-fill me-2  fs-5"></i>
                                         <div>{{ session('error') }}</div>
                                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                     </div>
@@ -63,8 +63,8 @@
 
                                     @if($errors->any())
                                     <div class="alert alert-danger alert-dismissible fade show d-flex align-items-start" role="alert">
-                                        <i class="bi bi-exclamation-triangle-fill me-2 flex-shrink-0 fs-5"></i>
-                                        <div class="flex-grow-1">
+                                        <i class="bi bi-exclamation-triangle-fill me-2  fs-5"></i>
+                                        <div class="">
                                             <ul class="mb-0 small">
                                                 @foreach($errors->all() as $error)
                                                 <li>{{ $error }}</li>

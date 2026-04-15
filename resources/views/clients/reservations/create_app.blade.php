@@ -34,29 +34,38 @@
     @endif
 
     <div class="row">
-        {{-- Colonne gauche : Info chambre --}}
+        {{-- Colonne gauche : Info logement --}}
         <div class="col-lg-8 mb-4">
             <div class="card shadow border-0 mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0"><i class="fa fa-hotel"></i> {{ $chambre->hotel->nom ?? 'Hôtel' }}</h4>
+                    @php
+                    $isAppartement = isset($appart) || (isset($chambre->type) && strtolower($chambre->type) === 'appartement');
+                    $logement = $isAppartement && isset($appart) ? $appart : $chambre;
+                    $iconType = $isAppartement ? 'fa-home' : 'fa-hotel';
+                    $labelType = $isAppartement ? 'Appartement' : 'Chambre';
+                    @endphp
+                    <h4 class="mb-0">
+                        <i class="fa {{ $iconType }}"></i>
+                        {{ $logement->nom ?? ($isAppartement ? 'Appartement' : 'Hôtel') }}
+                    </h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-5">
                             @php
                             $images = [];
-                            if (isset($chambre->images)) {
-                            if (is_string($chambre->images)) {
-                            $images = json_decode($chambre->images, true) ?? [];
-                            } elseif (is_array($chambre->images)) {
-                            $images = $chambre->images;
+                            if (isset($logement->images)) {
+                            if (is_string($logement->images)) {
+                            $images = json_decode($logement->images, true) ?? [];
+                            } elseif (is_array($logement->images)) {
+                            $images = $logement->images;
                             }
                             }
                             $mainImage = !empty($images) ? $images[0] : null;
                             @endphp
-                            <img src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/300x200?text=Chambre' }}"
+                            <img src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/300x200?text=' . $labelType }}"
                                 class="img-fluid rounded shadow-sm mb-3"
-                                alt="{{ $chambre->nom }}">
+                                alt="{{ $logement->nom }}">
 
                             @if(count($images) > 1)
                             <div class="d-flex flex-wrap">
@@ -72,37 +81,57 @@
                         </div>
 
                         <div class="col-md-7">
-                            <h5 class="text-primary font-weight-bold">{{ $chambre->nom }}</h5>
+                            <h5 class="text-primary font-weight-bold">{{ $logement->nom }}</h5>
                             <p class="text-muted mb-3">
                                 <i class="fa fa-map-marker text-danger"></i>
-                                {{ $chambre->hotel->adresse ?? 'Adresse non disponible' }}
+                                {{ $logement->adresse ?? 'Adresse non disponible' }}
                             </p>
 
+                            @if($isAppartement && isset($logement->telephone))
+                            <p class="text-muted mb-2">
+                                <i class="fa fa-phone text-success"></i>
+                                {{ $logement->telephone }}
+                            </p>
+                            @endif
+
+                            @if($isAppartement && isset($logement->email))
+                            <p class="text-muted mb-3">
+                                <i class="fa fa-envelope text-info"></i>
+                                {{ $logement->email }}
+                            </p>
+                            @endif
+
                             <div class="row mb-3">
-                                <div class="col-6">
-                                    <div class="bg-light p-3 rounded text-center">
-                                        <i class="fa fa-users fa-2x text-info mb-2"></i>
-                                        <h6 class="mb-1 font-weight-bold">Capacité</h6>
-                                        <span>{{ $chambre->capacite }} personnes</span>
-                                    </div>
-                                </div>
-                                <div class="col-6">
+                                <div class="col-12">
                                     <div class="bg-light p-3 rounded text-center">
                                         <i class="fa fa-tag fa-2x text-success mb-2"></i>
                                         <h6 class="mb-1 font-weight-bold">Prix/nuit</h6>
                                         <span class="text-success font-weight-bold">
-                                            {{ number_format($chambre->prix, 0, ',', ' ') }} XOF
+                                            {{ number_format($logement->prix, 0, ',', ' ') }} XOF
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
-                            @if(isset($chambre->hotel->description))
+                            @if(isset($logement->description))
                             <div class="bg-light p-3 rounded">
                                 <h6 class="text-primary font-weight-bold">
                                     <i class="fa fa-info-circle"></i> Description
                                 </h6>
-                                <p class="mb-0 text-muted small">{{ $chambre->hotel->description }}</p>
+                                <p class="mb-0 text-muted small">{{ $logement->description }}</p>
+                            </div>
+                            @endif
+
+                            @if($isAppartement && isset($logement->equipements))
+                            <div class="mt-3 bg-light p-3 rounded">
+                                <h6 class="text-primary font-weight-bold">
+                                    <i class="fa fa-check-circle"></i> Équipements
+                                </h6>
+                                <div class="d-flex flex-wrap">
+                                    @foreach(explode(',', $logement->equipements) as $equipement)
+                                    <span class="badge badge-secondary mr-1 mb-1">{{ trim($equipement) }}</span>
+                                    @endforeach
+                                </div>
                             </div>
                             @endif
                         </div>
@@ -118,9 +147,11 @@
                     <h5 class="mb-0"><i class="fa fa-calendar-check-o"></i> Réserver</h5>
                 </div>
                 <div class="card-body">
-                    <form id="reservationForm" action="{{ route('reservations.store') }}" method="POST">
+                    <form id="reservationForm" action="{{ route('reservations_appart.store') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="chambre_id" value="{{ $chambre->id }}">
+                        <!-- <input type="hidden" name="appartement_id" value="{{ $appart->id }}"> -->
+                        <!-- <input type="hidden" name="type" value="{{ $isAppartement ? 'appartement' : 'chambre' }}"> -->
+                         <input type="hidden" name="appartement_id" value="{{ $appart->id }}">
 
                         <div class="form-group">
                             <label class="font-weight-bold">
@@ -143,14 +174,14 @@
                                 <i class="fa fa-phone text-primary"></i> Téléphone *
                             </label>
                             <input type="tel" name="telephone" id="telephone" class="form-control"
-                                placeholder="+221 XX XXX XX XX" value="{{ old('telephone') }}" required>
+                                placeholder="+242 XX XXX XX XX" value="{{ old('telephone') }}" required>
                         </div>
 
                         <div class="form-group">
                             <label class="font-weight-bold">
-                                <i class="fa fa-envelope text-primary"></i> Email
+                                <i class="fa fa-envelope text-primary"></i> Email (facultatif)
                             </label>
-                            <input type="email" name="email" id="email" class="form-control"
+                            <input type="email" name="email" id="email" class="form-control" 
                                 placeholder="votre@email.com" value="{{ old('email') }}">
                         </div>
 
@@ -175,9 +206,9 @@
                                 <i class="fa fa-users text-primary"></i> Nombre de personnes *
                             </label>
                             <select name="nombre_personnes" id="nombre_personnes" class="form-control" required>
-                                @for($i = 1; $i <= $chambre->capacite; $i++)
+                                @for($i = 1; $i <= 10; $i++)
                                     <option value="{{ $i }}" {{ old('nombre_personnes') == $i ? 'selected' : '' }}>
-                                        {{ $i }} personne{{ $i > 1 ? 's' : '' }}
+                                    {{ $i }} personne{{ $i > 1 ? 's' : '' }}
                                     </option>
                                     @endfor
                             </select>
@@ -185,7 +216,7 @@
 
                         <div class="alert alert-info">
                             <strong><i class="fa fa-calculator"></i> Total estimé:</strong>
-                            <h5 class="mb-0 text-success">{{ number_format($chambre->prix, 0, ',', ' ') }} XOF</h5>
+                            <h5 class="mb-0 text-success">{{ number_format($logement->prix, 0, ',', ' ') }} XOF</h5>
                             <small class="text-muted">Basé sur 1 nuit</small>
                         </div>
 
@@ -221,12 +252,15 @@
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <h6 class="text-primary font-weight-bold border-bottom pb-2">
-                            <i class="fa fa-hotel"></i> Détails de la chambre
+                            <i class="fa {{ $iconType }}"></i> Détails du {{ $labelType }}
                         </h6>
-                        <p class="mb-1"><strong>Hôtel :</strong> <span>{{ $chambre->hotel->nom }}</span></p>
-                        <p class="mb-1"><strong>Chambre :</strong> <span>{{ $chambre->nom }}</span></p>
-                        <p class="mb-1"><strong>Capacité :</strong> <span>{{ $chambre->capacite }}</span> personnes</p>
-                        <p class="mb-1"><strong>Prix/nuit :</strong> <span>{{ number_format($chambre->prix, 0, ',', ' ') }}</span> XOF</p>
+                        <p class="mb-1"><strong>{{ $labelType }} :</strong>
+                            <span>{{ $logement->nom }}</span>
+                        </p>
+                        <p class="mb-1"><strong>Adresse :</strong> <span>{{ $logement->adresse ?? 'Non renseignée' }}</span></p>
+                        <p class="mb-1"><strong>Prix/nuit :</strong>
+                            <span>{{ number_format($logement->prix, 0, ',', ' ') }}</span> XOF
+                        </p>
                     </div>
                     <div class="col-md-6">
                         <h6 class="text-primary font-weight-bold border-bottom pb-2">
@@ -282,8 +316,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Code de réservation -->
                 <div class="alert alert-success text-center mt-3">
                     <h6 class="mb-1">
                         <i class="fa fa-ticket"></i> Code de réservation
@@ -291,8 +323,6 @@
                     <h4 class="fw-bold text-dark" id="recap_code"></h4>
                     <small>Présentez ce code lors de votre arrivée</small>
                 </div>
-
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -304,6 +334,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -313,8 +344,34 @@
 <script>
 $(document).ready(function() {
 
-    // ✅ Correction ici (erreur supprimée)
-    var prixNuit = {{ $chambre->prix ?? 0 }};
+    var prixNuit = {{ $logement->prix ?? 0 }};
+
+    function calculerTotal() {
+        var dateDebut = $('#date_debut').val();
+        var dateFin = $('#date_fin').val();
+
+        if (dateDebut && dateFin) {
+            var debut = new Date(dateDebut);
+            var fin = new Date(dateFin);
+            var nuits = Math.ceil((fin - debut) / (1000 * 60 * 60 * 24));
+
+            if (nuits > 0) {
+                var total = nuits * prixNuit;
+
+                // ✅ Mise à jour affichage direct (formulaire)
+                $('.alert-info h5').text(total.toLocaleString('fr-FR') + ' XOF');
+                $('.alert-info small').text('Pour ' + nuits + ' nuit(s)');
+            } else {
+                $('.alert-info h5').text('0 XOF');
+                $('.alert-info small').text('Dates invalides');
+            }
+        }
+    }
+
+    // 🔥 Calcul automatique quand on change les dates
+    $('#date_debut, #date_fin').on('change', function() {
+        calculerTotal();
+    });
 
     function generateCode() {
         return 'RES-' + Math.floor(100000 + Math.random() * 900000);
@@ -325,24 +382,19 @@ $(document).ready(function() {
         var prenom = $('#prenom').val();
         var nom = $('#nom').val();
         var telephone = $('#telephone').val();
-        var email = $('#email').val() || 'Non renseigné';
         var dateDebut = $('#date_debut').val();
         var dateFin = $('#date_fin').val();
         var personnes = $('#nombre_personnes').val();
 
-        // ✅ Génération du code
         var codeReservation = generateCode();
 
-        // ✅ Injection dans le modal
         $('#recap_code').text(codeReservation);
         $('#recap_nom_complet').text(prenom + ' ' + nom);
         $('#recap_telephone').text(telephone);
-        $('#recap_email').text(email);
         $('#recap_personnes').text(personnes + ' personne(s)');
         $('#recap_date_debut').text(dateDebut);
         $('#recap_date_fin').text(dateFin);
 
-        // ✅ Calcul du séjour
         if (dateDebut && dateFin) {
             var debut = new Date(dateDebut);
             var fin = new Date(dateFin);
@@ -361,5 +413,6 @@ $(document).ready(function() {
             }
         }
     });
+
 });
 </script>

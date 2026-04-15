@@ -40,11 +40,12 @@
                     <p>{{ Str::limit($blog->contenu, 100, '...') }}</p>
                 </div>
 
-                <div class="card-footer bg-white border-top-0 d-flex justify-content-between">
+                <div class="card-footer bg-white border-top-0 d-flex justify-content">
                     <!-- Boutons -->
-                    <a href="#" class="btn btn-warning btn-sm">Modifier</a>
 
-                    <form action="#" method="POST" class="d-inline">
+                    <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-info btn-sm mx-2">Voir</a>
+                    <a href="{{ route('blog.edit', $blog->id) }}" class="btn btn-warning btn-sm mx-2">Modifier</a>
+                    <form action="{{ route('blog.destroy', $blog->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-sm"

@@ -1,7 +1,7 @@
 @extends('superadmin.layout.app')
 
 @section('content')
-<h4 class="mb-4">Espace de travail</h4>
+<h4 class="mb-4 text-dark text-center">Espace de travail</h4>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -82,6 +82,25 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4 mt-3">
+                <div class="card card-stats card-info">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="icon-big text-center">
+                                    <i class="la la-shopping-cart"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <h3 class="card-category">Clients</h3>
+                                    <h4 class="card-title">{{ number_format($stats['clients']) }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -137,8 +156,8 @@
                                 @php
                                 $roleColors = [
                                 'superadmin' => 'bg-danger',
-                                'admin' => 'bg-warning text-dark',
-                                'user' => 'bg-primary',
+                                'admin' => 'bg-success text-white',
+                                'user' => 'bg-primary text-white',
                                 ];
                                 @endphp
                                 @forelse($user->getRoleNames() as $role)
@@ -146,16 +165,16 @@
                                     {{ ucfirst($role) }}
                                 </span>
                                 @empty
-                                <span class="badge rounded-pill bg-info text-dark">Établissement</span>
+                                <span class="badge rounded-pill bg-info text-white">Établissement</span>
                                 @endforelse
                             </td>
 
                             {{-- Statut --}}
                             <td class="text-center">
                                 @if($user->is_blocked)
-                                <span class="badge bg-danger rounded-pill">🔒 Bloqué</span>
+                                <span class="badge bg-danger rounded-pill text-white">Bloqué</span>
                                 @else
-                                <span class="badge bg-success rounded-pill"> Actif</span>
+                                <span class="badge bg-success rounded-pill text-white"> Actif</span>
                                 @endif
                             </td>
 
@@ -173,7 +192,7 @@
 
 
                 </table>
-                <a href="{{ route('superadmin.users') }}" class="btn btn-sm btn-outline-secondary mt-3">Parcourir les utilisateurs</a>
+                <a href="{{ route('superadmin.users') }}" class="btn btn-sm btn-outline-warning mt-3">Parcourir les utilisateurs</a>
 
             </div>
         </div>
@@ -184,29 +203,14 @@
     <div class="col-12">
         <div class="card shadow-sm">
             <div class="card-header bg-secondary text-white">
-                <h4> <strong>Liste des hotels</strong>
+                <h4> <strong>Liste des etablissements</strong>
                 </h4>
             </div>
 
             <div class="card-body">
-                <table class="table table-bordered table-striped align-middle">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nom hotel</th>
-                            <th>Telephone</th>
-                            <th>email</th>
-                            <th>Nombre de chambres</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="5" class="text-center text-muted">
-                                Aucun dossier disponible
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <a href="{{ route('superadmin.hotels') }}" class="btn btn-sm btn-outline-primary mt-3">Parcourir les hotels</a>
+                <a href="{{ route('superadmin.appartements') }}" class="btn btn-sm btn-outline-success mt-3">Parcourir les appartements</a>
+
             </div>
         </div>
     </div>

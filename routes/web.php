@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppartementController;
@@ -37,6 +38,7 @@ Route::put('/reservations/{id}/update-statut', [ReservationController::class, 'u
 Route::get('/reservation_admin', [ReservationController::class, 'reservation_admin']);
 // reservation appart
 Route::get('/reservation_etablissements/{id}', [ReservationController::class, 'create_appart'])->name('reservation_appart');
+Route::post('/reservation_appart', [ReservationController::class, 'store_appart'])->name('reservations_appart.store');
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservations.store');
 Route::get('/hotels/{id}/reservations', [HotelController::class, 'reservations'])->name('hotels.reservations');
 
@@ -106,6 +108,10 @@ Route::get('/reservation', [ReservationController::class, 'index'])->name('reser
 // Route pour gerer les blogs
 Route::get('/blog', [blogcontroller::class, 'index'])->name('admin.blog');
 Route::get('/ajouter_blog', [blogcontroller::class, 'ajout_form']);
+Route::get('/show_blog/{id}', [blogcontroller::class, 'show'])->name('blog.show');
+Route::get('/edit_blog/{id}', [blogcontroller::class, 'edit'])->name('blog.edit');
+Route::post('/update_blog/{id}', [blogcontroller::class, 'update'])->name('blog.update');
+Route::delete('/delete_blog/{id}', [blogcontroller::class, 'destroy'])->name('blog.destroy');
 Route::post('/ajout_save', [blogcontroller::class, 'store']);
 
 
@@ -113,12 +119,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'admin_view'])->name('superadmin.dashboard');
     Route::get('/inscription', [Authcontroller::class, 'registerform']);
     Route::get('/admin/users', [AdminController::class, 'liste_users'])->name('superadmin.users');
+    Route::get('/admin/users/{id}/edit', [AdminController::class, 'modif_form'])->name('superadmin.users.edit');
+    Route::post('/admin/users/{id}/update', [AdminController::class, 'update_user'])->name('superadmin.users.update');
+    Route::patch('/superadmin/users/{id}/bloquer',   [AdminController::class, 'bloquer'])->name('superadmin.users.bloquer');
+    Route::patch('/superadmin/users/{id}/debloquer', [AdminController::class, 'debloquer'])->name('superadmin.users.debloquer');
+    Route::delete('/superadmin/users/{id}', [AdminController::class, 'supprimer_user'])->name('superadmin.users.supprimer');
     Route::get('/admin/hotels', [AdminController::class, 'liste_hotels'])->name('superadmin.hotels');
     Route::get('/admin/appartements', [AdminController::class, 'liste_appartements'])->name('superadmin.appartements');
     Route::get('/admin/reservations', [AdminController::class, 'liste_reservations'])->name('superadmin.reservations');
     Route::get('/admin/details_hotel/{id}', [AdminController::class, 'show'])->name('superadmin.details');
-        Route::get('/admin/details_appart/{id}', [AdminController::class, 'show_appart'])->name('superadmin.details.appart');
+    Route::get('/admin/details_appart/{id}', [AdminController::class, 'show_appart'])->name('superadmin.details.appart');
 
+    Route::get('/blog_sup', [BlogController::class, 'liste_blog'])->name('superadmin.blogs');
+    Route::get('/blog_sup/{id}/edit', [BlogController::class, 'modif_view'])->name('superadmin.blogs.edit');
+    Route::post('/blog_sup/{id}/update', [BlogController::class, 'update_blog'])->name('superadmin.blogs.update');
+    Route::delete('/blog_sup/{id}', [BlogController::class, 'supprimer'])->name('superadmin.blogs.delete'); 
+    Route::get('/blog_sup/{id}', [BlogController::class, 'details'])->name('superadmin.blogs.show');  
 
 
     Route::get('/profil/admin', [Authcontroller::class, 'profil_admin'])->name('superadmin.profil');

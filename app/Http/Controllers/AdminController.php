@@ -22,6 +22,9 @@ class AdminController extends Controller
          'hotels'        => Hotel::count(),
          'appartements'  => Appartement::count(),
          'reservations'  => Reservation::count(),
+         'clients'=> User::whereHas('roles', function ($q) {
+            $q->where('name', 'user');
+         })->count(),
       ];
       return view('superadmin_view', compact('users', 'stats'));
    }
@@ -29,9 +32,61 @@ class AdminController extends Controller
    public function liste_users()
    {
       $users = User::paginate(10);
+      $stats = [
+    'total' => User::count(),
+    'actifs' => User::where('is_blocked', false)->count(),
+    'bloques' => User::where('is_blocked', true)->count(),
+    'admins' => User::role('admin')->count(),
+];
 
-      return view('superadmin.users.liste', compact('users'));
+      return view('superadmin.users.liste', compact('users', 'stats'));
    }
+
+   public function modif_form($id)
+   {
+      $user = User::findOrFail($id);
+
+      return view('superadmin.users.modif', compact('user'));
+   }
+
+   public function update_user(Request $request, $id)
+   {
+      $user = User::findOrFail($id);
+      $user->nom_complet = $request->input('nom_complet');
+      $user->email = $request->input('email');
+      $user->save();
+
+      return redirect()->route('superadmin.users')->with('success', 'Utilisateur mis à jour avec succès.');
+   }
+
+   public function bloquer($id)
+   {
+      $user = User::findOrFail($id);
+      $user->is_blocked = true;
+      $user->save();
+
+      return redirect()->route('superadmin.users')->with('success', 'Utilisateur bloqué avec succès.');
+   }
+
+   public function debloquer($id)
+   {
+      $user = User::findOrFail($id);
+      $user->is_blocked = false;
+      $user->save();
+
+      return redirect()->route('superadmin.users')->with('success', 'Utilisateur débloqué avec succès.');
+   }
+
+   public function supprimer_user($id){
+      $user = User::findOrFail($id);
+      $user->delete();
+
+      return redirect()->route('superadmin.users')->with('success', 'Utilisateur supprimé avec succès.');   
+   }
+
+
+
+
 
    public function liste_hotels()
    {

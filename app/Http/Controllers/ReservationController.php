@@ -11,6 +11,7 @@ use App\Models\Chambre;
 use App\Models\etablissement_mod;
 use App\Models\Hotel;
 use App\Models\Reservation;
+use App\Models\Reservation_appart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,29 +19,39 @@ use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
-
     public function index()
     {
         $user = Auth::user();
         $hotel = $user->hotel;
+        $appart = $user->appartement;
 
-        // Si l'utilisateur n'a pas encore d'hôtel
-        if (!$hotel) {
-            // On retourne une vue avec un message explicite
+        if (!$hotel && !$appart) {
             return view('admin.reservations.liste', [
-                'reservations' => collect(), // liste vide
-                'message' => 'Aucun hôtel associé à votre compte. Veuillez créer un établissement pour voir vos réservations.'
+                'reservations' => collect(),
+                'reservations_appart' => collect(),
+                'message' => 'Aucun établissement associé à votre compte.'
             ]);
         }
 
-        // Sinon, on récupère les réservations liées à son hôtel
-        $reservations = Reservation::whereHas('chambre', function ($q) use ($hotel) {
-            $q->where('hotel_id', $hotel->id);
-        })
-            ->with(['chambre.hotel'])
-            ->latest()
-            ->get();
-        return view('admin.reservations.liste', compact('reservations'));
+        $reservations = collect();
+        $reservations_appart = collect();
+
+        if ($hotel) {
+            $reservations = Reservation::whereHas('chambre', function ($q) use ($hotel) {
+                $q->where('hotel_id', $hotel->id);
+            })
+                ->with(['chambre.hotel'])
+                ->latest()
+                ->get();
+        }
+
+        if ($appart) {
+            $reservations_appart = Reservation_appart::where('appartement_id', $appart->id)
+                ->latest()
+                ->get();
+        }
+
+        return view('admin.reservations.liste', compact('reservations', 'reservations_appart'));
     }
 
 
@@ -57,10 +68,37 @@ class ReservationController extends Controller
     public function create_appart($id)
     {
         $appart = Appartement::findOrFail($id);
-        return view('admin.reservations.ajouter_appart', compact('appart'));
+        return view('clients.reservations.create_app', compact('appart'));
     }
 
+    public function store_appart(Request $request)
+    {
+        $validated = $request->validate([
+            'appartement_id' => 'required|exists:appartements,id',
+            'nom'            => 'required|string|max:255',
+            'prenom'         => 'required|string|max:255',
+            'telephone'      => 'required|string|max:50',
+            'email'          => 'nullable|email',
+            'date_debut'     => 'required|date|after_or_equal:today',
+            'date_fin'       => 'required|date|after:date_debut',
+        ]);
 
+        // Génération code unique
+        do {
+            $code = 'RES-' . mt_rand(100000, 999999);
+        } while (Reservation_appart::where('code_reservation', $code)->exists());
+
+        $validated['code_reservation'] = $code;
+        $validated['type']             = 'appartement';
+
+        $reservation = Reservation_appart::create($validated);
+
+        if (!empty($reservation->email)) {
+            Mail::to($reservation->email)->send(new ReservationMail($reservation));
+        }
+
+        return back()->with('success', 'Réservation confirmée ! Code : ' . $code);
+    }
 
 
     public function store(Request $request)
@@ -70,12 +108,12 @@ class ReservationController extends Controller
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'telephone' => 'required|string|max:50',
-            'email' => 'nullable|email', // client peut laisser vide
+            'email' => 'nullable|email',
             'date_debut' => 'required|date|after_or_equal:today',
             'date_fin' => 'required|date|after:date_debut',
         ]);
 
-        // Vérification si la chambre est déjà réservée
+        // Vérification disponibilité
         $dejaReservee = Reservation::where('chambre_id', $validated['chambre_id'])
             ->where(function ($q) use ($validated) {
                 $q->whereBetween('date_debut', [$validated['date_debut'], $validated['date_fin']])
@@ -87,20 +125,29 @@ class ReservationController extends Controller
             return back()->with('error', 'Cette chambre est déjà réservée pour cette période.');
         }
 
-        // Création de la réservation
+        // Génération code UNIQUE
+        do {
+            $code = 'RES-' . mt_rand(100000, 999999);
+        } while (Reservation::where('code_reservation', $code)->exists());
+
+        //  Ajout du code dans les données
+        $validated['code_reservation'] = $code;
+
+        // Création réservation
         $reservation = Reservation::create($validated);
 
-        // 1️⃣ Mail au client (si email renseigné)
+        // Mail client
         if (!empty($reservation->email)) {
             Mail::to($reservation->email)->send(new ReservationMail($reservation));
         }
 
-        // 2️⃣ Mail aux utilisateurs de l'hôtel
-        $hotel = $reservation->chambre->hotel; // récupère l'hôtel via la chambre
+        // Mail hôtel
+        $hotel = $reservation->chambre->hotel;
         if ($hotel && $hotel->user && !empty($hotel->user->email)) {
             Mail::to($hotel->user->email)->send(new ReservationAdmin($reservation));
         }
-        return back()->with('success', 'Votre réservation a bien été enregistrée !');
+
+        return back()->with('success', 'Réservation confirmée ! Code : ' . $code);
     }
 
     public function accepter($id)
@@ -153,7 +200,7 @@ class ReservationController extends Controller
 
     public function reservation_admin()
     {
-        $hotel = Hotel::where('user_id', auth()->id())->first();
+        $hotel = Hotel::where('user_id', Auth::id())->first();
 
         $chambres = Chambre::where('hotel_id', $hotel->id)->get();
 
