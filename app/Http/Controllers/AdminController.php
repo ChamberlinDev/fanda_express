@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appartement;
 use App\Models\Hotel;
 use App\Models\Reservation;
+use App\Models\Reservation_appart;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,8 @@ class AdminController extends Controller
          'utilisateurs'  => User::count(),
          'hotels'        => Hotel::count(),
          'appartements'  => Appartement::count(),
-         'reservations'  => Reservation::count(),
-         'clients'=> User::whereHas('roles', function ($q) {
+         'reservations'  => Reservation::count() + Reservation_appart::count(),
+         'clients' => User::whereHas('roles', function ($q) {
             $q->where('name', 'user');
          })->count(),
       ];
@@ -33,11 +34,11 @@ class AdminController extends Controller
    {
       $users = User::paginate(10);
       $stats = [
-    'total' => User::count(),
-    'actifs' => User::where('is_blocked', false)->count(),
-    'bloques' => User::where('is_blocked', true)->count(),
-    'admins' => User::role('admin')->count(),
-];
+         'total' => User::count(),
+         'actifs' => User::where('is_blocked', false)->count(),
+         'bloques' => User::where('is_blocked', true)->count(),
+         'admins' => User::role('admin')->count(),
+      ];
 
       return view('superadmin.users.liste', compact('users', 'stats'));
    }
@@ -77,11 +78,12 @@ class AdminController extends Controller
       return redirect()->route('superadmin.users')->with('success', 'Utilisateur débloqué avec succès.');
    }
 
-   public function supprimer_user($id){
+   public function supprimer_user($id)
+   {
       $user = User::findOrFail($id);
       $user->delete();
 
-      return redirect()->route('superadmin.users')->with('success', 'Utilisateur supprimé avec succès.');   
+      return redirect()->route('superadmin.users')->with('success', 'Utilisateur supprimé avec succès.');
    }
 
 
@@ -138,7 +140,7 @@ class AdminController extends Controller
       $totalEncaisse  = $reservations->where('reservation.statut', 'acceptée')->sum('montant');
       $totalReservations = $reservations->count();
 
-      return view('superadmin.reservations.show', compact(
+      return view('superadmin.hotels.show', compact(
          'hotel',
          'reservations',
          'totalEncaisse',

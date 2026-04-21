@@ -62,6 +62,8 @@ class Authcontroller extends Controller
                 ->latest()
                 ->take(5)
                 ->get();
+
+                
         }
 
         return view('welcome', [
@@ -69,7 +71,7 @@ class Authcontroller extends Controller
             'chambres' => $chambres,
             'reservations' => $reservations,
             'reservations_appart' => $reservations_appart,
-            'totalReservations' => $reservations->count(),
+            'totalReservations' => $reservations->count() + $reservations_appart->count(),
             'totalhotels' => $hotel ? 1 : 0,
             'totalClients' => $totalClients,
             'totalAppartements' => $appartements->count(),

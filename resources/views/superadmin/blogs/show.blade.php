@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+@extends('superadmin.layout.app')
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
@@ -48,10 +48,10 @@
 
         <!-- Actions -->
         <div class="flex gap-4">
-            <a href="{{ route('blog.edit', $blog->id) }}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+            <a href="{{ route('superadmin.blogs.edit', $blog->id) }}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
                 Edit
             </a>
-            <form action="{{ route('blog.destroy', $blog->id) }}" method="POST" style="display:inline;">
+            <form action="{{ route('superadmin.blogs.destroy', $blog->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="bg-red-600 text-dark px-6 py-2 rounded-lg hover:bg-red-700" onclick="return confirm('etes-vous sûr de vouloir supprimer ce blog ?')">

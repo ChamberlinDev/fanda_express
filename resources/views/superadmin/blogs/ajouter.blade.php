@@ -1,11 +1,11 @@
-@extends('admin.layout.app')
+@extends('superadmin.layout.app')
 @section('content')
 
 <div class="container my-5">
     <h2 class="mb-4 text-center"> + Ajouter un nouvel blog</h2>
 
     <div class="card shadow-sm p-4">
-        <form action="/ajout_save" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('superadmin.blogs.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">

@@ -9,7 +9,7 @@
             <h2 class="fw-bold mb-1">Blogs</h2>
             <p class="text-muted small mb-0">{{ $blogs->total() }} blog(s) publié(s)</p>
         </div>
-        <a href="/ajouter_blog" class="btn btn-primary btn-sm">
+        <a href="{{ route('superadmin.blogs.create') }}" class="btn btn-primary btn-sm">
             + Ajouter un blog
         </a>
     </div>

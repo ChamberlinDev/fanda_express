@@ -5,245 +5,282 @@
 @extends('clients.layout.app')
 
 @section('content')
+
+{{-- Recherche --}}
 @include('clients.partials.recherche')
 
-<!-- === SECTION HOTELS === -->
+{{-- ===== HOTELS ===== --}}
 <section class="container my-5">
-    <div class="mb-4">
-        <h2 class="font-weight-bold text-center">
-            <i class="bi bi-building text-primary mr-2"></i>Hôtels
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">
+            <i class="bi bi-building text-primary me-2"></i>Hôtels
         </h2>
-        <p class="text-muted text-center">Découvrez notre sélection d'hôtels</p>
+        <p class="text-muted">Découvrez notre sélection d'hôtels</p>
     </div>
 
-    <div class="row">
+    <div class="row g-4">
         @forelse($hotels as $hotel)
         @php
-        $hotelImages = json_decode($hotel->images, true);
-        $firstImage = (!empty($hotelImages) && is_array($hotelImages)) ? $hotelImages[0] : null;
+            $hotelImages = json_decode($hotel->images, true);
+            $firstImage  = (!empty($hotelImages) && is_array($hotelImages)) ? $hotelImages[0] : null;
         @endphp
 
-        <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4">
-            <div class="card h-100 shadow border-0 rounded-lg">
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm"
+                 style="border-radius:16px; overflow:hidden; transition:transform 0.2s, box-shadow 0.2s;"
+                 onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 16px 32px rgba(0,0,0,0.12)'"
+                 onmouseout="this.style.transform='';this.style.boxShadow=''">
+
+                {{-- Image --}}
                 <div class="position-relative">
-                    @if($firstImage)
-                    <img src="{{ asset('storage/' . $firstImage) }}"
-                        class="card-img-top rounded-top"
-                        alt="{{ $hotel->nom }}"
-                        style="height:280px; object-fit:cover;">
-                    @else
-                    <img src="https://via.placeholder.com/400x280?text=Pas+d'image"
-                        class="card-img-top rounded-top"
-                        alt="{{ $hotel->nom }}"
-                        style="height:280px; object-fit:cover;">
-                    @endif
-                    <span class="badge badge-primary position-absolute rounded-pill" style="top: 15px; right: 15px; font-size: 0.9rem; padding: 8px 16px;">
-                        <i class="bi bi-building mr-1"></i>Hôtel
+                    <img src="{{ $firstImage ? asset('storage/' . $firstImage) : 'https://placehold.co/400x280?text=Pas+d+image' }}"
+                         class="w-100"
+                         style="height:240px; object-fit:cover;"
+                         alt="{{ $hotel->nom }}">
+
+                    <span class="badge bg-primary position-absolute"
+                          style="top:12px; right:12px; border-radius:20px; padding:6px 14px; font-size:0.8rem;">
+                        <i class="bi bi-building me-1"></i>Hôtel
                     </span>
+
+                    {{-- Nombre d'images --}}
+                    @if(!empty($hotelImages) && count($hotelImages) > 1)
+                        <span class="badge bg-dark bg-opacity-75 position-absolute"
+                              style="bottom:12px; right:12px; border-radius:20px; font-size:0.75rem;">
+                            <i class="bi bi-images me-1"></i>{{ count($hotelImages) }} photos
+                        </span>
+                    @endif
                 </div>
 
-                <div class="card-body p-4">
-                    <h5 class="card-title text-dark font-weight-bold mb-3" style="font-size: 1.25rem;">{{ $hotel->nom }}</h5>
+                <div class="card-body d-flex flex-column p-4">
 
-                    <div class="mb-2">
-                        <i class="bi bi-geo-alt-fill text-danger mr-2"></i>
-                        <span class="text-muted">{{ $hotel->ville }}</span>
-                    </div>
+                    <h5 class="fw-bold mb-3">{{ $hotel->nom }}</h5>
 
-                    <div class="mb-3">
-                        <i class="bi bi-pin-map-fill text-info mr-2"></i>
-                        <span class="text-muted">{{ $hotel->adresse }}</span>
-                    </div>
+                    <p class="small text-muted mb-1">
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i>{{ $hotel->ville }}
+                    </p>
+                    <p class="small text-muted mb-3">
+                        <i class="bi bi-pin-map-fill text-info me-1"></i>{{ Str::limit($hotel->adresse, 40) }}
+                    </p>
 
                     @if(isset($hotel->prix_min))
-                    <div class="mb-2">
-                        <span class="text-primary font-weight-bold" style="font-size: 1.15rem;">À partir de {{ number_format($hotel->prix_min, 0, ',', ' ') }} XAF</span>
-                        <small class="text-muted">/nuit</small>
-                    </div>
+                        <p class="fw-bold text-primary mb-3" style="font-size:1.1rem;">
+                            À partir de {{ number_format($hotel->prix_min, 0, ',', ' ') }} XAF
+                            <small class="text-muted fw-normal">/nuit</small>
+                        </p>
                     @endif
-                </div>
 
-                <div class="card-footer bg-white border-0 p-3">
-                    <a href="{{ url('/details/' . $hotel->id) }}" class="btn btn-primary btn-block btn-lg">
-                        <i class="bi bi-eye mr-2"></i>Voir les détails
+                    @if($hotel->equipements)
+                        <div class="mb-3">
+                            @foreach(array_slice(explode(',', $hotel->equipements), 0, 3) as $eq)
+                                <span class="badge bg-light border text-dark me-1 mb-1" style="font-size:0.75rem;">
+                                    <i class="bi bi-check-circle-fill text-success me-1"></i>{{ trim($eq) }}
+                                </span>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <a href="{{ url('/details/' . $hotel->id) }}"
+                       class="btn btn-primary btn-block mt-auto w-100">
+                        <i class="bi bi-eye me-1"></i>Voir les détails
                     </a>
+
                 </div>
             </div>
         </div>
+
         @empty
         <div class="col-12">
-            <div class="alert alert-info text-center" role="alert">
-                <i class="bi bi-info-circle mr-2"></i>Aucun hôtel disponible pour le moment.
+            <div class="alert alert-info text-center border-0">
+                <i class="bi bi-info-circle me-2"></i>Aucun hôtel disponible pour le moment.
             </div>
         </div>
         @endforelse
     </div>
 
-    {{-- Pagination --}}
-    <div class="mt-4 d-flex justify-content-center">
-        {{ $hotels->links() }}
-    </div>
+    @if($hotels->hasPages())
+        <div class="mt-4 d-flex justify-content-center">
+            {{ $hotels->links() }}
+        </div>
+    @endif
+
 </section>
 
-<!-- === SECTION APPARTEMENTS === -->
+<hr class="my-2">
+
+{{-- ===== APPARTEMENTS ===== --}}
 <section class="container my-5">
-    <div class="mb-4">
-        <h2 class="font-weight-bold text-center">
-            <i class="bi bi-house-door text-success mr-2"></i>Appartements
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">
+            <i class="bi bi-house-door text-success me-2"></i>Appartements
         </h2>
-        <p class="text-muted text-center">Trouvez l'appartement idéal pour votre séjour</p>
+        <p class="text-muted">Trouvez l'appartement idéal pour votre séjour</p>
     </div>
 
-    <div class="row">
+    <div class="row g-4">
         @forelse($apparts as $appart)
         @php
-        $appartImages = json_decode($appart->images, true);
-        $firstImage = (!empty($appartImages) && is_array($appartImages)) ? $appartImages[0] : null;
-        // Si pas d'images en JSON, essayer le champ image simple
-        if (!$firstImage && !empty($appart->image)) {
-        $firstImage = $appart->image;
-        }
+            $appartImages = json_decode($appart->images, true);
+            $firstImage   = (!empty($appartImages) && is_array($appartImages)) ? $appartImages[0] : null;
+            if (!$firstImage && !empty($appart->image)) {
+                $firstImage = $appart->image;
+            }
         @endphp
 
-        <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4">
-            <div class="card h-100 shadow border-0 rounded-lg">
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm"
+                 style="border-radius:16px; overflow:hidden; transition:transform 0.2s, box-shadow 0.2s;"
+                 onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 16px 32px rgba(0,0,0,0.12)'"
+                 onmouseout="this.style.transform='';this.style.boxShadow=''">
+
+                {{-- Image --}}
                 <div class="position-relative">
-                    @if($firstImage)
-                    <img src="{{ asset('storage/' . $firstImage) }}"
-                        class="card-img-top rounded-top"
-                        alt="{{ $appart->nom }}"
-                        style="height:280px; object-fit:cover;">
-                    @else
-                    <img src="https://via.placeholder.com/400x280?text=Pas+d'image"
-                        class="card-img-top rounded-top"
-                        alt="{{ $appart->nom }}"
-                        style="height:280px; object-fit:cover;">
-                    @endif
-                    <span class="badge badge-success position-absolute rounded-pill" style="top: 15px; right: 15px; font-size: 0.9rem; padding: 8px 16px;">
-                        <i class="bi bi-house-door mr-1"></i>Appartement
+                    <img src="{{ $firstImage ? asset('storage/' . $firstImage) : 'https://placehold.co/400x280?text=Pas+d+image' }}"
+                         class="w-100"
+                         style="height:240px; object-fit:cover;"
+                         alt="{{ $appart->nom }}">
+
+                    <span class="badge bg-success position-absolute"
+                          style="top:12px; right:12px; border-radius:20px; padding:6px 14px; font-size:0.8rem;">
+                        <i class="bi bi-house-door me-1"></i>Appartement
                     </span>
-                </div>
-
-                <div class="card-body p-4">
-                    <h5 class="card-title text-dark font-weight-bold mb-3" style="font-size: 1.25rem;">{{ $appart->nom }}</h5>
-
-                    <div class="mb-2">
-                        <i class="bi bi-geo-alt-fill text-danger mr-2"></i>
-                        <span class="text-muted">{{ $appart->ville }}</span>
-                    </div>
-
-                    <div class="mb-3">
-                        <i class="bi bi-pin-map-fill text-info mr-2"></i>
-                        <span class="text-muted">{{ $appart->adresse }}</span>
-                    </div>
 
                     @if(isset($appart->prix))
-                    <div class="mb-2">
-                        <span class="text-success font-weight-bold" style="font-size: 1.15rem;">{{ number_format($appart->prix, 0, ',', ' ') }} XAF</span>
-                        <small class="text-muted">/nuit</small>
-                    </div>
-                    @endif
-
-                    @if(isset($appart->capacite))
-                    <div class="mb-2">
-                        <i class="bi bi-people-fill text-primary mr-2"></i>
-                        <span class="text-muted">{{ $appart->capacite }} personnes</span>
-                    </div>
+                        <span class="badge bg-dark bg-opacity-75 position-absolute"
+                              style="bottom:12px; left:12px; border-radius:20px; font-size:0.8rem;">
+                            {{ number_format($appart->prix, 0, ',', ' ') }} XAF / jours
+                        </span>
                     @endif
                 </div>
 
-                <div class="card-footer bg-white border-0 p-3">
-                    <a href="{{ url('/details_appart/' . $appart->id) }}" class="btn btn-success btn-block btn-lg">
-                        <i class="bi bi-eye mr-2"></i>Voir les détails
+                <div class="card-body d-flex flex-column p-4">
+
+                    <h5 class="fw-bold mb-3">{{ $appart->nom }}</h5>
+
+                    <p class="small text-muted mb-1">
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i>{{ $appart->ville }}
+                    </p>
+                    <p class="small text-muted mb-3">
+                        <i class="bi bi-pin-map-fill text-info me-1"></i>{{ Str::limit($appart->adresse, 40) }}
+                    </p>
+
+                    @if(isset($appart->capacite))
+                        <p class="small text-muted mb-3">
+                            <i class="bi bi-people-fill text-primary me-1"></i>
+                            Capacité : {{ $appart->capacite }} personne(s)
+                        </p>
+                    @endif
+
+                    @if($appart->equipements)
+                        <div class="mb-3">
+                            @foreach(array_slice(explode(',', $appart->equipements), 0, 3) as $eq)
+                                <span class="badge bg-light border text-dark me-1 mb-1" style="font-size:0.75rem;">
+                                    <i class="bi bi-check-circle-fill text-success me-1"></i>{{ trim($eq) }}
+                                </span>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <a href="{{ url('/details_appart/' . $appart->id) }}"
+                       class="btn btn-success btn-block mt-auto w-100">
+                        <i class="bi bi-eye me-1"></i>Voir les détails
                     </a>
+
                 </div>
             </div>
         </div>
+
         @empty
         <div class="col-12">
-            <div class="alert alert-info text-center" role="alert">
-                <i class="bi bi-info-circle mr-2"></i>Aucun appartement disponible pour le moment.
+            <div class="alert alert-info text-center border-0">
+                <i class="bi bi-info-circle me-2"></i>Aucun appartement disponible pour le moment.
             </div>
         </div>
         @endforelse
     </div>
 
-    {{-- Pagination --}}
-    <div class="mt-4 d-flex justify-content-center">
-        {{ $apparts->links() }}
-    </div>
+    @if($apparts->hasPages())
+        <div class="mt-4 d-flex justify-content-center">
+            {{ $apparts->links() }}
+        </div>
+    @endif
+
 </section>
 
+{{-- Blog --}}
 @include('clients.partials.blog')
 
+{{-- A propos --}}
 @include('clients.partials.apropos')
 
-<!-- Section Localisation -->
+{{-- Localisation --}}
 <section class="container-fluid my-5">
-    <div class="mb-4">
-        <h2 class="font-weight-bold text-center">
-            <i class="bi bi-geo-alt text-danger mr-2"></i>Localisation
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">
+            <i class="bi bi-geo-alt text-danger me-2"></i>Localisation
         </h2>
-        <p class="text-muted text-center">Trouvez-nous facilement</p>
+        <p class="text-muted">Trouvez-nous facilement</p>
     </div>
-
-    <div class="card shadow-sm border-0 rounded-lg overflow-hidden">
-        <iframe style="border:0; width: 100%; height: 400px;"
-            src="https://maps.google.com/maps?width=720&height=600&hl=fr&q=pointe-noire%20congo+(fanda-express)&t=&z=14&ie=UTF8&iwloc=B&output=embed"
-            frameborder="0" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="rounded-3 overflow-hidden shadow-sm">
+        <iframe style="border:0; width:100%; height:420px;"
+                src="https://maps.google.com/maps?width=720&height=600&hl=fr&q=pointe-noire%20congo+(fanda-express)&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                frameborder="0" allowfullscreen loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
     </div>
 </section>
 
-<!-- Section Contact -->
-<section class="container my-5" id="#contact">
-    <div class="mb-5">
-        <h2 class="font-weight-bold text-center">
-            <i class="bi bi-envelope text-primary mr-2"></i>Contactez-nous
+{{-- Contact --}}
+<section class="container my-5" id="contact">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">
+            <i class="bi bi-envelope text-primary me-2"></i>Contactez-nous
         </h2>
-        <p class="text-muted text-center">Nous sommes à votre écoute</p>
+        <p class="text-muted">Nous sommes à votre écoute</p>
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow border-0 rounded-lg">
-                <div class="card-body p-5">
-                    <form action="{{ route('contact.send') }}" method="post">
-                        @csrf <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <label for="name" class="font-weight-bold mb-2">
-                                    <i class="bi bi-person text-primary mr-2"></i>Votre nom
-                                </label>
-                                <input type="text" name="name" id="name" class="form-control form-control-lg" placeholder="Entrez votre nom" required>
-                            </div>
+        <div class="col-lg-7">
+            <div class="card shadow border-0" style="border-radius:16px;">
+                <div class="card-body p-4 p-md-5">
+                    <form action="{{ route('contact.send') }}" method="POST">
+                        @csrf
 
-                            <div class="col-md-6 mb-4">
-                                <label for="email" class="font-weight-bold mb-2">
-                                    <i class="bi bi-envelope text-primary mr-2"></i>Votre email
-                                </label>
-                                <input type="email" class="form-control form-control-lg" name="email" id="email" placeholder="Entrez votre email" required>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name" class="fw-bold small mb-1">Votre nom</label>
+                                <input type="text" name="name" id="name"
+                                       class="form-control form-control-lg"
+                                       placeholder="Entrez votre nom" required>
                             </div>
-
-                            <div class="col-md-12 mb-4">
-                                <label for="subject" class="font-weight-bold mb-2">
-                                    <i class="bi bi-chat-left-text text-primary mr-2"></i>Sujet
-                                </label>
-                                <input type="text" class="form-control form-control-lg" name="subject" id="subject" placeholder="Sujet de votre message" required>
+                            <div class="col-md-6">
+                                <label for="email" class="fw-bold small mb-1">Votre email</label>
+                                <input type="email" name="email" id="email"
+                                       class="form-control form-control-lg"
+                                       placeholder="Entrez votre email" required>
                             </div>
-
-                            <div class="col-md-12 mb-4">
-                                <label for="message" class="font-weight-bold mb-2">
-                                    <i class="bi bi-chat-dots text-primary mr-2"></i>Message
-                                </label>
-                                <textarea class="form-control form-control-lg" name="message" id="message" rows="6" placeholder="Écrivez votre message ici..." required></textarea>
+                            <div class="col-12">
+                                <label for="subject" class="fw-bold small mb-1">Sujet</label>
+                                <input type="text" name="subject" id="subject"
+                                       class="form-control form-control-lg"
+                                       placeholder="Sujet de votre message" required>
                             </div>
-
-                            <div class="col-md-12 text-center">
-                                <button class="btn btn-primary btn-lg px-5" type="submit">
-                                    <i class="bi bi-send-fill mr-2"></i>Envoyer le message
+                            <div class="col-12">
+                                <label for="message" class="fw-bold small mb-1">Message</label>
+                                <textarea name="message" id="message"
+                                          class="form-control form-control-lg"
+                                          rows="5"
+                                          placeholder="Écrivez votre message ici..." required></textarea>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-lg px-5">
+                                    <i class="bi bi-send-fill me-2"></i>Envoyer le message
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

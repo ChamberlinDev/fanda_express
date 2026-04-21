@@ -87,7 +87,7 @@
                 </div>
 
                 <div class="card-footer bg-white border-0 p-3">
-                    <a href="/details/{{$hotel->id}}" class="btn btn-primary btn-block btn-lg">
+                    <a href="{{ url('/details/' . $hotel->id) }}" class="btn btn-primary btn-block btn-lg">
                         <i class="bi bi-eye mr-2"></i>Voir les détails
                     </a>
                 </div>
@@ -167,7 +167,7 @@
                 </div>
 
                 <div class="card-footer bg-white border-0 p-3">
-                    <a href="/details/{{$appart->id}}" class="btn btn-success btn-block btn-lg">
+                    <a href="{{ url('/details_appart/' . $appart->id) }}" class="btn btn-success btn-block btn-lg">
                         <i class="bi bi-eye mr-2"></i>Voir les détails
                     </a>
                 </div>
