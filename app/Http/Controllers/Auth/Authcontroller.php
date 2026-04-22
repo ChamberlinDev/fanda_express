@@ -62,8 +62,6 @@ class Authcontroller extends Controller
                 ->latest()
                 ->take(5)
                 ->get();
-
-                
         }
 
         return view('welcome', [
@@ -248,10 +246,15 @@ class Authcontroller extends Controller
 
     public function clients_liste()
     {
-        $clients = Reservation::select('nom', 'prenom', 'telephone', 'email')
-            ->distinct()
+        $clientsHotel = Reservation::select('nom', 'prenom', 'telephone', 'email');
+
+        $clientsAppart = Reservation_appart::select('nom', 'prenom', 'telephone', 'email');
+
+        $clients = $clientsHotel
+            ->union($clientsAppart)
             ->orderBy('nom')
             ->get();
+
         return view('admin.clients.index', compact('clients'));
     }
 

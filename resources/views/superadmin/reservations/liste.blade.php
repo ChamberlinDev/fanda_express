@@ -95,7 +95,7 @@
                                     @endphp
                                     <tr>
                                         <td>
-                                            <span class="badge bg-secondary">{{ $index + 1 }}</span>
+                                            <span class="badge bg-secondary text-white">{{ $index + 1 }}</span>
                                         </td>
                                         <td>
                                             @if($firstImage)
@@ -113,12 +113,12 @@
                                         <td class="small">{{ $hotel->ville ?? '—' }}</td>
                                         <td class="small text-muted">{{ $hotel->adresse ?? '—' }}</td>
                                         <td class="text-center">
-                                            <span class="badge bg-primary">
+                                            <span class="badge bg-primary text-white">
                                                 {{ $hotel->chambres_count ?? 0 }}
                                             </span>
                                         </td>
                                         <td class="text-center">
-                                            <span class="badge bg-success">
+                                            <span class="badge bg-success text-white">
                                                 {{ $hotel->reservations_count ?? 0 }}
                                             </span>
                                         </td>
@@ -205,7 +205,7 @@
                                             </span>
                                         </td>
                                         <td class="text-center">
-                                            <a href="/details-appart/{{ $appart->id }}"
+                                            <a href="{{ route('superadmin.details.appart', $appart->id) }}"
                                                class="btn btn-outline-info btn-sm">
                                                 Voir
                                             </a>

@@ -45,6 +45,14 @@ class User extends Authenticatable
         return $this->hasOne(Appartement::class);
     }
 
+    public function reservations_appart()
+    {
+        return $this->hasMany(Reservation_appart::class);
+    }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 
     public function rapports()
     {

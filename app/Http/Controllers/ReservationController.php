@@ -82,6 +82,7 @@ class ReservationController extends Controller
             'email'          => 'nullable|email',
             'date_debut'     => 'required|date|after_or_equal:today',
             'date_fin'       => 'required|date|after:date_debut',
+            
         ]);
 
         // Génération code unique
@@ -109,6 +110,7 @@ class ReservationController extends Controller
         if ($reservations_appart->email) {
             Mail::to($reservations_appart->email)->send(new ReservationAccept($reservations_appart));
         }
+
 
         return redirect()->back()->with('success', 'Réservation acceptée et mail envoyé.');
     }

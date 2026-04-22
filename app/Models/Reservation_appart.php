@@ -24,4 +24,5 @@ class Reservation_appart extends Model
     {
         return $this->belongsTo(Appartement::class);
     }
+    
 }

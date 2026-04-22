@@ -17,15 +17,15 @@ class ReservationMail extends Mailable
 
     public $reservation;
 
-  public function __construct(Reservation|Reservation_appart $reservation)
-{
-    $this->reservation = $reservation;
+    public function __construct(Reservation|Reservation_appart $reservation)
+    {
+        $this->reservation = $reservation;
 
-    // Charger relations seulement si elles existent
-    if ($reservation instanceof Reservation) {
-        $this->reservation->load('chambre.hotel');
+        // Charger relations seulement si elles existent
+        if ($reservation instanceof Reservation) {
+            $this->reservation->load('chambre.hotel');
+        }
     }
-}
 
     public function build()
     {

@@ -74,8 +74,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <h3 class="card-category">Reservations</h3>
-                                    <h4 class="card-title">{{ number_format($stats['reservations']) }}</h4>
+                                    <h3 class="card-category">Reservation(hotels)</h3>
+                                    <h4 class="card-title">{{ number_format($stats['reservations-hotel']) }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -93,11 +93,32 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <h3 class="card-category">Clients</h3>
-                                    <h4 class="card-title">{{ number_format($stats['clients']) }}</h4>
+                                    <h3 class="card-category">Reservation(appart)</h3>
+                                    <h4 class="card-title">{{ number_format($stats['reservations-appart']) }}</h4>
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-4 mt-3">
+                <div class="card card-stats card-info">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="icon-big text-center">
+                                    <i class="la la-shopping-cart"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <h3 class="card-category">Blogs</h3>
+                                    <h4 class="card-title">{{ number_format($stats['blogs']) }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -174,7 +195,7 @@
                                 @if($user->is_blocked)
                                 <span class="badge bg-danger rounded-pill text-white">Bloqué</span>
                                 @else
-                                <span class="badge bg-success rounded-pill text-white"> Actif</span>
+                                <span class="badge bg-success rounded-pill text-white">Actif</span>
                                 @endif
                             </td>
 

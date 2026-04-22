@@ -232,7 +232,9 @@
             </div>
         </div>
     </div>
-
+<div class="d-flex justify-content mt-4">
+    <h6 class=" badge bg-info text-white">NB: Si vous voulez les calculs des reservations des appartements, Veuillez patienter la mise à jour à venir!</h6>
+</div>
 </div>
 
 {{-- JS : filtre + recherche --}}

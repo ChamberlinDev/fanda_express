@@ -83,7 +83,7 @@ class FinanceController extends Controller
             'user_id'          => Auth::id(),
         ]);
 
-        return redirect()->route('admin.rapport.index')
+        return redirect()->route('admin.rapport')
             ->with('success', 'Rapport généré avec succès !');
     }
 

@@ -20,12 +20,12 @@
 
        
 
-        <h3 style="color: #1a73e8;">🏨 Hôtel</h3>
+        <h3 style="color: #1a73e8;">Hôtel</h3>
         <p>
             <strong>{{ $reservation->chambre->hotel->nom ?? '—' }}</strong><br>
             {{ $reservation->chambre->hotel->adresse ?? '' }}<br>
-            📞 {{ $reservation->chambre->hotel->telephone ?? '' }}  
-            📧 {{ $reservation->chambre->hotel->email ?? '' }}
+             {{ $reservation->chambre->hotel->telephone ?? '' }}  
+             {{ $reservation->chambre->hotel->email ?? '' }}
         </p>
 
         <p>Nous vous recommandons de refaire la demande à l’hôtel<strong></strong>.  
@@ -33,7 +33,7 @@
 
         
         <p style="margin-top: 40px; text-align: center; color: #777;">
-            Merci pour votre confiance 💙<br>
+            Merci pour votre confiance<br>
             <strong>Fanda-express</strong>
         </p>
     </div>

@@ -140,7 +140,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/blog_sup', [BlogController::class, 'liste_blog'])->name('superadmin.blogs');
     Route::get('/blog_sup/{id}/edit', [BlogController::class, 'modif_view'])->name('superadmin.blogs.edit');
     Route::post('/blog_sup/{id}/update', [BlogController::class, 'update_blog'])->name('superadmin.blogs.update');
-    Route::delete('/blog_sup/{id}', [BlogController::class, 'supprimer'])->name('superadmin.blogs.delete'); 
+    Route::delete('/blog_sup/{id}', [BlogController::class, 'supprimer'])->name('superadmin.blogs.destroy'); 
     Route::get('/blog_sup/create', [BlogController::class, 'ajouter'])->name('superadmin.blogs.create');
     Route::post('/blog_sup/store', [BlogController::class, 'create'])->name('superadmin.blogs.store');
     Route::get('/blog_sup/{id}', [BlogController::class, 'details'])->name('superadmin.blogs.show');  

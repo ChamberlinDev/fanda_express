@@ -19,18 +19,17 @@ class ReservationAccept extends Mailable
 
     public function __construct(Reservation|Reservation_appart $reservation)
     {
-            if ($reservation instanceof Reservation_appart) {
-                $this->reservation->load('appartement');
-            }   
-            else {
-                $this->reservation->load('chambre.hotel');
-            }
+        $this->reservation = $reservation;
 
+        if ($reservation instanceof Reservation_appart) {
+            $this->reservation->load('appartement');
+        } else {
+            $this->reservation->load('chambre.hotel');
+        }
     }
-
     public function build()
     {
         return $this->subject('Votre réservation a été confirmée 🏨')
-                    ->view('emails.accept_reser');
+            ->view('emails.accept_reser');
     }
 }

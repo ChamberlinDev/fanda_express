@@ -42,10 +42,10 @@
                         @forelse($rapports as $rapport)
                         <tr>
                             <td class="text-center">
-                                <span class="badge bg-secondary">{{ $rapport->id }}</span>
+                                <span class="badge bg-secondary text-white">{{ $rapport->id }}</span>
                             </td>
                             <td>
-                                <span class="badge bg-primary">{{ ucfirst($rapport->type_rapport) }}</span>
+                                <span class="badge bg-primary text-white">{{ ucfirst($rapport->type_rapport) }}</span>
                             </td>
                             <td>
                                 <i class="bi bi-calendar3 text-muted me-1"></i>
@@ -64,7 +64,7 @@
                             </td>
                             <td>
                                 <i class="bi bi-person text-muted me-1"></i>
-                                {{ $rapport->user->name ?? '—' }}
+                                {{ $rapport->user->nom_complet ?? '—' }}
                             </td>
                             <td class="text-center">
                                 <form action="{{ route('admin.rapport.destroy', $rapport->id) }}"
@@ -92,5 +92,8 @@
         </div>
     </div>
 
+<div class="d-flex justify-content mt-4">
+    <h6 class=" badge bg-warning text-white">NB: Si vous voulez imprimer les rapports en PDF, Veuillez patienter la mise à jour à venir!</h6>
+</div>
 </div>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appartement;
+use App\Models\Blog;
 use App\Models\Hotel;
 use App\Models\Reservation;
 use App\Models\Reservation_appart;
@@ -22,10 +23,9 @@ class AdminController extends Controller
          'utilisateurs'  => User::count(),
          'hotels'        => Hotel::count(),
          'appartements'  => Appartement::count(),
-         'reservations'  => Reservation::count() + Reservation_appart::count(),
-         'clients' => User::whereHas('roles', function ($q) {
-            $q->where('name', 'user');
-         })->count(),
+         'reservations-hotel'  => Reservation::count(), 
+         'reservations-appart'  => Reservation_appart::count(),
+         'blogs'  => Blog::count(),
       ];
       return view('superadmin_view', compact('users', 'stats'));
    }
@@ -116,11 +116,9 @@ class AdminController extends Controller
    }
    public function show($id)
    {
-      $hotel = Hotel::with([
-         'chambres.reservations'
-      ])->findOrFail($id);
+      $hotel = Hotel::with(['chambres.reservations'])->findOrFail($id);
 
-      // Calcul par réservation
+      // Calcul par réservation pour les chambres d'hôtel
       $reservations = collect();
       foreach ($hotel->chambres as $chambre) {
          foreach ($chambre->reservations as $reservation) {
@@ -152,7 +150,7 @@ class AdminController extends Controller
    {
       $appart = Appartement::with('reservations')->findOrFail($id);
 
-      // Calcul par réservation
+      // Calcul des réservations pour les appartements
       $reservations = collect();
       foreach ($appart->reservations as $reservation) {
          $nuits   = \Carbon\Carbon::parse($reservation->date_debut)

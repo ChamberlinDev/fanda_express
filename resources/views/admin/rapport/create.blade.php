@@ -107,7 +107,7 @@
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-file-earmark-check me-1"></i>Générer le rapport
                             </button>
-                            <a href="{{ route('admin.rapport.index') }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('admin.rapport') }}" class="btn btn-outline-secondary">
                                 <i class="bi bi-arrow-left me-1"></i>Annuler
                             </a>
                         </div>

@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Reservation;
+use App\Models\Reservation_appart;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -17,10 +18,13 @@ class ReservationAdmin extends Mailable
 
     public $reservation;
 
-    public function __construct(Reservation $reservation)
+    public function __construct(Reservation|Reservation_appart $reservation)
     {
-        $this->reservation = $reservation;
-        $this->reservation = $reservation->load('chambre.hotel');
+        if ($reservation instanceof Reservation) {
+            $this->reservation = $reservation;
+        } elseif ($reservation instanceof Reservation_appart) {
+            $this->reservation = $reservation;
+        }
     }
 
     public function build()
