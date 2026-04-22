@@ -1,6 +1,7 @@
 <section class="container my-5">
     <div class="blog_section">
         <h2 class="text-center mb-4">Derniers Blogs</h2>
+        <p class="text-center text-muted">Découvrez nos dernières actualités et conseils</p>
         <hr>
         @if($blogs->isNotEmpty())
         <div class="row g-4">

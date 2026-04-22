@@ -157,13 +157,13 @@
                                             @endif"
                                         onchange="this.form.submit()">
                                         <option value="en attente" {{ $reservation->statut == 'en attente' ? 'selected' : '' }}>
-                                             En attente
+                                            En attente
                                         </option>
                                         <option value="acceptée" {{ $reservation->statut == 'acceptée' ? 'selected' : '' }}>
-                                             Acceptée
+                                            Acceptée
                                         </option>
                                         <option value="refusée" {{ $reservation->statut == 'refusée' ? 'selected' : '' }}>
-                                             Refusée
+                                            Refusée
                                         </option>
                                     </select>
                                 </form>
@@ -187,7 +187,7 @@
     </div>
 
 
-<div class="card shadow border-0">
+    <div class="card shadow border-0">
         <div class="card-header bg-primary text-white py-3">
             <h5 class="mb-0">Liste complète des réservations d'appartement </h5>
         </div>
@@ -233,7 +233,7 @@
                                 <i class="bi bi-phone text-muted me-1"></i>
                                 {{ $reservation->telephone ?? '+242 XX XXX XX XX' }}
                             </td>
-                           
+
                             <td>
                                 <span class="badge bg-secondary text-white">
                                     {{ $reservation->appartement->nom ?? '—' }}
@@ -260,22 +260,27 @@
                                 <form action="{{ route('reservations_update_statut', $reservation->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
+
                                     <select name="statut"
                                         class="form-select form-select-sm fw-bold
-                                            @if($reservation->statut == 'acceptée') text-success border-success
-                                            @elseif($reservation->statut == 'refusée') text-danger border-danger
-                                            @else text-warning border-warning
-                                            @endif"
+            @if($reservation->statut == 'acceptée') text-success border-success
+            @elseif($reservation->statut == 'refusée') text-danger border-danger
+            @else text-warning border-warning
+            @endif"
                                         onchange="this.form.submit()">
+
                                         <option value="en attente" {{ $reservation->statut == 'en attente' ? 'selected' : '' }}>
-                                             En attente
+                                            En attente
                                         </option>
+
                                         <option value="acceptée" {{ $reservation->statut == 'acceptée' ? 'selected' : '' }}>
-                                             Acceptée
+                                            Acceptée
                                         </option>
+
                                         <option value="refusée" {{ $reservation->statut == 'refusée' ? 'selected' : '' }}>
-                                             Refusée
+                                            Refusée
                                         </option>
+
                                     </select>
                                 </form>
                             </td>
@@ -296,5 +301,5 @@
             </div>
         </div>
 
-</div>
-@endsection
+    </div>
+    @endsection

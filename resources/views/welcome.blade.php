@@ -226,7 +226,7 @@
             </div>
         </div>
 
-
+<hr>
 
         <div class="col-xl-8 col-lg-7 mb-4">
             <div class="card">

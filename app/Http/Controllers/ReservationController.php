@@ -47,6 +47,7 @@ class ReservationController extends Controller
 
         if ($appart) {
             $reservations_appart = Reservation_appart::where('appartement_id', $appart->id)
+                ->with('appartement')
                 ->latest()
                 ->get();
         }
@@ -62,7 +63,7 @@ class ReservationController extends Controller
         // Récupérer la chambre choisie 
         $chambre = Chambre::with('hotel')->findOrFail($id);
         // Envoyer à la vue reservation.blade.php
-        return view('admin.reservations.ajouter', compact('chambre'));
+        return view('clients.reservations.create', compact('chambre'));
     }
 
     public function create_appart($id)
@@ -98,6 +99,46 @@ class ReservationController extends Controller
         }
 
         return back()->with('success', 'Réservation confirmée ! Code : ' . $code);
+    }
+
+    public function accepter_appart($id)
+    {
+        $reservations_appart = Reservation_appart::findOrFail($id);
+        $reservations_appart->update(['statut' => 'acceptée']);
+
+        if ($reservations_appart->email) {
+            Mail::to($reservations_appart->email)->send(new ReservationAccept($reservations_appart));
+        }
+
+        return redirect()->back()->with('success', 'Réservation acceptée et mail envoyé.');
+    }
+
+    public function refuser_appart($id)
+    {
+        $reservations_appart = Reservation_appart::findOrFail($id);
+        $reservations_appart->update(['statut' => 'refusée']);
+
+        if ($reservations_appart->email) {
+            Mail::to($reservations_appart->email)->send(new ReservationRefus($reservations_appart));
+        }
+        return redirect()->back()->with('success', 'Réservation refusée et mail envoyé.');
+    }
+
+    public function updateStatut_appart(Request $request, $id)
+    {
+        $reservations_appart = Reservation_appart::findOrFail($id);
+        $ancienStatut = $reservations_appart->statut;
+        $reservations_appart->update(['statut' => $request->statut]);
+
+        if ($reservations_appart->email) {
+            if ($request->statut === 'acceptée' && $ancienStatut !== 'acceptée') {
+                Mail::to($reservations_appart->email)->send(new ReservationAccept($reservations_appart));
+            } elseif ($request->statut === 'refusée' && $ancienStatut !== 'refusée') {
+                Mail::to($reservations_appart->email)->send(new ReservationRefus($reservations_appart));
+            }
+        }
+
+        return redirect()->back()->with('success', 'Statut de la réservation mis à jour.');
     }
 
 

@@ -39,65 +39,62 @@
         <p class="text-muted">Découvrez notre sélection d'hôtels</p>
     </div>
 
-    <div class="row">
+    <div class="row g-4">
         @forelse($hotels as $hotel)
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow border-0 rounded-lg">
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100"
+                style="border-radius:16px; overflow:hidden; transition:0.25s;"
+                onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 15px 35px rgba(0,0,0,0.12)'"
+                onmouseout="this.style.transform='';this.style.boxShadow=''">
+
                 <div class="position-relative">
                     @php
-                    $hotelImages = json_decode($hotel->images, true);
-                    $firstImage = (!empty($hotelImages) && is_array($hotelImages)) ? $hotelImages[0] : null;
+                    $images = json_decode($hotel->images, true);
+                    $img = (!empty($images) && is_array($images)) ? $images[0] : null;
                     @endphp
-                    
-                    @if($firstImage)
-                    <img src="{{ asset('storage/' . $firstImage) }}" 
-                            class="card-img-top rounded-top" 
-                            alt="{{ $hotel->nom }}" 
-                            style="height:280px; object-fit:cover;">
-                    @else
-                    <img src="https://via.placeholder.com/400x280?text=Pas+d'image" 
-                            class="card-img-top rounded-top" 
-                            alt="{{ $hotel->nom }}" 
-                            style="height:280px; object-fit:cover;">
-                    @endif
-                    <span class="badge badge-primary position-absolute rounded-pill" style="top: 15px; right: 15px; font-size: 0.9rem; padding: 8px 16px;">
-                        <i class="bi bi-building mr-1"></i>Hôtel
+
+                    <img src="{{ $img ? asset('storage/'.$img) : 'https://placehold.co/400x280' }}"
+                        class="w-100"
+                        style="height:240px; object-fit:cover; cursor:pointer;"
+                        onclick="openImage(this.src)">
+
+                    <span class="badge bg-primary position-absolute"
+                        style="top:12px; right:12px; border-radius:20px;">
+                        <i class="bi bi-building me-1"></i>Hôtel
                     </span>
                 </div>
 
-                <div class="card-body p-4">
-                    <h5 class="card-title text-dark font-weight-bold mb-3" style="font-size: 1.25rem;">{{ $hotel->nom }}</h5>
-                    
-                    <div class="mb-2">
-                        <i class="bi bi-geo-alt-fill text-danger mr-2"></i>
-                        <span class="text-muted">{{ $hotel->ville }}</span>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <i class="bi bi-pin-map-fill text-info mr-2"></i>
-                        <span class="text-muted">{{ $hotel->adresse }}</span>
-                    </div>
+                <div class="card-body">
+                    <h5 class="fw-bold mb-2">{{ $hotel->nom }}</h5>
+
+                    <p class="text-muted small mb-1">
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i>
+                        {{ $hotel->ville }}
+                    </p>
+
+                    <p class="text-muted small mb-3">
+                        <i class="bi bi-pin-map-fill text-info me-1"></i>
+                        {{ Str::limit($hotel->adresse, 40) }}
+                    </p>
 
                     @if(isset($hotel->prix_min))
-                    <div class="mb-2">
-                        <span class="text-primary font-weight-bold" style="font-size: 1.15rem;">À partir de {{ number_format($hotel->prix_min, 0, ',', ' ') }} XAF</span>
+                    <div class="fw-bold text-primary mb-3">
+                        {{ number_format($hotel->prix_min, 0, ',', ' ') }} XAF
                         <small class="text-muted">/nuit</small>
                     </div>
                     @endif
-                </div>
 
-                <div class="card-footer bg-white border-0 p-3">
-                    <a href="{{ url('/details/' . $hotel->id) }}" class="btn btn-primary btn-block btn-lg">
-                        <i class="bi bi-eye mr-2"></i>Voir les détails
+                    <a href="{{ url('/details/' . $hotel->id) }}"
+                        class="btn btn-primary w-100">
+                        <i class="bi bi-eye me-1"></i>Voir détails
                     </a>
                 </div>
             </div>
         </div>
         @empty
-        <div class="col-12">
-            <div class="alert alert-info text-center" role="alert">
-                <i class="bi bi-info-circle mr-2"></i>Aucun hôtel disponible pour le moment.
-            </div>
+        <div class="col-12 text-center text-muted">
+            <i class="bi bi-info-circle fs-4 d-block mb-2"></i>
+            Aucun hôtel disponible
         </div>
         @endforelse
     </div>
@@ -111,76 +108,82 @@
         <p class="text-muted">Trouvez l'appartement idéal pour votre séjour</p>
     </div>
 
-    <div class="row">
-        @forelse($apparts as $appart)
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow border-0 rounded-lg">
-                <div class="position-relative">
-                    @php
-                    $hotelImages = json_decode($appart->images, true);
-                    $firstImage = (!empty($hotelImages) && is_array($hotelImages)) ? $hotelImages[0] : null;
-                    @endphp
-                    
-                    @if($firstImage)
-                    <img src="{{ asset('storage/' . $firstImage) }}" 
-                            class="card-img-top rounded-top" 
-                            alt="{{ $appart->nom }}" 
-                            style="height:280px; object-fit:cover;">
-                    @else
-                    <img src="https://via.placeholder.com/400x280?text=Pas+d'image" 
-                            class="card-img-top rounded-top" 
-                            alt="{{ $appart->nom }}" 
-                            style="height:280px; object-fit:cover;">
-                    @endif
-                    <span class="badge badge-success position-absolute rounded-pill" style="top: 15px; right: 15px; font-size: 0.9rem; padding: 8px 16px;">
-                        <i class="bi bi-building mr-1"></i>Appartement
-                    </span>
-                </div>
+    <div class="row g-4 mt-2">
+@forelse($apparts as $appart)
+<div class="col-12 col-sm-6 col-lg-4">
+    <div class="card border-0 shadow-sm h-100"
+         style="border-radius:16px; overflow:hidden; transition:0.25s;"
+         onmouseover="this.style.transform='translateY(-6px)'"
+         onmouseout="this.style.transform=''">
 
+        <div class="position-relative">
+            @php
+                $images = json_decode($appart->images, true);
+                $img = (!empty($images) && is_array($images)) ? $images[0] : null;
+            @endphp
 
-                <div class="card-body p-4">
-                    <h5 class="card-title text-dark font-weight-bold mb-3" style="font-size: 1.25rem;">{{ $appart->nom }}</h5>
-                    
-                    <div class="mb-2">
-                        <i class="bi bi-geo-alt-fill text-danger mr-2"></i>
-                        <span class="text-muted">{{ $appart->ville }}</span>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <i class="bi bi-pin-map-fill text-info mr-2"></i>
-                        <span class="text-muted">{{ $appart->adresse }}</span>
-                    </div>
+            <img src="{{ $img ? asset('storage/'.$img) : 'https://placehold.co/400x280' }}"
+                 class="w-100"
+                 style="height:240px; object-fit:cover; cursor:pointer;"
+                 onclick="openImage(this.src)">
 
-                    @if(isset($appart->prix))
-                    <div class="mb-2">
-                        <span class="text-success font-weight-bold" style="font-size: 1.15rem;">{{ number_format($appart->prix, 0, ',', ' ') }} XAF</span>
-                        <small class="text-muted">/nuit</small>
-                    </div>
-                    @endif
-
-                    @if(isset($appart->capacite))
-                    <div class="mb-2">
-                        <i class="bi bi-people-fill text-primary mr-2"></i>
-                        <span class="text-muted">{{ $appart->capacite }} personnes</span>
-                    </div>
-                    @endif
-                </div>
-
-                <div class="card-footer bg-white border-0 p-3">
-                    <a href="{{ url('/details_appart/' . $appart->id) }}" class="btn btn-success btn-block btn-lg">
-                        <i class="bi bi-eye mr-2"></i>Voir les détails
-                    </a>
-                </div>
-            </div>
+            <span class="badge bg-success position-absolute"
+                  style="top:12px; right:12px; border-radius:20px;">
+                <i class="bi bi-house-door me-1"></i>Appartement
+            </span>
         </div>
-        @empty
-        <div class="col-12">
-            <div class="alert alert-info text-center" role="alert">
-                <i class="bi bi-info-circle mr-2"></i>Aucun appartement disponible pour le moment.
+
+        <div class="card-body">
+            <h5 class="fw-bold mb-2">{{ $appart->nom }}</h5>
+
+            <p class="text-muted small mb-1">
+                <i class="bi bi-geo-alt-fill text-danger me-1"></i>
+                {{ $appart->ville }}
+            </p>
+
+            <p class="text-muted small mb-2">
+                <i class="bi bi-pin-map-fill text-info me-1"></i>
+                {{ Str::limit($appart->adresse, 40) }}
+            </p>
+
+            <p class="small text-muted">
+                <i class="bi bi-people-fill text-primary me-1"></i>
+                {{ $appart->capacite }} personnes
+            </p>
+
+            <div class="fw-bold text-success mb-3">
+                {{ number_format($appart->prix, 0, ',', ' ') }} XAF
+                <small class="text-muted">/nuit</small>
             </div>
+
+            <a href="{{ url('/details_appart/' . $appart->id) }}"
+               class="btn btn-success w-100">
+               <i class="bi bi-eye me-1"></i>Voir détails
+            </a>
         </div>
-        @endforelse
     </div>
+</div>
+@empty
+<div class="col-12 text-center text-muted">
+    <i class="bi bi-info-circle fs-4 d-block mb-2"></i>
+    Aucun appartement disponible
+</div>
+@endforelse
+</div>
 </section>
+<div id="imgModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center;">
+    <img id="modalImg" style="max-width:90%; max-height:90%; border-radius:10px;">
+</div>
+
+<script>
+function openImage(src){
+    document.getElementById('imgModal').style.display = 'flex';
+    document.getElementById('modalImg').src = src;
+}
+
+document.getElementById('imgModal').onclick = function(){
+    this.style.display = 'none';
+}
+</script>
 
 @include('clients.partials.footer')

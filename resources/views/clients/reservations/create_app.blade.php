@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('styles/bootstrap-4.1.2/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-
+@include('clients.partials.header')
 <div class="container my-5">
     {{-- Bouton retour --}}
     <a href="/" class="btn btn-outline-secondary mb-4">
@@ -416,3 +416,5 @@ $(document).ready(function() {
 
 });
 </script>
+
+@include('clients.partials.footer')
