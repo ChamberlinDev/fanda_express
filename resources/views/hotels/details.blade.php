@@ -3,17 +3,17 @@
 @section('content')
 
 @php
-    $images = json_decode($hotel->images, true);
-    $images = is_array($images) ? $images : [];
-    $firstImage = !empty($images) ? $images[0] : null;
+$images = json_decode($hotel->images, true);
+$images = is_array($images) ? $images : [];
+$firstImage = !empty($images) ? $images[0] : null;
 @endphp
 
 {{-- Hero avec image principale --}}
 <div class="position-relative" style="height:420px; overflow:hidden;">
     <img src="{{ $firstImage ? asset('storage/' . $firstImage) : 'https://placehold.co/1200x400?text=Hôtel' }}"
-         class="w-100 h-100"
-         style="object-fit:cover; filter:brightness(0.6);"
-         alt="{{ $hotel->nom }}">
+        class="w-100 h-100"
+        style="object-fit:cover; filter:brightness(0.6);"
+        alt="{{ $hotel->nom }}">
 
     {{-- Overlay dégradé --}}
     <div style="position:absolute; inset:0;
@@ -22,13 +22,13 @@
 
     {{-- Bouton retour --}}
     <a href="/" class="btn btn-light btn-sm position-absolute"
-       style="top:20px; left:20px; border-radius:20px; opacity:0.9;">
+        style="top:20px; left:20px; border-radius:20px; opacity:0.9;">
         <i class="bi bi-arrow-left me-1"></i>Retour
     </a>
 
     {{-- Badge type --}}
     <span class="badge bg-primary position-absolute"
-          style="top:20px; right:20px; border-radius:20px; padding:7px 16px; font-size:0.85rem;">
+        style="top:20px; right:20px; border-radius:20px; padding:7px 16px; font-size:0.85rem;">
         <i class="bi bi-building me-1"></i>Hôtel
     </span>
 
@@ -50,13 +50,13 @@
 <div class="container mt-3 mb-2">
     <div class="d-flex gap-2 flex-wrap">
         @foreach($images as $index => $img)
-           <a href="{{ asset('storage/' . $img) }}" target="_blank"> <img src="{{ asset('storage/' . $img) }}"
-                 class="rounded shadow-sm border"
-                 style="width:80px; height:60px; object-fit:cover; cursor:pointer; transition:opacity 0.2s;"
-                 onmouseover="this.style.opacity='0.75'"
-                 onmouseout="this.style.opacity='1'"
-                 onclick="document.querySelector('.hero-img').src=this.src"
-                 alt="Photo {{ $index + 1 }}"></a>
+        <a href="{{ asset('storage/' . $img) }}" target="_blank"> <img src="{{ asset('storage/' . $img) }}"
+                class="rounded shadow-sm border"
+                style="width:80px; height:60px; object-fit:cover; cursor:pointer; transition:opacity 0.2s;"
+                onmouseover="this.style.opacity='0.75'"
+                onmouseout="this.style.opacity='1'"
+                onclick="document.querySelector('.hero-img').src=this.src"
+                alt="Photo {{ $index + 1 }}"></a>
         @endforeach
     </div>
 </div>
@@ -78,14 +78,14 @@
                 <div class="card-body px-4 pb-4">
                     <div class="row g-3 mt-1">
                         <div class="col-md-6 d-flex align-items-start gap-3">
-                           
+
                             <div>
                                 <small class="text-dark d-block">Nom</small>
                                 <span class="fw-semibold text-dark">{{ $hotel->nom }}</span>
                             </div>
                         </div>
                         <div class="col-md-6 d-flex align-items-start gap-3">
-                            
+
                             <div>
                                 <small class="text-dark d-block">Localisation</small>
                                 <span class="fw-semibold text-dark">{{ $hotel->ville ?? '—' }}</span>
@@ -94,7 +94,7 @@
                         @if($hotel->telephone ?? false)
                         <div class="col-md-6 d-flex align-items-start gap-3">
                             <div class="bg-success bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center "
-                                 style="width:42px; height:42px;">
+                                style="width:42px; height:42px;">
                                 <i class="bi bi-telephone-fill text-success"></i>
                             </div>
                             <div>
@@ -106,7 +106,7 @@
                         @if($hotel->email ?? false)
                         <div class="col-md-6 d-flex align-items-start gap-3">
                             <div class="bg-info bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center"
-                                 style="width:42px; height:42px;">
+                                style="width:42px; height:42px;">
                                 <i class="bi bi-envelope-fill text-info"></i>
                             </div>
                             <div>
@@ -142,11 +142,11 @@
                     </h5>
                     <div class="d-flex flex-wrap gap-2">
                         @foreach(explode(',', $hotel->equipements) as $eq)
-                            <span class="badge bg-light border text-dark px-3 py-2"
-                                  style="border-radius:20px; font-size:0.82rem;">
-                                <i class="bi bi-check-circle-fill text-success me-1"></i>
-                                {{ trim($eq) }}
-                            </span>
+                        <span class="badge bg-light border text-dark px-3 py-2"
+                            style="border-radius:20px; font-size:0.82rem;">
+                            <i class="bi bi-check-circle-fill text-success me-1"></i>
+                            {{ trim($eq) }}
+                        </span>
                         @endforeach
                     </div>
                 </div>
@@ -166,37 +166,37 @@
                 <div class="row g-4">
                     @forelse($hotel->chambres as $chambre)
                     @php
-                        $chambreImages = [];
-                        if ($chambre->images && is_string($chambre->images)) {
-                            $decoded = json_decode($chambre->images, true);
-                            $chambreImages = is_array($decoded) ? $decoded : [];
-                        }
-                        $chambreFirstImage = !empty($chambreImages) ? $chambreImages[0] : null;
+                    $chambreImages = [];
+                    if ($chambre->images && is_string($chambre->images)) {
+                    $decoded = json_decode($chambre->images, true);
+                    $chambreImages = is_array($decoded) ? $decoded : [];
+                    }
+                    $chambreFirstImage = !empty($chambreImages) ? $chambreImages[0] : null;
                     @endphp
 
                     <div class="col-md-6">
                         <div class="card h-100 border-0 shadow-sm"
-                             style="border-radius:16px; overflow:hidden; transition:transform 0.2s, box-shadow 0.2s;"
-                             onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 28px rgba(0,0,0,0.12)'"
-                             onmouseout="this.style.transform='';this.style.boxShadow=''">
+                            style="border-radius:16px; overflow:hidden; transition:transform 0.2s, box-shadow 0.2s;"
+                            onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 28px rgba(0,0,0,0.12)'"
+                            onmouseout="this.style.transform='';this.style.boxShadow=''">
 
                             <div class="position-relative">
                                 <img src="{{ $chambreFirstImage ? asset('storage/' . $chambreFirstImage) : 'https://placehold.co/600x220?text=Chambre' }}"
-                                     class="w-100"
-                                     style="height:200px; object-fit:cover;"
-                                     alt="{{ $chambre->nom }}">
+                                    class="w-100"
+                                    style="height:200px; object-fit:cover;"
+                                    alt="{{ $chambre->nom }}">
 
                                 <span class="badge bg-primary position-absolute"
-                                      style="top:10px; right:10px; border-radius:20px; padding:5px 12px;">
+                                    style="top:10px; right:10px; border-radius:20px; padding:5px 12px;">
                                     {{ $chambre->nom }}
                                 </span>
 
                                 {{-- Nb photos chambre --}}
                                 @if(count($chambreImages) > 1)
-                                    <span class="badge bg-dark bg-opacity-75 position-absolute"
-                                          style="bottom:10px; right:10px; border-radius:20px; font-size:0.72rem;">
-                                        <i class="bi bi-images me-1"></i>{{ count($chambreImages) }}
-                                    </span>
+                                <span class="badge bg-dark bg-opacity-75 position-absolute"
+                                    style="bottom:10px; right:10px; border-radius:20px; font-size:0.72rem;">
+                                    <i class="bi bi-images me-1"></i>{{ count($chambreImages) }}
+                                </span>
                                 @endif
                             </div>
 
@@ -219,14 +219,14 @@
                                 </div>
 
                                 @if(isset($chambre->superficie))
-                                    <p class="small text-muted mb-3">
-                                        <i class="bi bi-arrows-angle-expand me-1"></i>
-                                        {{ $chambre->superficie }} m²
-                                    </p>
+                                <p class="small text-muted mb-3">
+                                    <i class="bi bi-arrows-angle-expand me-1"></i>
+                                    {{ $chambre->superficie }} m²
+                                </p>
                                 @endif
 
                                 <a href="{{ route('reservation_hotel', $chambre->id) }}"
-                                   class="btn btn-primary w-100 mt-auto">
+                                    class="btn btn-primary w-100 mt-auto">
                                     <i class="bi bi-calendar-check me-1"></i>Réserver cette chambre
                                 </a>
 
@@ -252,11 +252,11 @@
                         <i class="bi bi-chat-left-text-fill text-primary me-2"></i>
                         Laisser un commentaire
                     </h5>
-                    <form>
+                    <form action="" method="POST">
                         <div class="mb-3">
-                            <textarea name="commentaire" class="form-control" rows="4"
-                                      placeholder="Partagez votre expérience..."
-                                      style="border-radius:12px; resize:none;"></textarea>
+                            <textarea name="avis" class="form-control" rows="4"
+                                placeholder="Partagez votre expérience..."
+                                style="border-radius:12px; resize:none;"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary px-4">
                             <i class="bi bi-send-fill me-1"></i>Envoyer
@@ -306,10 +306,10 @@
                         <li>
                             <small class="text-dark d-block mb-2">Équipements</small>
                             @foreach(array_slice(explode(',', $hotel->equipements), 0, 4) as $eq)
-                                <span class="badge bg-light border text-dark me-1 mb-1"
-                                      style="border-radius:20px; font-size:0.72rem;">
-                                    <i class="bi bi-check-circle-fill text-success me-1"></i>{{ trim($eq) }}
-                                </span>
+                            <span class="badge bg-light border text-dark me-1 mb-1"
+                                style="border-radius:20px; font-size:0.72rem;">
+                                <i class="bi bi-check-circle-fill text-success me-1"></i>{{ trim($eq) }}
+                            </span>
                             @endforeach
                         </li>
                         @endif
@@ -325,6 +325,20 @@
 
     </div>
 </div>
+{{-- commentaire --}}
+<section class="container-fluid my-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">
+            <i class="bi bi-comment text-info me-2"></i>Commentaires
+        </h2>
+        <p class="text-muted">Vous pouvez un commentaire par rapport a vos experience</p>
+    </div>
+    <div class="rounded-3 overflow-hidden shadow-sm mx-3">
+
+
+
+    </div>
+</section>
 
 @include('clients.partials.footer')
 

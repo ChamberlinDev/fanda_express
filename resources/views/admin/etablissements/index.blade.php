@@ -135,7 +135,7 @@
 
                                 {{-- Chambres count --}}
                                 <div class="d-flex gap-2 mb-3 mt-auto">
-                                    <span class="badge bg-primary text-white bg-opacity-10 text-white">
+                                    <span class="badge bg-primary text-white bg-opacity-10">
                                         <i class="bi bi-door-open me-1"></i>
                                         {{ $hotel->chambres ? $hotel->chambres->count() : 0 }} chambre(s)
                                     </span>

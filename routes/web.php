@@ -6,6 +6,7 @@ use App\Http\Controllers\AppartementController;
 use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\blogcontroller;
 use App\Http\Controllers\ChambreController;
+use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ConctactController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Etablissement;
@@ -120,6 +121,12 @@ Route::get('/edit_blog/{id}', [blogcontroller::class, 'edit'])->name('blog.edit'
 Route::post('/update_blog/{id}', [blogcontroller::class, 'update'])->name('blog.update');
 Route::delete('/delete_blog/{id}', [blogcontroller::class, 'destroy'])->name('blog.destroy');
 Route::post('/ajout_save', [blogcontroller::class, 'store']);
+
+// commentaires
+
+Route::post('/commentaire_app', [CommentaireController::class, 'store_app'])->name('commentaire_app');
+
+
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
