@@ -50,7 +50,7 @@
                data-toggle="tab" data-bs-toggle="tab"
                href="#hotels" role="tab">
                 <i class="bi bi-building me-1"></i> Hôtels
-                <span class="badge bg-primary ms-1">{{ $hotels->count() }}</span>
+                <span class="badge bg-primary text-white ms-1">{{ $hotels->count() }}</span>
             </a>
         </li>
         <li class="nav-item" role="presentation">
@@ -58,7 +58,7 @@
                data-toggle="tab" data-bs-toggle="tab"
                href="#apparts" role="tab">
                 <i class="bi bi-house-door me-1"></i> Appartements
-                <span class="badge bg-success ms-1">{{ $apparts->count() }}</span>
+                <span class="badge bg-success text-white ms-1">{{ $apparts->count() }}</span>
             </a>
         </li>
     </ul>
@@ -135,7 +135,7 @@
 
                                 {{-- Chambres count --}}
                                 <div class="d-flex gap-2 mb-3 mt-auto">
-                                    <span class="badge bg-primary text-white bg-opacity-10 text-primary">
+                                    <span class="badge bg-primary text-white bg-opacity-10 text-white">
                                         <i class="bi bi-door-open me-1"></i>
                                         {{ $hotel->chambres ? $hotel->chambres->count() : 0 }} chambre(s)
                                     </span>
@@ -230,9 +230,9 @@
                                 {{-- Prix --}}
                                 @if(isset($appart->prix))
                                     <div class="mb-3 mt-auto  ">
-                                        <span class="badge bg-success  bg-opacity-10 text-success">
+                                        <span class="badge bg-success  bg-opacity-10 text-white">
                                             <i class="bi bi-cash me-1"></i>
-                                            {{ number_format($appart->prix, 0, ',', ' ') }} FCFA / nuit
+                                            {{ number_format($appart->prix, 0, ',', ' ') }} FCFA / jours
                                         </span>
                                     </div>
                                 @endif
