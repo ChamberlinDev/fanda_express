@@ -252,7 +252,8 @@ $firstImage = !empty($images) ? $images[0] : null;
                         <i class="bi bi-chat-left-text-fill text-primary me-2"></i>
                         Laisser un commentaire
                     </h5>
-                    <form action="" method="POST">
+                    <form action="{{route('commentaire_app',  $hotel->id) }}" method="POST">
+                        @csrf
                         <div class="mb-3">
                             <textarea name="avis" class="form-control" rows="4"
                                 placeholder="Partagez votre expérience..."
@@ -325,20 +326,7 @@ $firstImage = !empty($images) ? $images[0] : null;
 
     </div>
 </div>
-{{-- commentaire --}}
-<section class="container-fluid my-5">
-    <div class="text-center mb-4">
-        <h2 class="fw-bold">
-            <i class="bi bi-comment text-info me-2"></i>Commentaires
-        </h2>
-        <p class="text-muted">Vous pouvez un commentaire par rapport a vos experience</p>
-    </div>
-    <div class="rounded-3 overflow-hidden shadow-sm mx-3">
 
-
-
-    </div>
-</section>
 
 @include('clients.partials.footer')
 

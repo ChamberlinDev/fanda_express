@@ -45,7 +45,7 @@ class CommentaireController extends Controller
 
     public function store_app(Request $request)
     {
-         $hotels = Hotel::whereHas('user', function ($q) {
+        $hotels = Hotel::whereHas('user', function ($q) {
             $q->where('is_blocked', false);
         })
             ->paginate(12);
@@ -68,5 +68,13 @@ class CommentaireController extends Controller
         $commentaire->save();
 
         return view('accueil', compact('hotels', 'apparts', 'blogs'));
+    }
+
+
+
+    public function liste_commentaires()
+    {
+        $commentaires = Commentaire_app::latest()->paginate(10);
+        return view('superadmin.commentaires.index', compact('commentaires'));
     }
 }

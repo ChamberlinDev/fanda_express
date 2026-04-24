@@ -152,6 +152,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/blog_sup/store', [BlogController::class, 'create'])->name('superadmin.blogs.store');
     Route::get('/blog_sup/{id}', [BlogController::class, 'details'])->name('superadmin.blogs.show');  
 
+    Route::get('/commentaires', [CommentaireController::class, 'liste_commentaires'])->name('superadmin.commentaires');  
+
 
     Route::get('/profil/admin', [Authcontroller::class, 'profil_admin'])->name('superadmin.profil');
     Route::get('/profil_edit/admin', [Authcontroller::class, 'edit_profil_admin'])->name('superadmin.profil_edit');

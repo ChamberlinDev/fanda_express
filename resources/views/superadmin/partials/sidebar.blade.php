@@ -62,12 +62,12 @@
                 <span>Parametres</span>
             </a>
         </li>
-        <!-- <li class="nav-item">
-        <a class="nav-link" href="#">
+        <li class="nav-item">
+        <a class="nav-link" href="{{ route('superadmin.commentaires') }}">
             <i class="fas fa-fw fa-file-invoice"></i>
-            <span>Rapports</span>
+            <span>Commentaires</span>
         </a>
-    </li> -->
+    </li>
         <hr class="sidebar-divider">
         <div class="version" id="version-ruangadmin"></div>
     </ul>
