@@ -69,6 +69,8 @@
                 <small class="text-muted">FCFA encaissés</small>
             </div>
         </div>
+
+
     </div>
 
     {{-- Onglets --}}
@@ -114,6 +116,7 @@
                                     <th class="text-center">Nuits</th>
                                     <th class="text-center">Prix / nuit</th>
                                     <th class="text-center">Montant total</th>
+                                    <th class="text-center">Commission(15%)</th>
                                     <th class="text-center">Statut</th>
                                 </tr>
                             </thead>
@@ -183,14 +186,21 @@
                                             {{ number_format($item['montant'], 0, ',', ' ') }} FCFA
                                         </span>
                                     </td>
+                                    <td class="text-center fw-bold text-primary">
+
+                                        @php
+                                        $commission = $item['montant'] * 0.15;
+                                        @endphp
+                                        {{ number_format($commission, 0, ',', ' ') }} FCFA
+                                    </td>
 
                                     <td class="text-center">
                                         @if($r->statut == 'acceptée')
-                                        <span class="badge bg-success">✅ Acceptée</span>
+                                        <span class="badge bg-success"> Acceptée</span>
                                         @elseif($r->statut == 'refusée')
-                                        <span class="badge bg-danger">❌ Refusée</span>
+                                        <span class="badge bg-danger"> Refusée</span>
                                         @else
-                                        <span class="badge bg-warning text-dark">⏳ En attente</span>
+                                        <span class="badge bg-warning text-dark"> En attente</span>
                                         @endif
                                     </td>
 
@@ -212,6 +222,9 @@
                                     <td colspan="8" class="text-end fw-bold">Total encaissé :</td>
                                     <td class="text-center fw-bold text-success">
                                         {{ number_format($totalEncaisse, 0, ',', ' ') }} FCFA
+                                    </td>
+                                    <td class="text-center fw-bold text-primary">
+                                        {{ number_format($totalCommission, 0, ',', ' ') }} FCFA
                                     </td>
                                     <td></td>
                                 </tr>
@@ -294,4 +307,6 @@
 
     </div>
 </div>
+
+
 @endsection

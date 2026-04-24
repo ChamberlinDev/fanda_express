@@ -23,7 +23,7 @@ class AdminController extends Controller
          'utilisateurs'  => User::count(),
          'hotels'        => Hotel::count(),
          'appartements'  => Appartement::count(),
-         'reservations-hotel'  => Reservation::count(), 
+         'reservations-hotel'  => Reservation::count(),
          'reservations-appart'  => Reservation_appart::count(),
          'blogs'  => Blog::count(),
       ];
@@ -137,12 +137,15 @@ class AdminController extends Controller
 
       $totalEncaisse  = $reservations->where('reservation.statut', 'acceptée')->sum('montant');
       $totalReservations = $reservations->count();
-
+      $totalCommission = collect($reservations)->sum(function ($item) {
+         return $item['montant'] * 0.15;
+      });
       return view('superadmin.hotels.show', compact(
          'hotel',
          'reservations',
          'totalEncaisse',
-         'totalReservations'
+         'totalReservations',
+         'totalCommission'
       ));
    }
 
@@ -166,12 +169,16 @@ class AdminController extends Controller
 
       $totalEncaisse  = $reservations->where('reservation.statut', 'acceptée')->sum('montant');
       $totalReservations = $reservations->count();
+      $totalCommission = collect($reservations)->sum(function ($item) {
+         return $item['montant'] * 0.15;
+      });
 
       return view('superadmin.appartements.detail', compact(
          'appart',
          'reservations',
          'totalEncaisse',
-         'totalReservations'
+         'totalReservations',
+         'totalCommission'
       ));
    }
 }

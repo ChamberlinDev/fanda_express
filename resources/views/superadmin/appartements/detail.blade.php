@@ -213,6 +213,7 @@
                                 <th class="text-center">Départ</th>
                                 <th class="text-center">Nuits</th>
                                 <th class="text-center">Montant</th>
+                                <th class="text-center">Commission(15%)</th>
                                 <th class="text-center">Statut</th>
                             </tr>
                         </thead>
@@ -267,6 +268,14 @@
                                         {{ number_format($item['montant'], 0, ',', ' ') }} FCFA
                                     </span>
                                 </td>
+                                <td>
+                                    @php
+                                        $commission = $item['montant'] * 0.15;
+                                    @endphp
+                                    <span class="text-info small">
+                                        {{ number_format($commission, 0, ',', ' ') }} FCFA
+                                    </span>
+                                </td>
 
                                 <td class="text-center">
                                     @if($r->statut == 'acceptée')
@@ -295,6 +304,12 @@
                                 <td colspan="5" class="text-end fw-bold small">Total encaissé :</td>
                                 <td class="text-center fw-bold text-success">
                                     {{ number_format($totalEncaisse, 0, ',', ' ') }} FCFA
+                                </td>
+                                <td>
+                                    <span class="text-info small">
+                                        {{ number_format($totalCommission, 0, ',', ' ') }} FCFA
+                                    </span>
+
                                 </td>
                                 <td></td>
                             </tr>

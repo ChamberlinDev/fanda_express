@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appartement;
 use App\Models\Blog;
+use App\Models\Commentaire_app;
 use App\Models\etablissement_mod;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class AccueilController extends Controller
             ->paginate(12);
 
         $blogs = Blog::latest()->take(6)->get();
+        // $avis=Commentaire_app::latest()->take(3)->get();
 
         return view('accueil', compact('hotels', 'apparts', 'blogs'));
     }
