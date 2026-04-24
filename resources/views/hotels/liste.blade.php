@@ -23,7 +23,7 @@
             </ul>
         </nav>
         <div class="d-flex align-items-center">
-            <a href="/hotel" class="btn btn-primary text-white px-4 mr-3">Réserver</a>
+            <a href="/hotels" class="btn btn-primary text-white px-4 mr-3">Réserver</a>
             <a href="/connexion" class="btn btn-outline-primary">Connexion</a>
         </div>
     </div>
