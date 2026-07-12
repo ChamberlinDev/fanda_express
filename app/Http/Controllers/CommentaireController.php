@@ -74,7 +74,7 @@ class CommentaireController extends Controller
 
     public function liste_commentaires()
     {
-        $commentaires = Commentaire_app::latest()->paginate(10);
+        $commentaires = Commentaire_app::with('appartement','hotel')->latest()->paginate(10);
         return view('superadmin.commentaires.index', compact('commentaires'));
     }
 }

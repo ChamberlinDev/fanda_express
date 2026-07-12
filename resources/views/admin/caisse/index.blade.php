@@ -153,7 +153,7 @@
 
                             {{-- Hôtel --}}
                             <td>
-                                <span class="badge bg-secondary">
+                                <span class="badge bg-secondary text-light">
                                     {{ $reservation->chambre->hotel->nom ?? '—' }}
                                 </span>
                             </td>

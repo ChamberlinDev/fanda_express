@@ -31,16 +31,17 @@
         }} FCFA
     </p>
 
-    <p>Avant le $reservation->date_debut, $reservation->chambre->hotel->nom vous appelera afin de discuter et finaliser votre reservation! pour des raison de securité vos reservations sont tracables </p>
-    <hr style="margin:20px 0;">
+    <p>
+    Votre réservation est actuellement en attente de confirmation.
+    Avant votre arrivée prévue le
+    <strong>{{ \Carbon\Carbon::parse($reservation->date_debut)->format('d/m/Y') }}</strong>,
+    l'hôtel <strong>{{ $reservation->chambre->hotel->nom }}</strong>
+    vous contactera pour confirmer votre réservation et répondre à vos éventuelles questions.
+</p>
 
-    <h3 style="color:#1a73e8;">Informations sur l’hôtel</h3>
-    <p><strong>Nom :</strong> {{ $reservation->chambre->hotel->nom ?? '—' }}</p>
-    <p><strong>Adresse :</strong> {{ $reservation->chambre->hotel->adresse ?? '—' }}</p>
-    <p><strong>Téléphone :</strong> {{ $reservation->chambre->hotel->telephone ?? '—' }}</p>
-    <p><strong>Email :</strong> {{ $reservation->chambre->hotel->email ?? '—' }}</p>
-
-    <p>Merci pour votre confiance<br>
-    L’équipe <strong>Fanda-express</strong></p>
+<p>
+    Pour garantir votre sécurité et celle de nos partenaires, toutes les réservations effectuées via
+    <strong>Fanda-express</strong> sont enregistrées et peuvent être retracées.
+</p>
 </body>
 </html>
