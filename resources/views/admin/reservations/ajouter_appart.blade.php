@@ -174,7 +174,7 @@
                                 <i class="fa fa-phone text-primary"></i> Téléphone *
                             </label>
                             <input type="tel" name="telephone" id="telephone" class="form-control" 
-                                placeholder="+221 XX XXX XX XX" value="{{ old('telephone') }}" required>
+                                placeholder="+242 XX XXX XX XX" value="{{ old('telephone') }}" required>
                         </div>
 
                         <!-- <div class="form-group">

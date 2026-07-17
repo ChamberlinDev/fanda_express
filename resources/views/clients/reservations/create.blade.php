@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="{{ asset('styles/bootstrap-4.1.2/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 @include('clients.partials.header')
@@ -143,7 +144,7 @@
                                 <i class="fa fa-phone text-primary"></i> Téléphone *
                             </label>
                             <input type="tel" name="telephone" id="telephone" class="form-control"
-                                placeholder="+221 XX XXX XX XX" value="{{ old('telephone') }}" required>
+                                placeholder="06XXXXXXX" value="{{ old('telephone') }}" required>
                         </div>
 
                         <div class="form-group">
