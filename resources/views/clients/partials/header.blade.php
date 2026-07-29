@@ -1,7 +1,7 @@
 <header class="header bg-dark text-white py-2 shadow">
 	<div class="container-fluid px-3 px-lg-4">
 		<div class="header_content d-flex flex-row align-items-center justify-content-between">
-			
+
 			{{-- Logo --}}
 			<div style="width: 140px;">
 				<a href="/" class="d-block">
@@ -38,12 +38,12 @@
 			</div>
 
 			{{-- Bouton Menu Mobile --}}
-			<button class="navbar-toggler d-lg-none border-0 bg-transparent p-2" 
-					type="button" 
-					data-toggle="collapse" 
-					data-target="#mobileMenu"
-					aria-controls="mobileMenu"
-					aria-expanded="false">
+			<button class="navbar-toggler d-lg-none border-0 bg-transparent p-2"
+				type="button"
+				data-toggle="collapse"
+				data-target="#mobileMenu"
+				aria-controls="mobileMenu"
+				aria-expanded="false">
 				<i class="fa fa-bars fa-2x text-white"></i>
 			</button>
 		</div>
