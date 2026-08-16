@@ -18,6 +18,19 @@ use App\Http\Controllers\reservation;
 use App\Http\Controllers\ReservationController;
 use App\Models\Hotel;
 use Illuminate\Support\Facades\Route;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
+
+
+Route::get('/sitemap.xml', function () {
+    return Sitemap::create()
+        ->add(Url::create('/')->setPriority(1.0))
+        ->add(Url::create('/menu')->setPriority(0.8))
+        ->add(Url::create('/contact')->setPriority(0.5))
+        ->toResponse(request());
+});
+
+
 
 
 
