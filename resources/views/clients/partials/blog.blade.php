@@ -53,7 +53,7 @@
                         </p>
 
                         {{-- Lire la suite --}}
-                        <a href="#"
+                        <a href="{{ route('blog.details', $blog->id) }}"
                            class="btn btn-outline-primary btn-sm mt-auto"
                            style="border-radius:20px; align-self:flex-start;">
                             Lire la suite

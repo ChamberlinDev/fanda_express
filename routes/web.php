@@ -135,6 +135,8 @@ Route::post('/update_blog/{id}', [blogcontroller::class, 'update'])->name('blog.
 Route::delete('/delete_blog/{id}', [blogcontroller::class, 'destroy'])->name('blog.destroy');
 Route::post('/ajout_save', [blogcontroller::class, 'store']);
 
+
+Route::get('/blog_details/{id}', [blogcontroller::class, 'details'])->name('blog.details');
 // commentaires
 
 Route::post('/commentaire_app', [CommentaireController::class, 'store_app'])->name('commentaire_app');
