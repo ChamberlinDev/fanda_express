@@ -56,7 +56,7 @@
                         <a href="{{ route('blog.details', $blog->id) }}"
                            class="btn btn-outline-primary btn-sm mt-auto"
                            style="border-radius:20px; align-self:flex-start;">
-                            Lire la suite
+                            Parcourir
                             <i class="bi bi-arrow-right ms-1"></i>
                         </a>
 
