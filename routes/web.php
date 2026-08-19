@@ -136,7 +136,7 @@ Route::delete('/delete_blog/{id}', [BlogController::class, 'destroy'])->name('bl
 Route::post('/ajout_save', [BlogController::class, 'store']);
 
 
-Route::get('/blog_details/{id}', [BlogController::class, 'details'])->name('blog.details');
+Route::get('/blog_details/{id}', [BlogController::class, ' blog_details'])->name('blog.details');
 // commentaires
 
 Route::post('/commentaire_app', [CommentaireController::class, 'store_app'])->name('commentaire_app');
