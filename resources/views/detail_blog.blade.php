@@ -39,8 +39,8 @@
             <hr class="my-5">
 
             {{-- Retour --}}
-            <a href="{{ route('blog.index') }}" class="btn btn-outline-primary">
-                <i class="bi bi-arrow-left"></i> Retour aux blogs
+            <a href="/" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left"></i> Retour à l'accueil
             </a>
 
         </div>
