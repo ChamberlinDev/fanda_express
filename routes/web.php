@@ -4,7 +4,7 @@ use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppartementController;
 use App\Http\Controllers\Auth\Authcontroller;
-use App\Http\Controllers\blogcontroller;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ConctactController;
@@ -63,6 +63,32 @@ Route::get('/deconnexion', [Authcontroller::class, 'logout'])->name('logout');
 // fiches détail publiques (consultées par les clients avant réservation)
 Route::get('/details/{id}', [HotelController::class, 'details'])->name('hotel.show');
 Route::get('/details_appart/{id}', [AppartementController::class, 'details'])->name('appart.show');
+Route::get('/modif_edit/{id}', [AppartementController::class, 'edit']);
+Route::post('/modif_appart/{id}', [AppartementController::class, 'update'])->name('modif_appart');
+Route::delete('/supp_appart/{id}', [AppartementController::class, 'destroy'])->name('supp_appart');
+
+// Route pour chambre
+Route::get('/chambres/{id}', [ChambreController::class, 'create'])->name('chambres.create');
+Route::post('/etablissements/{id}/chambres', [ChambreController::class, 'store'])->name('chambres.store');
+Route::get('/chambres/{id}/edit',    [ChambreController::class, 'edit'])->name('chambres.edit');
+Route::put('/chambres/{id}',         [ChambreController::class, 'update'])->name('chambres.update');
+Route::delete('/chambres/{id}',      [ChambreController::class, 'destroy'])->name('chambres.destroy');
+
+// Route pour gerer les reservations
+Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation.index');
+
+// Route pour gerer les blogs
+Route::get('/blog', [BlogController::class, 'index'])->name('admin.blog');
+Route::get('/ajouter_blog', [BlogController::class, 'ajout_form']);
+Route::get('/show_blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/edit_blog/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+Route::post('/update_blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+Route::delete('/delete_blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
+Route::post('/ajout_save', [BlogController::class, 'store']);
+
+
+Route::get('/blog_details/{id}', [BlogController::class, 'details'])->name('blog.details');
+// commentaires
 
 // commentaires (soumission publique)
 Route::post('/commentaire_app', [CommentaireController::class, 'store_app'])->name('commentaire_app');
