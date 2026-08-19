@@ -165,4 +165,10 @@ class BlogController extends Controller
         $blogs = Blog::latest()->paginate(6);
         return view('superadmin.blogs.liste', compact('blogs'));
     }
+
+    public function blog_details($id)
+    {
+        $blog = Blog::findOrFail($id);
+        return view('detail_blog', compact('blog'));
+    }
 }
