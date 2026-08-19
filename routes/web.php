@@ -4,7 +4,7 @@ use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppartementController;
 use App\Http\Controllers\Auth\Authcontroller;
-use App\Http\Controllers\blogcontroller;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ConctactController;
@@ -127,16 +127,16 @@ Route::delete('/chambres/{id}',      [ChambreController::class, 'destroy'])->nam
 Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation.index');
 
 // Route pour gerer les blogs
-Route::get('/blog', [blogcontroller::class, 'index'])->name('admin.blog');
-Route::get('/ajouter_blog', [blogcontroller::class, 'ajout_form']);
-Route::get('/show_blog/{id}', [blogcontroller::class, 'show'])->name('blog.show');
-Route::get('/edit_blog/{id}', [blogcontroller::class, 'edit'])->name('blog.edit');
-Route::post('/update_blog/{id}', [blogcontroller::class, 'update'])->name('blog.update');
-Route::delete('/delete_blog/{id}', [blogcontroller::class, 'destroy'])->name('blog.destroy');
-Route::post('/ajout_save', [blogcontroller::class, 'store']);
+Route::get('/blog', [BlogController::class, 'index'])->name('admin.blog');
+Route::get('/ajouter_blog', [BlogController::class, 'ajout_form']);
+Route::get('/show_blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/edit_blog/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+Route::post('/update_blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+Route::delete('/delete_blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
+Route::post('/ajout_save', [BlogController::class, 'store']);
 
 
-Route::get('/blog_details/{id}', [blogcontroller::class, 'details'])->name('blog.details');
+Route::get('/blog_details/{id}', [BlogController::class, 'details'])->name('blog.details');
 // commentaires
 
 Route::post('/commentaire_app', [CommentaireController::class, 'store_app'])->name('commentaire_app');
@@ -166,6 +166,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/blog_sup/create', [BlogController::class, 'ajouter'])->name('superadmin.blogs.create');
     Route::post('/blog_sup/store', [BlogController::class, 'create'])->name('superadmin.blogs.store');
     Route::get('/blog_sup/{id}', [BlogController::class, 'details'])->name('superadmin.blogs.show');  
+
+
 
     Route::get('/commentaires', [CommentaireController::class, 'liste_commentaires'])->name('superadmin.commentaires');  
 
