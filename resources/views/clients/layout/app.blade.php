@@ -49,10 +49,10 @@
                                                                         <div class="home_content text-center">
                                                                                 <div class="home_title">Bienvenue sur Fanda Express</div>
                                                                                 <div class="booking_form_container">
-                                                                                        <p class="text-white lead">Découvrez nos hébergements de qualité et profitez d'un séjour inoubliable dans un cadre exceptionnel.</p>
+                                                                                        <p class="text-white lead">Découvrez nos hébergements de qualité et profitez d'un séjour inoubliable</p>
                                                                                        <a href="/hotels" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill btn-reserve">
-                                                Réserver maintenant
-                                            </a>
+                                                                                              Réserver maintenant
+                                                                                         </a>
                                                                                     </div>
                                                                             </div>
                                                                     </div>
@@ -71,7 +71,7 @@
                                                                                 <div class="home_title">Retrouvez Votre Luxe</div>
                                                                                 <div class="booking_form_container">
                                                                                         <p class="text-white lead">Des chambres élégantes et confortables pour un séjour qui allie raffinement et détente.</p>
-                                                                                        <a href="/hotels" class="btn btn-light btn-lg mt-3 px-5 rounded-pill">
+                                                                                       <a href="/hotels" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill btn-reserve">
                                                                                                 Voir nos etablissements
                                                                                             </a>
                                                                                     </div>
@@ -92,7 +92,7 @@
                                                                                 <div class="home_title">Un Moment de Rêve</div>
                                                                                 <div class="booking_form_container">
                                                                                         <p class="text-white lead">Vivez une expérience unique dans un environnement paisible et accueillant.</p>
-                                                                                        <a href="/hotels" class="btn btn-light btn-lg mt-3 px-5 rounded-pill">
+                                                                                        <a href="/hotels" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill btn-reserve">
                                                                                                 Voir nos etablissements
                                                                                             </a>
                                                                                     </div>
