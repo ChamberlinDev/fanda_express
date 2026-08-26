@@ -36,96 +36,156 @@
 
         @include('clients.partials.header')
 
-        <div class="home" style="height: 500px;">
-                <div class="home_slider_container">
-                        <div class="owl-carousel owl-theme home_slider">
+       <div class="home" style="height: 500px;">
+    <div class="home_slider_container">
+        <div class="owl-carousel owl-theme home_slider">
 
-                                                <div class="slide">
-                                                            <div class="background_image" style="background-image:url('images/téléchargement.jpeg')"></div>
-                                        <div class="home_container">
-                                                <div class="container">
-                                                        <div class="row">
-                                                                <div class="col">
-                                                                        <div class="home_content text-center">
-                                                                                <div class="home_title">Bienvenue sur Fanda Express</div>
-                                                                                <div class="booking_form_container">
-                                                                                        <p class="text-white lead">Découvrez nos hébergements de qualité et profitez d'un séjour inoubliable</p>
-                                                                                       <a href="/hotels" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill btn-reserve">
-                                                                                              Réserver maintenant
-                                                                                         </a>
-                                                                                    </div>
-                                                                            </div>
-                                                                    </div>
-                                                            </div>
-                                                    </div>
-                                            </div>
-                                    </div>
+            <div class="slide">
+                <div class="background_image" style="background-image:url('images/téléchargement.jpeg')"></div>
+                <div class="home_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="home_content text-center">
+                                    <div class="home_title">Bienvenue sur Fanda Express</div>
+                                    <div class="booking_form_container">
+                                        <p class="text-white lead">Découvrez nos hébergements de qualité et profitez d'un séjour inoubliable</p>
+                                        <a href="/hotels" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill btn-reserve">
+                                            Réserver maintenant
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                                <div class="slide">
-                                                            <div class="background_image" style="background-image:url('images/image_6.jpg')"></div>
-                                        <div class="home_container">
-                                                <div class="container">
-                                                        <div class="row">
-                                                                <div class="col">
-                                                                        <div class="home_content text-center">
-                                                                                <div class="home_title">Retrouvez Votre Luxe</div>
-                                                                                <div class="booking_form_container">
-                                                                                        <p class="text-white lead">Des chambres élégantes et confortables pour un séjour qui allie raffinement et détente.</p>
-                                                                                       <a href="/hotels" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill btn-reserve">
-                                                                                                Voir nos etablissements
-                                                                                            </a>
-                                                                                    </div>
-                                                                            </div>
-                                                                    </div>
-                                                            </div>
-                                                    </div>
-                                            </div>
-                                    </div>
+            <div class="slide">
+                <div class="background_image" style="background-image:url('images/image_6.jpg')"></div>
+                <div class="home_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="home_content text-center">
+                                    <div class="home_title">Retrouvez Votre Luxe</div>
+                                    <div class="booking_form_container">
+                                        <p class="text-white lead">Des chambres élégantes et confortables pour un séjour qui allie raffinement et détente.</p>
+                                        <a href="/hotels" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill btn-reserve">
+                                            Voir nos etablissements
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                                <div class="slide">
-                                                            <div class="background_image" style="background-image:url('images/room-3.jpg')"></div>
-                                        <div class="home_container">
-                                                <div class="container">
-                                                        <div class="row">
-                                                                <div class="col">
-                                                                        <div class="home_content text-center">
-                                                                                <div class="home_title">Un Moment de Rêve</div>
-                                                                                <div class="booking_form_container">
-                                                                                        <p class="text-white lead">Vivez une expérience unique dans un environnement paisible et accueillant.</p>
-                                                                                        <a href="/hotels" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill btn-reserve">
-                                                                                                Voir nos etablissements
-                                                                                            </a>
-                                                                                    </div>
-                                                                            </div>
-                                                                    </div>
-                                                            </div>
-                                                    </div>
-                                            </div>
-                                    </div>
+            <div class="slide">
+                <div class="background_image" style="background-image:url('images/room-3.jpg')"></div>
+                <div class="home_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="home_content text-center">
+                                    <div class="home_title">Un Moment de Rêve</div>
+                                    <div class="booking_form_container">
+                                        <p class="text-white lead">Vivez une expérience unique dans un environnement paisible et accueillant.</p>
+                                        <a href="/hotels" class="btn btn-primary btn-lg mt-3 px-5 rounded-pill btn-reserve">
+                                            Voir nos etablissements
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            </div>
-                    </div>
-            </div>
+        </div>
+    </div>
+</div>
 
-        <div class="container-fluid my-5" id="chambres">
-                @yield('content')
-            </div>
+<div class="container-fluid my-5" id="chambres">
+    @yield('content')
+</div>
 
-       
-    <hr class="my-5">
+<hr class="my-5">
+
 <style>
-    .btn-reserve {
-    font-size: 1rem;
-    padding: 0.75rem 3rem;
-}
-
-@media (max-width: 576px) {
-    .btn-reserve {
-        font-size: 0.85rem;
-        padding: 0.5rem 1.5rem;
+    /* Centrage vertical du contenu dans le slider */
+    .home_container {
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-}
 
+    .home_content {
+        width: 100%;
+    }
+
+    .home_title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Bouton responsive avec clamp() : s'adapte fluide selon la largeur d'écran */
+    .btn-reserve {
+        font-size: clamp(0.8rem, 2vw, 1rem);
+        padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1.5rem, 5vw, 3rem);
+        margin-top: 1rem !important;
+    }
+
+    /* Tablette */
+    @media (max-width: 768px) {
+        .home_title {
+            font-size: 1.8rem;
+        }
+
+        .home_content .lead {
+            font-size: 1rem;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 576px) {
+        .home {
+            height: 400px !important;
+        }
+
+        .home_container {
+            height: 400px;
+        }
+
+        .home_title {
+            font-size: 1.4rem;
+        }
+
+        .home_content .lead {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-reserve {
+            font-size: 0.75rem;
+            padding: 0.4rem 1.2rem;
+            margin-top: 0.5rem !important;
+        }
+    }
+
+    /* Très petits écrans */
+    @media (max-width: 375px) {
+        .home_title {
+            font-size: 1.1rem;
+        }
+
+        .btn-reserve {
+            font-size: 0.7rem;
+            padding: 0.35rem 1rem;
+        }
+    }
 </style>
 
         @include('clients.partials.footer')
