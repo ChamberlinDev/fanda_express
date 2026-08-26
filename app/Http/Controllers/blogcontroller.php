@@ -12,6 +12,10 @@ class BlogController extends Controller
     //
     public function index()
     {
+        if (! Auth::check()) {
+            return redirect('/connexion');
+        }
+
         // chaque user ne voit que ses propres blogs
         Auth::user()->is_admin ? $blogs = Blog::latest()->paginate(6) :
             $blogs = Blog::where('user_id', Auth::id())->latest()->paginate(6);
